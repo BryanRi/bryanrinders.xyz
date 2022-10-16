@@ -1,0 +1,25 @@
+#+TITLE: Test org publishing
+#+AUTHOR: Bryan Rinders
+#+DATE: 2022-10-16
+#+INCLUDE: ./header.org
+
+* Test heading
+testing regular text
+tables:
+| x | y |
+|---+---|
+| 1 | 3 |
+| 2 | 6 |
+| 3 | 9 |
+|---+---|
+** sub heading
+testing source blocks with output.
+#+begin_src python :results output :exports both
+  def func(x):
+      return x*x
+
+  print(func(3))
+#+end_src
+
+#+RESULTS:
+: 9

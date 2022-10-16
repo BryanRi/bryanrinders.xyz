@@ -1,0 +1,10 @@
+image: br/emacs
+
+pages:
+  script:
+  - ./build.sh
+  artifacts:
+    paths:
+    - html
+  only:
+  - masterr
