@@ -1,0 +1,3 @@
+#+TITLE: Sitemap for project linux
+
+- {{{timestamp(2022-11-28)}}} [[file:./linux/index.org][Linux Tutorials]]

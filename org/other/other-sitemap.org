@@ -1,0 +1,3 @@
+#+TITLE: Sitemap for project other
+
+- {{{timestamp(2022-11-28)}}} [[file:./other/index.org][Other stuff]]

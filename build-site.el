@@ -9,39 +9,212 @@
 (setq package-archives '(("melpa" . "https://melpa.org/packages/")
                          ("elpa" . "https://elpa.gnu.org/packages/")))
 
+
 ;; Initialize the package system
 (package-initialize)
 (unless package-archive-contents
   (package-refresh-contents))
 
+
 ;; Install dependencies
 (package-install 'htmlize)
+
 
 ;; Load the publishing system
 (require 'ox-publish)
 
+
+;; hardcoded html definitions
+;; for the navigation bar and footer
+(defvar html-head-css
+  "<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />")
+
+(defvar nav-bar
+  "<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/html/'>Home</a>
+  <a href='/html/ctf/'>CTF WriteUps</a>
+  <a href='/html/emacs/'>Emacs</a>
+  <a href='/html/linux/'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/html/other/'>Other</a>
+  <span class='right'>
+    <a href='/html/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>")
+
+(defvar footer
+  "<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with %c on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>")
+
+
+;; Defining a custom face
+;; that will define my shell prompt
+(defface br-prompt-face '() "Face to highlight the shell prompt in code blocks")
+
+;; Everytime the shell prompt appears,
+;; Emacs applies the br-prompt-face to display it
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (font-lock-add-keywords nil
+                                    '(("\\(^\\[?[[:alnum:]]+@[^\\$]*\\$\\)" 1
+                                       'br-prompt-face t)))))
+
+
+;; Configurations for the sitemap
+(defun br/org-sitemap-date-entry-format (entry style project)
+  "Format ENTRY in org-publish PROJECT Sitemap format ENTRY ENTRY STYLE format that includes date."
+  (let ((filename (org-publish-find-title entry project)))
+    (if (= (length filename) 0)
+        (format "*%s*" entry)
+      (format "{{{timestamp(%s)}}} [[./%s/%s][%s]]"
+              (format-time-string "%Y-%m-%d"
+                                  (org-publish-find-date entry project))
+              (car project)
+              entry
+              filename))))
+
+(setq org-export-global-macros
+      '(("timestamp" . "@@html:<span class=\"timestamp\">[$1]</span>@@")))
+
+
 ;; Customize the HTML output
-(setq org-html-validation-link nil            ;; Don't show validation link
-      org-html-head-include-scripts nil       ;; Use our own scripts
-      org-html-head-include-default-style nil ;; Use our own styles
-      ;;org-html-head "<link rel=\"stylesheet\" href=\"https://cdn.simplecss.org/simple.min.css\" />"
+(setq org-html-validation-link            nil   ;; Don't show validation link
+      org-html-head-include-scripts       nil   ;; Use our own scripts
+      org-html-head-include-default-style nil   ;; Use our own styles
+      org-src-fontify-natively            t
+      org-html-htmlize-output-type        'css  ;; use css for syntax highlighting code blocks
+      org-html-head                       html-head-css
       )
+
+(defun br/define-website-component(id)
+  "Create a list of all the settings for the website component ID."
+  (list id
+        :recursive             t
+        :base-directory        (concat "./org/" id)
+        :publishing-function   'org-html-publish-to-html
+        :publishing-directory  (concat "./html/" id)
+        :auto-sitemap          t
+        :sitemap-filename      (concat id "-sitemap.org")
+        :sitemap-style         'list
+        :sitemape-sort-folders 'ignore
+        :sitemap-sort-files    'anti-chronologically
+        :sitemap-format-entry  'br/org-sitemap-date-entry-format
+        :with-author           nil
+        :with-creator          t
+        :with-toc              t
+        :section-numbers       t
+        :html-preamble         nav-bar
+        :html-postamble        footer
+        :htmlized-source       t
+        :time-stamp-file       nil))
 
 ;; Define the publishing project
 (setq org-publish-project-alist
       (list
-       (list "blog"                     ;; unique string that identifies the project/website
-             :recursive t
-             :base-directory "./org"
-             :publishing-function 'org-html-publish-to-html
-             :publishing-directory "./html"
-             :with-author nil           ;; Don't include author name
-             :with-creator t            ;; Include Emacs and Org versions in footer
-             :with-toc t                ;; Include a table of contents
-             :section-numbers t         ;; Don't include section numbers
-             :time-stamp-file t)))      ;; Don't include time stamp in file
+        (list "home"                ;; unique string that identifies the project/website
+              :recursive            nil
+              :base-directory       "./org"
+              :publishing-function  'org-html-publish-to-html
+              :publishing-directory "./html"
+              :with-author          nil         ;; Don't include author name
+              :with-title           nil
+              :with-creator         t           ;; Include Emacs and Org versions in footer
+              :with-toc             nil         ;; Include a table of contents
+              :section-numbers      nil         ;; Don't include section numbers
+              :html-preamble        nav-bar
+              :html-postamble       footer
+              :time-stamp-file      nil)        ;; Don't include time stamp in file
+        (br/define-website-component "ctf")
+        (br/define-website-component "emacs")
+        (br/define-website-component "linux")
+        (br/define-website-component "other")
+;        (list "ctf"
+;              :recursive            t
+;              :base-directory       "./org/ctf"
+;              :publishing-function  'org-html-publish-to-html
+;              :publishing-directory "./html/ctf"
+;              :auto-sitemap         t
+;              :sitemap-filename     "ctf-sitemap.org"
+;              :sitemap-style        'list
+;              :with-author          nil
+;              :with-creator         t
+;              :with-toc             t
+;              :section-numbers      t
+;              :html-preamble        nav-bar
+;              :html-postamble       footer
+;              :htmlized-source      t
+;              :time-stamp-file      nil)
+;        (list "emacs"
+;              :recursive            t
+;              :base-directory       "./org/emacs"
+;              :publishing-function  'org-html-publish-to-html
+;              :publishing-directory "./html/emacs"
+;              :auto-sitemap         t
+;              :sitemap-filename     "emacs-sitemap.org"
+;              :sitemap-style        'list
+;              :with-author          nil
+;              :with-creator         t
+;              :with-toc             t
+;              :section-numbers      t
+;              :html-preamble        nav-bar
+;              :html-postamble       footer
+;              :htmlized-source      t
+;              :time-stamp-file      nil)
+;        (list "linux"
+;              :recursive            t
+;              :base-directory       "./org/linux"
+;              :publishing-function  'org-html-publish-to-html
+;              :publishing-directory "./html/linux"
+;              :auto-sitemap         t
+;              :sitemap-filename     "linux-sitemap.org"
+;              :sitemap-style        'list
+;              :with-author          nil
+;              :with-creator         t
+;              :with-toc             t
+;              :section-numbers      t
+;              :html-preamble        nav-bar
+;              :html-postamble       footer
+;              :htmlized-source      t
+;              :time-stamp-file      nil)
+;        (list "other"
+;              :recursive            t
+;              :base-directory       "./org/other"
+;              :publishing-function  'org-html-publish-to-html
+;              :publishing-directory "./html/other"
+;              :auto-sitemap         t
+;              :sitemap-filename     "other-sitemap.org"
+;              :sitemap-style        'list
+;              :with-author          nil
+;              :with-creator         t
+;              :with-toc             t
+;              :section-numbers      t
+;              :html-preamble        nav-bar
+;              :html-postamble       footer
+;              :htmlized-source      t
+;              :time-stamp-file      nil)
+        (list "website" :components '("ctf" "emacs" "linux" "other" "home"))))
+
 
 ;; Generate the site output
+;(org-publish "blog")  ;; publish only those files that are modified/new
 (org-publish-all t)  ;; regenerates every html page, consider only updating a single one
 
 (message "Build complete!")

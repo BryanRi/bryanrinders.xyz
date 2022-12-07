@@ -1,0 +1,7 @@
+#+TITLE: Sitemap for project ctf
+
+- {{{timestamp(2022-12-07)}}} [[file:./ctf/index.org][CTF WriteUps]]
+- {{{timestamp(2022-12-07)}}} [[file:./ctf/tryhackme/advent-of-cyber-2022.org][Advent Of Cyber 2022 (TryHackMe)]]
+- {{{timestamp(2022-11-30)}}} [[file:./ctf/overthewire/bandit.org][Bandit (OverTheWire)]]
+- {{{timestamp(2022-11-30)}}} [[file:./ctf/overthewire/index.org][OverTheWire]]
+- {{{timestamp(2022-11-30)}}} [[file:./ctf/overthewire/natas.org][Natas (OverTheWire)]]
