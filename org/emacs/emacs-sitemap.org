@@ -1,3 +1,0 @@
-#+TITLE: Sitemap for project emacs
-
-- {{{timestamp(2022-11-28)}}} [[file:./emacs/index.org][Emacs Tutorials]]
