@@ -33,14 +33,14 @@
 (defvar nav-bar
   "<h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
-  <a href='/html/'>Home</a>
-  <a href='/html/ctf/'>CTF WriteUps</a>
-  <a href='/html/emacs/'>Emacs</a>
-  <a href='/html/linux/'>Linux Tutorials</a>
+  <a href='/'>Home</a>
+  <a href='/ctf/'>CTF WriteUps</a>
+  <a href='/emacs/'>Emacs</a>
+  <a href='/linux/'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/html/other/'>Other</a>
+  <a href='/other/'>Other</a>
   <span class='right'>
-    <a href='/html/sitemap.html'>Sitemap</a>
+    <a href='/sitemap.html'>Sitemap</a>
   </span>
 </div>
 <br><hr>")
@@ -84,7 +84,8 @@
   (let ((filename (org-publish-find-title entry project)))
     (if (= (length filename) 0)
         (format "*%s*" entry)
-      (format "{{{timestamp(%s)}}} [[./%s/%s][%s]]"
+      (format "{{{timestamp(%s)}}} [[/%s/%s][%s]]"
+      ;(format "{{{timestamp(%s)}}} [[./%s][%s]]"
               (format-time-string "%Y-%m-%d"
                                   (org-publish-find-date entry project))
               (car project)
@@ -146,6 +147,12 @@
         (br/define-website-component "emacs")
         (br/define-website-component "linux")
         (br/define-website-component "other")
+        (list "css"
+              :base-directory       "./org/css"
+              :base-extension       "css"
+              :recursive            nil
+              :publishing-directory "./html/css"
+              :publishing-function  'org-publish-attachment)
 ;        (list "ctf"
 ;              :recursive            t
 ;              :base-directory       "./org/ctf"
@@ -162,55 +169,7 @@
 ;              :html-postamble       footer
 ;              :htmlized-source      t
 ;              :time-stamp-file      nil)
-;        (list "emacs"
-;              :recursive            t
-;              :base-directory       "./org/emacs"
-;              :publishing-function  'org-html-publish-to-html
-;              :publishing-directory "./html/emacs"
-;              :auto-sitemap         t
-;              :sitemap-filename     "emacs-sitemap.org"
-;              :sitemap-style        'list
-;              :with-author          nil
-;              :with-creator         t
-;              :with-toc             t
-;              :section-numbers      t
-;              :html-preamble        nav-bar
-;              :html-postamble       footer
-;              :htmlized-source      t
-;              :time-stamp-file      nil)
-;        (list "linux"
-;              :recursive            t
-;              :base-directory       "./org/linux"
-;              :publishing-function  'org-html-publish-to-html
-;              :publishing-directory "./html/linux"
-;              :auto-sitemap         t
-;              :sitemap-filename     "linux-sitemap.org"
-;              :sitemap-style        'list
-;              :with-author          nil
-;              :with-creator         t
-;              :with-toc             t
-;              :section-numbers      t
-;              :html-preamble        nav-bar
-;              :html-postamble       footer
-;              :htmlized-source      t
-;              :time-stamp-file      nil)
-;        (list "other"
-;              :recursive            t
-;              :base-directory       "./org/other"
-;              :publishing-function  'org-html-publish-to-html
-;              :publishing-directory "./html/other"
-;              :auto-sitemap         t
-;              :sitemap-filename     "other-sitemap.org"
-;              :sitemap-style        'list
-;              :with-author          nil
-;              :with-creator         t
-;              :with-toc             t
-;              :section-numbers      t
-;              :html-preamble        nav-bar
-;              :html-postamble       footer
-;              :htmlized-source      t
-;              :time-stamp-file      nil)
-        (list "website" :components '("ctf" "emacs" "linux" "other" "home"))))
+        (list "website" :components '("css" "ctf" "emacs" "linux" "other" "home"))))
 
 
 ;; Generate the site output
