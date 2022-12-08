@@ -1,0 +1,146 @@
+:root {
+    --orange: #804008;
+}
+
+body {
+    background-color: #1d2021;
+    color: #ebdbb2;
+    margin: auto;
+    width: 50%;
+}
+
+.outline-3 {
+    margin-left: 20px;
+}
+
+a {
+    color: #b8bb26;
+}
+
+table {
+    margin: auto;
+    border: #665c54;
+    width: 80%;
+}
+
+#site-name {
+    margin: 0;
+    padding: 0;
+}
+
+/* Navigation menu */
+#menu {
+    background: #3c3836;
+    border: 2px solid #3c3836;
+}
+
+#menu a {
+    text-decoration: none;
+    color: #ebdbb2;
+    padding: 3px;
+}
+
+#menu a:hover {
+    background-color: #665c54;
+    color: ;
+}
+
+.right {
+    float: right;
+    margin: 0;
+    padding: 0;
+}
+
+/* Table of contents */
+#text-table-of-contents ul {
+    list-style-type: none;
+}
+
+#text-table-of-contents a {
+    text-decoration: none;
+    color: #ebdbb2;
+}
+
+/* Source code blocks */
+.org-src-container {
+    margin: 10px;
+}
+
+pre {
+    background-color: #3c3836;
+    margin: 5px;
+    border: 10px solid #3c3836;
+}
+
+pre, pre span {
+    overflow-x: auto;
+    font-size: 15px;
+}
+
+/* Table formatting */
+thead th, tbody td {
+    margin: 25px;
+    padding: 1px;
+    min-width: 150px;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    border: 2px solid #665c54;
+}
+
+td.org-right {
+    text-align: right;
+}
+
+thead th {
+    text-align: center;
+    background-color: #66120e;
+    border: 2px solid #66120e;
+}
+
+tbody tr:nth-of-type(even) {
+    background-color: #3c3836;
+}
+
+tbody tr:last-of-type {
+    border-bottom: 3px solid #665c54;
+}
+
+/* Scrollbar for Firefox */
+* {
+  scrollbar-color: black var(--orange);
+}
+
+/* Scrollbar for Chrome, Edge, Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--orange);
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: black;
+  border-radius: 20px;
+  border: 2px solid var(--orange);
+}
+
+/* Resize width based on screen size */
+@media only screen and (max-width: 1650px) {
+	body {
+		width: 65%;
+	}
+
+@media only screen and (max-width: 1500px) {
+	body {
+		width: 70%;
+	}
+}
+
+@media only screen and (max-width: 1300px) {
+	body {
+		width: 80%;
+	}
+}
