@@ -7,21 +7,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Advent Of Cyber 2022 (TryHackMe)</title>
 <meta name="generator" content="Org mode" />
-<link rel='stylesheet' href='/css/default.css' />
-<link rel='stylesheet' href='/css/source-code.css' />
+<link rel='stylesheet' href='website/css/default.css' />
+<link rel='stylesheet' href='website/css/source-code.css' />
 </head>
 <body>
 <div id="preamble" class="status">
 <h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
-  <a href='/'>Home</a>
-  <a href='/ctf/'>CTF WriteUps</a>
-  <a href='/emacs/'>Emacs</a>
-  <a href='/linux/'>Linux Tutorials</a>
+  <a href='website/'>Home</a>
+  <a href='website/ctf-index.html'>CTF WriteUps</a>
+  <a href='website/emacs/'>Emacs</a>
+  <a href='website/linux/'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/other/'>Other</a>
+  <a href='website/other/'>Other</a>
   <span class='right'>
-    <a href='/sitemap.html'>Sitemap</a>
+    <a href='website/sitemap.html'>Sitemap</a>
   </span>
 </div>
 <br><hr>
@@ -32,31 +32,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgd839d61">Day 1 Frameworks</a>
+<li><a href="#orgb07dc03">Day 1 Frameworks</a>
 <ul>
-<li><a href="#org632ca7a">Puzzle 1</a></li>
-<li><a href="#org1a8a7f3">Puzzle 2</a></li>
-<li><a href="#org9f07cd0">Puzzle 3</a></li>
-<li><a href="#org01e54b6">Answers</a></li>
+<li><a href="#orge4b6111">Puzzle 1</a></li>
+<li><a href="#org5252e13">Puzzle 2</a></li>
+<li><a href="#org3aaa01b">Puzzle 3</a></li>
+<li><a href="#orgac6e3d0">Answers</a></li>
 </ul>
 </li>
-<li><a href="#orgadb3f42">Day 2 Log Analysis</a></li>
-<li><a href="#orgda22795">Day 3 OSINT</a></li>
-<li><a href="#org26f2396">Day 4 Scanning</a></li>
-<li><a href="#orgae293de">Day 5 Brute Forcing</a></li>
-<li><a href="#org13c2367">Day 6 Email Analysis</a></li>
-<li><a href="#org38b7b2e">Day 7 Cyberchef</a></li>
+<li><a href="#org9fbbd28">Day 2 Log Analysis</a></li>
+<li><a href="#org2c86925">Day 3 OSINT</a></li>
+<li><a href="#org56876a3">Day 4 Scanning</a></li>
+<li><a href="#org89bd041">Day 5 Brute Forcing</a></li>
+<li><a href="#orga5ec87c">Day 6 Email Analysis</a></li>
+<li><a href="#orgcebfcb5">Day 7 Cyberchef</a></li>
+<li><a href="#org66b2cc0">Day 8 Smart Contracts</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgd839d61" class="outline-2">
-<h2 id="orgd839d61">Day 1 Frameworks</h2>
-<div class="outline-text-2" id="text-orgd839d61">
+<div id="outline-container-orgb07dc03" class="outline-2">
+<h2 id="orgb07dc03">Day 1 Frameworks</h2>
+<div class="outline-text-2" id="text-orgb07dc03">
 </div>
-<div id="outline-container-org632ca7a" class="outline-3">
-<h3 id="org632ca7a">Puzzle 1</h3>
-<div class="outline-text-3" id="text-org632ca7a">
+<div id="outline-container-orge4b6111" class="outline-3">
+<h3 id="orge4b6111">Puzzle 1</h3>
+<div class="outline-text-3" id="text-orge4b6111">
 <ol class="org-ol">
 <li>Reconnaissance</li>
 <li>Weaponization</li>
@@ -70,9 +71,9 @@
 </div>
 </div>
 
-<div id="outline-container-org1a8a7f3" class="outline-3">
-<h3 id="org1a8a7f3">Puzzle 2</h3>
-<div class="outline-text-3" id="text-org1a8a7f3">
+<div id="outline-container-org5252e13" class="outline-3">
+<h3 id="org5252e13">Puzzle 2</h3>
+<div class="outline-text-3" id="text-org5252e13">
 <ol class="org-ol">
 <li>Pivoting</li>
 <li>Discovery</li>
@@ -84,9 +85,9 @@
 </div>
 </div>
 
-<div id="outline-container-org9f07cd0" class="outline-3">
-<h3 id="org9f07cd0">Puzzle 3</h3>
-<div class="outline-text-3" id="text-org9f07cd0">
+<div id="outline-container-org3aaa01b" class="outline-3">
+<h3 id="org3aaa01b">Puzzle 3</h3>
+<div class="outline-text-3" id="text-org3aaa01b">
 <ol class="org-ol">
 <li>Access</li>
 <li>Collection</li>
@@ -97,9 +98,9 @@
 </div>
 </div>
 
-<div id="outline-container-org01e54b6" class="outline-3">
-<h3 id="org01e54b6">Answers</h3>
-<div class="outline-text-3" id="text-org01e54b6">
+<div id="outline-container-orgac6e3d0" class="outline-3">
+<h3 id="orgac6e3d0">Answers</h3>
+<div class="outline-text-3" id="text-orgac6e3d0">
 <p>
 Who is the adversary that attacked Santa's network this year?
 </p>
@@ -121,15 +122,15 @@ What's the flag that they left behind?
 </div>
 </div>
 
-<div id="outline-container-orgadb3f42" class="outline-2">
-<h2 id="orgadb3f42">Day 2 Log Analysis</h2>
-<div class="outline-text-2" id="text-orgadb3f42">
+<div id="outline-container-org9fbbd28" class="outline-2">
+<h2 id="org9fbbd28">Day 2 Log Analysis</h2>
+<div class="outline-text-2" id="text-org9fbbd28">
 <p>
 Use the ls command to list the files present in the current directory. How many log files are present?
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">ls .*.log* | wc -l
+<pre class="src src-sh">ls *.log | wc -l
 </pre>
 </div>
 
@@ -137,9 +138,10 @@ Use the ls command to list the files present in the current directory. How many 
 Elf McSkidy managed to capture the logs generated by the web server. What is the name of this log file?
 </p>
 
-<pre class="example">
-webserver.log
+<div class="org-src-container">
+<pre class="src src-sh">ls *.log
 </pre>
+</div>
 
 <p>
 On what day was Santa's naughty and nice list stolen?
@@ -149,18 +151,147 @@ On what day was Santa's naughty and nice list stolen?
 <pre class="src src-sh">grep <span class="org-string">"santaslist.txt"</span> webserver.log
 </pre>
 </div>
+
+<p>
+November 18 2022 is a Friday.
+</p>
+
+<pre class="example">
+Friday
+</pre>
+
+<p>
+What is the IP address of the attacker?
+</p>
+
+<p>
+From the grep of the previous question the IP is:
+</p>
+
+<pre class="example">
+10.10.249.191
+</pre>
+
+<p>
+What is the name of the important list that the attacker stole from Santa?
+</p>
+
+<p>
+Again from the grep of the previous question the file name is:
+</p>
+
+<pre class="example">
+santaslist.txt
+</pre>
+
+<p>
+Look through the log files for the flag. The format of the flag is: THM{}
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">grep THM SSDH.log
+</pre>
+</div>
 </div>
 </div>
 
-<div id="outline-container-orgda22795" class="outline-2">
-<h2 id="orgda22795">Day 3 OSINT</h2>
+<div id="outline-container-org2c86925" class="outline-2">
+<h2 id="org2c86925">Day 3 OSINT</h2>
+<div class="outline-text-2" id="text-org2c86925">
+<p>
+What is the name of the Registrar for the domain santagift.shop?
+</p>
+
+<p>
+Go to <a href="https://who.is/whois/github.com">https://who.is/whois/github.com</a> and search for <code>santagift.shop</code>. The name of the registra is
+</p>
+
+<pre class="example">
+NAMECHEAP.INC
+</pre>
+
+<p>
+Find the website's source code (repository) on github.com and open the file containing sensitive credentials. Can you find the flag?
+</p>
+
+<p>
+The url to the source code of the webshop is:
+</p>
+
+<pre class="example">
+https://github.com/muhammadthm/SantaGiftShop
+</pre>
+
+<p>
+Clone the repository and grep for <code>THM</code> to easily find the flag.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git clone https://github.com/muhammadthm/SantaGiftShop.git
+<span class="org-builtin">cd</span> SantaGiftShop
+grep <span class="org-string">'THM'</span> **/*
+</pre>
 </div>
-<div id="outline-container-org26f2396" class="outline-2">
-<h2 id="org26f2396">Day 4 Scanning</h2>
+
+<p>
+What is the name of the file containing passwords?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">grep password **/*
+</pre>
 </div>
-<div id="outline-container-orgae293de" class="outline-2">
-<h2 id="orgae293de">Day 5 Brute Forcing</h2>
-<div class="outline-text-2" id="text-orgae293de">
+
+<p>
+Among the output you'll find the answer:
+</p>
+
+<pre class="example">
+config.php
+</pre>
+
+<p>
+What is the name of the QA server associated with the website?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">grep QA **/*
+</pre>
+</div>
+
+<p>
+Among the output you'll find the url to the QA website:
+</p>
+
+<pre class="example">
+qa.santagift.shop
+</pre>
+
+<p>
+What is the DB<sub>PASSWORD</sub> that is being reused between the QA and PROD environments?
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">grep <span class="org-string">'DB_PASSWORD'</span> **/*
+</pre>
+</div>
+
+<p>
+The password is:
+</p>
+
+<pre class="example">
+s@nta2022
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org56876a3" class="outline-2">
+<h2 id="org56876a3">Day 4 Scanning</h2>
+</div>
+<div id="outline-container-org89bd041" class="outline-2">
+<h2 id="org89bd041">Day 5 Brute Forcing</h2>
+<div class="outline-text-2" id="text-org89bd041">
 <p>
 Use Hydra to find the VNC password of the target with IP address
 <b>MACHINE<sub>IP</sub></b>. What is the password?
@@ -190,11 +321,173 @@ THM{I_SEE_YOUR_SCREEN}
 </div>
 </div>
 
-<div id="outline-container-org13c2367" class="outline-2">
-<h2 id="org13c2367">Day 6 Email Analysis</h2>
+<div id="outline-container-orga5ec87c" class="outline-2">
+<h2 id="orga5ec87c">Day 6 Email Analysis</h2>
+<div class="outline-text-2" id="text-orga5ec87c">
+<ol class="org-ol">
+<li>What is the email address of the sender?</li>
+</ol>
+
+<p>
+Open the <code>Urgent:.eml</code> with any text editor.
+</p>
+<pre class="example">
+chief.elf@santaclaus.thm
+</pre>
+
+<ol class="org-ol">
+<li>What is the return address?</li>
+</ol>
+
+<pre class="example">
+murphy.evident@bandityeti.thm
+</pre>
+
+<ol class="org-ol">
+<li>On whose behalf was the email sent?</li>
+</ol>
+
+<pre class="example">
+chief elf
+</pre>
+
+<ol class="org-ol">
+<li>What is the X-spam score?</li>
+</ol>
+
+<pre class="example">
+3
+</pre>
+
+<ol class="org-ol">
+<li>What is hidden in the value of the Message-ID field?</li>
+</ol>
+
+<p>
+Decode the message with a base 64 decoder.
+</p>
+<pre class="example">
+AoC2022_Email_Analysis
+</pre>
+
+<ol class="org-ol">
+<li>Visit the email reputation check website provided in the task. What
+is the reputation result of the sender's email address?</li>
+</ol>
+
+<p>
+Go to <a href="https://emailrep.io/">https://emailrep.io/</a> and search for <code>chief.elf@santaclaus.thm</code>
+</p>
+<pre class="example">
+Risky
+</pre>
+
+<ol class="org-ol">
+<li>Check the attachments. What is the filename of the attachment?</li>
+</ol>
+
+<pre class="example">
+Division_of_labour-Load_share_plan.doc
+</pre>
+
+<ol class="org-ol">
+<li>What is the hash value of the attachment?</li>
+</ol>
+
+<div class="org-src-container">
+<pre class="src src-sh">emlAnalyzer -i Urgent<span class="org-string">\:</span>.eml --extract-all
+<span class="org-builtin">cd</span> eml-attachments
+sha256sum Division_of_labour-Load_share_plan.doc
+</pre>
 </div>
-<div id="outline-container-org38b7b2e" class="outline-2">
-<h2 id="org38b7b2e">Day 7 Cyberchef</h2>
+
+<ol class="org-ol">
+<li>Visit the Virus Total website and use the hash value to
+search. Navigate to the behaviour section. What is the second
+tactic marked in the Mitre ATT&amp;CK section?</li>
+</ol>
+
+<p>
+Go to <a href="https://www.virustotal.com/gui/home/upload">https://www.virustotal.com/gui/home/upload</a> and search for the
+hash found in the previous question. Navigate to the behaviour tab and
+look for the Mitre section. The second tactic is:
+</p>
+<pre class="example">
+defense evasion
+</pre>
+
+<ol class="org-ol">
+<li>Visit the InQuest website and use the hash value to search. What
+is the subcategory of the file?</li>
+</ol>
+
+<p>
+Go to <a href="https://labs.inquest.net/">https://labs.inquest.net/</a> and again search the hash found
+previously. Click the full page results. The sub-category is:
+</p>
+<pre class="example">
+macro_hunter
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgcebfcb5" class="outline-2">
+<h2 id="orgcebfcb5">Day 7 Cyberchef</h2>
+<div class="outline-text-2" id="text-orgcebfcb5">
+<p>
+Before answering any of the questions, open firefox and click the
+bookmark of cyberchef. Then go through all the 11 steps as explained
+in the intro.
+</p>
+
+<p>
+What is the version of CyberChef found in the attached VM?
+</p>
+
+<p>
+You can find the version number in the url.
+</p>
+
+<pre class="example">
+9.49.0
+</pre>
+
+<p>
+How many recipes were used to extract URLs from the malicious doc?
+</p>
+
+<pre class="example">
+10
+</pre>
+
+<p>
+We found a URL that was downloading a suspicious file; what is the name of that malware?
+</p>
+
+<pre class="example">
+mysterygift.exe
+</pre>
+
+<p>
+What is the last defanged URL of the bandityeti domain found in the last step?
+</p>
+
+<pre class="example">
+hxxps[://]cdn[.]bandityeti[.]THM/files/index/
+</pre>
+
+<p>
+What is the ticket found in one of the domains? (Format: Domain/&lt;GOLDEN<sub>FLAG</sub>&gt;)
+</p>
+
+<pre class="example">
+THM_MYSTERY_FLAG
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org66b2cc0" class="outline-2">
+<h2 id="org66b2cc0">Day 8 Smart Contracts</h2>
 </div>
 </div>
 <div id="postamble" class="status">

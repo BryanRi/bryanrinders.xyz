@@ -7,21 +7,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Natas (OverTheWire)</title>
 <meta name="generator" content="Org mode" />
-<link rel='stylesheet' href='/css/default.css' />
-<link rel='stylesheet' href='/css/source-code.css' />
+<link rel='stylesheet' href='website/css/default.css' />
+<link rel='stylesheet' href='website/css/source-code.css' />
 </head>
 <body>
 <div id="preamble" class="status">
 <h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
-  <a href='/'>Home</a>
-  <a href='/ctf/'>CTF WriteUps</a>
-  <a href='/emacs/'>Emacs</a>
-  <a href='/linux/'>Linux Tutorials</a>
+  <a href='website/'>Home</a>
+  <a href='website/ctf-index.html'>CTF WriteUps</a>
+  <a href='website/emacs/'>Emacs</a>
+  <a href='website/linux/'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/other/'>Other</a>
+  <a href='website/other/'>Other</a>
   <span class='right'>
-    <a href='/sitemap.html'>Sitemap</a>
+    <a href='website/sitemap.html'>Sitemap</a>
   </span>
 </div>
 <br><hr>
@@ -32,37 +32,37 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgca94bed">1. Introduction</a></li>
-<li><a href="#orgee4b993">2. Level 0</a></li>
-<li><a href="#orgc96b95f">3. Level 1</a></li>
-<li><a href="#org149cc38">4. Level 2</a></li>
-<li><a href="#org49c1658">5. Level 3</a></li>
-<li><a href="#org3c3a105">6. Level 4</a></li>
-<li><a href="#org58c7d4b">7. Level 5</a></li>
-<li><a href="#org35f0900">8. Level 6</a></li>
-<li><a href="#org755158b">9. Level 7</a></li>
-<li><a href="#org4380448">10. Level 8</a></li>
-<li><a href="#org08a73d8">11. Level 9</a></li>
-<li><a href="#orgbbfa3d3">12. Level 10</a></li>
-<li><a href="#org5a49226">13. Level 11</a>
+<li><a href="#orgd7ed722">1. Introduction</a></li>
+<li><a href="#org7958201">2. Level 0</a></li>
+<li><a href="#org3fc9352">3. Level 1</a></li>
+<li><a href="#orgab93cda">4. Level 2</a></li>
+<li><a href="#org9622437">5. Level 3</a></li>
+<li><a href="#org1797b8d">6. Level 4</a></li>
+<li><a href="#org11da342">7. Level 5</a></li>
+<li><a href="#orgee64d4a">8. Level 6</a></li>
+<li><a href="#orgb58766e">9. Level 7</a></li>
+<li><a href="#orgaf9c04a">10. Level 8</a></li>
+<li><a href="#org85bb14f">11. Level 9</a></li>
+<li><a href="#org634c403">12. Level 10</a></li>
+<li><a href="#orga9f3a3e">13. Level 11</a>
 <ul>
-<li><a href="#orgc646358">13.1. Intro</a></li>
-<li><a href="#org3989c8a">13.2. Get the cookie (cipher text)</a></li>
-<li><a href="#org643195b">13.3. Get the plain text</a></li>
-<li><a href="#orgc314feb">13.4. Find the encryption key</a></li>
-<li><a href="#org58de6d1">13.5. Get the password for natas12</a></li>
+<li><a href="#orgca85912">13.1. Intro</a></li>
+<li><a href="#org3adc05b">13.2. Get the cookie (cipher text)</a></li>
+<li><a href="#org7a043c4">13.3. Get the plain text</a></li>
+<li><a href="#orge698ddd">13.4. Find the encryption key</a></li>
+<li><a href="#org4e3c9f4">13.5. Get the password for natas12</a></li>
 </ul>
 </li>
-<li><a href="#orgb06e095">14. Natas 12</a></li>
-<li><a href="#org6f94883">15. Natas 13</a></li>
-<li><a href="#orgffc3ceb">16. Natas 14</a></li>
-<li><a href="#orgeae3f7e">17. Natas 15</a></li>
+<li><a href="#org3c80a40">14. Natas 12</a></li>
+<li><a href="#orgac7cb28">15. Natas 13</a></li>
+<li><a href="#org1198bef">16. Natas 14</a></li>
+<li><a href="#orgc3e2b7e">17. Natas 15</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgca94bed" class="outline-2">
-<h2 id="orgca94bed"><span class="section-number-2">1</span> Introduction</h2>
+<div id="outline-container-orgd7ed722" class="outline-2">
+<h2 id="orgd7ed722"><span class="section-number-2">1</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This is a writeup for the <a href="https://overthewire.org/wargames/">overthewire.org</a> war game Natas. To start a level 
@@ -75,8 +75,8 @@ All passwords for the next level are also stored in
 </div>
 </div>
 
-<div id="outline-container-orgee4b993" class="outline-2">
-<h2 id="orgee4b993"><span class="section-number-2">2</span> Level 0</h2>
+<div id="outline-container-org7958201" class="outline-2">
+<h2 id="org7958201"><span class="section-number-2">2</span> Level 0</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 View the source page and find the password:
@@ -96,8 +96,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-orgc96b95f" class="outline-2">
-<h2 id="orgc96b95f"><span class="section-number-2">3</span> Level 1</h2>
+<div id="outline-container-org3fc9352" class="outline-2">
+<h2 id="org3fc9352"><span class="section-number-2">3</span> Level 1</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 View the source page by using a short cut key (for me &lt;C-u&gt;, Ctrl+u):
@@ -117,8 +117,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org149cc38" class="outline-2">
-<h2 id="org149cc38"><span class="section-number-2">4</span> Level 2</h2>
+<div id="outline-container-orgab93cda" class="outline-2">
+<h2 id="orgab93cda"><span class="section-number-2">4</span> Level 2</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Again view the source page. There is a line with a link to an image 
@@ -150,8 +150,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org49c1658" class="outline-2">
-<h2 id="org49c1658"><span class="section-number-2">5</span> Level 3</h2>
+<div id="outline-container-org9622437" class="outline-2">
+<h2 id="org9622437"><span class="section-number-2">5</span> Level 3</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 View the source and find the line
@@ -179,8 +179,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org3c3a105" class="outline-2">
-<h2 id="org3c3a105"><span class="section-number-2">6</span> Level 4</h2>
+<div id="outline-container-org1797b8d" class="outline-2">
+<h2 id="org1797b8d"><span class="section-number-2">6</span> Level 4</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 To get access to the password we need to come from the natas5 website as is 
@@ -200,7 +200,7 @@ First define a function that can find the password in the raw html text:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org8b65d4e">def find_pswd(text):
+<pre class="src src-ein-python" id="orgc34fa53">def find_pswd(text):
     # find the line with the password in the html text
     lines = text.split('\n')
     bools = list(map(lambda x : "password" in x, lines))
@@ -215,7 +215,7 @@ Now the code that change the referer to natas5:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org0a9a304"># The code is written in python
+<pre class="src src-ein-python" id="orgb424dce"># The code is written in python
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -240,8 +240,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org58c7d4b" class="outline-2">
-<h2 id="org58c7d4b"><span class="section-number-2">7</span> Level 5</h2>
+<div id="outline-container-org11da342" class="outline-2">
+<h2 id="org11da342"><span class="section-number-2">7</span> Level 5</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 After logging in the web page shows:
@@ -256,7 +256,7 @@ Lets inspect the headers to see what is happening
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="orgb917eeb"># The code is written in python
+<pre class="src src-ein-python" id="org728a82a"># The code is written in python
 import requests
 from requests.auth import HTTPBasicAuth
 
@@ -282,7 +282,7 @@ loggedin=1 then that should give access to the password.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org8ddd95f">cookies = {'loggedin': '1'}
+<pre class="src src-ein-python" id="orgeb1b733">cookies = {'loggedin': '1'}
 
 # get request with the cookie set loggedin=1
 r = requests.get(url, cookies=cookies, auth=HTTPBasicAuth(user,pswd))
@@ -301,8 +301,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org35f0900" class="outline-2">
-<h2 id="org35f0900"><span class="section-number-2">8</span> Level 6</h2>
+<div id="outline-container-orgee64d4a" class="outline-2">
+<h2 id="orgee64d4a"><span class="section-number-2">8</span> Level 6</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 After logging in we are prompted to input a secret. The source contains the line:
@@ -321,7 +321,7 @@ follow this to the url <a href="http://natas6.natas.labs.overthewire.org/include
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org06ee3d0">user = "natas6"
+<pre class="src src-ein-python" id="org72e52e0">user = "natas6"
 pswd = "aGoY4q2Dc6MgDq4oL4YtoKtyAg9PeHa1"
 url = "http://natas6.natas.labs.overthewire.org/"
 post_data = {"secret": "FOEIUWGHFEEUHOFUOIU", "submit": "submit"}
@@ -342,8 +342,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org755158b" class="outline-2">
-<h2 id="org755158b"><span class="section-number-2">9</span> Level 7</h2>
+<div id="outline-container-orgb58766e" class="outline-2">
+<h2 id="orgb58766e"><span class="section-number-2">9</span> Level 7</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 The source page says:
@@ -357,7 +357,7 @@ and there are two links for 'Home' and 'About', 'index.php?page=Home' and 'index
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org001464e">user = "natas7"
+<pre class="src src-ein-python" id="org1902ae6">user = "natas7"
 pswd = "7z3hEENjQtflzgnT29q7wAvMNfZdh0i9"
 url = "http://natas7.natas.labs.overthewire.org/"
 location = "/index.php?page=/etc/natas_webpass/natas8"
@@ -378,8 +378,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org4380448" class="outline-2">
-<h2 id="org4380448"><span class="section-number-2">10</span> Level 8</h2>
+<div id="outline-container-orgaf9c04a" class="outline-2">
+<h2 id="orgaf9c04a"><span class="section-number-2">10</span> Level 8</h2>
 <div class="outline-text-2" id="text-10">
 <p>
 The source page again has a link to:
@@ -405,7 +405,7 @@ function encodeSecret($secret) {
 All we need to do is reverse this function on the given encoded secret:
 </p>
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org2d0f1b9">import base64
+<pre class="src src-ein-python" id="org8692a19">import base64
 
 secret = "3d3d516343746d4d6d6c315669563362"
 # convert hex to binary
@@ -433,7 +433,7 @@ Now we can POST the secret to get the password.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org3fffd3f">user = "natas8"
+<pre class="src src-ein-python" id="org1c66d73">user = "natas8"
 pswd = "DBfUBfqQG69KvJvJ1iAbMoIpwSNQ9bWe"
 url = "http://natas8.natas.labs.overthewire.org/"
 post_data = {"secret": "oubWYf2kBq", "submit": "submit"}
@@ -454,8 +454,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org08a73d8" class="outline-2">
-<h2 id="org08a73d8"><span class="section-number-2">11</span> Level 9</h2>
+<div id="outline-container-org85bb14f" class="outline-2">
+<h2 id="org85bb14f"><span class="section-number-2">11</span> Level 9</h2>
 <div class="outline-text-2" id="text-11">
 <p>
 On the site there is a search box that searches for words. Trying out some words in the search box shows that it actual does find all words containing the searched string. Inspecting the source reveals this piece of code:
@@ -472,7 +472,7 @@ So it is using grep to find results from 'dictionary.txt', but grep allows for m
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org3fcf585">import re
+<pre class="src src-ein-python" id="org835a5b5">import re
 
 user = "natas9"
 pswd = "W0mMhUcRRnG8dcghE4qvk3JA9lGt8nDl"
@@ -495,8 +495,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-orgbbfa3d3" class="outline-2">
-<h2 id="orgbbfa3d3"><span class="section-number-2">12</span> Level 10</h2>
+<div id="outline-container-org634c403" class="outline-2">
+<h2 id="org634c403"><span class="section-number-2">12</span> Level 10</h2>
 <div class="outline-text-2" id="text-12">
 <p>
 This level is similar to the previous level but it checks if there are "illegal" characters in the input.
@@ -517,7 +517,7 @@ From the regular expression in 'preg<sub>match</sub>' the illegal characters are
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="orgdc95fab">user = "natas10"
+<pre class="src src-ein-python" id="orgef3163d">user = "natas10"
 pswd = "nOpp1igQAkUzaI1GUUjzn1bFVj7xCNzu"
 url = "http://natas10.natas.labs.overthewire.org/"
 post_data = {"needle": "'' /etc/natas_webpass/natas11", "submit": "submit"}
@@ -538,12 +538,12 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-org5a49226" class="outline-2">
-<h2 id="org5a49226"><span class="section-number-2">13</span> Level 11</h2>
+<div id="outline-container-orga9f3a3e" class="outline-2">
+<h2 id="orga9f3a3e"><span class="section-number-2">13</span> Level 11</h2>
 <div class="outline-text-2" id="text-13">
 </div>
-<div id="outline-container-orgc646358" class="outline-3">
-<h3 id="orgc646358"><span class="section-number-3">13.1</span> Intro</h3>
+<div id="outline-container-orgca85912" class="outline-3">
+<h3 id="orgca85912"><span class="section-number-3">13.1</span> Intro</h3>
 <div class="outline-text-3" id="text-13-1">
 <p>
 From the source code, these are the most important functions/variables:
@@ -577,15 +577,15 @@ The <code>xor_encrypt()</code> function simply encrypts the input with a censore
 </div>
 </div>
 
-<div id="outline-container-org3989c8a" class="outline-3">
-<h3 id="org3989c8a"><span class="section-number-3">13.2</span> Get the cookie (cipher text)</h3>
+<div id="outline-container-org3adc05b" class="outline-3">
+<h3 id="org3adc05b"><span class="section-number-3">13.2</span> Get the cookie (cipher text)</h3>
 <div class="outline-text-3" id="text-13-2">
 <p>
 So lets get a cookie:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="orgc9d9a39">import requests
+<pre class="src src-ein-python" id="orgb4800b9">import requests
 from requests.auth import HTTPBasicAuth
 import re
 
@@ -616,7 +616,7 @@ This cookie is url encode as can be seen by the %3D at the end. Lets decode it:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org610c08e">from urllib.parse import unquote
+<pre class="src src-ein-python" id="orgfe42e66">from urllib.parse import unquote
 import base64 
 
 cookie = unquote(cookie)
@@ -637,8 +637,8 @@ Results:
 </div>
 </div>
 
-<div id="outline-container-org643195b" class="outline-3">
-<h3 id="org643195b"><span class="section-number-3">13.3</span> Get the plain text</h3>
+<div id="outline-container-org7a043c4" class="outline-3">
+<h3 id="org7a043c4"><span class="section-number-3">13.3</span> Get the plain text</h3>
 <div class="outline-text-3" id="text-13-3">
 <p>
 Now to get the plaintext that is used in the <code>xor_encrypt()</code> the <code>savedata()</code> json<sub>encode</sub> the <code>defaultdata</code> first. 
@@ -661,8 +661,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-orgc314feb" class="outline-3">
-<h3 id="orgc314feb"><span class="section-number-3">13.4</span> Find the encryption key</h3>
+<div id="outline-container-orge698ddd" class="outline-3">
+<h3 id="orge698ddd"><span class="section-number-3">13.4</span> Find the encryption key</h3>
 <div class="outline-text-3" id="text-13-4">
 <p>
 Now use the plain and cipher text in a slightly rewritten <code>xor_encrypt()</code> to find the key.
@@ -704,8 +704,8 @@ The is a pattern in the key which means that the key that was used is the substr
 </div>
 </div>
 
-<div id="outline-container-org58de6d1" class="outline-3">
-<h3 id="org58de6d1"><span class="section-number-3">13.5</span> Get the password for natas12</h3>
+<div id="outline-container-org4e3c9f4" class="outline-3">
+<h3 id="org4e3c9f4"><span class="section-number-3">13.5</span> Get the password for natas12</h3>
 <div class="outline-text-3" id="text-13-5">
 <p>
 To get the password change the <code>showpassword</code> value from the array <code>$defaultdata</code> to "yes". Then encrypt the array with the key <code>qw8J</code>. This will result in the value that should be send as the cookie and will give the password.
@@ -746,7 +746,7 @@ Use the just computed cipher text as the cookie and send a get request with the 
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org6114085">import requests
+<pre class="src src-ein-python" id="org65d7326">import requests
 from requests.auth import HTTPBasicAuth
 import re
 
@@ -774,8 +774,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-orgb06e095" class="outline-2">
-<h2 id="orgb06e095"><span class="section-number-2">14</span> Natas 12</h2>
+<div id="outline-container-org3c80a40" class="outline-2">
+<h2 id="org3c80a40"><span class="section-number-2">14</span> Natas 12</h2>
 <div class="outline-text-2" id="text-14">
 <p>
 The webpage asks for .jpg files to be uploaded. After uploading a picture a link is given to the location, <code>upload/&lt;randomstring&gt;.jpg</code>, of the uploaded file. I tried a few path traversal attacks, e.g. <code>/upload/../etc/natas_webpass/natas13</code>, but all failed. So maybe it is possible to upload some malicious php code instead of a jpg.
@@ -796,7 +796,7 @@ Now the python script that uploads <code>evil.php</code> to the website and gets
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org7c1f31a">import requests
+<pre class="src src-ein-python" id="orgf0d4bc2">import requests
 from requests.auth import HTTPBasicAuth
 import re
 
@@ -826,15 +826,15 @@ print('The password for natas13: ' + r1.text)
 </div>
 </div>
 
-<div id="outline-container-org6f94883" class="outline-2">
-<h2 id="org6f94883"><span class="section-number-2">15</span> Natas 13</h2>
+<div id="outline-container-orgac7cb28" class="outline-2">
+<h2 id="orgac7cb28"><span class="section-number-2">15</span> Natas 13</h2>
 <div class="outline-text-2" id="text-15">
 <p>
 This level is similar to level 12 but it uses <code>exif_imagetype</code> to check if the file being uploaded is actually an image. It does this by checking the <i>magic number</i> at the beginning of the file. So if we can insert this <i>magic number</i> to the beginning of our php script than it will pass the <code>exif_imagetype</code> check will the server will execute the contents of the file. We will insert the <i>magic number</i> by letting python write it to the file in bytes. The rest of the attack is very similar to level 12. The <i>magic number</i> is <code>\xFF\xD8\xFF\xE0</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org32a47f5">import requests
+<pre class="src src-ein-python" id="orgcceb2c0">import requests
 from requests.auth import HTTPBasicAuth
 import re
 
@@ -875,15 +875,15 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-orgffc3ceb" class="outline-2">
-<h2 id="orgffc3ceb"><span class="section-number-2">16</span> Natas 14</h2>
+<div id="outline-container-org1198bef" class="outline-2">
+<h2 id="org1198bef"><span class="section-number-2">16</span> Natas 14</h2>
 <div class="outline-text-2" id="text-16">
 <p>
 This level has a login form. The source code reveals the use of very simple sql queries, which means we could try some <a href="https://en.wikipedia.org/wiki/SQL_injection#Incorrectly_constructed_SQL_statements">sql injections</a>. The very first try immediately worked, supplying <code>" or 1=1 --</code> for both the username and the password.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-ein-python" id="org5c8eea1">import requests
+<pre class="src src-ein-python" id="orgb5cf90f">import requests
 from requests.auth import HTTPBasicAuth
 import re
 
@@ -910,8 +910,8 @@ Result:
 </div>
 </div>
 
-<div id="outline-container-orgeae3f7e" class="outline-2">
-<h2 id="orgeae3f7e"><span class="section-number-2">17</span> Natas 15</h2>
+<div id="outline-container-orgc3e2b7e" class="outline-2">
+<h2 id="orgc3e2b7e"><span class="section-number-2">17</span> Natas 15</h2>
 <div class="outline-text-2" id="text-17">
 <div class="org-src-container">
 <pre class="src src-ein-python">import requests
