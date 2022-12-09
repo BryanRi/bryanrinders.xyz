@@ -27,8 +27,8 @@
 ;; hardcoded html definitions
 ;; for the navigation bar and footer
 (defvar html-head-css
-  "<link rel='stylesheet' href='/css/default.css' />
-<link rel='stylesheet' href='/css/source-code.css' />")
+  "<link rel='stylesheet' href='/website/css/default.css' />
+<link rel='stylesheet' href='/website/css/source-code.css' />")
 
 (defvar nav-bar
   "<h1 id='site-name'>Bryan Rinders</h1>
