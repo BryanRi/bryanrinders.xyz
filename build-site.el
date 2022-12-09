@@ -27,20 +27,20 @@
 ;; hardcoded html definitions
 ;; for the navigation bar and footer
 (defvar html-head-css
-  "<link rel='stylesheet' href='/css/default.css' />
-<link rel='stylesheet' href='/css/source-code.css' />")
+  "<link rel='stylesheet' href='website/css/default.css' />
+<link rel='stylesheet' href='website/css/source-code.css' />")
 
 (defvar nav-bar
   "<h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
-  <a href='/'>Home</a>
-  <a href='/ctf/'>CTF WriteUps</a>
-  <a href='/emacs/'>Emacs</a>
-  <a href='/linux/'>Linux Tutorials</a>
+  <a href='website/'>Home</a>
+  <a href='website/ctf/'>CTF WriteUps</a>
+  <a href='website/emacs/'>Emacs</a>
+  <a href='website/linux/'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/other/'>Other</a>
+  <a href='website/other/'>Other</a>
   <span class='right'>
-    <a href='/sitemap.html'>Sitemap</a>
+    <a href='website/sitemap.html'>Sitemap</a>
   </span>
 </div>
 <br><hr>")
@@ -84,7 +84,7 @@
   (let ((filename (org-publish-find-title entry project)))
     (if (= (length filename) 0)
         (format "*%s*" entry)
-      (format "{{{timestamp(%s)}}} [[/%s/%s][%s]]"
+      (format "{{{timestamp(%s)}}} [[./%s/%s][%s]]"
       ;(format "{{{timestamp(%s)}}} [[./%s][%s]]"
               (format-time-string "%Y-%m-%d"
                                   (org-publish-find-date entry project))
@@ -114,6 +114,7 @@
         :publishing-directory  (concat "./html/" id)
         :auto-sitemap          t
         :sitemap-filename      (concat id "-sitemap.org")
+        :sitemap-title         nil  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; new
         :sitemap-style         'list
         :sitemape-sort-folders 'ignore
         :sitemap-sort-files    'anti-chronologically
@@ -130,6 +131,12 @@
 ;; Define the publishing project
 (setq org-publish-project-alist
       (list
+        (list "css"
+              :base-directory       "./org/css"
+              :base-extension       "css"
+              :recursive            nil
+              :publishing-directory "./html/css"
+              :publishing-function  'org-publish-attachment)
         (list "home"                ;; unique string that identifies the project/website
               :recursive            nil
               :base-directory       "./org"
@@ -147,28 +154,6 @@
         (br/define-website-component "emacs")
         (br/define-website-component "linux")
         (br/define-website-component "other")
-        (list "css"
-              :base-directory       "./org/css"
-              :base-extension       "css"
-              :recursive            nil
-              :publishing-directory "./html/css"
-              :publishing-function  'org-publish-attachment)
-;        (list "ctf"
-;              :recursive            t
-;              :base-directory       "./org/ctf"
-;              :publishing-function  'org-html-publish-to-html
-;              :publishing-directory "./html/ctf"
-;              :auto-sitemap         t
-;              :sitemap-filename     "ctf-sitemap.org"
-;              :sitemap-style        'list
-;              :with-author          nil
-;              :with-creator         t
-;              :with-toc             t
-;              :section-numbers      t
-;              :html-preamble        nav-bar
-;              :html-postamble       footer
-;              :htmlized-source      t
-;              :time-stamp-file      nil)
         (list "website" :components '("css" "ctf" "emacs" "linux" "other" "home"))))
 
 

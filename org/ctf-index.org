@@ -5,4 +5,4 @@
 
 An exhaustive list of all my CTF writeups.
 
-#+INCLUDE: ctf-sitemap.org :lines 3-
+#+INCLUDE: ctf/ctf-sitemap.org :lines 3-
