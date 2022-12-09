@@ -7,21 +7,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Advent Of Cyber 2022 (TryHackMe)</title>
 <meta name="generator" content="Org mode" />
-<link rel='stylesheet' href='website/css/default.css' />
-<link rel='stylesheet' href='website/css/source-code.css' />
+<link rel='stylesheet' href='./css/default.css' />
+<link rel='stylesheet' href='./css/source-code.css' />
 </head>
 <body>
 <div id="preamble" class="status">
 <h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
-  <a href='website/'>Home</a>
-  <a href='website/ctf-index.html'>CTF WriteUps</a>
-  <a href='website/emacs/'>Emacs</a>
-  <a href='website/linux/'>Linux Tutorials</a>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs/'>Emacs</a>
+  <a href='/linux/'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='website/other/'>Other</a>
+  <a href='/other/'>Other</a>
   <span class='right'>
-    <a href='website/sitemap.html'>Sitemap</a>
+    <a href='/sitemap.html'>Sitemap</a>
   </span>
 </div>
 <br><hr>
@@ -32,32 +32,32 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb07dc03">Day 1 Frameworks</a>
+<li><a href="#org8541ec1">Day 1 Frameworks</a>
 <ul>
-<li><a href="#orge4b6111">Puzzle 1</a></li>
-<li><a href="#org5252e13">Puzzle 2</a></li>
-<li><a href="#org3aaa01b">Puzzle 3</a></li>
-<li><a href="#orgac6e3d0">Answers</a></li>
+<li><a href="#orgf751234">Puzzle 1</a></li>
+<li><a href="#org1576dc5">Puzzle 2</a></li>
+<li><a href="#orgddcbbf9">Puzzle 3</a></li>
+<li><a href="#org9594e3b">Answers</a></li>
 </ul>
 </li>
-<li><a href="#org9fbbd28">Day 2 Log Analysis</a></li>
-<li><a href="#org2c86925">Day 3 OSINT</a></li>
-<li><a href="#org56876a3">Day 4 Scanning</a></li>
-<li><a href="#org89bd041">Day 5 Brute Forcing</a></li>
-<li><a href="#orga5ec87c">Day 6 Email Analysis</a></li>
-<li><a href="#orgcebfcb5">Day 7 Cyberchef</a></li>
-<li><a href="#org66b2cc0">Day 8 Smart Contracts</a></li>
+<li><a href="#org5addbb1">Day 2 Log Analysis</a></li>
+<li><a href="#org5205096">Day 3 OSINT</a></li>
+<li><a href="#orga688094">Day 4 Scanning</a></li>
+<li><a href="#org0e2d7b4">Day 5 Brute Forcing</a></li>
+<li><a href="#orgd3d9dc4">Day 6 Email Analysis</a></li>
+<li><a href="#org1cc4282">Day 7 Cyberchef</a></li>
+<li><a href="#org65e3224">Day 8 Smart Contracts</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgb07dc03" class="outline-2">
-<h2 id="orgb07dc03">Day 1 Frameworks</h2>
-<div class="outline-text-2" id="text-orgb07dc03">
+<div id="outline-container-org8541ec1" class="outline-2">
+<h2 id="org8541ec1">Day 1 Frameworks</h2>
+<div class="outline-text-2" id="text-org8541ec1">
 </div>
-<div id="outline-container-orge4b6111" class="outline-3">
-<h3 id="orge4b6111">Puzzle 1</h3>
-<div class="outline-text-3" id="text-orge4b6111">
+<div id="outline-container-orgf751234" class="outline-3">
+<h3 id="orgf751234">Puzzle 1</h3>
+<div class="outline-text-3" id="text-orgf751234">
 <ol class="org-ol">
 <li>Reconnaissance</li>
 <li>Weaponization</li>
@@ -71,9 +71,9 @@
 </div>
 </div>
 
-<div id="outline-container-org5252e13" class="outline-3">
-<h3 id="org5252e13">Puzzle 2</h3>
-<div class="outline-text-3" id="text-org5252e13">
+<div id="outline-container-org1576dc5" class="outline-3">
+<h3 id="org1576dc5">Puzzle 2</h3>
+<div class="outline-text-3" id="text-org1576dc5">
 <ol class="org-ol">
 <li>Pivoting</li>
 <li>Discovery</li>
@@ -85,9 +85,9 @@
 </div>
 </div>
 
-<div id="outline-container-org3aaa01b" class="outline-3">
-<h3 id="org3aaa01b">Puzzle 3</h3>
-<div class="outline-text-3" id="text-org3aaa01b">
+<div id="outline-container-orgddcbbf9" class="outline-3">
+<h3 id="orgddcbbf9">Puzzle 3</h3>
+<div class="outline-text-3" id="text-orgddcbbf9">
 <ol class="org-ol">
 <li>Access</li>
 <li>Collection</li>
@@ -98,9 +98,9 @@
 </div>
 </div>
 
-<div id="outline-container-orgac6e3d0" class="outline-3">
-<h3 id="orgac6e3d0">Answers</h3>
-<div class="outline-text-3" id="text-orgac6e3d0">
+<div id="outline-container-org9594e3b" class="outline-3">
+<h3 id="org9594e3b">Answers</h3>
+<div class="outline-text-3" id="text-org9594e3b">
 <p>
 Who is the adversary that attacked Santa's network this year?
 </p>
@@ -122,9 +122,9 @@ What's the flag that they left behind?
 </div>
 </div>
 
-<div id="outline-container-org9fbbd28" class="outline-2">
-<h2 id="org9fbbd28">Day 2 Log Analysis</h2>
-<div class="outline-text-2" id="text-org9fbbd28">
+<div id="outline-container-org5addbb1" class="outline-2">
+<h2 id="org5addbb1">Day 2 Log Analysis</h2>
+<div class="outline-text-2" id="text-org5addbb1">
 <p>
 Use the ls command to list the files present in the current directory. How many log files are present?
 </p>
@@ -195,9 +195,9 @@ Look through the log files for the flag. The format of the flag is: THM{}
 </div>
 </div>
 
-<div id="outline-container-org2c86925" class="outline-2">
-<h2 id="org2c86925">Day 3 OSINT</h2>
-<div class="outline-text-2" id="text-org2c86925">
+<div id="outline-container-org5205096" class="outline-2">
+<h2 id="org5205096">Day 3 OSINT</h2>
+<div class="outline-text-2" id="text-org5205096">
 <p>
 What is the name of the Registrar for the domain santagift.shop?
 </p>
@@ -286,12 +286,12 @@ s@nta2022
 </div>
 </div>
 
-<div id="outline-container-org56876a3" class="outline-2">
-<h2 id="org56876a3">Day 4 Scanning</h2>
+<div id="outline-container-orga688094" class="outline-2">
+<h2 id="orga688094">Day 4 Scanning</h2>
 </div>
-<div id="outline-container-org89bd041" class="outline-2">
-<h2 id="org89bd041">Day 5 Brute Forcing</h2>
-<div class="outline-text-2" id="text-org89bd041">
+<div id="outline-container-org0e2d7b4" class="outline-2">
+<h2 id="org0e2d7b4">Day 5 Brute Forcing</h2>
+<div class="outline-text-2" id="text-org0e2d7b4">
 <p>
 Use Hydra to find the VNC password of the target with IP address
 <b>MACHINE<sub>IP</sub></b>. What is the password?
@@ -321,9 +321,9 @@ THM{I_SEE_YOUR_SCREEN}
 </div>
 </div>
 
-<div id="outline-container-orga5ec87c" class="outline-2">
-<h2 id="orga5ec87c">Day 6 Email Analysis</h2>
-<div class="outline-text-2" id="text-orga5ec87c">
+<div id="outline-container-orgd3d9dc4" class="outline-2">
+<h2 id="orgd3d9dc4">Day 6 Email Analysis</h2>
+<div class="outline-text-2" id="text-orgd3d9dc4">
 <ol class="org-ol">
 <li>What is the email address of the sender?</li>
 </ol>
@@ -431,9 +431,9 @@ macro_hunter
 </div>
 </div>
 
-<div id="outline-container-orgcebfcb5" class="outline-2">
-<h2 id="orgcebfcb5">Day 7 Cyberchef</h2>
-<div class="outline-text-2" id="text-orgcebfcb5">
+<div id="outline-container-org1cc4282" class="outline-2">
+<h2 id="org1cc4282">Day 7 Cyberchef</h2>
+<div class="outline-text-2" id="text-org1cc4282">
 <p>
 Before answering any of the questions, open firefox and click the
 bookmark of cyberchef. Then go through all the 11 steps as explained
@@ -486,8 +486,8 @@ THM_MYSTERY_FLAG
 </div>
 </div>
 
-<div id="outline-container-org66b2cc0" class="outline-2">
-<h2 id="org66b2cc0">Day 8 Smart Contracts</h2>
+<div id="outline-container-org65e3224" class="outline-2">
+<h2 id="org65e3224">Day 8 Smart Contracts</h2>
 </div>
 </div>
 <div id="postamble" class="status">
