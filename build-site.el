@@ -34,7 +34,7 @@
   "<h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
   <a href='website/'>Home</a>
-  <a href='website/ctf/'>CTF WriteUps</a>
+  <a href='website/ctf-index.html'>CTF WriteUps</a>
   <a href='website/emacs/'>Emacs</a>
   <a href='website/linux/'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
