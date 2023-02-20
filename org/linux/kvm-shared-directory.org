@@ -1,0 +1,36 @@
+#+TITLE: KVM: Setup A Shared Direcory Between A Host And Guest
+#+AUTHOR: Bryan Rinders
+#+OPTIONS: toc:nil title:nil
+
+* KVM: Setup A Shared Direcory Between A Host And Guest
+Create the directory to be shared on you host machine and set the permissions.
+
+#+begin_src sh
+  mkdir ~/shared
+  chmod 777 ~/shared
+#+end_src
+
+In virt-manager open the settings (i.e. click the open button in the top left corner) of the VM you wish to share a directory with. Then click "Show virtual hardware details" (i.e. the light bulb in the top left corner). In the bottom left click the "Add hardware". A new window should pop up. In the menu on the left click "Filesystem". Use the follow settings
+
+#+begin_example
+Driver: virtio-9p
+Source path: /home/br/dox/shared
+Target path: /sharedir
+#+end_example
+
+Now start the VM. To mount the shared directory use:
+
+#+begin_src sh
+  mkdir shared
+  sudo mount -t 9p -o trans=virtio /sharedir shared/
+#+end_src
+
+Or if you want the directory to automatically be mounted on boot add this to your =/etc/fstab=:
+
+#+begin_src sh
+/sharedir /shared 9p trans=virtio,version=9p2000.L,rw 0 0
+#+end_src
+
+* Sources
+- https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/
+- https://www.linux-kvm.org/page/9p_virtio

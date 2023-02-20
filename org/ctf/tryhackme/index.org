@@ -1,0 +1,14 @@
+#+TITLE: TryHackMe
+#+AUTHOR: Bryan Rinders
+#+DATE: 2022-10-16
+#+OPTIONS: num:nil toc:nil title:nil
+
+* TryHackMe Writeups
+My write ups for [[https://tryhackme.com][TryHackMe]] rooms and learning paths.
+
+| OverTheWire          |
+|----------------------|
+| [[./advent-of-cyber-2022.org][Advent Of Cyber 2022]] |
+| [[./file-inclusion.org][File Inclusion]]       |
+
+

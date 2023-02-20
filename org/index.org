@@ -12,6 +12,9 @@ Emacs and GNU/Linux. I also create writeups for CTF (CTF's or Capture The Flags
 are a fun way to learn cyber security skills).
 You can find my dotfiles and the source code for this website and many other
 projects on my [[https://gitlab.com/users/bryanrinders/groups][gitlab page]]
+#+BEGIN_EXPORT html
+<a href='https://gitlab.com/users/bryanrinders/groups', target='_blank'>
+#+END_EXPORT
 
 * List of most recent posts
 ** CTF Writeups

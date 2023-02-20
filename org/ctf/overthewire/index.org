@@ -1,12 +1,13 @@
 #+TITLE: OverTheWire
 #+AUTHOR: Bryan Rinders
 #+DATE: 2022-10-16
-#+OPTIONS: num:nil toc:nil
+#+OPTIONS: num:nil toc:nil title:nil
 
-* OverTheWire writeups
-My write ups for the [[https://overthewire.org/wargames][overthewire.org]] war
-games.
+* OverTheWire Writeups
+My write ups for the [[https://overthewire.org/wargames][overthewire.org]] war games.
+
 | OverTheWire |
-| [[./bandit.org][Bandit]] |
-| [[./natas.org][Natas]] |
-place holder file
+|-------------|
+| [[./bandit.org][Bandit]]      |
+| [[./natas.org][Natas]]       |
+

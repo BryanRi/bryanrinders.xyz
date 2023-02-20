@@ -35,10 +35,10 @@
 <div id='menu'>
   <a href='/website/'>Home</a>
   <a href='/website/ctf-index.html'>CTF WriteUps</a>
-  <a href='/website/emacs/'>Emacs</a>
-  <a href='/website/linux/'>Linux Tutorials</a>
+  <a href='/website/emacs-index.html'>Emacs</a>
+  <a href='/website/linux-index.html'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/website/other/'>Other</a>
+  <a href='/website/other-index.html'>Other</a>
   <span class='right'>
     <a href='/website/sitemap.html'>Sitemap</a>
   </span>
@@ -114,14 +114,14 @@
         :publishing-directory  (concat "./html/" id)
         :auto-sitemap          t
         :sitemap-filename      (concat id "-sitemap.org")
-        :sitemap-title         nil  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; new
+        :sitemap-title         nil
         :sitemap-style         'list
         :sitemape-sort-folders 'ignore
         :sitemap-sort-files    'anti-chronologically
         :sitemap-format-entry  'br/org-sitemap-date-entry-format
         :with-author           nil
         :with-creator          t
-        :with-toc              t
+        :with-toc              1
         :section-numbers       t
         :html-preamble         nav-bar
         :html-postamble        footer
