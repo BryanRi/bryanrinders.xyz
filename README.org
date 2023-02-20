@@ -1,6 +1,2 @@
 * My Website
 The source code for [[https://bryanri.github.io/website/]]
-
-* TODO
-- [ ] Fix issue with the internal links.
-- [ ] Fix css not being sourced.
