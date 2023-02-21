@@ -6,15 +6,14 @@
 * Welcome!
 {{{date}}}
 
-Welcome to my website. My name is Bryan Rinders and I am a Computing Science
-Student with a specialization in Security. I write tutorials for GNU
-Emacs and GNU/Linux. I also create writeups for CTF (CTF's or Capture The Flags
-are a fun way to learn cyber security skills).
-You can find my dotfiles and the source code for this website and many other
-projects on my [[https://gitlab.com/users/bryanrinders/groups][gitlab page]]
-#+BEGIN_EXPORT html
-<a href='https://gitlab.com/users/bryanrinders/groups', target='_blank'>
-#+END_EXPORT
+Welcome to my website. My name is Bryan Rinders and I am a Computing
+Science Student with a specialization in Security. I write tutorials
+for GNU Emacs and GNU/Linux. I also create writeups for CTF's (CTF's
+or Capture The Flags are a fun way to learn cyber security skills).
+You can find my dotfiles and the source code for this website and many
+other projects on my @@html:<a @@
+href='https://gitlab.com/users/bryanrinders/groups',
+target='_blank'@@html:>gitlab page</a>@@
 
 * List of most recent posts
 ** CTF Writeups
