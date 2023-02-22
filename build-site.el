@@ -24,6 +24,14 @@
 (require 'ox-publish)
 
 
+;; load some programming languages for syntax highlighting
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (shell . t)
+   (python . t)))
+
+
 ;; hardcoded html definitions
 ;; for the navigation bar and footer
 (defvar html-head-css
