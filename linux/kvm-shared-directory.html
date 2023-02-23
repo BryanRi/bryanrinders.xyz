@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>KVM: Setup A Shared Direcory Between A Host And Guest</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/website/css/default.css' />
+<link rel='stylesheet' href='/website/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/website/'>Home</a>
+  <a href='/website/ctf-index.html'>CTF WriteUps</a>
+  <a href='/website/emacs-index.html'>Emacs</a>
+  <a href='/website/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/website/other-index.html'>Other</a>
+  <span class='right'>
+    <a href='/website/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+
+<div id="outline-container-org49b1b84" class="outline-2">
+<h2 id="org49b1b84"><span class="section-number-2">1</span> KVM: Setup A Shared Direcory Between A Host And Guest</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Create the directory to be shared on you host machine and set the permissions.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir ~/shared
+chmod 777 ~/shared
+</pre>
+</div>
+
+<p>
+In virt-manager open the settings (i.e. click the open button in the top left corner) of the VM you wish to share a directory with. Then click "Show virtual hardware details" (i.e. the light bulb in the top left corner). In the bottom left click the "Add hardware". A new window should pop up. In the menu on the left click "Filesystem". Use the follow settings
+</p>
+
+<pre class="example">
+Driver: virtio-9p
+Source path: /home/br/dox/shared
+Target path: /sharedir
+</pre>
+
+<p>
+Now start the VM. To mount the shared directory use:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">mkdir shared
+sudo mount -t 9p -o <span class="org-variable-name">trans</span>=virtio /sharedir shared/
+</pre>
+</div>
+
+<p>
+Or if you want the directory to automatically be mounted on boot add this to your <code>/etc/fstab</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">/sharedir /shared 9p <span class="org-variable-name">trans</span>=virtio,<span class="org-variable-name">version</span>=9p2000.L,rw 0 0
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfcf8f58" class="outline-2">
+<h2 id="orgfcf8f58"><span class="section-number-2">2</span> Sources</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li><a href="https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/">https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/</a></li>
+<li><a href="https://www.linux-kvm.org/page/9p_virtio">https://www.linux-kvm.org/page/9p_virtio</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
