@@ -109,22 +109,24 @@ tbody tr:last-of-type {
 /* Scrollbar for Firefox */
 * {
   scrollbar-color: black var(--orange);
+  scrollbar-width: thin;
+  scrollbar-gutter: auto;  /* does not work in firefox */
 }
 
 /* Scrollbar for Chrome, Edge, Safari */
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 
 *::-webkit-scrollbar-track {
-  background: var(--orange);
+  background: #222222;
 }
 
 *::-webkit-scrollbar-thumb {
   background-color: black;
   border-radius: 20px;
-  border: 2px solid var(--orange);
+  border: 3px solid var(--orange);
 }
 
 /* Resize width based on screen size */
