@@ -236,7 +236,7 @@ contains the line:
 #+END_SRC
 
 Then going to the url
-[[view-source:http://natas6.natas.labs.overthewire.org/index-source.html]]
+http://natas6.natas.labs.overthewire.org/index-source.html
 contains:
 
 #+BEGIN_SRC 
