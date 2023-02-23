@@ -1,9 +1,8 @@
 #+TITLE: Natas (OverTheWire)
 #+AUTHOR: Bryan Rinders
 #+DATE: 2022-10-16
-#+PROPERTY: header-args :exports both :eval never-export
-#+PROPERTY: header-args:sh :session *natas-sh-session*
-#+PROPERTY: header-args:python :session *natas-python-session* :results output
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
 
 * Introduction
 This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Natas. To start a level 
