@@ -352,8 +352,9 @@ All we need to do is reverse this function on the given encoded secret:
 #+RESULTS: decoded_secret
 : oubWYf2kBq
 
-Now we can POST the secret, =DECODED_SECRET=: src_sh[:var
-s=decoded_secret]{echo "s"}, to get the password.
+Now we can POST the =DECODED_SECRET:= src_sh[:var s=decoded_secret
+:results output :exports results]{echo "$s" | cut -d ' ' -f 5}
+{{{results(=oubWYf2kBq=)}}}, to get the password.
 
 #+NAME: lvl8.2
 #+BEGIN_SRC python :var DECODED_SECRET=decoded_secret PASS_NATAS8=lvl7
