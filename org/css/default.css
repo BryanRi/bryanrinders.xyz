@@ -66,10 +66,17 @@ table {
     margin: 10px;
 }
 
-pre {
+code {
+    padding: 0px 3px;
+}
+
+pre, code {
     background-color: #3c3836;
-    margin: 5px;
-    border: 10px solid #3c3836;
+    font-size: 15px;
+}
+
+pre {
+    padding: 10px 15px;
 }
 
 pre, pre span {
