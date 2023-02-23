@@ -32,8 +32,7 @@
    (python . t)))
 
 
-;; hardcoded html definitions
-;; for the navigation bar and footer
+;; hardcoded html definitions for the navigation bar and footer
 (defvar html-head-css
   "<link rel='stylesheet' href='/website/css/default.css' />
 <link rel='stylesheet' href='/website/css/source-code.css' />")
@@ -167,6 +166,4 @@
 
 ;; Generate the site output
 ;(org-publish "blog")  ;; publish only those files that are modified/new
-(org-publish-all t)  ;; regenerates every html page, consider only updating a single one
-
-(message "Build complete!")
+;(org-publish-all t)   ;; regenerates every html page, consider only updating a single one
