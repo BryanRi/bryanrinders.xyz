@@ -1,7 +1,6 @@
 #+TITLE: Natas (OverTheWire)
 #+AUTHOR: Bryan Rinders
 #+DATE: 2022-10-16
-#+EXPORT_DATE: 2022-10-16
 #+PROPERTY: header-args :exports both :eval never-export
 #+PROPERTY: header-args:sh :session *natas-sh-session*
 #+PROPERTY: header-args:python :session *natas-python-session* :results output
@@ -456,7 +455,6 @@ function xor_encrypt($in) {
 function saveData($d) {
     setcookie("data", base64_encode(xor_encrypt(json_encode($d))));
 }
-
 #+END_SRC
 
 The =xor_encrypt()= function simply encrypts the input with a censored
