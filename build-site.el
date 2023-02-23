@@ -126,7 +126,7 @@
         :recursive             t
         :base-directory        (concat "./org/" id)
         :publishing-function   'org-html-publish-to-html
-        :publishing-directory  (concat "./html/" id)
+        :publishing-directory  (concat "./website/" id)
         :auto-sitemap          t
         :sitemap-filename      (concat id "-sitemap.org")
         :sitemap-title         nil
@@ -150,13 +150,13 @@
               :base-directory       "./org/css"
               :base-extension       "css"
               :recursive            nil
-              :publishing-directory "./html/css"
+              :publishing-directory "./website/css"
               :publishing-function  'org-publish-attachment)
         (list "home"                ;; unique string that identifies the project/website
               :recursive            nil
               :base-directory       "./org"
               :publishing-function  'org-html-publish-to-html
-              :publishing-directory "./html"
+              :publishing-directory "./website"
               :with-author          nil         ;; Don't include author name
               :with-title           nil
               :with-creator         t           ;; Include Emacs and Org versions in footer
