@@ -118,6 +118,7 @@
       org-src-fontify-natively            t
       org-html-htmlize-output-type        'css  ;; use css for syntax highlighting code blocks
       org-html-head                       html-head-css
+	  org-export-with-sub-superscripts    '{}    ;; sub/superscripts must be surrounded with {}
       )
 
 (defun br/define-website-component(id)
