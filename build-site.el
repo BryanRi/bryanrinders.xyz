@@ -61,11 +61,14 @@
 <br><hr>")
 
 (defvar footer
-  "<br><hr/>
+  (concat (format
+	   "<br><hr/>
 <footer>
   <div class='copyright-container'>
     <div class='copyright'>
-      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      Copyright &copy; 2022-%s Bryan Rinders some rights reserved"
+	   (format-time-string "%Y"))
+	  "
       <br><br>
       This page is available under a
       <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
@@ -77,7 +80,7 @@
   <div class='generated'>
     Created with %c on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
   </div>
-</footer>")
+</footer>"))
 
 
 ;; Defining a custom face
