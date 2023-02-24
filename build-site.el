@@ -132,7 +132,7 @@
         :sitemap-filename      (concat id "-sitemap.org")
         :sitemap-title         nil
         :sitemap-style         'list
-        :sitemape-sort-folders 'ignore
+        :sitemap-sort-folders  'ignore
         :sitemap-sort-files    'anti-chronologically
         :sitemap-format-entry  'br/org-sitemap-date-entry-format
         :with-author           nil
