@@ -1,6 +1,7 @@
 #+TITLE: Natas (OverTheWire)
 #+AUTHOR: Bryan Rinders
-#+DATE: 2022-10-16
+#+DATE: <2023-02-24 Fri>
+#+OPTIONS: num:nil
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 

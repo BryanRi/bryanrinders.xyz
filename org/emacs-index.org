@@ -1,6 +1,6 @@
 #+TITLE: Emacs Tutorials
 #+AUTHOR: Bryan Rinders
-#+DATE: 2022-10-16
+#+DATE: <2022-10-17 Mon>
 
 * An Exhaustive List Of My Emacs Tutorials
 

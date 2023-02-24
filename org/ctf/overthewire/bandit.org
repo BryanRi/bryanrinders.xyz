@@ -1,7 +1,8 @@
 #+TITLE: Bandit (OverTheWire)
 #+AUTHOR: Bryan Rinders
-#+DATE: 2022-10-16
+#+DATE: <2022-10-17 Mon>
 #+OPTIONS: num:nil
+#+PROPERTY: header-args:sh :eval never-export
 
 * Introduction
 This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Bandit. The password for each 

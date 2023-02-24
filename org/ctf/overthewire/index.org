@@ -1,6 +1,6 @@
 #+TITLE: OverTheWire
 #+AUTHOR: Bryan Rinders
-#+DATE: 2022-10-16
+#+DATE: <2022-10-17 Mon>
 #+OPTIONS: num:nil toc:nil title:nil
 
 * OverTheWire Writeups

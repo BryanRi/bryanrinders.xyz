@@ -1,6 +1,6 @@
 #+TITLE: Bryan's Website
 #+AUTHOR: Bryan Rinders
-#+DATE: 2022-10-16
+#+DATE: <2022-10-17 Mon>
 #+OPTIONS: toc:nil
 
 * Welcome!
