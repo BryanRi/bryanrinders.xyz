@@ -8,7 +8,7 @@ build_website() {
 
 case "$1" in
     # debug mode, load emacs session loading only the website settings
-    d|dbg) emacs -Q -l build-site.el --eval "(load-theme 'modus-vivendi)" ;;
+    d|dbg) emacs -Q -l build-site.el -l build-site-debug.el ;;
     # build the entire website
     a|all) build_website '(org-publish-all t)' ;;
     # build the website by only updating changed files
