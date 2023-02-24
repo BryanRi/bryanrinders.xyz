@@ -89,7 +89,7 @@
 (add-hook 'prog-mode-hook
           (lambda ()
             (font-lock-add-keywords nil
-                                    '(("\\(^\\[?[[:alnum:]]+@[^\\$]*\\$\\)" 1
+                                    '(("\\(^\\[?[[:alnum:]]+@[^\\$]*[\\$\\|#]\\)" 1
                                        'br-prompt-face t)))))
 
 
