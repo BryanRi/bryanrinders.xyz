@@ -634,7 +634,7 @@ with the cookie attached. This will show the password for Natas 12.
 #+RESULTS: lvl11.8
 : EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
 
-* Natas 12
+* Level 12
 The webpage asks for .jpg files to be uploaded. After uploading a
 picture a link is given to the location, =upload/<randomstring>.jpg=,
 of the uploaded file. I tried a few path traversal attacks,
@@ -676,7 +676,7 @@ the password for natas13.
 #+RESULTS: lvl12.2
 : jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
 
-* Natas 13
+* Level 13
 This level is similar to level 12 but it uses =exif_imagetype= to
 check if the file being uploaded is actually an image. It does this by
 checking the *magic number* at the beginning of the file. So if we can
@@ -718,7 +718,7 @@ similar to level 12. The /magic number/ is =\xFF\xD8\xFF\xE0=.
 #+RESULTS: lvl13.2
 : Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
 
-* Natas 14
+* Level 14
 This level has a login form. The source code reveals the use of very
 simple sql queries, which means we could try some [[https://en.wikipedia.org/wiki/SQL_injection#Incorrectly_constructed_SQL_statements][sql injections]]. The
 very first try immediately worked, supplying ~" or 1=1 --~ for both
@@ -738,7 +738,7 @@ the username and the password.
 #+RESULTS: lvl14
 : AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
 
-* COMMENT Natas 15
+* COMMENT Level 15
 
 #+BEGIN_SRC python :var PASS_NATAS15=lvl14
   user, url = user_url(15)
