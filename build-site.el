@@ -104,14 +104,36 @@
         (format "*%s*" entry)
       (format "{{{timestamp(%s)}}} [[./%s/%s][%s]]"
       ;(format "{{{timestamp(%s)}}} [[./%s][%s]]"
-              (format-time-string "%Y-%m-%d"
+              (format-time-string "[%Y-%m-%d]"
                                   (org-publish-find-date entry project))
               (car project)
               entry
               filename))))
 
+;; org-publish-find-date
+;; org-macro--find-date
+(defun br/org-macro--find-date (&optional format)
+  "Find value for DATE in current buffer. If it is in
+org-time-stamp format then format it with FORMAT if
+given. Otherwise return DATE as is as a string. If no DATE
+specified return an empty string."
+  (let* ((date-string (org-macro--find-keyword-value "DATE"))
+         (date (org-element-parse-secondary-string
+                date-string (org-element-restriction 'keyword))))
+    (cond ((let ((ts (and (consp date) (assq 'timestamp date) (not (cdr date)))))
+             (and ts
+                  (org-string-nw-p date-string)
+                  (format-time-string (or format "[%Y-%m-%d]")
+                                      (org-time-string-to-time date-string)))))
+          (date-string date-string)
+          (t  ""))))
+
 (setq org-export-global-macros
-      '(("timestamp" . "@@html:<span class=\"timestamp\">[$1]</span>@@")))
+      '(("timestamp" . "@@html:<span class=\"timestamp\">$1</span>@@")
+        ;; brdate: insert the DATE (optionally supply format string)
+		("brdate" . "(eval (let ((open-tag \"@@html:<span class='timestamp'>\")
+								(close-tag \"</span>@@\"))
+							(concat open-tag (br/org-macro--find-date $1) close-tag)))")))
 
 
 ;; Customize the HTML output
