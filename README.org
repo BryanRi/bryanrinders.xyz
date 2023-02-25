@@ -1,2 +1,6 @@
 * My Website
 The source code for [[https://bryanri.github.io/website/]]
+* TODO wishlist [0/3]
+- [ ] Use CATEGORY to automatically make sub-sitemaps. This allows for
+  dynamically increasing the number of sitemaps, and hence no need to
+  add more and more components to the =org-publish-project-alist=.
