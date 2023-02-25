@@ -18,7 +18,8 @@ fork_emacs() {
     # open a new emacsclient frame and fork the process. If no
     # emacsclient exists create one.
     emacsclient --socket-name="${DAEMON}" --eval '(message "I exist")' \
-        || emacs  --daemon="${DAEMON}" --quick --load=build-site-debug.el --load=build-site.el \
+        || SHELL=/bin/bash \
+               emacs  --daemon="${DAEMON}" --quick --load=build-site-debug.el --load=build-site.el \
         && emacsclient --socket-name="${DAEMON}" --no-wait --create-frame
     return
 }
