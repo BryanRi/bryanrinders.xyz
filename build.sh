@@ -1,16 +1,32 @@
 #!/bin/sh
 
+DAEMON="debug-site"
+
 build_website() {
-    emacs -Q --script build-site.el --eval "$1" \
+    # all := forcefully update the whole site
+    # *   := update only the changed files
+    case "$1" in
+        all) emacs -Q --script build-site.el --eval "(org-publish-all t)" ;;
+        *  ) emacs -Q --script build-site.el --eval "(org-publish \"website\")" ;;
+    esac \
         && echo "Build successful." \
         || echo "Something failed."
+    return
+}
+
+fork_emacs() {
+    # open a new emacsclient frame and fork the process. If no
+    # emacsclient exists create one.
+    emacsclient -s "${DAEMON}" -e '(message "I exist")' \
+        || emacs  --daemon="${DAEMON}" -Q -l build-site-debug.el -l build-site.el \
+        && setsid -f emacsclient -s "${DAEMON}" -c
+    return
 }
 
 case "$1" in
-    # debug mode, load emacs session loading only the website settings
-    d|dbg) emacs -Q -l build-site.el -l build-site-debug.el ;;
-    # build the entire website
-    a|all) build_website '(org-publish-all t)' ;;
-    # build the website by only updating changed files
-    *  ) build_website '(org-publish "website")' ;;
+    d|dbg) fork_emacs ;;
+    a|all) build_website "all" ;;
+    *    ) build_website ;;
 esac
+
+exit
