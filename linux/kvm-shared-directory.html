@@ -27,9 +27,14 @@
 <br><hr>
 </div>
 <div id="content">
+<h1 class="title">KVM: Setup A Shared Direcory Between A Host And Guest</h1>
+<p>
+<span class='timestamp'></span> Follow the instruction below to set up a shared directory
+between a host and a KVM guest virtual machine.
+</p>
 
-<div id="outline-container-org88b74a8" class="outline-2">
-<h2 id="org88b74a8"><span class="section-number-2">1</span> KVM: Setup A Shared Direcory Between A Host And Guest</h2>
+<div id="outline-container-orga7e9843" class="outline-2">
+<h2 id="orga7e9843"><span class="section-number-2">1</span> KVM: Setup A Shared Direcory Between A Host And Guest</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Create the directory to be shared on you host machine and set the permissions.
@@ -42,7 +47,12 @@ chmod 777 ~/shared
 </div>
 
 <p>
-In virt-manager open the settings (i.e. click the open button in the top left corner) of the VM you wish to share a directory with. Then click "Show virtual hardware details" (i.e. the light bulb in the top left corner). In the bottom left click the "Add hardware". A new window should pop up. In the menu on the left click "Filesystem". Use the follow settings
+In virt-manager open the settings (i.e. click the open button in the
+top left corner) of the VM you wish to share a directory with. Then
+click "Show virtual hardware details" (i.e. the light bulb in the top
+left corner). In the bottom left click the "Add hardware". A new
+window should pop up. In the menu on the left click "Filesystem". Use
+the follow settings
 </p>
 
 <pre class="example">
@@ -62,7 +72,8 @@ sudo mount -t 9p -o <span class="org-variable-name">trans</span>=virtio /sharedi
 </div>
 
 <p>
-Or if you want the directory to automatically be mounted on boot add this to your <code>/etc/fstab</code>:
+Or if you want the directory to automatically be mounted on boot add
+this to your <code>/etc/fstab</code>:
 </p>
 
 <div class="org-src-container">
@@ -72,8 +83,8 @@ Or if you want the directory to automatically be mounted on boot add this to you
 </div>
 </div>
 
-<div id="outline-container-org2e4282b" class="outline-2">
-<h2 id="org2e4282b"><span class="section-number-2">2</span> Sources</h2>
+<div id="outline-container-org0e0be70" class="outline-2">
+<h2 id="org0e0be70"><span class="section-number-2">2</span> Sources</h2>
 <div class="outline-text-2" id="text-2">
 <ul class="org-ul">
 <li><a href="https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/">https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/</a></li>

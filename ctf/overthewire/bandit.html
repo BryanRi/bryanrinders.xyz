@@ -32,65 +32,55 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org4ff35a8">Introduction</a></li>
-<li><a href="#org057d665">Level 0</a></li>
-<li><a href="#orgc83c19b">Level 1</a></li>
-<li><a href="#org8c8cfc0">Level 2</a></li>
-<li><a href="#org76c66f5">Level 3</a></li>
-<li><a href="#orgb6a7077">Level 4</a></li>
-<li><a href="#org056d18d">Level 5</a></li>
-<li><a href="#org1f268d5">Level 6</a></li>
-<li><a href="#org9a458bd">Level 7</a></li>
-<li><a href="#org500aba8">Level 8</a></li>
-<li><a href="#org5a55ac7">Level 9</a></li>
-<li><a href="#orgc18ca58">Level 10</a></li>
-<li><a href="#org82d2f57">Level 11</a></li>
-<li><a href="#orgee07fc6">Level 12</a></li>
-<li><a href="#orgc24249e">Level 13</a></li>
-<li><a href="#org1f480d8">Level 14</a></li>
-<li><a href="#org89026e7">Level 15</a></li>
-<li><a href="#org431d875">Level 16</a></li>
-<li><a href="#org33eb089">Level 17</a></li>
-<li><a href="#orgec8ab48">Level 18</a></li>
-<li><a href="#org85775cb">Level 19</a></li>
-<li><a href="#org96d9ec8">Level 20</a></li>
-<li><a href="#orgd49dbc0">Level 21</a></li>
-<li><a href="#org0817041">Level 22</a></li>
-<li><a href="#org7bd6b97">Level 23</a></li>
-<li><a href="#orgd5d4b12">Level 24</a></li>
-<li><a href="#orgefeeca4">Level 25-26</a></li>
-<li><a href="#orgd70de53">Level 27</a></li>
-<li><a href="#orgcecb29a">Level 28</a></li>
-<li><a href="#orgfa2758c">Level 29</a></li>
-<li><a href="#org57deda6">Level 30</a></li>
-<li><a href="#org96a6633">Level 31</a></li>
-<li><a href="#org43547f0">Level 32</a></li>
+<li><a href="#org0edb7dc">Introduction</a></li>
+<li><a href="#org30c6341">Level 0</a></li>
+<li><a href="#org261a0a5">Level 1</a></li>
+<li><a href="#org1dd54f0">Level 2</a></li>
+<li><a href="#org5c9875f">Level 3</a></li>
+<li><a href="#orgeff5c8d">Level 4</a></li>
+<li><a href="#org8d75cb9">Level 5</a></li>
+<li><a href="#orgad1834e">Level 6</a></li>
+<li><a href="#orga4a7357">Level 7</a></li>
+<li><a href="#orgd78b08e">Level 8</a></li>
+<li><a href="#org6e65844">Level 9</a></li>
+<li><a href="#org91dbb01">Level 10</a></li>
+<li><a href="#org9878e6c">Level 11</a></li>
+<li><a href="#org9530aa1">Level 12</a></li>
+<li><a href="#orge295f49">Level 13</a></li>
+<li><a href="#org18197f2">Level 14</a></li>
+<li><a href="#org3aca902">Level 15</a></li>
+<li><a href="#orgc132693">Level 16</a></li>
+<li><a href="#org4daf934">Level 17</a></li>
+<li><a href="#org2bdaf26">Level 18</a></li>
+<li><a href="#org77d3f4d">Level 19</a></li>
+<li><a href="#orgf807e2a">Level 20</a></li>
+<li><a href="#org6e30478">Level 21</a></li>
+<li><a href="#org8e1fd0a">Level 22</a></li>
+<li><a href="#org4f14de0">Level 23</a></li>
+<li><a href="#orgd644d36">Level 24</a></li>
+<li><a href="#org9788e5a">Level 25-26</a></li>
+<li><a href="#orgbaf4b00">Level 27</a></li>
+<li><a href="#org25a24d9">Level 28</a></li>
+<li><a href="#org6c1e684">Level 29</a></li>
+<li><a href="#org7e48a98">Level 30</a></li>
+<li><a href="#org6f15f9a">Level 31</a></li>
+<li><a href="#org04bb5ba">Level 32</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org4ff35a8" class="outline-2">
-<h2 id="org4ff35a8">Introduction</h2>
-<div class="outline-text-2" id="text-org4ff35a8">
+<div id="outline-container-org0edb7dc" class="outline-2">
+<h2 id="org0edb7dc">Introduction</h2>
+<div class="outline-text-2" id="text-org0edb7dc">
 <p>
-This is a writeup for the <a href="https://overthewire.org/wargames/">overthewire.org</a> war game Bandit. The password for each 
-level is stored in a file named banditX.txt where X is the level number. Then 
-use
+<span class='timestamp'></span> This is a writeup for the <a href="https://overthewire.org/wargames/">overthewire.org</a> war game
+Bandit. The password for each level is stored in a file named
+banditX.txt where X is the level number. Then use
 </p>
 
 <div class="org-src-container">
 <pre class="src src-sh">
-sshpass -p <span class="org-sh-quoted-exec">`cat banditX.txt`</span> ssh banditX@bandit.labs.overthewire.org -p 2220
-
-</pre>
-</div>
-
-<div class="org-src-container">
-<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">testing executing commands remotely</span>
-<span class="org-comment-delimiter">#</span><span class="org-comment">sshpass -p `echo bandit0` ssh bandit0@bandit.labs.overthewire.org -p 2220 "ls"</span>
-<span class="org-comment-delimiter">#</span><span class="org-comment">ssh root@MachineB 'sh -s' &lt; local_script.sh</span>
-ls &gt; test.txt
-cat test.txt
+sshpass -p <span class="org-string">"$(cat banditX.txt)"</span> ssh banditX@bandit.labs.overthewire.org -p 2220
 
 </pre>
 </div>
@@ -101,9 +91,9 @@ to connect to the server without having to manually type the password for each l
 </div>
 </div>
 
-<div id="outline-container-org057d665" class="outline-2">
-<h2 id="org057d665">Level 0</h2>
-<div class="outline-text-2" id="text-org057d665">
+<div id="outline-container-org30c6341" class="outline-2">
+<h2 id="org30c6341">Level 0</h2>
+<div class="outline-text-2" id="text-org30c6341">
 <p>
 The password for this level is given: bandit0. Simply connect to the server with SSH to port 2220. 
 The password for the next level is stored in a file called readme.
@@ -121,9 +111,9 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 </div>
 </div>
 
-<div id="outline-container-orgc83c19b" class="outline-2">
-<h2 id="orgc83c19b">Level 1</h2>
-<div class="outline-text-2" id="text-orgc83c19b">
+<div id="outline-container-org261a0a5" class="outline-2">
+<h2 id="org261a0a5">Level 1</h2>
+<div class="outline-text-2" id="text-org261a0a5">
 <p>
 The password to the next level is located in a file named '-', to cat out the
 contents of this file use the full path to the file from the home directory.
@@ -141,9 +131,9 @@ CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 </div>
 </div>
 
-<div id="outline-container-org8c8cfc0" class="outline-2">
-<h2 id="org8c8cfc0">Level 2</h2>
-<div class="outline-text-2" id="text-org8c8cfc0">
+<div id="outline-container-org1dd54f0" class="outline-2">
+<h2 id="org1dd54f0">Level 2</h2>
+<div class="outline-text-2" id="text-org1dd54f0">
 <p>
 The password is in a file with spaces in the name. To cat out the contents either 
 use backslashes before the spaces or surround the entire file name with single 
@@ -168,9 +158,9 @@ UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 </div>
 </div>
 
-<div id="outline-container-org76c66f5" class="outline-2">
-<h2 id="org76c66f5">Level 3</h2>
-<div class="outline-text-2" id="text-org76c66f5">
+<div id="outline-container-org5c9875f" class="outline-2">
+<h2 id="org5c9875f">Level 3</h2>
+<div class="outline-text-2" id="text-org5c9875f">
 <p>
 The password is in a hidden file inside the directory 'inhere'. To cat out the 
 contents move into the inhere directory and cat out the file.
@@ -200,9 +190,9 @@ pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 </div>
 </div>
 
-<div id="outline-container-orgb6a7077" class="outline-2">
-<h2 id="orgb6a7077">Level 4</h2>
-<div class="outline-text-2" id="text-orgb6a7077">
+<div id="outline-container-orgeff5c8d" class="outline-2">
+<h2 id="orgeff5c8d">Level 4</h2>
+<div class="outline-text-2" id="text-orgeff5c8d">
 <p>
 The password is the only human readable file inside the directory 'inhere'. When
 listing all the files in the directory notice that the file names start with a
@@ -256,9 +246,9 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 </div>
 </div>
 
-<div id="outline-container-org056d18d" class="outline-2">
-<h2 id="org056d18d">Level 5</h2>
-<div class="outline-text-2" id="text-org056d18d">
+<div id="outline-container-org8d75cb9" class="outline-2">
+<h2 id="org8d75cb9">Level 5</h2>
+<div class="outline-text-2" id="text-org8d75cb9">
 <p>
 The directory 'inhere' contains several directories which contains files. One 
 of these files contains the password, this file has the following properties:
@@ -311,9 +301,9 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 </div>
 </div>
 
-<div id="outline-container-org1f268d5" class="outline-2">
-<h2 id="org1f268d5">Level 6</h2>
-<div class="outline-text-2" id="text-org1f268d5">
+<div id="outline-container-orgad1834e" class="outline-2">
+<h2 id="orgad1834e">Level 6</h2>
+<div class="outline-text-2" id="text-orgad1834e">
 <p>
 The file containing the password is somewhere on the server with the following
 properties: size = 33 bytes, owned by user bandit7 and owned by group bandit6.
@@ -333,9 +323,9 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 </div>
 </div>
 
-<div id="outline-container-org9a458bd" class="outline-2">
-<h2 id="org9a458bd">Level 7</h2>
-<div class="outline-text-2" id="text-org9a458bd">
+<div id="outline-container-orga4a7357" class="outline-2">
+<h2 id="orga4a7357">Level 7</h2>
+<div class="outline-text-2" id="text-orga4a7357">
 <p>
 The password is in the file 'data.txt' next to the word millionth. Grep can be
 used to find the line that contains that word.
@@ -357,9 +347,9 @@ millionth       cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 </div>
 </div>
 
-<div id="outline-container-org500aba8" class="outline-2">
-<h2 id="org500aba8">Level 8</h2>
-<div class="outline-text-2" id="text-org500aba8">
+<div id="outline-container-orgd78b08e" class="outline-2">
+<h2 id="orgd78b08e">Level 8</h2>
+<div class="outline-text-2" id="text-orgd78b08e">
 <p>
 The password is in the file 'data.txt' and is the line that only occurs once in
 the file. Uniq -u can filter out all duplicate lines that are adjacent. To find
@@ -382,9 +372,9 @@ UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 </div>
 </div>
 
-<div id="outline-container-org5a55ac7" class="outline-2">
-<h2 id="org5a55ac7">Level 9</h2>
-<div class="outline-text-2" id="text-org5a55ac7">
+<div id="outline-container-org6e65844" class="outline-2">
+<h2 id="org6e65844">Level 9</h2>
+<div class="outline-text-2" id="text-org6e65844">
 <p>
 The password for the next level is stored in the file data.txt in one of the 
 few human-readable strings, preceded by several ‘=’ characters.
@@ -418,9 +408,9 @@ total 32
 </div>
 </div>
 
-<div id="outline-container-orgc18ca58" class="outline-2">
-<h2 id="orgc18ca58">Level 10</h2>
-<div class="outline-text-2" id="text-orgc18ca58">
+<div id="outline-container-org91dbb01" class="outline-2">
+<h2 id="org91dbb01">Level 10</h2>
+<div class="outline-text-2" id="text-org91dbb01">
 <p>
 The password for the next level is stored in the file data.txt, which contains 
 base64 encoded data.
@@ -443,9 +433,9 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 </div>
 </div>
 
-<div id="outline-container-org82d2f57" class="outline-2">
-<h2 id="org82d2f57">Level 11</h2>
-<div class="outline-text-2" id="text-org82d2f57">
+<div id="outline-container-org9878e6c" class="outline-2">
+<h2 id="org9878e6c">Level 11</h2>
+<div class="outline-text-2" id="text-org9878e6c">
 <p>
 The password for the next level is stored in the file data.txt, where all 
 lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
@@ -469,9 +459,9 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 </div>
 </div>
 
-<div id="outline-container-orgee07fc6" class="outline-2">
-<h2 id="orgee07fc6">Level 12</h2>
-<div class="outline-text-2" id="text-orgee07fc6">
+<div id="outline-container-org9530aa1" class="outline-2">
+<h2 id="org9530aa1">Level 12</h2>
+<div class="outline-text-2" id="text-org9530aa1">
 <p>
 The password for the next level is stored in the file data.txt, which is a 
 hexdump of a file that has been repeatedly compressed.
@@ -551,9 +541,9 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
 </div>
 </div>
 
-<div id="outline-container-orgc24249e" class="outline-2">
-<h2 id="orgc24249e">Level 13</h2>
-<div class="outline-text-2" id="text-orgc24249e">
+<div id="outline-container-orge295f49" class="outline-2">
+<h2 id="orge295f49">Level 13</h2>
+<div class="outline-text-2" id="text-orge295f49">
 <p>
 The password for the next level is stored in /etc/bandit_pass/bandit14 and can 
 only be read by user bandit14. For this level, you don’t get the next password, 
@@ -581,9 +571,9 @@ This is a OverTheWire game server. More information on http://www.overthewire.or
 </div>
 </div>
 
-<div id="outline-container-org1f480d8" class="outline-2">
-<h2 id="org1f480d8">Level 14</h2>
-<div class="outline-text-2" id="text-org1f480d8">
+<div id="outline-container-org18197f2" class="outline-2">
+<h2 id="org18197f2">Level 14</h2>
+<div class="outline-text-2" id="text-org18197f2">
 <p>
 The password for the next level can be retrieved by submitting the password of 
 the current level to port 30000 on localhost.
@@ -603,9 +593,9 @@ BfMYroe26WYalil77FoDi9qh59eK5xNr
 </div>
 </div>
 
-<div id="outline-container-org89026e7" class="outline-2">
-<h2 id="org89026e7">Level 15</h2>
-<div class="outline-text-2" id="text-org89026e7">
+<div id="outline-container-org3aca902" class="outline-2">
+<h2 id="org3aca902">Level 15</h2>
+<div class="outline-text-2" id="text-org3aca902">
 <p>
 The password for the next level can be retrieved by submitting the password of 
 the current level to port 30001 on localhost using SSL encryption.
@@ -627,9 +617,9 @@ closed
 </div>
 </div>
 
-<div id="outline-container-org431d875" class="outline-2">
-<h2 id="org431d875">Level 16</h2>
-<div class="outline-text-2" id="text-org431d875">
+<div id="outline-container-orgc132693" class="outline-2">
+<h2 id="orgc132693">Level 16</h2>
+<div class="outline-text-2" id="text-orgc132693">
 <p>
 The credentials for the next level can be retrieved by submitting the password 
 of the current level to a port on localhost in the range 31000 to 32000. First 
@@ -698,9 +688,9 @@ closed
 </div>
 </div>
 
-<div id="outline-container-org33eb089" class="outline-2">
-<h2 id="org33eb089">Level 17</h2>
-<div class="outline-text-2" id="text-org33eb089">
+<div id="outline-container-org4daf934" class="outline-2">
+<h2 id="org4daf934">Level 17</h2>
+<div class="outline-text-2" id="text-org4daf934">
 <p>
 There are 2 files in the homedirectory: passwords.old and passwords.new. The 
 password for the next level is in passwords.new and is the only line that has 
@@ -733,9 +723,9 @@ Meaning kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd is the password for level 18.
 </div>
 </div>
 
-<div id="outline-container-orgec8ab48" class="outline-2">
-<h2 id="orgec8ab48">Level 18</h2>
-<div class="outline-text-2" id="text-orgec8ab48">
+<div id="outline-container-org2bdaf26" class="outline-2">
+<h2 id="org2bdaf26">Level 18</h2>
+<div class="outline-text-2" id="text-org2bdaf26">
 <p>
 The password for the next level is stored in a file readme in the homedirectory. 
 Unfortunately, someone has modified .bashrc to log you out when you log in with 
@@ -758,9 +748,9 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 </div>
 </div>
 
-<div id="outline-container-org85775cb" class="outline-2">
-<h2 id="org85775cb">Level 19</h2>
-<div class="outline-text-2" id="text-org85775cb">
+<div id="outline-container-org77d3f4d" class="outline-2">
+<h2 id="org77d3f4d">Level 19</h2>
+<div class="outline-text-2" id="text-org77d3f4d">
 <p>
 To gain access to the next level, you should use the setuid binary in the 
 homedirectory. Execute it without arguments to find out how to use it. The 
@@ -792,9 +782,9 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 </div>
 </div>
 
-<div id="outline-container-org96d9ec8" class="outline-2">
-<h2 id="org96d9ec8">Level 20</h2>
-<div class="outline-text-2" id="text-org96d9ec8">
+<div id="outline-container-orgf807e2a" class="outline-2">
+<h2 id="orgf807e2a">Level 20</h2>
+<div class="outline-text-2" id="text-orgf807e2a">
 <p>
 There is a setuid binary in the homedirectory that does the following: it makes a 
 connection to localhost on the port you specify as a commandline argument. It 
@@ -835,9 +825,9 @@ gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
 </div>
 </div>
 
-<div id="outline-container-orgd49dbc0" class="outline-2">
-<h2 id="orgd49dbc0">Level 21</h2>
-<div class="outline-text-2" id="text-orgd49dbc0">
+<div id="outline-container-org6e30478" class="outline-2">
+<h2 id="org6e30478">Level 21</h2>
+<div class="outline-text-2" id="text-org6e30478">
 <p>
 A program is running automatically at regular intervals from cron, the 
 time-based job scheduler. Look in <i>etc/cron.d</i> for the configuration and see 
@@ -874,9 +864,9 @@ Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 </div>
 </div>
 
-<div id="outline-container-org0817041" class="outline-2">
-<h2 id="org0817041">Level 22</h2>
-<div class="outline-text-2" id="text-org0817041">
+<div id="outline-container-org8e1fd0a" class="outline-2">
+<h2 id="org8e1fd0a">Level 22</h2>
+<div class="outline-text-2" id="text-org8e1fd0a">
 <p>
 A program is running automatically at regular intervals from cron, the 
 time-based job scheduler. Look in <i>etc/cron.d</i> for the configuration and see 
@@ -920,9 +910,9 @@ jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 </div>
 </div>
 
-<div id="outline-container-org7bd6b97" class="outline-2">
-<h2 id="org7bd6b97">Level 23</h2>
-<div class="outline-text-2" id="text-org7bd6b97">
+<div id="outline-container-org4f14de0" class="outline-2">
+<h2 id="org4f14de0">Level 23</h2>
+<div class="outline-text-2" id="text-org4f14de0">
 <p>
 A program is running automatically at regular intervals from cron, the 
 time-based job scheduler. Look in <i>etc/cron.d</i> for the configuration and see 
@@ -981,9 +971,9 @@ UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 </div>
 </div>
 
-<div id="outline-container-orgd5d4b12" class="outline-2">
-<h2 id="orgd5d4b12">Level 24</h2>
-<div class="outline-text-2" id="text-orgd5d4b12">
+<div id="outline-container-orgd644d36" class="outline-2">
+<h2 id="orgd644d36">Level 24</h2>
+<div class="outline-text-2" id="text-orgd644d36">
 <p>
 A daemon is listening on port 30002 and will give you the password for bandit25 
 if given the password for bandit24 and a secret numeric 4-digit pincode. There 
@@ -1019,9 +1009,9 @@ The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 </div>
 </div>
 
-<div id="outline-container-orgefeeca4" class="outline-2">
-<h2 id="orgefeeca4">Level 25-26</h2>
-<div class="outline-text-2" id="text-orgefeeca4">
+<div id="outline-container-org9788e5a" class="outline-2">
+<h2 id="org9788e5a">Level 25-26</h2>
+<div class="outline-text-2" id="text-org9788e5a">
 <p>
 Logging in to bandit26 from bandit25 should be fairly easy… The shell for user 
 bandit26 is not /bin/sh, but something else. Find out what it is, how it 
@@ -1085,9 +1075,9 @@ total 24
 </div>
 </div>
 
-<div id="outline-container-orgd70de53" class="outline-2">
-<h2 id="orgd70de53">Level 27</h2>
-<div class="outline-text-2" id="text-orgd70de53">
+<div id="outline-container-orgbaf4b00" class="outline-2">
+<h2 id="orgbaf4b00">Level 27</h2>
+<div class="outline-text-2" id="text-orgbaf4b00">
 <p>
 There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. 
 The password for the user bandit27-git is the same as for the user bandit27.
@@ -1133,9 +1123,9 @@ The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 </div>
 </div>
 
-<div id="outline-container-orgcecb29a" class="outline-2">
-<h2 id="orgcecb29a">Level 28</h2>
-<div class="outline-text-2" id="text-orgcecb29a">
+<div id="outline-container-org25a24d9" class="outline-2">
+<h2 id="org25a24d9">Level 28</h2>
+<div class="outline-text-2" id="text-org25a24d9">
 <p>
 There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
 Clone the repository and find the password for the next level.
@@ -1205,9 +1195,9 @@ index 3f7cee8..5c6457b 100644
 </div>
 </div>
 
-<div id="outline-container-orgfa2758c" class="outline-2">
-<h2 id="orgfa2758c">Level 29</h2>
-<div class="outline-text-2" id="text-orgfa2758c">
+<div id="outline-container-org6c1e684" class="outline-2">
+<h2 id="org6c1e684">Level 29</h2>
+<div class="outline-text-2" id="text-org6c1e684">
 <p>
 There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo. The password for the user bandit29-git is the same as for the user bandit29.
 Clone the repository and find the password for the next level.
@@ -1278,9 +1268,9 @@ Some notes for bandit30 of bandit.
 </div>
 </div>
 
-<div id="outline-container-org57deda6" class="outline-2">
-<h2 id="org57deda6">Level 30</h2>
-<div class="outline-text-2" id="text-org57deda6">
+<div id="outline-container-org7e48a98" class="outline-2">
+<h2 id="org7e48a98">Level 30</h2>
+<div class="outline-text-2" id="text-org7e48a98">
 <p>
 There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo. 
 The password for the user bandit30-git is the same as for the user bandit30.
@@ -1343,9 +1333,9 @@ f17132340e8ee6c159e0a4a6bc6f80e1da3b1aea refs/tags/secret
 </div>
 </div>
 
-<div id="outline-container-org96a6633" class="outline-2">
-<h2 id="org96a6633">Level 31</h2>
-<div class="outline-text-2" id="text-org96a6633">
+<div id="outline-container-org6f15f9a" class="outline-2">
+<h2 id="org6f15f9a">Level 31</h2>
+<div class="outline-text-2" id="text-org6f15f9a">
 <p>
 There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. The password for the user bandit31-git is the same as for the user bandit31.
 Clone the repository and find the password for the next level.
@@ -1438,9 +1428,9 @@ error: failed to push some refs to <span class="org-string">'ssh://bandit31-git@
 </div>
 </div>
 
-<div id="outline-container-org43547f0" class="outline-2">
-<h2 id="org43547f0">Level 32</h2>
-<div class="outline-text-2" id="text-org43547f0">
+<div id="outline-container-org04bb5ba" class="outline-2">
+<h2 id="org04bb5ba">Level 32</h2>
+<div class="outline-text-2" id="text-org04bb5ba">
 <p>
 After all this git stuff its time for another escape. Good luck!
 </p>
