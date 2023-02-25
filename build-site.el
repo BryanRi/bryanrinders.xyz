@@ -26,10 +26,10 @@
 ;; move the timestamps directory when running this script on my
 ;; personal machine
 (setq org-publish-timestamp-directory
-	  (let ((my-project-dir (getenv "MY_PROJECTS_DIR")))
-		(if my-project-dir
-			(concat my-project-dir "/website/.org-timestamps/")
-		  "~/.org-timestamps/")))
+      (let ((my-project-dir (getenv "MY_PROJECTS_DIR")))
+        (if my-project-dir
+            (concat my-project-dir "/website/.org-timestamps/")
+          "~/.org-timestamps/")))
 
 
 ;; load some programming languages for syntax highlighting
@@ -62,13 +62,13 @@
 
 (defvar footer
   (concat (format
-	   "<br><hr/>
+       "<br><hr/>
 <footer>
   <div class='copyright-container'>
     <div class='copyright'>
       Copyright &copy; 2022-%s Bryan Rinders some rights reserved"
-	   (format-time-string "%Y"))
-	  "
+       (format-time-string "%Y"))
+      "
       <br><br>
       This page is available under a
       <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
@@ -131,9 +131,9 @@ specified return an empty string."
 (setq org-export-global-macros
       '(("timestamp" . "@@html:<span class=\"timestamp\">$1</span>@@")
         ;; brdate: insert the DATE (optionally supply format string)
-		("brdate" . "(eval (let ((open-tag \"@@html:<span class='timestamp'>\")
-								(close-tag \"</span>@@\"))
-							(concat open-tag (br/org-macro--find-date $1) close-tag)))")))
+        ("brdate" . "(eval (let ((open-tag \"@@html:<span class='timestamp'>\")
+                                 (close-tag \"</span>@@\"))
+                             (concat open-tag (br/org-macro--find-date $1) close-tag)))")))
 
 
 ;; Customize the HTML output
@@ -143,7 +143,7 @@ specified return an empty string."
       org-src-fontify-natively            t
       org-html-htmlize-output-type        'css  ;; use css for syntax highlighting code blocks
       org-html-head                       html-head-css
-	  org-export-with-sub-superscripts    '{}    ;; sub/superscripts must be surrounded with {}
+      org-export-with-sub-superscripts    '{}    ;; sub/superscripts must be surrounded with {}
       )
 
 (defun br/define-website-component(id)
