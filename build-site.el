@@ -133,7 +133,7 @@
         :publishing-directory  (concat "./website/" id)
         :auto-sitemap          t
         :sitemap-filename      (concat id "-sitemap.org")
-        :sitemap-title         nil
+        :sitemap-title         ""
         :sitemap-style         'list
         :sitemap-sort-folders  'ignore
         :sitemap-sort-files    'anti-chronologically
@@ -162,7 +162,7 @@
               :publishing-function  'org-html-publish-to-html
               :publishing-directory "./website"
               :with-author          nil         ;; Don't include author name
-              :with-title           nil
+              :with-title           t
               :with-creator         t           ;; Include Emacs and Org versions in footer
               :with-toc             nil         ;; Include a table of contents
               :section-numbers      nil         ;; Don't include section numbers

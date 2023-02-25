@@ -1,10 +1,7 @@
-#+TITLE: Bryan's Website
+#+TITLE: Welcome !
 #+AUTHOR: Bryan Rinders
 #+DATE: <2022-10-17 Mon>
 #+OPTIONS: toc:nil
-
-* Welcome!
-{{{date}}}
 
 Welcome to my website. My name is Bryan Rinders and I am a Computing
 Science Student with a specialization in Security. I write tutorials
