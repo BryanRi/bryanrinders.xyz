@@ -17,9 +17,9 @@ build_website() {
 fork_emacs() {
     # open a new emacsclient frame and fork the process. If no
     # emacsclient exists create one.
-    emacsclient -s "${DAEMON}" -e '(message "I exist")' \
-        || emacs  --daemon="${DAEMON}" -Q -l build-site-debug.el -l build-site.el \
-        && setsid -f emacsclient -s "${DAEMON}" -c
+    emacsclient --socket-name="${DAEMON}" --eval '(message "I exist")' \
+        || emacs  --daemon="${DAEMON}" --quick --load=build-site-debug.el --load=build-site.el \
+        && emacsclient --socket-name="${DAEMON}" --no-wait --create-frame
     return
 }
 
