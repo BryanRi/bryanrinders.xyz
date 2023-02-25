@@ -6,11 +6,11 @@
 #+PROPERTY: header-args:python :session *natas-python-session*
 
 * Introduction
-This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Natas. To start a level 
-visit the URL http://natasX.natas.labs.overthewire.org, and login with 
-username: natasX and the password found in the previous level, where X is the 
-level number. 
-All passwords for the next level are also stored in
+{{{brdate}}} This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game
+Natas. To start a level visit the URL
+http://natasX.natas.labs.overthewire.org, and login with username:
+=natasX= and the password found in the previous level, where =X= is
+the level number.  All passwords for the next level are also stored in
 /etc/natas_webpass/natasX, where X is the number of the level.
 
 In the scripts below =PASS_NATASX= is the password for level =X= as

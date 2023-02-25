@@ -5,15 +5,19 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Introduction
-This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Bandit. The password for each 
-level is stored in a file named banditX.txt where X is the level number. Then 
-use
+{{{brdate}}} This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game
+Bandit. The password for each level is stored in a file named
+banditX.txt where X is the level number. Then use
 
 #+BEGIN_SRC sh
 
-sshpass -p `cat banditX.txt` ssh banditX@bandit.labs.overthewire.org -p 2220
+sshpass -p "$(cat banditX.txt)" ssh banditX@bandit.labs.overthewire.org -p 2220
 
 #+END_SRC
+
+to connect to the server without having to manually type the password for each level.
+
+* COMMENT testing stuff
 
 #+BEGIN_SRC sh
 # testing executing commands remotely
@@ -30,8 +34,6 @@ cat test.txt
 | passwords  |
 | README.md  |
 | test.txt   |
-
-to connect to the server without having to manually type the password for each level.
 
 * Level 0
 The password for this level is given: bandit0. Simply connect to the server with SSH to port 2220. 

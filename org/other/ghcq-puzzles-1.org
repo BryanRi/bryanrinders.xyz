@@ -1,6 +1,6 @@
 #+TITLE: GHCQ Puzzle book 1
 #+AUTHOR: Bryan Rinders
-#+DATE: 2022-12-25
+#+DATE: <2023-02-25 Sat>
 
 * 1-10
 1. Anwser: Penguin

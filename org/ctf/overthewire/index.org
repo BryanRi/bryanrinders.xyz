@@ -4,7 +4,8 @@
 #+OPTIONS: num:nil toc:nil title:nil
 
 * OverTheWire Writeups
-My write ups for the [[https://overthewire.org/wargames][overthewire.org]] war games.
+My write ups for the [[https://overthewire.org/wargames][overthewire.org]] war games. OverTheWire teaches
+basic *nix skill, web security and more.
 
 | OverTheWire |
 |-------------|

@@ -1,10 +1,12 @@
 #+TITLE: File Inclusion (TryHackMe)
 #+AUTHOR: Bryan Rinders
-#+DATE: <2023-01-31 Tue>
+#+DATE: <2023-01-28 Sat>
 #+OPTIONS: num:nil
 #+PROPERTY: header-args:sh :eval never-export
 
-https://tryhackme.com/room/fileinc
+* Intro
+{{{brdate}}} This is a write up for the Challenges part of the
+TryHackMe room [[https://tryhackme.com/room/fileinc][File Inclusion]].
 
 * Challenges
 ** Flag 1
