@@ -5,8 +5,8 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Intro
-{{{brdate}}} This is a write up for the Challenges part of the
-TryHackMe room [[https://tryhackme.com/room/fileinc][File Inclusion]].
+{{{date([%Y-%m-%d])}}} This is a write up for the Challenges part of
+the TryHackMe room [[https://tryhackme.com/room/fileinc][File Inclusion]].
 
 * Challenges
 ** Flag 1

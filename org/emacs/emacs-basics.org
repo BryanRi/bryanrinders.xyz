@@ -2,12 +2,12 @@
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-01-31 Tue 19:32>
 
-{{{brdate}}} This is a summary of most of the Emacs key bindings that
-can be found in the Emacs tutorial. You can start the tutorial inside
-Emacs with =C-h t=. The tutorial covers the basics of movement,
-editing, window and buffer management and much more. The most
-important key binding to remember is =M-x=; to get access to all of
-Emacs' commands.
+{{{date([%Y-%m-%d])}}} This is a summary of most of the Emacs key
+bindings that can be found in the Emacs tutorial. You can start the
+tutorial inside Emacs with =C-h t=. The tutorial covers the basics of
+movement, editing, window and buffer management and much more. The
+most important key binding to remember is =M-x=; to get access to all
+of Emacs' commands.
 
 * Buffer movement
 

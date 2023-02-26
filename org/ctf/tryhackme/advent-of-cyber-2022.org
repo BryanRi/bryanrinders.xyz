@@ -5,8 +5,8 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Introduction
-{{{brdate}}} This is a write up for the 2022 version of TryHackMe's
-Advent Of Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
+{{{date([%Y-%m-%d])}}} This is a write up for the 2022 version of
+TryHackMe's Advent Of Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
 
 * Day 1 Frameworks
 ** Puzzle 1

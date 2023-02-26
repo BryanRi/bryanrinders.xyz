@@ -5,8 +5,8 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Introduction
-{{{brdate}}} This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game
-Bandit. The password for each level is stored in a file named
+{{{date([%Y-%m-%d])}}} This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war
+game Bandit. The password for each level is stored in a file named
 banditX.txt where X is the level number. Then use
 
 #+BEGIN_SRC sh
@@ -15,7 +15,8 @@ sshpass -p "$(cat banditX.txt)" ssh banditX@bandit.labs.overthewire.org -p 2220
 
 #+END_SRC
 
-to connect to the server without having to manually type the password for each level.
+to connect to the server without having to manually type the password
+for each level.
 
 * COMMENT testing stuff
 
