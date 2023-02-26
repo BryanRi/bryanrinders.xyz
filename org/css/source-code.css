@@ -10,12 +10,12 @@
 }
 .org-comment {
   /* font-lock-comment-face */
-  color: #928374;
+  color: #a89984;
   font-style: italic;
 }
 .org-comment-delimiter {
   /* font-lock-comment-delimiter-face */
-  color: #928374;
+  color: #a89984;
   font-style: italic;
 }
 .org-constant {
@@ -24,7 +24,7 @@
 }
 .org-doc {
   /* font-lock-doc-face */
-  color: #928374;
+  color: #a89984;
   font-style: italic;
 }
 .org-function-name {
