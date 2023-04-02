@@ -32,15 +32,16 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org6231877">1. Buffer movement</a></li>
-<li><a href="#orgacf9d4c">2. Cursor movement</a></li>
-<li><a href="#org0c42421">3. Universal argument</a></li>
-<li><a href="#org7c427bb">4. Quit</a></li>
-<li><a href="#org86db2c4">5. Windows</a></li>
-<li><a href="#org580cde5">6. Editing</a></li>
-<li><a href="#org5006d45">7. Files</a></li>
-<li><a href="#orgce62378">8. Buffers</a></li>
-<li><a href="#org4bf443a">9. Searching</a></li>
+<li><a href="#orgb229ee9">1. Buffer movement</a></li>
+<li><a href="#org9bb6a70">2. Cursor movement</a></li>
+<li><a href="#orgcc4fbb4">3. Universal argument</a></li>
+<li><a href="#orgce353fe">4. Quit</a></li>
+<li><a href="#org5fb4855">5. Windows</a></li>
+<li><a href="#org9f960f5">6. Editing</a></li>
+<li><a href="#org3e76519">7. Files</a></li>
+<li><a href="#org7d9aff8">8. Buffers</a></li>
+<li><a href="#org3e611e6">9. Searching</a></li>
+<li><a href="#orgf77455f">10. Frames</a></li>
 </ul>
 </div>
 </div>
@@ -53,8 +54,8 @@ most important key binding to remember is <code>M-x</code>; to get access to all
 of Emacs' commands.
 </p>
 
-<div id="outline-container-org6231877" class="outline-2">
-<h2 id="org6231877"><span class="section-number-2">1</span> Buffer movement</h2>
+<div id="outline-container-orgb229ee9" class="outline-2">
+<h2 id="orgb229ee9"><span class="section-number-2">1</span> Buffer movement</h2>
 <div class="outline-text-2" id="text-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -102,8 +103,8 @@ of Emacs' commands.
 </div>
 </div>
 
-<div id="outline-container-orgacf9d4c" class="outline-2">
-<h2 id="orgacf9d4c"><span class="section-number-2">2</span> Cursor movement</h2>
+<div id="outline-container-org9bb6a70" class="outline-2">
+<h2 id="org9bb6a70"><span class="section-number-2">2</span> Cursor movement</h2>
 <div class="outline-text-2" id="text-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -207,8 +208,8 @@ of Emacs' commands.
 </div>
 </div>
 
-<div id="outline-container-org0c42421" class="outline-2">
-<h2 id="org0c42421"><span class="section-number-2">3</span> Universal argument</h2>
+<div id="outline-container-orgcc4fbb4" class="outline-2">
+<h2 id="orgcc4fbb4"><span class="section-number-2">3</span> Universal argument</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 To supply an emacs command a numeric argument, the repeat count or
@@ -225,8 +226,8 @@ results in <code>********</code>.
 </div>
 </div>
 
-<div id="outline-container-org7c427bb" class="outline-2">
-<h2 id="org7c427bb"><span class="section-number-2">4</span> Quit</h2>
+<div id="outline-container-orgce353fe" class="outline-2">
+<h2 id="orgce353fe"><span class="section-number-2">4</span> Quit</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 To quit in the middle of typing a key cord use <code>C-g</code>. It can also be
@@ -235,8 +236,8 @@ used when Emacs stops responding.
 </div>
 </div>
 
-<div id="outline-container-org86db2c4" class="outline-2">
-<h2 id="org86db2c4"><span class="section-number-2">5</span> Windows</h2>
+<div id="outline-container-org5fb4855" class="outline-2">
+<h2 id="org5fb4855"><span class="section-number-2">5</span> Windows</h2>
 <div class="outline-text-2" id="text-5">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -265,25 +266,37 @@ used when Emacs stops responding.
 <tr>
 <td class="org-left">C-x 2</td>
 <td class="org-left">split-window-below</td>
-<td class="org-left">Create a new window below</td>
+<td class="org-left">create a new window below</td>
 </tr>
 
 <tr>
 <td class="org-left">C-x 3</td>
 <td class="org-left">split-window-right</td>
-<td class="org-left">Create a new window to the right</td>
+<td class="org-left">create a new window to the right</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x o</td>
+<td class="org-left">other-window</td>
+<td class="org-left">change focus to another window</td>
+</tr>
+
+<tr>
+<td class="org-left">C-M-v</td>
+<td class="org-left">scroll-other-window</td>
+<td class="org-left">a negative prefix scrolls the other way C-u -</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
 
-<div id="outline-container-org580cde5" class="outline-2">
-<h2 id="org580cde5"><span class="section-number-2">6</span> Editing</h2>
+<div id="outline-container-org9f960f5" class="outline-2">
+<h2 id="org9f960f5"><span class="section-number-2">6</span> Editing</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgcc9e63c" class="outline-3">
-<h3 id="orgcc9e63c"><span class="section-number-3">6.1</span> Killing, Deleting and Yanking</h3>
+<div id="outline-container-orgbb980ff" class="outline-3">
+<h3 id="orgbb980ff"><span class="section-number-3">6.1</span> Killing, Deleting and Yanking</h3>
 <div class="outline-text-3" id="text-6-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -373,8 +386,8 @@ used when Emacs stops responding.
 </div>
 </div>
 
-<div id="outline-container-orgbdd7709" class="outline-3">
-<h3 id="orgbdd7709"><span class="section-number-3">6.2</span> Undo-ing</h3>
+<div id="outline-container-orgbe3888c" class="outline-3">
+<h3 id="orgbe3888c"><span class="section-number-3">6.2</span> Undo-ing</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 <code>C-/</code>, <code>C-_</code> and <code>C-x u</code> can be used to undo. In order to redo
@@ -412,8 +425,8 @@ your undos.
 </div>
 </div>
 
-<div id="outline-container-org5006d45" class="outline-2">
-<h2 id="org5006d45"><span class="section-number-2">7</span> Files</h2>
+<div id="outline-container-org3e76519" class="outline-2">
+<h2 id="org3e76519"><span class="section-number-2">7</span> Files</h2>
 <div class="outline-text-2" id="text-7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -455,8 +468,8 @@ will create the file and directories if necessary.
 </div>
 </div>
 
-<div id="outline-container-orgce62378" class="outline-2">
-<h2 id="orgce62378"><span class="section-number-2">8</span> Buffers</h2>
+<div id="outline-container-org7d9aff8" class="outline-2">
+<h2 id="org7d9aff8"><span class="section-number-2">8</span> Buffers</h2>
 <div class="outline-text-2" id="text-8">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -498,8 +511,78 @@ will create the file and directories if necessary.
 </div>
 </div>
 
-<div id="outline-container-org4bf443a" class="outline-2">
-<h2 id="org4bf443a"><span class="section-number-2">9</span> Searching</h2>
+<div id="outline-container-org3e611e6" class="outline-2">
+<h2 id="org3e611e6"><span class="section-number-2">9</span> Searching</h2>
+<div class="outline-text-2" id="text-9">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Key binding</th>
+<th scope="col" class="org-left">Function</th>
+<th scope="col" class="org-left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-s</td>
+<td class="org-left">isearch-forward</td>
+<td class="org-left">incrementally search forward</td>
+</tr>
+
+<tr>
+<td class="org-left">C-r</td>
+<td class="org-left">isearch-backward</td>
+<td class="org-left">incrementally search backward</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-orgf77455f" class="outline-2">
+<h2 id="orgf77455f"><span class="section-number-2">10</span> Frames</h2>
+<div class="outline-text-2" id="text-10">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Key binding</th>
+<th scope="col" class="org-left">Function</th>
+<th scope="col" class="org-left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-x 5 2</td>
+<td class="org-left">make-frame-command</td>
+<td class="org-left">creates a new frame</td>
+</tr>
+
+<tr>
+<td class="org-left">C-x 5 0</td>
+<td class="org-left">delete-frame</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
