@@ -56,8 +56,10 @@ used when Emacs stops responding.
 | Key binding | Function             | Notes                                         |
 |-------------+----------------------+-----------------------------------------------|
 | C-x 1       | delete-other-windows | delete all windows except the focussed window |
-| C-x 2       | split-window-below   | Create a new window below                     |
-| C-x 3       | split-window-right   | Create a new window to the right              |
+| C-x 2       | split-window-below   | create a new window below                     |
+| C-x 3       | split-window-right   | create a new window to the right              |
+| C-x o       | other-window         | change focus to another window                |
+| C-M-v       | scroll-other-window  | a negative prefix scrolls the other way C-u - |
 
 * Editing
 ** Killing, Deleting and Yanking
@@ -103,6 +105,19 @@ will create the file and directories if necessary.
 | C-x s       | save-some-buffers | interactively save open buffers   |
 
 * Searching
+| Key binding | Function         | Notes                         |
+|-------------+------------------+-------------------------------|
+| C-s         | isearch-forward  | incrementally search forward  |
+| C-r         | isearch-backward | incrementally search backward |
+
+* Frames
+| Key binding | Function           | Notes               |
+|-------------+--------------------+---------------------|
+| C-x 5 2     | make-frame-command | creates a new frame |
+| C-x 5 0     | delete-frame       |                     |
+
+* COMMENT Recursive Editing
+
 
 * COMMENT continue at line
-Tutorial line 869
+Tutorial line 1016

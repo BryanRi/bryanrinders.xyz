@@ -1,0 +1,185 @@
+#+TITLE: Kmonad: Super Charge Your Keyboard
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-03-02 Thu>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :exports code :eval never-export
+
+* Intro
+{{{date([%Y-%m-%d])}}} With [[https://github.com/kmonad/kmonad][kmonad]] you no longer have to buy an
+expensive programable keyboard in order to remap every key on your
+keyboard. Kmonad allows you to remap keys, create layers, compose keys
+and more.
+
+* Post installation
+After you have installed =kmonad=, to prevent having to run =kmonad=
+with root priviledges run the following commands and then reboot your
+machine. See
+[[https://github.com/kmonad/kmonad/blob/master/doc/faq.md#q-how-do-i-get-uinput-permissions][Kmonad FAQ]]
+and
+[[https://github.com/kmonad/kmonad/issues/160#issuecomment-766121884][this]]
+for more info.
+
+
+#+begin_src sh
+  # Add self to the input and uinput groups
+  sudo usermod -aG input $USER
+  sudo groupadd uinput
+  sudo usermod -aG uinput $USER
+
+  echo 'KERNEL=="uinput", MODE="0660", GROUP="uinput", OPTIONS+="static_node=uinput"' \
+      | sudo tee /etc/udev/rules.d/90-uinput.rules
+
+  # This seems to be needed because uinput isn't compiled as a loadable module these days.
+  # See https://github.com/chrippa/ds4drv/issues/93#issuecomment-265300511
+  echo uinput | sudo tee /etc/modules-load.d/uinput.conf
+
+  sudo modprobe uinput
+#+end_src
+
+* Configuring
+
+#+begin_src emacs-lisp
+  (defcfg
+    ;; For Linux
+    input  (device-file "/dev/input/by-path/platform-i8042-serio-0-event-kbd")
+    output (uinput-sink "My KMonad output"
+                        "/usr/bin/sleep 0.2; /usr/bin/xset r rate 240 60")
+
+    ;; Comment this is you want unhandled events not to be emitted
+    fallthrough true
+
+    ;; Set this to false to disable any command-execution in KMonad
+    allow-cmd true
+  )
+
+  ;; US
+  (defsrc
+    esc  mute vold volu                          prnt slck pause ins  home pgup
+    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   del  end  pgdn
+    grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+    tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+    caps a    s    d    f    g    h    j    k    l    ;    '          ret
+    lsft z    x    c    v    b    n    m    ,    .    /               rsft
+    lctl lmet lalt           spc            ralt cmps rctl       back up   fwd
+                                                                 left down rght
+  )
+
+  ;; Below, I use `around' to compose `layer-toggle' with `fn' (instead
+  ;; of using `layer-toggle' directly) so that the `fn' keypress
+  ;; actually gets emitted. This matters when using an application that
+  ;; can use `fn' as a modifier (like Emacs).
+
+  ;; (defalias fn (around (layer-toggle function) fn))
+  (defalias
+    ;; layer toggles when holding down a key
+    num (tap-hold-next-release 200 v (layer-toggle numbers))
+    sym (tap-hold-next-release 200 m (layer-toggle symbols))
+    arr (tap-hold-next-release 200 t (layer-toggle arrows))
+    mse (tap-hold-next-release 200 s (layer-toggle mouse))
+    ;; modifier keys when holding down a key
+    esca (tap-hold-next-release 200 esc lalt)
+    actl (tap-hold-next-release 200 a lctrl)
+    octl (tap-hold-next-release 200 o lctrl)
+    'alt (tap-hold-next-release 200 ' lalt)
+    spcm (tap-hold-next-release 200 spc lmet)
+    ;; complex modifier keys
+    hyp C-A-S
+    meh C-A-M-S
+   ;; lead (multi-tap 200 @spcm C-x)  ;; leader key
+    ;; switch base layers for when other people need to use my keyboard
+    qwe (layer-switch qwerty)
+    col (layer-switch colemak)
+  )
+
+  (deflayer colemak
+    esc   mute  vold volu                          @qwe slck  pause ins  home pgup
+    f1    f2    f3   f4   f5   f6   f7   f8   f9   f10  f11   f12   del  end  @qwe
+    grv   1     2    3    4    5    6    7    8    9    0     -     =    bspc
+    tab   q     w    f    p    g    j    l    u    y    ;     [     ]    \
+    @esca @actl r    #mse @arr d    h    n    e    i    @octl @'alt      ret
+    lsft  z     x    c    @num b    k    @sym ,    .    /                rsft
+    lctl  lmet  @meh           @spcm          @hyp ralt rctl        pgdn up   pgup
+                                                                    left down rght
+  )
+
+  ;; standard qwerty layer, switch back to colemak by pressing pgdn (@col) on the
+  ;; top right. pgup and pgdn are moved to the arrow keys cluster.
+  (deflayer qwerty
+    esc  mute vold volu                          @col slck pause ins  home pgup
+    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  f12   del  end  @col
+    grv  1    2    3    4    5    6    7    8    9    0    -     =    bspc
+    tab  q    w    e    r    t    y    u    i    o    p    [     ]    \
+    esc  a    s    d    f    g    h    j    k    l    ;    '          ret
+    lsft z    x    c    v    b    n    m    ,    .    /               rsft
+    lctl lmet lalt           spc            ralt cmps rctl       pgdn up   pgup
+                                                                 left down rght
+  )
+
+  (deflayer numbers
+    _    _    _    _                             _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    7    8    9    +    _    _    _
+    _    _    _    lsft _    _    0    4    5    6    *    =         _
+    _    _    ,    .    _    _    -    1    2    3    /              _
+    _    _    _              _              _    _    _         _    _    _
+                                                                _    _    _
+  )
+
+  (deflayer symbols
+    _    _    _    _                             _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    `    !    @    {    }    \    _    _    _    _    _    _    _    _
+    _    #    $    \(   \)   &    _    _    _    _    _    _         _
+    _    %    ^    [    ]    ~    _    _    _    _    _              _
+    _    _    _              _              _    _    _         _    _    _
+                                                                _    _    _
+  )
+
+  (deflayer arrows
+    _    _    _    _                             _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    lalt lctl lsft _    _    left down up   rght _    _         _
+    _    _    _    _    _    _    _    _    _    _    _              _
+    _    _    _              _              _    _    _         _    _    _
+                                                                _    _    _
+  )
+
+  (defalias
+    mup (cmd-button "xdotool mousemove_relative -- 0 -15")
+    mdn (cmd-button "xdotool mousemove_relative 0 15")
+    mlt (cmd-button "xdotool mousemove_relative 15 0")
+    mrt (cmd-button "xdotool mousemove_relative -- -15 0")
+    )
+
+  (deflayer mouse
+    _    _    _    _                             _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    @mrt @mdn @mup @mrt _    _         _
+    _    _    _    _    _    _    _    _    _    _    _              _
+    _    _    _              _              _    _    _         _    _    _
+                                                                _    _    _
+  )
+
+  #|
+  g and h are marked with XX for easy reference
+  (deflayer empty
+    _    _    _    _                             _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    _    _    _    _    _    _    _    _    _
+    _    _    _    _    _    XX   XX   _    _    _    _    _         _
+    _    _    _    _    _    _    _    _    _    _    _              _
+    _    _    _              _              _    _    _         _    _    _
+                                                                _    _    _
+  )
+  |#
+#+end_src
+
+* COMMENT Other Sources
+[[https://www.reddit.com/r/emacs/comments/oyzfz9/kmonad_and_the_power_of_infinite_leader_keys/][kmonad reddit]]
