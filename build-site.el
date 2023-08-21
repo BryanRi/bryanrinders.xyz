@@ -42,20 +42,20 @@
 
 ;; hardcoded html definitions for the navigation bar and footer
 (defvar html-head-css
-  "<link rel='stylesheet' href='/website/css/default.css' />
-<link rel='stylesheet' href='/website/css/source-code.css' />")
+  "<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />")
 
 (defvar nav-bar
   "<h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
-  <a href='/website/'>Home</a>
-  <a href='/website/ctf-index.html'>CTF WriteUps</a>
-  <a href='/website/emacs-index.html'>Emacs</a>
-  <a href='/website/linux-index.html'>Linux Tutorials</a>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/website/other-index.html'>Other</a>
+  <a href='/other-index.html'>Other</a>
   <span class='right'>
-    <a href='/website/sitemap.html'>Sitemap</a>
+    <a href='/sitemap.html'>Sitemap</a>
   </span>
 </div>
 <br><hr>")
