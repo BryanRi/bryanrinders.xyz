@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gnupg Backup</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/other-index.html'>Other</a>
+  <span class='right'>
+    <a href='/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Gnupg Backup
+<br />
+<span class="subtitle">Backup Your GPG Private Keys And Settings</span>
+</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4a2acf4">Backup</a></li>
+<li><a href="#orge3f3d0c">Restore</a></li>
+<li><a href="#org82f6613">Script</a></li>
+<li><a href="#org2a8f579">Just Backing Up Your Private Keys</a></li>
+<li><a href="#orgbda5276">Moving GPG keys privately</a></li>
+<li><a href="#org26d9b13">Sources</a></li>
+</ul>
+</div>
+</div>
+<p>
+#+PROPERTY; header-args:sh :results output
+</p>
+
+<div id="outline-container-org4a2acf4" class="outline-2">
+<h2 id="org4a2acf4">Backup</h2>
+<div class="outline-text-2" id="text-org4a2acf4">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2023-08-28 Mon] </span></span> Get a list of all uid's with keys on you
+system:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --list-secret-keys
+</pre>
+</div>
+
+<pre class="example">
+/home/br/.local/share/gnupg/pubring.gpg
+---------------------------------------
+sec   rsa4096 2022-09-19 [SC]
+      018875D477884685DD4737A32E650629543EECA3
+uid           [ultimate] Pacman Keyring Master Key &lt;pacman@localhost&gt;
+
+sec   rsa4096 2023-08-22 [SC]
+      EF492D56F73B9C3D547780A5C58F5BDFB7D2DCA3
+uid           [ultimate] &lt;YOUR_ID&gt;
+ssb   rsa4096 2023-08-22 [E]
+
+</pre>
+
+<p>
+Export your private key using <code>YOUR_ID</code> as found in the previous
+command:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --output private-key.asc --export-options backup --export-secret-keys --armor &lt;YOUR_ID&gt;
+</pre>
+</div>
+
+<p>
+Export the trust database:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --export-ownertrust &gt; otrust.txt
+</pre>
+</div>
+
+<p>
+Backup <code>gpg.conf</code>, just copy it, and backup <code>pubring.kbx</code> or
+<code>pubring.gpg</code>, <code>pubring.gpg</code> could be named <code>pubring.kbx</code>. Only do
+this if you have public keys in your key ring that need to be saved.
+You do not need to backup your own public key because it is part of
+your private key.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --output public-keys.asc --export --armor --keyring &lt;path/to/pubring.gpg&gt;
+</pre>
+</div>
+
+<p>
+Back up the revocation certificate, these are stored in
+<code>gnupg/openpgp-revocs.d</code>, note this backup should be stored somewhere
+else than the place you backup your private keys since part of its
+utiliy comes from having no longer access to your private key.
+Alternatively you can store the certificate, private keys and
+everything else in multiple places. The certificates can also be
+generated with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --gen-revoke --armor --output revcert.asc &lt;YOUR_ID&gt;
+</pre>
+</div>
+
+<p>
+Place all these files in a directory and encrypt it with a strong
+password, note in the command below <code>gpg-backup</code> is the directory
+with your private key, etc:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpgtar --output gpg-backup.gpg <span class="org-sh-escaped-newline">\</span>
+       --symmetric <span class="org-sh-escaped-newline">\</span>
+       --cipher-algo AES256 <span class="org-sh-escaped-newline">\</span>
+       --s2k-digest-algo SHA512 <span class="org-sh-escaped-newline">\</span>
+       --s2k-count 65536 <span class="org-sh-escaped-newline">\</span>
+       --armor <span class="org-sh-escaped-newline">\</span>
+       gpg-backup
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orge3f3d0c" class="outline-2">
+<h2 id="orge3f3d0c">Restore</h2>
+<div class="outline-text-2" id="text-orge3f3d0c">
+<p>
+Decrypt the tarbal:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpgtar --output gpg-backup --decrypt gpg-backup.tar
+</pre>
+</div>
+
+<p>
+Restore the public keys:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --import public-key.asc
+</pre>
+</div>
+
+<p>
+Restore the private key:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --import-options restore --import private.asc
+</pre>
+</div>
+
+<p>
+Restore the trust database:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --import-ownertrust &lt; otrust.txt
+</pre>
+</div>
+
+<p>
+and also copy <code>gnupg.conf</code> into your <code>gnupg</code> directory.
+</p>
+</div>
+
+<div id="outline-container-orgb2124f8" class="outline-3">
+<h3 id="orgb2124f8">Manually Setting The Trust Of Your Key</h3>
+<div class="outline-text-3" id="text-orgb2124f8">
+<div class="org-src-container">
+<pre class="src src-sh">gpg --edit-key your@id.here
+gpg&gt; trust
+Your decision? 5
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org82f6613" class="outline-2">
+<h2 id="org82f6613">Script</h2>
+<div class="outline-text-2" id="text-org82f6613">
+<p>
+Simple script to automate the backing up and restoring process.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-comment-delimiter">#</span><span class="org-comment">!/usr/bin/</span><span class="org-keyword">env</span><span class="org-comment"> sh</span>
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Description:</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Backup your gpg keys and settings or import them.</span>
+<span class="org-comment-delimiter">#</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Dependencies:</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">- gnupg</span>
+
+<span class="org-builtin">set</span> -ex
+
+<span class="org-function-name">usage</span>() {
+    cat &lt;&lt; EOF
+<span class="org-sh-heredoc">Usage: $0 import | export</span>
+<span class="org-sh-heredoc">    import _directory_,</span>
+<span class="org-sh-heredoc">           import a gpg encrypted tar archive created with the</span>
+<span class="org-sh-heredoc">           export option.</span>
+<span class="org-sh-heredoc">    export, export a chosen gpg private key, owner trust, public</span>
+<span class="org-sh-heredoc">            keys, gpg.conf, revocation of the private key</span>
+<span class="org-sh-heredoc">EOF</span>
+}
+
+
+: <span class="org-string">"${GNUPGHOME:=$HOME/.gnupg}"</span>
+
+<span class="org-keyword">case</span> <span class="org-string">"$1"</span><span class="org-keyword"> in</span>
+    e|<span class="org-builtin">export</span>)
+        <span class="org-variable-name">backup_dir</span>=gnupg-backup-<span class="org-string">"$(date '+%Y%m%d')"</span>
+        mkdir <span class="org-string">"${backup_dir}"</span> || <span class="org-keyword">exit</span> 1
+        gpg --list-secret-keys
+        <span class="org-builtin">echo</span> <span class="org-string">'Which uid to backup: '</span>
+        <span class="org-builtin">read</span> -r uid
+        <span class="org-comment-delimiter"># </span><span class="org-comment">echo 'Do you want to backup the public key ring [y/n]: '</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">read -r backup_pubring</span>
+        <span class="org-builtin">cd</span> <span class="org-string">"${backup_dir}"</span> || <span class="org-keyword">exit</span> 3
+        gpg --output private-key.asc <span class="org-sh-escaped-newline">\</span>
+            --export-options backup <span class="org-sh-escaped-newline">\</span>
+            --export-secret-keys <span class="org-sh-escaped-newline">\</span>
+            --armor <span class="org-sh-escaped-newline">\</span>
+            <span class="org-string">"${uid}"</span>
+        gpg --export-ownertrust &gt; otrust.txt
+        gpg --output public-keys.asc <span class="org-sh-escaped-newline">\</span>
+            --export <span class="org-sh-escaped-newline">\</span>
+            --armor <span class="org-sh-escaped-newline">\</span>
+            --keyring <span class="org-string">"${GNUPGHOME}"</span>/pubring.gpg
+        cp <span class="org-string">"${GNUPGHOME}"</span>/gpg.conf .
+        <span class="org-variable-name">fingerprint</span>=<span class="org-string">"$(gpg  --fingerprint --keyid-format long "${uid}" \</span>
+<span class="org-string">                            | awk -F= '/Key/ { gsub(/[[:blank:]]/, "", $2); print $2 }')"</span>
+        <span class="org-comment-delimiter"># </span><span class="org-comment">consider backing up entire openpgp-revocs.d directory</span>
+        gpg --gen-revoke --armor --output <span class="org-string">"${fingerprint}.rev"</span> <span class="org-string">"${uid}"</span>
+        <span class="org-builtin">cd</span> .. || <span class="org-keyword">exit</span> 3
+        gpgtar --output <span class="org-string">"${backup_dir}"</span>.gpg <span class="org-sh-escaped-newline">\</span>
+               --encrypt <span class="org-sh-escaped-newline">\</span>
+               --symmetric <span class="org-sh-escaped-newline">\</span>
+               --gpg-args <span class="org-string">'--cipher-algo AES256 --s2k-digest-algo SHA512 --s2k-count 65536 --armor'</span> <span class="org-sh-escaped-newline">\</span>
+               <span class="org-string">"${backup_dir}"</span>
+        ;;
+    i|import)
+        [ -f <span class="org-string">"${2}"</span> ] || { usage; <span class="org-keyword">exit</span> 2; }
+        <span class="org-comment-delimiter"># </span><span class="org-comment">num="$(find . -maxdepth 1 -type d -name '*_.+_')"</span>
+        <span class="org-variable-name">output_dir</span>=<span class="org-string">"${2%.gpg}"</span>
+        mkdir -pv <span class="org-string">"${output_dir}"</span> || <span class="org-keyword">exit</span> 1
+        gpgtar --directory <span class="org-string">"${output_dir}"</span> --decrypt <span class="org-string">"${2}"</span>
+        <span class="org-variable-name">backup_dir</span>=<span class="org-string">"$(find "${output_dir}" -mindepth 1 -maxdepth 1 -type d)"</span>
+        <span class="org-builtin">cd</span> <span class="org-string">"${backup_dir}"</span> || <span class="org-keyword">exit</span> 3
+        gpg --import public-keys.asc
+        gpg --import-options restore --import private-key.asc
+        gpg --import-ownertrust &lt; otrust.txt
+        mkdir -pv  <span class="org-string">"${GNUPGHOME}"</span>/openpgp-revocs.d <span class="org-sh-escaped-newline">\</span>
+              &amp;&amp; cp *.rev <span class="org-string">"${GNUPGHOME}"</span>/openpgp-revocs.d
+        cp gpg.conf <span class="org-string">"${GNUPGHOME}"</span>
+        ;;
+    *) usage; <span class="org-keyword">exit</span> 4; ;;
+<span class="org-keyword">esac</span>
+
+<span class="org-keyword">exit</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2a8f579" class="outline-2">
+<h2 id="org2a8f579">Just Backing Up Your Private Keys</h2>
+<div class="outline-text-2" id="text-org2a8f579">
+<p>
+Encrypting
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gpg --output pubkey.gpg --export SOMEKEYID <span class="org-sh-escaped-newline">\</span>
+    &amp;&amp; gpg --output - --export-secret-key SOMEKEYID <span class="org-sh-escaped-newline">\</span>
+        | cat pubkey.gpg - <span class="org-sh-escaped-newline">\</span>
+        | gpg --armor --output keys.asc --symmetric --cipher-algo AES256
+</pre>
+</div>
+
+<p>
+Decrypting
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">gpg --output - keys.asc | gpg --import
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbda5276" class="outline-2">
+<h2 id="orgbda5276">Moving GPG keys privately</h2>
+<div class="outline-text-2" id="text-orgbda5276">
+<p>
+This method allows you to very easily move you key from one computer
+to another. It does require you to have ssh access to that computer.
+</p>
+
+<p>
+If you’re on the machine that already has the key:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --export-secret-key SOMEKEYID | ssh othermachine gpg --import
+</pre>
+</div>
+
+<p>
+If you’re on the machine that needs the key:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">ssh othermachine gpg --export-secret-key SOMEKEYID | gpg --import
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org26d9b13" class="outline-2">
+<h2 id="org26d9b13">Sources</h2>
+<div class="outline-text-2" id="text-org26d9b13">
+<ul class="org-ul">
+<li><a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html">https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html</a></li>
+<li><a href="https://wiki.archlinux.org/title/GnuPG#Key_maintenance">https://wiki.archlinux.org/title/GnuPG#Key_maintenance</a></li>
+<li><a href="https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/">https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
