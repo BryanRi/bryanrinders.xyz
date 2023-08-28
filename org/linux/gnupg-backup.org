@@ -1,0 +1,236 @@
+#+TITLE: Gnupg Backup
+#+SUBTITLE: Backup Your GPG Private Keys And Settings
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-08-28 Mon>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY; header-args:sh :results output
+
+* TODO COMMENT Getting started with gnupg
+
+* TODO COMMENT How to handle subkeys
+
+* Backup
+{{{date([%Y-%m-%d])}}} Get a list of all uid's with keys on you
+system:
+
+#+begin_src sh
+  gpg --list-secret-keys
+#+end_src
+
+#+RESULTS:
+#+begin_example
+/home/br/.local/share/gnupg/pubring.gpg
+---------------------------------------
+sec   rsa4096 2022-09-19 [SC]
+      018875D477884685DD4737A32E650629543EECA3
+uid           [ultimate] Pacman Keyring Master Key <pacman@localhost>
+
+sec   rsa4096 2023-08-22 [SC]
+      EF492D56F73B9C3D547780A5C58F5BDFB7D2DCA3
+uid           [ultimate] <YOUR_ID>
+ssb   rsa4096 2023-08-22 [E]
+
+#+end_example
+
+Export your private key using =YOUR_ID= as found in the previous
+command:
+
+#+begin_src sh
+  gpg --output private-key.asc --export-options backup --export-secret-keys --armor <YOUR_ID>
+#+end_src
+
+Export the trust database:
+
+#+begin_src sh
+  gpg --export-ownertrust > otrust.txt
+#+end_src
+
+Backup =gpg.conf=, just copy it, and backup =pubring.kbx= or
+=pubring.gpg=, =pubring.gpg= could be named =pubring.kbx=. Only do
+this if you have public keys in your key ring that need to be saved.
+You do not need to backup your own public key because it is part of
+your private key.
+
+#+begin_src sh
+  gpg --output public-keys.asc --export --armor --keyring <path/to/pubring.gpg>
+#+end_src
+
+Back up the revocation certificate, these are stored in
+=gnupg/openpgp-revocs.d=, note this backup should be stored somewhere
+else than the place you backup your private keys since part of its
+utiliy comes from having no longer access to your private key.
+Alternatively you can store the certificate, private keys and
+everything else in multiple places. The certificates can also be
+generated with:
+
+#+begin_src sh
+  gpg --gen-revoke --armor --output revcert.asc <YOUR_ID>
+#+end_src
+
+Place all these files in a directory and encrypt it with a strong
+password, note in the command below =gpg-backup= is the directory
+with your private key, etc:
+
+# https://wiki.archlinux.org/title/GnuPG#Symmetric
+# TODO test whether --s2k-digest-algo is the correct flag
+#+begin_src sh
+  gpgtar --output gpg-backup.gpg \
+         --symmetric \
+         --cipher-algo AES256 \
+         --s2k-digest-algo SHA512 \
+         --s2k-count 65536 \
+         --armor \
+         gpg-backup
+#+end_src
+
+* Restore
+Decrypt the tarbal:
+
+#+begin_src sh
+  gpgtar --output gpg-backup --decrypt gpg-backup.tar
+#+end_src
+
+Restore the public keys:
+
+#+begin_src sh
+  gpg --import public-key.asc
+#+end_src
+
+Restore the private key:
+
+#+begin_src sh
+  gpg --import-options restore --import private.asc
+#+end_src
+
+Restore the trust database:
+
+#+begin_src sh
+  gpg --import-ownertrust < otrust.txt
+#+end_src
+
+and also copy =gnupg.conf= into your =gnupg= directory.
+
+** Manually Setting The Trust Of Your Key
+
+#+begin_src sh
+  gpg --edit-key your@id.here
+  gpg> trust
+  Your decision? 5
+#+end_src
+
+* Script
+Simple script to automate the backing up and restoring process.
+
+#+begin_src sh
+#!/usr/bin/env sh
+
+# Description:
+# Backup your gpg keys and settings or import them.
+#
+# Dependencies:
+# - gnupg
+
+set -ex
+
+usage() {
+    cat << EOF
+Usage: $0 import | export
+    import _directory_,
+           import a gpg encrypted tar archive created with the
+           export option.
+    export, export a chosen gpg private key, owner trust, public
+            keys, gpg.conf, revocation of the private key
+EOF
+}
+
+
+: "${GNUPGHOME:=$HOME/.gnupg}"
+
+case "$1" in
+    e|export)
+        backup_dir=gnupg-backup-"$(date '+%Y%m%d')"
+        mkdir "${backup_dir}" || exit 1
+        gpg --list-secret-keys
+        echo 'Which uid to backup: '
+        read -r uid
+        # echo 'Do you want to backup the public key ring [y/n]: '
+        # read -r backup_pubring
+        cd "${backup_dir}" || exit 3
+        gpg --output private-key.asc \
+            --export-options backup \
+            --export-secret-keys \
+            --armor \
+            "${uid}"
+        gpg --export-ownertrust > otrust.txt
+        gpg --output public-keys.asc \
+            --export \
+            --armor \
+            --keyring "${GNUPGHOME}"/pubring.gpg
+        cp "${GNUPGHOME}"/gpg.conf .
+        fingerprint="$(gpg  --fingerprint --keyid-format long "${uid}" \
+                            | awk -F= '/Key/ { gsub(/[[:blank:]]/, "", $2); print $2 }')"
+        # consider backing up entire openpgp-revocs.d directory
+        gpg --gen-revoke --armor --output "${fingerprint}.rev" "${uid}"
+        cd .. || exit 3
+        gpgtar --output "${backup_dir}".gpg \
+               --encrypt \
+               --symmetric \
+               --gpg-args '--cipher-algo AES256 --s2k-digest-algo SHA512 --s2k-count 65536 --armor' \
+               "${backup_dir}"
+        ;;
+    i|import)
+        [ -f "${2}" ] || { usage; exit 2; }
+        # num="$(find . -maxdepth 1 -type d -name '*_.+_')"
+        output_dir="${2%.gpg}"
+        mkdir -pv "${output_dir}" || exit 1
+        gpgtar --directory "${output_dir}" --decrypt "${2}"
+        backup_dir="$(find "${output_dir}" -mindepth 1 -maxdepth 1 -type d)"
+        cd "${backup_dir}" || exit 3
+        gpg --import public-keys.asc
+        gpg --import-options restore --import private-key.asc
+        gpg --import-ownertrust < otrust.txt
+        mkdir -pv  "${GNUPGHOME}"/openpgp-revocs.d \
+              && cp *.rev "${GNUPGHOME}"/openpgp-revocs.d
+        cp gpg.conf "${GNUPGHOME}"
+        ;;
+    *) usage; exit 4; ;;
+esac
+
+exit
+#+end_src
+
+* Just Backing Up Your Private Keys
+Encrypting
+#+begin_src sh
+  gpg --output pubkey.gpg --export SOMEKEYID \
+      && gpg --output - --export-secret-key SOMEKEYID \
+          | cat pubkey.gpg - \
+          | gpg --armor --output keys.asc --symmetric --cipher-algo AES256
+#+end_src
+
+Decrypting
+#+begin_src sh
+  gpg --output - keys.asc | gpg --import
+#+end_src
+
+* Moving GPG keys privately
+This method allows you to very easily move you key from one computer
+to another. It does require you to have ssh access to that computer.
+
+If you’re on the machine that already has the key:
+
+#+begin_src sh
+  gpg --export-secret-key SOMEKEYID | ssh othermachine gpg --import
+#+end_src
+
+If you’re on the machine that needs the key:
+
+#+begin_src sh
+  ssh othermachine gpg --export-secret-key SOMEKEYID | gpg --import
+#+end_src
+
+* Sources
+- https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html
+- https://wiki.archlinux.org/title/GnuPG#Key_maintenance
+- https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/
