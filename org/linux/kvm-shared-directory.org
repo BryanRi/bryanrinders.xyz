@@ -23,7 +23,7 @@ the follow settings
 
 #+begin_example
 Driver: virtio-9p
-Source path: /home/br/dox/shared
+Source path: /full/path/to/shared/on/host
 Target path: /sharedir
 #+end_example
 
