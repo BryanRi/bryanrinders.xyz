@@ -1,0 +1,121 @@
+#+TITLE: Org Mode Database
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-09-28 Thu>
+#+OPTIONS: num:nil
+#+FILETAGS: :emacs:org-mode:database:
+
+* Create A Basic database With Org-mode
+{{{date([%Y-%m-%d])}}} Lets say you want to record all the books you
+have / want to read. The first solution for storing this kind of data
+is to use a spread sheet or other kind of tabular data format. And if
+you are reading this you probably use [[https://orgmode.org/][org-mode]], so you might think org
+tables are a good idea. However org tables are only really useful when
+they are small (less than 100 x 10; rows x columns); with big tables
+emacs starts to become noticeably slower.
+
+There is another alternative that also uses org-mode, which uses
+[[https://orgmode.org/manual/Properties-and-Columns.html][properties]]. Each top-level headline will represent a table and the
+second-level headline an entry in the table. You can give each
+second-level headline any number of properties. For this example we'll
+assume that the second-level headline is the title of the book. Then
+for properties we could use author, series and number of pages. You
+can set properties with ~org-set-property~ or =C-c C-x p=.
+
+So your org file, book database, could look like:
+
+#+begin_example
+,* Finish Reading
+,** The Eye Of The World
+:PROPERTIES:
+:author: Robert Jordan
+:series: The Wheel Of Time
+:genre: Fantasy
+:#pages: 800
+:END:
+
+,** The Great Hunt
+:PROPERTIES:
+:author: Robert Jordan
+:series: The Wheel Of Time
+:genre: Fantasy
+:#pages: 705
+:END:
+
+,* To Be Read
+,** The Dragon Reborn
+:PROPERTIES:
+:author: Robert Jordan
+:series: The Wheel Of Time
+:genre: Fantasy
+:#pages: 705
+:END:
+#+end_example
+
+The properties drawer can be collapsed by pressing =TAB=, with the
+point on the =:PROPERTIES:= line, for a cleaner view.
+
+* Column View
+With this setup you can now view the database in a tabular format with
+[[https://orgmode.org/manual/Column-View.html][column view]]. To start column view use ~org-columns~ or =C-c C-x C-c=.
+In this view you will see all the properties in a org table[fn:1]. To
+get out of this view press =q= with the point on one of the table
+lines. In column view you can also edit values and modify columns, see
+[[https://orgmode.org/manual/Using-column-view.html][using columns view]] for more information on this.
+
+You can also modify which columns are shown in column view using the
+=#+COLUMNS= setting or the =:COLUMNS:= property. For example
+
+#+begin_example
+,* Finished Reading
+,#+COLUMNS: %ITEM %series %author
+...
+#+end_example
+
+will show the headline, series and author in column view. Columns
+settings can be set on file level and/or specific headline tree. The
+settings are inherited by subtrees. For more costumization options of
+columns see [[https://orgmode.org/manual/Column-attributes.html][column attributes]].
+
+* Creating Relations
+In the example above we are currently reading /The Wheel Of Time/
+series, which contains 14 books plus some novellas. If we want to keep
+track of which books in the series we have read thus far we can create
+a new top-level headline (database table) for series and use internal
+org links to link to books that are already in the database.
+
+This could look like:
+
+#+begin_example
+,* Series
+,** The Wheel Of Time
+:PROPERTIES:
+:author: Robert Jordan
+:END:
+- [X] [[The Eye Of The World]]
+- [X] [[The Great Hunt]]
+- [ ] [[The Dragon Reborn]]
+- [ ] ...
+#+end_example
+
+# the list items in the example are links but emacs hides the syntax,
+# however it does show as verbatim in html export.
+
+The links, the text enclosed by double square brackets e.g. =[​[XX]]=,
+will search for the headline =XX= when pressing =C-c C-o=, with the
+point on that link.
+
+Using the same idea you can also create links from the =:series:=
+property to the series headline. This way you can build a simple
+relational database.
+
+Note that if you use links to headlines this way, the headlines must
+be unique or org-mode won't know which headline you want to link to.
+If you do have non-unique headline you could use the =:CUSTOM_ID:=
+property for those headlines instead. See [[https://orgmode.org/manual/Internal-Links.html][internal links]] on how to set
+this up.
+
+* Footnotes
+
+[fn:1] Column view is just an overlay and can therefore not be
+exported or printed directly. If you need this functionality use
+[[https://orgmode.org/manual/Capturing-column-view.html][capturing column view.]]
