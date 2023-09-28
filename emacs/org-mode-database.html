@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Org Mode Database</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/other-index.html'>Other</a>
+  <span class='right'>
+    <a href='/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Org Mode Database</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org5e733ff">Create A Basic database With Org-mode</a></li>
+<li><a href="#org7babfa8">Column View</a></li>
+<li><a href="#orgb1666da">Creating Relations</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org5e733ff" class="outline-2">
+<h2 id="org5e733ff">Create A Basic database With Org-mode</h2>
+<div class="outline-text-2" id="text-org5e733ff">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2023-09-28 Thu] </span></span> Lets say you want to record all the books you
+have / want to read. The first solution for storing this kind of data
+is to use a spread sheet or other kind of tabular data format. And if
+you are reading this you probably use <a href="https://orgmode.org/">org-mode</a>, so you might think org
+tables are a good idea. However org tables are only really useful when
+they are small (less than 100 x 10; rows x columns); with big tables
+emacs starts to become noticeably slower.
+</p>
+
+<p>
+There is another alternative that also uses org-mode, which uses
+<a href="https://orgmode.org/manual/Properties-and-Columns.html">properties</a>. Each top-level headline will represent a table and the
+second-level headline an entry in the table. You can give each
+second-level headline any number of properties. For this example we'll
+assume that the second-level headline is the title of the book. Then
+for properties we could use author, series and number of pages. You
+can set properties with <code>org-set-property</code> or <code>C-c C-x p</code>.
+</p>
+
+<p>
+So your org file, book database, could look like:
+</p>
+
+<pre class="example">
+* Finish Reading
+** The Eye Of The World
+:PROPERTIES:
+:author: Robert Jordan
+:series: The Wheel Of Time
+:genre: Fantasy
+:#pages: 800
+:END:
+
+** The Great Hunt
+:PROPERTIES:
+:author: Robert Jordan
+:series: The Wheel Of Time
+:genre: Fantasy
+:#pages: 705
+:END:
+
+* To Be Read
+** The Dragon Reborn
+:PROPERTIES:
+:author: Robert Jordan
+:series: The Wheel Of Time
+:genre: Fantasy
+:#pages: 705
+:END:
+</pre>
+
+<p>
+The properties drawer can be collapsed by pressing <code>TAB</code>, with the
+point on the <code>:PROPERTIES:</code> line, for a cleaner view.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org7babfa8" class="outline-2">
+<h2 id="org7babfa8">Column View</h2>
+<div class="outline-text-2" id="text-org7babfa8">
+<p>
+With this setup you can now view the database in a tabular format with
+<a href="https://orgmode.org/manual/Column-View.html">column view</a>. To start column view use <code>org-columns</code> or <code>C-c C-x C-c</code>.
+In this view you will see all the properties in a org table<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>. To
+get out of this view press <code>q</code> with the point on one of the table
+lines. In column view you can also edit values and modify columns, see
+<a href="https://orgmode.org/manual/Using-column-view.html">using columns view</a> for more information on this.
+</p>
+
+<p>
+You can also modify which columns are shown in column view using the
+<code>#+COLUMNS</code> setting or the <code>:COLUMNS:</code> property. For example
+</p>
+
+<pre class="example">
+* Finished Reading
+#+COLUMNS: %ITEM %series %author
+...
+</pre>
+
+<p>
+will show the headline, series and author in column view. Columns
+settings can be set on file level and/or specific headline tree. The
+settings are inherited by subtrees. For more costumization options of
+columns see <a href="https://orgmode.org/manual/Column-attributes.html">column attributes</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb1666da" class="outline-2">
+<h2 id="orgb1666da">Creating Relations</h2>
+<div class="outline-text-2" id="text-orgb1666da">
+<p>
+In the example above we are currently reading <i>The Wheel Of Time</i>
+series, which contains 14 books plus some novellas. If we want to keep
+track of which books in the series we have read thus far we can create
+a new top-level headline (database table) for series and use internal
+org links to link to books that are already in the database.
+</p>
+
+<p>
+This could look like:
+</p>
+
+<pre class="example">
+* Series
+** The Wheel Of Time
+:PROPERTIES:
+:author: Robert Jordan
+:END:
+- [X] [[The Eye Of The World]]
+- [X] [[The Great Hunt]]
+- [ ] [[The Dragon Reborn]]
+- [ ] ...
+</pre>
+
+<p>
+The links, the text enclosed by double square brackets e.g. <code>[​[XX]]</code>,
+will search for the headline <code>XX</code> when pressing <code>C-c C-o</code>, with the
+point on that link.
+</p>
+
+<p>
+Using the same idea you can also create links from the <code>:series:</code>
+property to the series headline. This way you can build a simple
+relational database.
+</p>
+
+<p>
+Note that if you use links to headlines this way, the headlines must
+be unique or org-mode won't know which headline you want to link to.
+If you do have non-unique headline you could use the <code>:CUSTOM_ID:</code>
+property for those headlines instead. See <a href="https://orgmode.org/manual/Internal-Links.html">internal links</a> on how to set
+this up.
+</p>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Column view is just an overlay and can therefore not be
+exported or printed directly. If you need this functionality use
+<a href="https://orgmode.org/manual/Capturing-column-view.html">capturing column view.</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
