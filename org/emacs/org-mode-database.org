@@ -114,6 +114,21 @@ If you do have non-unique headline you could use the =:CUSTOM_ID:=
 property for those headlines instead. See [[https://orgmode.org/manual/Internal-Links.html][internal links]] on how to set
 this up.
 
+* Migrating From Org Tables
+If you already have an org table in which you store all the data you
+can use a ~query-replace-regexp~ like the one below to convert to a
+properties based database.
+
+#+begin_src emacs-lisp
+(query-replace-regexp "^| \\(.*?\\) | \\(.*?\\) | \\(.*?\\) | \\(.*?\\) |$"
+                       "** \\1\n:PROPERTIES:\n:series: \\2\n:author: \\3\n:genre: \\4\n:END:\n" )
+#+end_src
+
+In the first string, the regular expression, the parentheses i.e.
+=\\(.*?\\)= capture the value of each column. You can insert this
+value back in to the output by refering to it in the second string
+with =\\n=, where =n= is the number of the column.
+
 * Footnotes
 
 [fn:1] Column view is just an overlay and can therefore not be
