@@ -35,12 +35,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2d6be02">Backup</a></li>
-<li><a href="#org999ed7f">Restore</a></li>
-<li><a href="#orgf5ac575">Script</a></li>
-<li><a href="#org8abe17d">Just Backing Up Your Private Keys</a></li>
-<li><a href="#org3378bba">Moving GPG keys privately</a></li>
-<li><a href="#orgdb8fb09">Sources</a></li>
+<li><a href="#org5fb74a8">Backup</a></li>
+<li><a href="#orgfbd65c4">Restore</a></li>
+<li><a href="#org878b481">Script</a></li>
+<li><a href="#orgbad5071">Just Backing Up Your Private Keys</a></li>
+<li><a href="#orgee14570">Moving GPG keys privately</a></li>
+<li><a href="#org50d6e88">Sources</a></li>
 </ul>
 </div>
 </div>
@@ -48,9 +48,9 @@
 #+PROPERTY; header-args:sh :results output
 </p>
 
-<div id="outline-container-org2d6be02" class="outline-2">
-<h2 id="org2d6be02">Backup</h2>
-<div class="outline-text-2" id="text-org2d6be02">
+<div id="outline-container-org5fb74a8" class="outline-2">
+<h2 id="org5fb74a8">Backup</h2>
+<div class="outline-text-2" id="text-org5fb74a8">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">[2023-08-28 Mon] </span></span> Get a list of all uid's with keys on you
 system:
@@ -141,9 +141,9 @@ with your private key, etc:
 </div>
 </div>
 
-<div id="outline-container-org999ed7f" class="outline-2">
-<h2 id="org999ed7f">Restore</h2>
-<div class="outline-text-2" id="text-org999ed7f">
+<div id="outline-container-orgfbd65c4" class="outline-2">
+<h2 id="orgfbd65c4">Restore</h2>
+<div class="outline-text-2" id="text-orgfbd65c4">
 <p>
 Decrypt the tarbal:
 </p>
@@ -185,9 +185,9 @@ and also copy <code>gnupg.conf</code> into your <code>gnupg</code> directory.
 </p>
 </div>
 
-<div id="outline-container-orgdf38033" class="outline-3">
-<h3 id="orgdf38033">Manually Setting The Trust Of Your Key</h3>
-<div class="outline-text-3" id="text-orgdf38033">
+<div id="outline-container-org38bd02f" class="outline-3">
+<h3 id="org38bd02f">Manually Setting The Trust Of Your Key</h3>
+<div class="outline-text-3" id="text-org38bd02f">
 <div class="org-src-container">
 <pre class="src src-sh">gpg --edit-key your@id.here
 gpg&gt; trust
@@ -198,9 +198,9 @@ Your decision? 5
 </div>
 </div>
 
-<div id="outline-container-orgf5ac575" class="outline-2">
-<h2 id="orgf5ac575">Script</h2>
-<div class="outline-text-2" id="text-orgf5ac575">
+<div id="outline-container-org878b481" class="outline-2">
+<h2 id="org878b481">Script</h2>
+<div class="outline-text-2" id="text-org878b481">
 <p>
 Simple script to automate the backing up and restoring process.
 </p>
@@ -286,9 +286,9 @@ Simple script to automate the backing up and restoring process.
 </div>
 </div>
 
-<div id="outline-container-org8abe17d" class="outline-2">
-<h2 id="org8abe17d">Just Backing Up Your Private Keys</h2>
-<div class="outline-text-2" id="text-org8abe17d">
+<div id="outline-container-orgbad5071" class="outline-2">
+<h2 id="orgbad5071">Just Backing Up Your Private Keys</h2>
+<div class="outline-text-2" id="text-orgbad5071">
 <p>
 Encrypting
 </p>
@@ -310,9 +310,9 @@ Decrypting
 </div>
 </div>
 
-<div id="outline-container-org3378bba" class="outline-2">
-<h2 id="org3378bba">Moving GPG keys privately</h2>
-<div class="outline-text-2" id="text-org3378bba">
+<div id="outline-container-orgee14570" class="outline-2">
+<h2 id="orgee14570">Moving GPG keys privately</h2>
+<div class="outline-text-2" id="text-orgee14570">
 <p>
 This method allows you to very easily move you key from one computer
 to another. It does require you to have ssh access to that computer.
@@ -338,9 +338,9 @@ If you’re on the machine that needs the key:
 </div>
 </div>
 
-<div id="outline-container-orgdb8fb09" class="outline-2">
-<h2 id="orgdb8fb09">Sources</h2>
-<div class="outline-text-2" id="text-orgdb8fb09">
+<div id="outline-container-org50d6e88" class="outline-2">
+<h2 id="org50d6e88">Sources</h2>
+<div class="outline-text-2" id="text-org50d6e88">
 <ul class="org-ul">
 <li><a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html">https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html</a></li>
 <li><a href="https://wiki.archlinux.org/title/GnuPG#Key_maintenance">https://wiki.archlinux.org/title/GnuPG#Key_maintenance</a></li>
