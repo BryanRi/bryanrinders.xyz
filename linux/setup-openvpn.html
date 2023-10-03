@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Setup Openvpn</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/other-index.html'>Other</a>
+  <span class='right'>
+    <a href='/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Setup Openvpn</h1>
+
+<div id="outline-container-org720a003" class="outline-2">
+<h2 id="org720a003">Setup OpenVPN</h2>
+<div class="outline-text-2" id="text-org720a003">
+<p>
+On arch based distro's.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo pacman -S networkmanager <span class="org-sh-escaped-newline">\</span>
+     networkmanager-openvpn <span class="org-sh-escaped-newline">\</span>
+     network-manager-applet <span class="org-sh-escaped-newline">\</span>
+     openvpn <span class="org-sh-escaped-newline">\</span>
+     trayer
+</pre>
+</div>
+
+<p>
+Download the (science) openvpn configuration file, for me that is:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">wget https://gitlab.science.ru.nl/cncz/openvpn/raw/master/openvpn-ca-science.ovpn
+</pre>
+</div>
+
+<p>
+Restart networkmanager, if you do not use <code>runit</code> as your init system
+then you'll most likely need to replace the command below with
+something like <code>sudo systemctl restart NetworkManager</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo sv restart NetworkManager
+</pre>
+</div>
+
+<p>
+Import the configuration:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">nmcli connection import type openvpn file openvpn-ca-science.ovpn
+</pre>
+</div>
+
+<p>
+Restart networkmanager again:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo sv restart NetworkManager
+</pre>
+</div>
+
+<p>
+Start trayer and nm-applet
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">setsid -f trayer
+setsid -f nm-applet
+</pre>
+</div>
+
+<p>
+Open the nm-applet and configure the vpn settings by adding your user
+name. Click save. Connect to vpn and enter password. Now you can
+remove <code>trayer</code> and <code>nm-applet</code> and you can activate the vpn with
+<code>nmtui</code>, where the vpn should be shown on the bottom.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">pacman -Rns network-manager-applet trayer
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
