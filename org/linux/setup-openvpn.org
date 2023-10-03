@@ -1,10 +1,10 @@
 #+TITLE: Setup Openvpn
 #+AUTHOR: Bryan Rinders
-#+DATE: <2023-04-28>
+#+DATE: <2023-10-03 Tue>
 #+OPTIONS: ^:{} toc:nil num:nil
 
-* Setup OpenVPN
-On arch based distro's.
+* Setup OpenVPN With Network Manager
+{{{date([%Y-%m-%d])}}} On arch based distro's.
 
 #+begin_src sh
   sudo pacman -S networkmanager \
