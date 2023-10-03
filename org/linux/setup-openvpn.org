@@ -1,0 +1,57 @@
+#+TITLE: Setup Openvpn
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-04-28>
+#+OPTIONS: ^:{} toc:nil num:nil
+
+* Setup OpenVPN
+On arch based distro's.
+
+#+begin_src sh
+  sudo pacman -S networkmanager \
+       networkmanager-openvpn \
+       network-manager-applet \
+       openvpn \
+       trayer
+#+end_src
+
+Download the (science) openvpn configuration file, for me that is:
+
+#+begin_src sh
+  wget https://gitlab.science.ru.nl/cncz/openvpn/raw/master/openvpn-ca-science.ovpn
+#+end_src
+
+Restart networkmanager, if you do not use =runit= as your init system
+then you'll most likely need to replace the command below with
+something like ~sudo systemctl restart NetworkManager~:
+
+#+begin_src sh
+  sudo sv restart NetworkManager
+#+end_src
+
+Import the configuration:
+
+#+begin_src sh
+  nmcli connection import type openvpn file openvpn-ca-science.ovpn
+#+end_src
+
+Restart networkmanager again:
+
+#+begin_src sh
+  sudo sv restart NetworkManager
+#+end_src
+
+Start trayer and nm-applet
+
+#+begin_src sh
+  setsid -f trayer
+  setsid -f nm-applet
+#+end_src
+
+Open the nm-applet and configure the vpn settings by adding your user
+name. Click save. Connect to vpn and enter password. Now you can
+remove =trayer= and =nm-applet= and you can activate the vpn with
+=nmtui=, where the vpn should be shown on the bottom.
+
+#+begin_src sh
+  pacman -Rns network-manager-applet trayer
+#+end_src
