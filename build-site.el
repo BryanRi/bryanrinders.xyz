@@ -152,7 +152,7 @@ specified return an empty string."
         :recursive             t
         :base-directory        (concat "./org/" id)
         :publishing-function   'org-html-publish-to-html
-        :publishing-directory  (concat "./website/" id)
+        :publishing-directory  (concat "./html/" id)
         :auto-sitemap          t
         :sitemap-filename      (concat id "-sitemap.org")
         :sitemap-title         ""
@@ -176,13 +176,13 @@ specified return an empty string."
               :base-directory       "./org/css"
               :base-extension       "css"
               :recursive            nil
-              :publishing-directory "./website/css"
+              :publishing-directory "./html/css"
               :publishing-function  'org-publish-attachment)
         (list "home"                ;; unique string that identifies the project/website
               :recursive            nil
               :base-directory       "./org"
               :publishing-function  'org-html-publish-to-html
-              :publishing-directory "./website"
+              :publishing-directory "./html"
               :with-author          nil         ;; Don't include author name
               :with-title           t
               :with-creator         t           ;; Include Emacs and Org versions in footer
