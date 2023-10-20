@@ -1,0 +1,266 @@
+#+TITLE: Getting Started With Guix Home
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-10-18 Wed>
+#+CATEGORY: Guix
+#+OPTIONS: num:t
+#+PROPERTY: header-args :results output :exports code :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+* Introduction
+{{{date([%Y-%m-%d])}}}
+
+[[https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html][Guix-home]] is part of the [[https://guix.gnu.org/manual/devel/en/html_node/index.html][guix]] package manager and allows you to
+configure your home environment (your dotfiles) in a declarative way.
+It provides you with all the benefits of guix, such as rolling back
+your configuration, but for your home environment. You also no longer
+need another program such as [[https://www.gnu.org/software/stow/manual/stow.html][gnu-stow]] or [[https://www.chezmoi.io/][chezmoi]] to manage you
+dotfiles and it works both on the guix system as well as on foreign
+distros.
+
+* Testing
+Once you have a config you can test it inside a throw away container
+with:
+
+#+begin_src sh
+  guix home container home-configuration.scm
+#+end_src
+
+And to apply it to your actual system run:
+
+#+begin_src sh
+  guix home reconfigure home-configuration.scm
+#+end_src
+
+* Shells
+If you already use guix as a package manager then letting guix-home
+configure your shell(s) will make your life easier as it automatically
+sets the proper environment variables and sources your guix profiles.
+The shells that can be configured with guix-home, at the time of
+writing, are ~zsh~, ~bash~ and ~fish~.
+
+A basic home configuration with ~bash~ looks like this:
+
+#+begin_src scheme
+  (use-modules
+   (gnu home)
+   (gnu home services shells)
+   (gnu services)
+   (guix gexp))
+
+  (home-environment
+   ;; (package (list package-name))
+   (services
+    (list (service home-bash-service-type
+                   (home-bash-configuration
+                    (guix-defaults? #f)
+                    (bashrc (list (local-file ".config/bash/bashrc")))
+                    (aliases '(("grep" . "grep --color=auto")
+                               (".."   . "cd ../")))
+                    (bash-profile (list (local-file ".config/bash/bash_profile"))))))))
+#+end_src
+
+The ~package~ definition is where you specify the package that should
+be include in your guix-home profile. I will not go into detail on it
+here.
+
+The ~(guix-defaults? #f)~ will make sure that only your configuration
+is included in the resulting =.bashrc= configuration. The main bashrc
+configuration is taken from a local file, =.config/bash/bashrc=
+(relative to the guix-home config file). Using ~(local-file...)~ is
+the easiest way to migrate to guix-home without having to rewrite all
+you dotfiles to guile scheme, it also allows you to edit the config
+file in the major mode specific to that file (if you use emacs). The
+aliases are defined explicitly and must be list of cons pairs where
+each cons pair consists of ~("alias_name" . "alias value")~, that will
+be written to =~/.bashrc= as
+
+#+begin_src sh
+  alias alias_name="alias_value"
+#+end_src
+
+Configurations for the other shells look very similar.
+
+* Environment Variables
+You can also define you environment variables inside you guix-home
+configuration. They will be system wide variables that are sourced
+from the =~/.profile= file.
+
+Just like the bash aliases, environent variables are defined in a list
+of cons pairs. A simple configuration will look like:
+
+#+begin_src scheme
+  (use-modules
+   ...
+   (gnu home services shells)
+   (gnu home services)
+   (gnu packages shells))
+
+  (home-environment
+   ...
+   (simple-service 'br/env-vars-service
+                   home-environment-variables-service-type
+                   `(("BROWSER" . "librewolf")
+                     ("EDITOR"  . "emacsclient --create-frame --alternate-editor=")
+                     ("SHELL"   . ,(file-append fish "/bin/fish")))))
+#+end_src
+
+~br/env-vars-service~ is just a placeholder and can be named whatever
+you like and the definitions of the environment variables follow the
+same idea as the bash aliases described above. One interesting part is
+the definition of =SHELL=; ~(file-append fish "/bin/fish")~ will
+expand to the new guix-home profile directory. That way you will
+always use the latest installed version of fish.
+
+* Channels
+If you use channels other than the default ones you can extend the
+~home-channels-service-type~ like this:
+
+#+begin_src scheme
+  (use-modules
+   ...
+   (gnu home services guix)
+   (guix channels))
+
+  (home-environment
+   ...
+   (simple-service 'br/home-channels-service
+                   home-channels-service-type
+                   (list
+                    (channel
+                     (name 'nonguix)
+                     (url "https://gitlab.com/nonguix/nonguix")
+                     ;; Enable signature verification:
+                     (introduction
+                      (make-channel-introduction
+                       "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+                       (openpgp-fingerprint
+                        "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5")))))))
+#+end_src
+
+The example adds the [[https://gitlab.com/nonguix/nonguix][nonguix]] channel to the list of channels.
+
+* Other Configuration Files
+To search for guix-home service types you can run
+
+#+begin_src sh
+  guix home search "home"
+#+end_src
+
+from the terminal, replace =home= with a key word that you are
+interested in to narrow down the search results. For all configuration
+files that do not have a specific service type and that reside inside
+=XDG_CONFIG_HOME= you can use the service type
+~home-xdg-configuration-files-service-type~.
+
+#+NAME: src_xdg_service
+#+begin_src scheme
+  (use-modules
+   ...
+   (gnu home services xdg))
+
+  (home-environment
+   ...
+   (service home-xdg-configuration-files-service-type
+            (map br/xdg-config-files-symlink-target
+                 '(
+                   "alacritty/alacritty.yml"
+                   "emacs/early-init.el"
+                   "emacs/init.el"
+                   ))))
+#+end_src
+
+To reduce the verbosity of the [[src_xdg_service][home-xdg-configation-files-service-type]]
+configuration, I created a function that expands every string in the
+given list to a cons pair of ~("SOURCE" . "TARGET")~, as can be seen
+above. The function is defined as:
+
+#+begin_src scheme
+  (define (br/xdg-config-files-symlink-target file)
+    ;; Create a list such that it can be used with
+    ;; 'home-xdg-configuration-files-service-type'.
+    (list file
+          (local-file (string-append
+                       (or (getenv "DOTFILE_DIR")
+                           (string-append (getenv "HOME")
+                                          "/.local/my-projects/dotfiles"))
+                       "/.config/" file))))
+#+end_src
+
+It assumes that you either have the environent variable =DOTFILE_DIR=
+set to where you dotfiles live or that you dotfiles live in
+=~/.local/my-projects/dotfiles=. It also assumes that the dofile
+directory has a =.config= directory that resembles =XDG_CONFIG_HOME=.
+
+* Combining Everything
+Combining all the above configurations will results in:
+
+#+begin_src scheme
+  (use-modules
+   (guix channels)
+   (gnu home)
+   (gnu home services guix)
+   (gnu home services shells)
+   (gnu home services xdg)
+   (gnu home services)
+   (gnu packages shells)
+   (gnu services)
+   (guix gexp)
+   )
+
+  (define (br/xdg-config-files-symlink-target file)
+    ;; Create a list such that it can be used with
+    ;; 'home-xdg-configuration-files-service-type'.
+    (list file
+          (local-file (string-append
+                       (or (getenv "DOTFILE_DIR")
+                           (string-append (getenv "HOME")
+                                          "/.local/my-projects/dotfiles"))
+                       "/.config/" file))))
+
+  (home-environment
+   ;; (package nil)
+   (services
+    (list (service home-bash-service-type
+                   (home-bash-configuration
+                    ;; the defaults are included in my bash/bashrc
+                    ;; without the aliases
+                    (guix-defaults? #f)
+                    (bashrc (list (local-file ".config/bash/bashrc")))
+                    ;; not all abbreviations make sense as aliases
+                    (aliases '(("grep" . "grep --color=auto")
+                               (".."   . "cd ../")))
+                    (bash-profile (list (local-file ".config/bash/bash_profile")))))
+          (simple-service 'br/env-vars-service
+                          home-environment-variables-service-type
+                          `(("BROWSER" . "librewolf")
+                            ("DMENU"   . "dmenu -i -p")
+                            ("EDITOR"  . "emacsclient --create-frame --alternate-editor=")
+                            ("SHELL"   . ,(file-append fish "/bin/fish"))))
+          (simple-service 'br/home-channels-service
+                          home-channels-service-type
+
+                          (list
+                           (channel
+                            (name 'nonguix)
+                            (url "https://gitlab.com/nonguix/nonguix")
+                            ;; Enable signature verification:
+                            (introduction
+                             (make-channel-introduction
+                              "897c1a470da759236cc11798f4e0a5f7d4d59fbc"
+                              (openpgp-fingerprint
+                               "2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"))))))
+          (service home-xdg-configuration-files-service-type
+                   (map br/xdg-config-files-symlink-target
+                        '(
+                          "alacritty/alacritty.yml"
+                          "emacs/early-init.el"
+                          "emacs/init.el"
+                          ))))))
+#+end_src
+
+You should store this configuration in =home-configuration.scm= at the
+root of your dotfile directory.
+
+* Sources
+- The guix home manual:
+  [[https://guix.gnu.org/manual/en/html_node/Home-Configuration.html]]
