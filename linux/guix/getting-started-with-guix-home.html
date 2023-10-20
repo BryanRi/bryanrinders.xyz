@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Getting Started With Guix Home</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/other-index.html'>Other</a>
+  <span class='right'>
+    <a href='/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Getting Started With Guix Home</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgc116dc9">1. Introduction</a></li>
+<li><a href="#org3bdefe8">2. Testing</a></li>
+<li><a href="#org61daf0c">3. Shells</a></li>
+<li><a href="#orgad6a6d5">4. Environment Variables</a></li>
+<li><a href="#org715b280">5. Channels</a></li>
+<li><a href="#orgbead419">6. Other Configuration Files</a></li>
+<li><a href="#org68e2989">7. Combining Everything</a></li>
+<li><a href="#orgf22b96a">8. Sources</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc116dc9" class="outline-2">
+<h2 id="orgc116dc9"><span class="section-number-2">1</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2023-10-18 Wed]</span></span>
+</p>
+
+<p>
+<a href="https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html">Guix-home</a> is part of the <a href="https://guix.gnu.org/manual/devel/en/html_node/index.html">guix</a> package manager and allows you to
+configure your home environment (your dotfiles) in a declarative way.
+It provides you with all the benefits of guix, such as rolling back
+your configuration, but for your home environment. You also no longer
+need another program such as <a href="https://www.gnu.org/software/stow/manual/stow.html">gnu-stow</a> or <a href="https://www.chezmoi.io/">chezmoi</a> to manage you
+dotfiles and it works both on the guix system as well as on foreign
+distros.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3bdefe8" class="outline-2">
+<h2 id="org3bdefe8"><span class="section-number-2">2</span> Testing</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+Once you have a config you can test it inside a throw away container
+with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">guix home container home-configuration.scm
+</pre>
+</div>
+
+<p>
+And to apply it to your actual system run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">guix home reconfigure home-configuration.scm
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org61daf0c" class="outline-2">
+<h2 id="org61daf0c"><span class="section-number-2">3</span> Shells</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+If you already use guix as a package manager then letting guix-home
+configure your shell(s) will make your life easier as it automatically
+sets the proper environment variables and sources your guix profiles.
+The shells that can be configured with guix-home, at the time of
+writing, are <code>zsh</code>, <code>bash</code> and <code>fish</code>.
+</p>
+
+<p>
+A basic home configuration with <code>bash</code> looks like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(use-modules
+ (gnu home)
+ (gnu home services shells)
+ (gnu services)
+ (guix gexp))
+
+(home-environment
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">(package (list package-name))</span>
+ (services
+  (list (service home-bash-service-type
+                 (home-bash-configuration
+                  (guix-defaults? #f)
+                  (bashrc (list (local-file <span class="org-string">".config/bash/bashrc"</span>)))
+                  (aliases '((<span class="org-string">"grep"</span> . <span class="org-string">"grep --color=auto"</span>)
+                             (<span class="org-string">".."</span>   . <span class="org-string">"cd ../"</span>)))
+                  (bash-profile (list (local-file <span class="org-string">".config/bash/bash_profile"</span>))))))))
+</pre>
+</div>
+
+<p>
+The <code>package</code> definition is where you specify the package that should
+be include in your guix-home profile. I will not go into detail on it
+here.
+</p>
+
+<p>
+The <code>(guix-defaults? #f)</code> will make sure that only your configuration
+is included in the resulting <code>.bashrc</code> configuration. The main bashrc
+configuration is taken from a local file, <code>.config/bash/bashrc</code>
+(relative to the guix-home config file). Using <code>(local-file...)</code> is
+the easiest way to migrate to guix-home without having to rewrite all
+you dotfiles to guile scheme, it also allows you to edit the config
+file in the major mode specific to that file (if you use emacs). The
+aliases are defined explicitly and must be list of cons pairs where
+each cons pair consists of <code>("alias_name" . "alias value")</code>, that will
+be written to <code>~/.bashrc</code> as
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">alias <span class="org-variable-name">alias_name</span>=<span class="org-string">"alias_value"</span>
+</pre>
+</div>
+
+<p>
+Configurations for the other shells look very similar.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgad6a6d5" class="outline-2">
+<h2 id="orgad6a6d5"><span class="section-number-2">4</span> Environment Variables</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+You can also define you environment variables inside you guix-home
+configuration. They will be system wide variables that are sourced
+from the <code>~/.profile</code> file.
+</p>
+
+<p>
+Just like the bash aliases, environent variables are defined in a list
+of cons pairs. A simple configuration will look like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(use-modules
+ ...
+ (gnu home services shells)
+ (gnu home services)
+ (gnu packages shells))
+
+(home-environment
+ ...
+ (simple-service 'br/env-vars-service
+                 home-environment-variables-service-type
+                 `((<span class="org-string">"BROWSER"</span> . <span class="org-string">"librewolf"</span>)
+                   (<span class="org-string">"EDITOR"</span>  . <span class="org-string">"emacsclient --create-frame --alternate-editor="</span>)
+                   (<span class="org-string">"SHELL"</span>   . ,(file-append fish <span class="org-string">"/bin/fish"</span>)))))
+</pre>
+</div>
+
+<p>
+<code>br/env-vars-service</code> is just a placeholder and can be named whatever
+you like and the definitions of the environment variables follow the
+same idea as the bash aliases described above. One interesting part is
+the definition of <code>SHELL</code>; <code>(file-append fish "/bin/fish")</code> will
+expand to the new guix-home profile directory. That way you will
+always use the latest installed version of fish.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org715b280" class="outline-2">
+<h2 id="org715b280"><span class="section-number-2">5</span> Channels</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+If you use channels other than the default ones you can extend the
+<code>home-channels-service-type</code> like this:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(use-modules
+ ...
+ (gnu home services guix)
+ (guix channels))
+
+(home-environment
+ ...
+ (simple-service 'br/home-channels-service
+                 home-channels-service-type
+                 (list
+                  (channel
+                   (name 'nonguix)
+                   (url <span class="org-string">"https://gitlab.com/nonguix/nonguix"</span>)
+                   <span class="org-comment-delimiter">;; </span><span class="org-comment">Enable signature verification:</span>
+                   (introduction
+                    (make-channel-introduction
+                     <span class="org-string">"897c1a470da759236cc11798f4e0a5f7d4d59fbc"</span>
+                     (openpgp-fingerprint
+                      <span class="org-string">"2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"</span>)))))))
+</pre>
+</div>
+
+<p>
+The example adds the <a href="https://gitlab.com/nonguix/nonguix">nonguix</a> channel to the list of channels.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgbead419" class="outline-2">
+<h2 id="orgbead419"><span class="section-number-2">6</span> Other Configuration Files</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+To search for guix-home service types you can run
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">guix home search <span class="org-string">"home"</span>
+</pre>
+</div>
+
+<p>
+from the terminal, replace <code>home</code> with a key word that you are
+interested in to narrow down the search results. For all configuration
+files that do not have a specific service type and that reside inside
+<code>XDG_CONFIG_HOME</code> you can use the service type
+<code>home-xdg-configuration-files-service-type</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme" id="org9d032c6">(use-modules
+ ...
+ (gnu home services xdg))
+
+(home-environment
+ ...
+ (service home-xdg-configuration-files-service-type
+          (<span class="org-keyword">map</span> br/xdg-config-files-symlink-target
+               '(
+                 <span class="org-string">"alacritty/alacritty.yml"</span>
+                 <span class="org-string">"emacs/early-init.el"</span>
+                 <span class="org-string">"emacs/init.el"</span>
+                 ))))
+</pre>
+</div>
+
+<p>
+To reduce the verbosity of the <a href="#org9d032c6">home-xdg-configation-files-service-type</a>
+configuration, I created a function that expands every string in the
+given list to a cons pair of <code>("SOURCE" . "TARGET")</code>, as can be seen
+above. The function is defined as:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(<span class="org-keyword">define</span> (<span class="org-function-name">br/xdg-config-files-symlink-target</span> file)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Create a list such that it can be used with</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">'home-xdg-configuration-files-service-type'.</span>
+  (list file
+        (local-file (string-append
+                     (<span class="org-keyword">or</span> (getenv <span class="org-string">"DOTFILE_DIR"</span>)
+                         (string-append (getenv <span class="org-string">"HOME"</span>)
+                                        <span class="org-string">"/.local/my-projects/dotfiles"</span>))
+                     <span class="org-string">"/.config/"</span> file))))
+</pre>
+</div>
+
+<p>
+It assumes that you either have the environent variable <code>DOTFILE_DIR</code>
+set to where you dotfiles live or that you dotfiles live in
+<code>~/.local/my-projects/dotfiles</code>. It also assumes that the dofile
+directory has a <code>.config</code> directory that resembles <code>XDG_CONFIG_HOME</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org68e2989" class="outline-2">
+<h2 id="org68e2989"><span class="section-number-2">7</span> Combining Everything</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Combining all the above configurations will results in:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-scheme">(use-modules
+ (guix channels)
+ (gnu home)
+ (gnu home services guix)
+ (gnu home services shells)
+ (gnu home services xdg)
+ (gnu home services)
+ (gnu packages shells)
+ (gnu services)
+ (guix gexp)
+ )
+
+(<span class="org-keyword">define</span> (<span class="org-function-name">br/xdg-config-files-symlink-target</span> file)
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">Create a list such that it can be used with</span>
+  <span class="org-comment-delimiter">;; </span><span class="org-comment">'home-xdg-configuration-files-service-type'.</span>
+  (list file
+        (local-file (string-append
+                     (<span class="org-keyword">or</span> (getenv <span class="org-string">"DOTFILE_DIR"</span>)
+                         (string-append (getenv <span class="org-string">"HOME"</span>)
+                                        <span class="org-string">"/.local/my-projects/dotfiles"</span>))
+                     <span class="org-string">"/.config/"</span> file))))
+
+(home-environment
+ <span class="org-comment-delimiter">;; </span><span class="org-comment">(package nil)</span>
+ (services
+  (list (service home-bash-service-type
+                 (home-bash-configuration
+                  <span class="org-comment-delimiter">;; </span><span class="org-comment">the defaults are included in my bash/bashrc</span>
+                  <span class="org-comment-delimiter">;; </span><span class="org-comment">without the aliases</span>
+                  (guix-defaults? #f)
+                  (bashrc (list (local-file <span class="org-string">".config/bash/bashrc"</span>)))
+                  <span class="org-comment-delimiter">;; </span><span class="org-comment">not all abbreviations make sense as aliases</span>
+                  (aliases '((<span class="org-string">"grep"</span> . <span class="org-string">"grep --color=auto"</span>)
+                             (<span class="org-string">".."</span>   . <span class="org-string">"cd ../"</span>)))
+                  (bash-profile (list (local-file <span class="org-string">".config/bash/bash_profile"</span>)))))
+        (simple-service 'br/env-vars-service
+                        home-environment-variables-service-type
+                        `((<span class="org-string">"BROWSER"</span> . <span class="org-string">"librewolf"</span>)
+                          (<span class="org-string">"DMENU"</span>   . <span class="org-string">"dmenu -i -p"</span>)
+                          (<span class="org-string">"EDITOR"</span>  . <span class="org-string">"emacsclient --create-frame --alternate-editor="</span>)
+                          (<span class="org-string">"SHELL"</span>   . ,(file-append fish <span class="org-string">"/bin/fish"</span>))))
+        (simple-service 'br/home-channels-service
+                        home-channels-service-type
+
+                        (list
+                         (channel
+                          (name 'nonguix)
+                          (url <span class="org-string">"https://gitlab.com/nonguix/nonguix"</span>)
+                          <span class="org-comment-delimiter">;; </span><span class="org-comment">Enable signature verification:</span>
+                          (introduction
+                           (make-channel-introduction
+                            <span class="org-string">"897c1a470da759236cc11798f4e0a5f7d4d59fbc"</span>
+                            (openpgp-fingerprint
+                             <span class="org-string">"2A39 3FFF 68F4 EF7A 3D29  12AF 6F51 20A0 22FB B2D5"</span>))))))
+        (service home-xdg-configuration-files-service-type
+                 (<span class="org-keyword">map</span> br/xdg-config-files-symlink-target
+                      '(
+                        <span class="org-string">"alacritty/alacritty.yml"</span>
+                        <span class="org-string">"emacs/early-init.el"</span>
+                        <span class="org-string">"emacs/init.el"</span>
+                        ))))))
+</pre>
+</div>
+
+<p>
+You should store this configuration in <code>home-configuration.scm</code> at the
+root of your dotfile directory.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf22b96a" class="outline-2">
+<h2 id="orgf22b96a"><span class="section-number-2">8</span> Sources</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>The guix home manual:
+<a href="https://guix.gnu.org/manual/en/html_node/Home-Configuration.html">https://guix.gnu.org/manual/en/html_node/Home-Configuration.html</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
