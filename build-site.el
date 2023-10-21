@@ -62,7 +62,13 @@
 
 (defvar footer
   (concat (format
-       "<br><hr/>
+           "<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
+  .
+</div>
+<br><hr/>
 <footer>
   <div class='copyright-container'>
     <div class='copyright'>
