@@ -32,21 +32,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc116dc9">1. Introduction</a></li>
-<li><a href="#org3bdefe8">2. Testing</a></li>
-<li><a href="#org61daf0c">3. Shells</a></li>
-<li><a href="#orgad6a6d5">4. Environment Variables</a></li>
-<li><a href="#org715b280">5. Channels</a></li>
-<li><a href="#orgbead419">6. Other Configuration Files</a></li>
-<li><a href="#org68e2989">7. Combining Everything</a></li>
-<li><a href="#orgf22b96a">8. Sources</a></li>
+<li><a href="#Introduction">1. Introduction</a></li>
+<li><a href="#Testing">2. Testing</a></li>
+<li><a href="#Shells">3. Shells</a></li>
+<li><a href="#Environment-Variables">4. Environment Variables</a></li>
+<li><a href="#Channels">5. Channels</a></li>
+<li><a href="#Other-Configuration-Files">6. Other Configuration Files</a></li>
+<li><a href="#Combining-Everything">7. Combining Everything</a></li>
+<li><a href="#Sources">8. Sources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc116dc9" class="outline-2">
-<h2 id="orgc116dc9"><span class="section-number-2">1</span> Introduction</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org045afa8" class="outline-2">
+<h2 id="Introduction"><span class="section-number-2">1</span> <a href="#Introduction">Introduction</a></h2>
+<div class="outline-text-2" id="text-Introduction">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">[2023-10-18 Wed]</span></span>
 </p>
@@ -63,9 +63,9 @@ distros.
 </div>
 </div>
 
-<div id="outline-container-org3bdefe8" class="outline-2">
-<h2 id="org3bdefe8"><span class="section-number-2">2</span> Testing</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org2fd4ff9" class="outline-2">
+<h2 id="Testing"><span class="section-number-2">2</span> <a href="#Testing">Testing</a></h2>
+<div class="outline-text-2" id="text-Testing">
 <p>
 Once you have a config you can test it inside a throw away container
 with:
@@ -87,9 +87,9 @@ And to apply it to your actual system run:
 </div>
 </div>
 
-<div id="outline-container-org61daf0c" class="outline-2">
-<h2 id="org61daf0c"><span class="section-number-2">3</span> Shells</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-org19f9bfb" class="outline-2">
+<h2 id="Shells"><span class="section-number-2">3</span> <a href="#Shells">Shells</a></h2>
+<div class="outline-text-2" id="text-Shells">
 <p>
 If you already use guix as a package manager then letting guix-home
 configure your shell(s) will make your life easier as it automatically
@@ -152,9 +152,9 @@ Configurations for the other shells look very similar.
 </div>
 </div>
 
-<div id="outline-container-orgad6a6d5" class="outline-2">
-<h2 id="orgad6a6d5"><span class="section-number-2">4</span> Environment Variables</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org06b3a4a" class="outline-2">
+<h2 id="Environment-Variables"><span class="section-number-2">4</span> <a href="#Environment-Variables">Environment Variables</a></h2>
+<div class="outline-text-2" id="text-Environment-Variables">
 <p>
 You can also define you environment variables inside you guix-home
 configuration. They will be system wide variables that are sourced
@@ -194,9 +194,9 @@ always use the latest installed version of fish.
 </div>
 </div>
 
-<div id="outline-container-org715b280" class="outline-2">
-<h2 id="org715b280"><span class="section-number-2">5</span> Channels</h2>
-<div class="outline-text-2" id="text-5">
+<div id="outline-container-org4d4f5b3" class="outline-2">
+<h2 id="Channels"><span class="section-number-2">5</span> <a href="#Channels">Channels</a></h2>
+<div class="outline-text-2" id="text-Channels">
 <p>
 If you use channels other than the default ones you can extend the
 <code>home-channels-service-type</code> like this:
@@ -231,9 +231,9 @@ The example adds the <a href="https://gitlab.com/nonguix/nonguix">nonguix</a> ch
 </div>
 </div>
 
-<div id="outline-container-orgbead419" class="outline-2">
-<h2 id="orgbead419"><span class="section-number-2">6</span> Other Configuration Files</h2>
-<div class="outline-text-2" id="text-6">
+<div id="outline-container-org7df8baf" class="outline-2">
+<h2 id="Other-Configuration-Files"><span class="section-number-2">6</span> <a href="#Other-Configuration-Files">Other Configuration Files</a></h2>
+<div class="outline-text-2" id="text-Other-Configuration-Files">
 <p>
 To search for guix-home service types you can run
 </p>
@@ -252,7 +252,7 @@ files that do not have a specific service type and that reside inside
 </p>
 
 <div class="org-src-container">
-<pre class="src src-scheme" id="org9d032c6">(use-modules
+<pre class="src src-scheme" id="orgfb193bf">(use-modules
  ...
  (gnu home services xdg))
 
@@ -269,7 +269,7 @@ files that do not have a specific service type and that reside inside
 </div>
 
 <p>
-To reduce the verbosity of the <a href="#org9d032c6">home-xdg-configation-files-service-type</a>
+To reduce the verbosity of the <a href="#orgfb193bf">home-xdg-configation-files-service-type</a>
 configuration, I created a function that expands every string in the
 given list to a cons pair of <code>("SOURCE" . "TARGET")</code>, as can be seen
 above. The function is defined as:
@@ -297,9 +297,9 @@ directory has a <code>.config</code> directory that resembles <code>XDG_CONFIG_H
 </div>
 </div>
 
-<div id="outline-container-org68e2989" class="outline-2">
-<h2 id="org68e2989"><span class="section-number-2">7</span> Combining Everything</h2>
-<div class="outline-text-2" id="text-7">
+<div id="outline-container-org0d45b6b" class="outline-2">
+<h2 id="Combining-Everything"><span class="section-number-2">7</span> <a href="#Combining-Everything">Combining Everything</a></h2>
+<div class="outline-text-2" id="text-Combining-Everything">
 <p>
 Combining all the above configurations will results in:
 </p>
@@ -376,9 +376,9 @@ root of your dotfile directory.
 </div>
 </div>
 
-<div id="outline-container-orgf22b96a" class="outline-2">
-<h2 id="orgf22b96a"><span class="section-number-2">8</span> Sources</h2>
-<div class="outline-text-2" id="text-8">
+<div id="outline-container-orgb63d798" class="outline-2">
+<h2 id="Sources"><span class="section-number-2">8</span> <a href="#Sources">Sources</a></h2>
+<div class="outline-text-2" id="text-Sources">
 <ul class="org-ul">
 <li>The guix home manual:
 <a href="https://guix.gnu.org/manual/en/html_node/Home-Configuration.html">https://guix.gnu.org/manual/en/html_node/Home-Configuration.html</a></li>
@@ -387,6 +387,12 @@ root of your dotfile directory.
 </div>
 </div>
 <div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
+  .
+</div>
 <br><hr/>
 <footer>
   <div class='copyright-container'>

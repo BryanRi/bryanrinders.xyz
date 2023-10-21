@@ -35,12 +35,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8584991">Backup</a></li>
-<li><a href="#orga891deb">Restore</a></li>
-<li><a href="#org350a81f">Script</a></li>
-<li><a href="#orgb4fdf90">Just Backing Up Your Private Keys</a></li>
-<li><a href="#orga3ff9ec">Moving GPG keys privately</a></li>
-<li><a href="#orgefae1b0">Sources</a></li>
+<li><a href="#Backup">Backup</a></li>
+<li><a href="#Restore">Restore</a></li>
+<li><a href="#Script">Script</a></li>
+<li><a href="#Just-Backing-Up-Your-Private-Keys">Just Backing Up Your Private Keys</a></li>
+<li><a href="#Moving-GPG-keys-privately">Moving GPG keys privately</a></li>
+<li><a href="#Sources">Sources</a></li>
 </ul>
 </div>
 </div>
@@ -48,12 +48,15 @@
 #+PROPERTY; header-args:sh :results output
 </p>
 
-<div id="outline-container-org8584991" class="outline-2">
-<h2 id="org8584991">Backup</h2>
-<div class="outline-text-2" id="text-org8584991">
+<div id="outline-container-org6f8b8dc" class="outline-2">
+<h2 id="Backup"><a href="#Backup">Backup</a></h2>
+<div class="outline-text-2" id="text-Backup">
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">[2023-08-28 Mon] </span></span> Get a list of all uid's with keys on you
-system:
+<span class="timestamp-wrapper"><span class="timestamp">[2023-08-28 Mon]</span></span>
+</p>
+
+<p>
+Get a list of all uid's with keys on you system:
 </p>
 
 <div class="org-src-container">
@@ -141,9 +144,9 @@ with your private key, etc:
 </div>
 </div>
 
-<div id="outline-container-orga891deb" class="outline-2">
-<h2 id="orga891deb">Restore</h2>
-<div class="outline-text-2" id="text-orga891deb">
+<div id="outline-container-org130a92c" class="outline-2">
+<h2 id="Restore"><a href="#Restore">Restore</a></h2>
+<div class="outline-text-2" id="text-Restore">
 <p>
 Decrypt the tarbal:
 </p>
@@ -185,9 +188,9 @@ and also copy <code>gnupg.conf</code> into your <code>gnupg</code> directory.
 </p>
 </div>
 
-<div id="outline-container-org259cf77" class="outline-3">
-<h3 id="org259cf77">Manually Setting The Trust Of Your Key</h3>
-<div class="outline-text-3" id="text-org259cf77">
+<div id="outline-container-org0ad7046" class="outline-3">
+<h3 id="Manually-Setting-The-Trust-Of-Your-Key"><a href="#Manually-Setting-The-Trust-Of-Your-Key">Manually Setting The Trust Of Your Key</a></h3>
+<div class="outline-text-3" id="text-Manually-Setting-The-Trust-Of-Your-Key">
 <div class="org-src-container">
 <pre class="src src-sh">gpg --edit-key your@id.here
 gpg&gt; trust
@@ -198,9 +201,9 @@ Your decision? 5
 </div>
 </div>
 
-<div id="outline-container-org350a81f" class="outline-2">
-<h2 id="org350a81f">Script</h2>
-<div class="outline-text-2" id="text-org350a81f">
+<div id="outline-container-orgc102aab" class="outline-2">
+<h2 id="Script"><a href="#Script">Script</a></h2>
+<div class="outline-text-2" id="text-Script">
 <p>
 Simple script to automate the backing up and restoring process.
 </p>
@@ -286,9 +289,9 @@ Simple script to automate the backing up and restoring process.
 </div>
 </div>
 
-<div id="outline-container-orgb4fdf90" class="outline-2">
-<h2 id="orgb4fdf90">Just Backing Up Your Private Keys</h2>
-<div class="outline-text-2" id="text-orgb4fdf90">
+<div id="outline-container-orga8f7448" class="outline-2">
+<h2 id="Just-Backing-Up-Your-Private-Keys"><a href="#Just-Backing-Up-Your-Private-Keys">Just Backing Up Your Private Keys</a></h2>
+<div class="outline-text-2" id="text-Just-Backing-Up-Your-Private-Keys">
 <p>
 Encrypting
 </p>
@@ -310,9 +313,9 @@ Decrypting
 </div>
 </div>
 
-<div id="outline-container-orga3ff9ec" class="outline-2">
-<h2 id="orga3ff9ec">Moving GPG keys privately</h2>
-<div class="outline-text-2" id="text-orga3ff9ec">
+<div id="outline-container-org7838f4e" class="outline-2">
+<h2 id="Moving-GPG-keys-privately"><a href="#Moving-GPG-keys-privately">Moving GPG keys privately</a></h2>
+<div class="outline-text-2" id="text-Moving-GPG-keys-privately">
 <p>
 This method allows you to very easily move you key from one computer
 to another. It does require you to have ssh access to that computer.
@@ -338,9 +341,9 @@ If you’re on the machine that needs the key:
 </div>
 </div>
 
-<div id="outline-container-orgefae1b0" class="outline-2">
-<h2 id="orgefae1b0">Sources</h2>
-<div class="outline-text-2" id="text-orgefae1b0">
+<div id="outline-container-orgc9b0e10" class="outline-2">
+<h2 id="Sources"><a href="#Sources">Sources</a></h2>
+<div class="outline-text-2" id="text-Sources">
 <ul class="org-ul">
 <li><a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html">https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html</a></li>
 <li><a href="https://wiki.archlinux.org/title/GnuPG#Key_maintenance">https://wiki.archlinux.org/title/GnuPG#Key_maintenance</a></li>
@@ -350,6 +353,12 @@ If you’re on the machine that needs the key:
 </div>
 </div>
 <div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
+  .
+</div>
 <br><hr/>
 <footer>
   <div class='copyright-container'>

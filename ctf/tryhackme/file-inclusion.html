@@ -32,29 +32,33 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0a0c47d">Intro</a></li>
-<li><a href="#orge884b68">Challenges</a></li>
+<li><a href="#Intro">Intro</a></li>
+<li><a href="#Challenges">Challenges</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org0a0c47d" class="outline-2">
-<h2 id="org0a0c47d">Intro</h2>
-<div class="outline-text-2" id="text-org0a0c47d">
+<div id="outline-container-orgea1c79b" class="outline-2">
+<h2 id="Intro"><a href="#Intro">Intro</a></h2>
+<div class="outline-text-2" id="text-Intro">
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">[2023-01-28 Sat] </span></span> This is a write up for the Challenges part of
-the TryHackMe room <a href="https://tryhackme.com/room/fileinc">File Inclusion</a>.
+<span class="timestamp-wrapper"><span class="timestamp">[2023-01-28 Sat]</span></span>
+</p>
+
+<p>
+This is a write up for the Challenges part of the TryHackMe room <a href="https://tryhackme.com/room/fileinc">File
+Inclusion</a>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orge884b68" class="outline-2">
-<h2 id="orge884b68">Challenges</h2>
-<div class="outline-text-2" id="text-orge884b68">
+<div id="outline-container-orgddcf4f1" class="outline-2">
+<h2 id="Challenges"><a href="#Challenges">Challenges</a></h2>
+<div class="outline-text-2" id="text-Challenges">
 </div>
-<div id="outline-container-orgd67fa1a" class="outline-3">
-<h3 id="orgd67fa1a">Flag 1</h3>
-<div class="outline-text-3" id="text-orgd67fa1a">
+<div id="outline-container-orgfab8666" class="outline-3">
+<h3 id="Flag-1"><a href="#Flag-1">Flag 1</a></h3>
+<div class="outline-text-3" id="text-Flag-1">
 <p>
 On the right hand side of Firefox open the <code>menu &gt; Web Developer &gt;
 Inspector</code>. In the html source code find the form tag and change the
@@ -64,9 +68,9 @@ in the form and press the include button. This should reveal the flag.
 </div>
 </div>
 
-<div id="outline-container-orgb3ced55" class="outline-3">
-<h3 id="orgb3ced55">Flag 2</h3>
-<div class="outline-text-3" id="text-orgb3ced55">
+<div id="outline-container-org38c472e" class="outline-3">
+<h3 id="Flag-2"><a href="#Flag-2">Flag 2</a></h3>
+<div class="outline-text-3" id="text-Flag-2">
 <p>
 From the hint it is clear that we have to edit the cookie to find the
 flag. To inspect the cookie run:
@@ -106,9 +110,9 @@ Locate the flag at the end of the file <code>flag2.txt</code>.
 </div>
 </div>
 
-<div id="outline-container-orga51a14e" class="outline-3">
-<h3 id="orga51a14e">Flag 3</h3>
-<div class="outline-text-3" id="text-orga51a14e">
+<div id="outline-container-orge232bf9" class="outline-3">
+<h3 id="Flag-3"><a href="#Flag-3">Flag 3</a></h3>
+<div class="outline-text-3" id="text-Flag-3">
 <p>
 The url input is filtered, everything that is not a-z is filtered
 out. To get around this change the method from get to <code>GET</code> to <code>POST</code>
@@ -128,9 +132,9 @@ Locate the flag at the end of the file <code>flag3.txt</code>.
 </div>
 </div>
 
-<div id="outline-container-org4e4caee" class="outline-3">
-<h3 id="org4e4caee">Playground</h3>
-<div class="outline-text-3" id="text-org4e4caee">
+<div id="outline-container-org37b01a0" class="outline-3">
+<h3 id="Playground"><a href="#Playground">Playground</a></h3>
+<div class="outline-text-3" id="text-Playground">
 <p>
 Since this is a RFI exercise we first need to create a <code>.php</code> file
 that will execute the command we want, <code>hostname</code>.
@@ -170,6 +174,12 @@ defaults to 8000 but can be different.
 </div>
 </div>
 <div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
+  .
+</div>
 <br><hr/>
 <footer>
   <div class='copyright-container'>

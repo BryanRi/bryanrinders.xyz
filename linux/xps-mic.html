@@ -32,19 +32,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9dbbe71">Fix Microphone On XPS 9700</a></li>
-<li><a href="#org5d002cc">Noise Cancelation</a></li>
-<li><a href="#org4893127">Sources</a></li>
+<li><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></li>
+<li><a href="#Noise-Cancelation">Noise Cancelation</a></li>
+<li><a href="#Sources">Sources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9dbbe71" class="outline-2">
-<h2 id="org9dbbe71">Fix Microphone On XPS 9700</h2>
-<div class="outline-text-2" id="text-org9dbbe71">
+<div id="outline-container-org82d7cc8" class="outline-2">
+<h2 id="Fix-Microphone-On-XPS-9700"><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></h2>
+<div class="outline-text-2" id="text-Fix-Microphone-On-XPS-9700">
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">[2023-09-10 Sun] </span></span> I fixed the Issue by switching the rt715 ADC 24
-Mux selector in <code>alsamixer</code> to DMIC3.
+<span class="timestamp-wrapper"><span class="timestamp">[2023-09-10 Sun]</span></span>
+</p>
+
+<p>
+I fixed the Issue by switching the rt715 ADC 24 Mux selector in
+<code>alsamixer</code> to DMIC3.
 </p>
 
 <p>
@@ -63,9 +67,9 @@ alsactl restore -f ~/.config/alsa/asound.state
 </div>
 </div>
 
-<div id="outline-container-org5d002cc" class="outline-2">
-<h2 id="org5d002cc">Noise Cancelation</h2>
-<div class="outline-text-2" id="text-org5d002cc">
+<div id="outline-container-orgc9e402f" class="outline-2">
+<h2 id="Noise-Cancelation"><a href="#Noise-Cancelation">Noise Cancelation</a></h2>
+<div class="outline-text-2" id="text-Noise-Cancelation">
 <p>
 The commands below will create a new device which you can select with
 for example <code>pavucontrol</code>.
@@ -83,9 +87,9 @@ sudo cat &lt;&lt;EOT &gt;&gt; /etc/pulse/default.pa
 </div>
 </div>
 
-<div id="outline-container-org4893127" class="outline-2">
-<h2 id="org4893127">Sources</h2>
-<div class="outline-text-2" id="text-org4893127">
+<div id="outline-container-org5bce4c6" class="outline-2">
+<h2 id="Sources"><a href="#Sources">Sources</a></h2>
+<div class="outline-text-2" id="text-Sources">
 <ul class="org-ul">
 <li><a href="https://askubuntu.com/a/1362014">https://askubuntu.com/a/1362014</a></li>
 <li><a href="https://www.youtube.com/watch?v=lTodCeVAfpI">https://www.youtube.com/watch?v=lTodCeVAfpI</a></li>
@@ -94,6 +98,12 @@ sudo cat &lt;&lt;EOT &gt;&gt; /etc/pulse/default.pa
 </div>
 </div>
 <div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
+  .
+</div>
 <br><hr/>
 <footer>
   <div class='copyright-container'>
