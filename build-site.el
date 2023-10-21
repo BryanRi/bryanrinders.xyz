@@ -137,20 +137,22 @@ specified return an empty string."
 
 
 ;; Customize the HTML output
-(setq org-html-validation-link            nil   ;; Don't show validation link
-      org-html-head-include-scripts       nil   ;; Use our own scripts
-      org-html-head-include-default-style nil   ;; Use our own styles
-      org-src-fontify-natively            t
-      org-html-htmlize-output-type        'css  ;; use css for syntax highlighting code blocks
-      org-html-head                       html-head-css
-      org-export-with-sub-superscripts    '{}    ;; sub/superscripts must be surrounded with {}
-      )
+(setq
+ org-export-with-sub-superscripts    '{}    ;; sub/superscripts must be surrounded with {}
+ org-html-head                       html-head-css
+ org-html-head-include-default-style nil   ;; Use our own styles
+ org-html-head-include-scripts       nil   ;; Use our own scripts
+ org-html-htmlize-output-type        'css  ;; use css for syntax highlighting code blocks
+ org-html-validation-link            nil   ;; Don't show validation link
+ org-src-fontify-natively            t
+ )
 
 (defun br/define-website-component(id)
   "Create a list of all the settings for the website component ID."
   (list id
         :recursive             t
         :base-directory        (concat "./org/" id)
+        :base-extension        "org"
         :publishing-function   'org-html-publish-to-html
         :publishing-directory  (concat "./html/" id)
         :auto-sitemap          t
