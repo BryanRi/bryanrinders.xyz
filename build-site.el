@@ -143,6 +143,7 @@ specified return an empty string."
  org-html-head-include-default-style nil   ;; Use our own styles
  org-html-head-include-scripts       nil   ;; Use our own scripts
  org-html-htmlize-output-type        'css  ;; use css for syntax highlighting code blocks
+ org-html-self-link-headlines        t
  org-html-validation-link            nil   ;; Don't show validation link
  org-src-fontify-natively            t
  )
