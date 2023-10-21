@@ -183,6 +183,7 @@ specified return an empty string."
         (list "home"                ;; unique string that identifies the project/website
               :recursive            nil
               :base-directory       "./org"
+              :base-extension       "org"
               :publishing-function  'org-html-publish-to-html
               :publishing-directory "./html"
               :with-author          nil         ;; Don't include author name
