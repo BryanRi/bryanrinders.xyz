@@ -5,12 +5,19 @@
 #+PROPERTY: header-args :exports code :eval never-export
 
 * Intro
-{{{date([%Y-%m-%d])}}} With [[https://github.com/kmonad/kmonad][kmonad]] you no longer have to buy an
-expensive programable keyboard in order to remap every key on your
-keyboard. Kmonad allows you to remap keys, create layers, compose keys
-and more.
+:PROPERTIES:
+:CUSTOM_ID: Intro
+:END:
+{{{date([%Y-%m-%d])}}}
+
+With [[https://github.com/kmonad/kmonad][kmonad]] you no longer have to buy an expensive programable
+keyboard in order to remap every key on your keyboard. Kmonad allows
+you to remap keys, create layers, compose keys and more.
 
 * Post installation
+:PROPERTIES:
+:CUSTOM_ID: Post-installation
+:END:
 After you have installed =kmonad=, to prevent having to run =kmonad=
 with root priviledges run the following commands and then reboot your
 machine. See
@@ -37,6 +44,9 @@ for more info.
 #+end_src
 
 * Configuring
+:PROPERTIES:
+:CUSTOM_ID: Configuring
+:END:
 
 #+begin_src emacs-lisp
   (defcfg
@@ -182,4 +192,7 @@ for more info.
 #+end_src
 
 * COMMENT Other Sources
+:PROPERTIES:
+:CUSTOM_ID: Other-Sources
+:END:
 [[https://www.reddit.com/r/emacs/comments/oyzfz9/kmonad_and_the_power_of_infinite_leader_keys/][kmonad reddit]]

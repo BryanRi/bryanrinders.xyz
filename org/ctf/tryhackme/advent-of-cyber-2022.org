@@ -5,11 +5,22 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Introduction
-{{{date([%Y-%m-%d])}}} This is a write up for the 2022 version of
-TryHackMe's Advent Of Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
+:PROPERTIES:
+:CUSTOM_ID: Introduction
+:END:
+{{{date([%Y-%m-%d])}}}
+
+This is a write up for the 2022 version of TryHackMe's Advent Of
+Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
 
 * Day 1 Frameworks
+:PROPERTIES:
+:CUSTOM_ID: Day-1-Frameworks
+:END:
 ** Puzzle 1
+:PROPERTIES:
+:CUSTOM_ID: Day-1-Puzzle-1
+:END:
 1. Reconnaissance
 2. Weaponization
 3. Delivery
@@ -20,6 +31,9 @@ TryHackMe's Advent Of Cyber. Join the room [[https://tryhackme.com/room/adventof
 8. Command & Control
 
 ** Puzzle 2
+:PROPERTIES:
+:CUSTOM_ID: Day-1-Puzzle-2
+:END:
 1. Pivoting
 2. Discovery
 3. Priviledge Escalation
@@ -28,6 +42,9 @@ TryHackMe's Advent Of Cyber. Join the room [[https://tryhackme.com/room/adventof
 6. Lateral Movement
 
 ** Puzzle 3
+:PROPERTIES:
+:CUSTOM_ID: Day-1-Puzzle-3
+:END:
 1. Access
 2. Collection
 3. Exfiltration
@@ -35,6 +52,9 @@ TryHackMe's Advent Of Cyber. Join the room [[https://tryhackme.com/room/adventof
 5. Objectivication
 
 ** Answers
+:PROPERTIES:
+:CUSTOM_ID: Day-1-Answers
+:END:
 Who is the adversary that attacked Santa's network this year?
 
 #+begin_example
@@ -48,6 +68,9 @@ THM{IT'S A Y3T1 CHR1$TMA$}
 #+end_example
 
 * Day 2 Log Analysis
+:PROPERTIES:
+:CUSTOM_ID: Day-2-Log-Analysis
+:END:
 Use the ls command to list the files present in the current directory. How many log files are present?
 
 #+begin_src sh :export both :eval never-export
@@ -77,7 +100,7 @@ On what day was Santa's naughty and nice list stolen?
 
 November 18 2022 is a Friday.
 
-#+begin_src 
+#+begin_src
 Friday
 #+end_src
 
@@ -85,7 +108,7 @@ What is the IP address of the attacker?
 
 From the grep of the previous question the IP is:
 
-#+begin_src 
+#+begin_src
 10.10.249.191
 #+end_src
 
@@ -107,6 +130,9 @@ Look through the log files for the flag. The format of the flag is: THM{}
 : THM{STOLENSANTASLIST}
 
 * Day 3 OSINT
+:PROPERTIES:
+:CUSTOM_ID: Day-3-OSINT
+:END:
 What is the name of the Registrar for the domain santagift.shop?
 
 Go to [[https://who.is/whois/github.com]] and search for =santagift.shop=. The name of the registra is
@@ -171,7 +197,13 @@ s@nta2022
 #+end_example
 
 * Day 4 Scanning
+:PROPERTIES:
+:CUSTOM_ID: Day-4-Scanning
+:END:
 * Day 5 Brute Forcing
+:PROPERTIES:
+:CUSTOM_ID: Day-5-Brute-Forcing
+:END:
 Use Hydra to find the VNC password of the target with IP address
 *MACHINE_IP*. What is the password?
 
@@ -196,6 +228,9 @@ THM{I_SEE_YOUR_SCREEN}
 #+end_example
 
 * Day 6 Email Analysis
+:PROPERTIES:
+:CUSTOM_ID: Day-6-Email-Analysis
+:END:
 1. What is the email address of the sender?
 
 Open the =Urgent:.eml= with any text editor.
@@ -260,7 +295,7 @@ sha256sum Division_of_labour-Load_share_plan.doc
 Go to [[https://www.virustotal.com/gui/home/upload]] and search for the
 hash found in the previous question. Navigate to the behaviour tab and
 look for the Mitre section. The second tactic is:
-#+begin_src 
+#+begin_src
 defense evasion
 #+end_src
 
@@ -269,11 +304,14 @@ defense evasion
 
 Go to [[https://labs.inquest.net/]] and again search the hash found
 previously. Click the full page results. The sub-category is:
-#+begin_src 
+#+begin_src
 macro_hunter
 #+end_src
 
 * Day 7 Cyberchef
+:PROPERTIES:
+:CUSTOM_ID: Day-7-Cyberchef
+:END:
 Before answering any of the questions, open firefox and click the
 bookmark of cyberchef. Then go through all the 11 steps as explained
 in the intro.
@@ -311,3 +349,6 @@ THM_MYSTERY_FLAG
 #+end_example
 
 * Day 8 Smart Contracts
+:PROPERTIES:
+:CUSTOM_ID: Day-8-Smart-Contracts
+:END:

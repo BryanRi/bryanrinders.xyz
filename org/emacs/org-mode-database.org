@@ -5,13 +5,18 @@
 #+FILETAGS: :emacs:org-mode:database:
 
 * Create A Basic database With Org-mode
-{{{date([%Y-%m-%d])}}} Lets say you want to record all the books you
-have / want to read. The first solution for storing this kind of data
-is to use a spread sheet or other kind of tabular data format. And if
-you are reading this you probably use [[https://orgmode.org/][org-mode]], so you might think org
-tables are a good idea. However org tables are only really useful when
-they are small (less than 100 x 10; rows x columns); with big tables
-emacs starts to become noticeably slower.
+:PROPERTIES:
+:CUSTOM_ID: Create-A-Basic-database-With-Org-mode
+:END:
+{{{date([%Y-%m-%d])}}}
+
+Lets say you want to record all the books you have / want to read. The
+first solution for storing this kind of data is to use a spread sheet
+or other kind of tabular data format. And if you are reading this you
+probably use [[https://orgmode.org/][org-mode]], so you might think org tables are a good idea.
+However org tables are only really useful when they are small (less
+than 100 x 10; rows x columns); with big tables emacs starts to become
+noticeably slower.
 
 There is another alternative that also uses org-mode, which uses
 [[https://orgmode.org/manual/Properties-and-Columns.html][properties]]. Each top-level headline will represent a table and the
@@ -55,6 +60,9 @@ The properties drawer can be collapsed by pressing =TAB=, with the
 point on the =:PROPERTIES:= line, for a cleaner view.
 
 * Column View
+:PROPERTIES:
+:CUSTOM_ID: Column-View
+:END:
 With this setup you can now view the database in a tabular format with
 [[https://orgmode.org/manual/Column-View.html][column view]]. To start column view use ~org-columns~ or =C-c C-x C-c=.
 In this view you will see all the properties in a org table[fn:1]. To
@@ -77,6 +85,9 @@ settings are inherited by subtrees. For more costumization options of
 columns see [[https://orgmode.org/manual/Column-attributes.html][column attributes]].
 
 * Creating Relations
+:PROPERTIES:
+:CUSTOM_ID: Creating-Relations
+:END:
 In the example above we are currently reading /The Wheel Of Time/
 series, which contains 14 books plus some novellas. If we want to keep
 track of which books in the series we have read thus far we can create
@@ -115,6 +126,9 @@ property for those headlines instead. See [[https://orgmode.org/manual/Internal-
 this up.
 
 * Migrating From Org Tables
+:PROPERTIES:
+:CUSTOM_ID: Migrating-From-Org-Tables
+:END:
 If you already have an org table in which you store all the data you
 can use a ~query-replace-regexp~ like the one below to convert to a
 properties based database.
@@ -130,6 +144,9 @@ value back in to the output by refering to it in the second string
 with =\\n=, where =n= is the number of the column.
 
 * Footnotes
+:PROPERTIES:
+:CUSTOM_ID: Footnotes
+:END:
 
 [fn:1] Column view is just an overlay and can therefore not be
 exported or printed directly. If you need this functionality use

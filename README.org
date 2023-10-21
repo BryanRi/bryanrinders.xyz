@@ -5,13 +5,19 @@
 #+OPTIONS: ^:{} toc:nil num:nil
 
 * My Website
+:PROPERTIES:
+:CUSTOM_ID: My-Website
+:END:
 The source code for [[https://bryanrinders.xyz]]
 
 - Git repo Gitlab: [[https://gitlab.com/bryanrinders/bryanrinders.xyz]]
   + Mirrors:
     - Github: [[https://github.com/BryanRi/bryanrinders.xyz]]
 
-* TODO Wishlist [0/3]
+* TODO Wishlist [1/4]
+:PROPERTIES:
+:CUSTOM_ID: Wishlist-14
+:END:
 - [ ] Use CATEGORY to automatically make sub-sitemaps. This allows for
   dynamically increasing the number of sitemaps, and hence no need to
   add more and more components to the =org-publish-project-alist=.

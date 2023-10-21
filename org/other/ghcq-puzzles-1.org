@@ -3,6 +3,9 @@
 #+DATE: <2023-02-25 Sat>
 
 * 1-10
+:PROPERTIES:
+:CUSTOM_ID: 1-10
+:END:
 1. Anwser: Penguin
 2. The last words of the titles of the Star Trek/Wars movies
    Answer: Spock Sith
@@ -14,8 +17,8 @@
    (d) Tent
    Anwser: Ent connect these anwsers created by J.R.R. Tolkien in the
    fantasy series The Lord Of The Rings.
-5. 
+5.
 6. The first letter of the country names of the cities follow the
    order ABC... Country name starting with H is Hungary and the city
    is Budapest.
-7. 
+7.

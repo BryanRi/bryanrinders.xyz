@@ -7,12 +7,22 @@
 #+PROPERTY; header-args:sh :results output
 
 * TODO COMMENT Getting started with gnupg
+:PROPERTIES:
+:CUSTOM_ID: Getting-started-with-gnupg
+:END:
 
 * TODO COMMENT How to handle subkeys
+:PROPERTIES:
+:CUSTOM_ID: How-to-handle-subkeys
+:END:
 
 * Backup
-{{{date([%Y-%m-%d])}}} Get a list of all uid's with keys on you
-system:
+:PROPERTIES:
+:CUSTOM_ID: Backup
+:END:
+{{{date([%Y-%m-%d])}}}
+
+Get a list of all uid's with keys on you system:
 
 #+begin_src sh
   gpg --list-secret-keys
@@ -85,6 +95,9 @@ with your private key, etc:
 #+end_src
 
 * Restore
+:PROPERTIES:
+:CUSTOM_ID: Restore
+:END:
 Decrypt the tarbal:
 
 #+begin_src sh
@@ -112,6 +125,9 @@ Restore the trust database:
 and also copy =gnupg.conf= into your =gnupg= directory.
 
 ** Manually Setting The Trust Of Your Key
+:PROPERTIES:
+:CUSTOM_ID: Manually-Setting-The-Trust-Of-Your-Key
+:END:
 
 #+begin_src sh
   gpg --edit-key your@id.here
@@ -120,6 +136,9 @@ and also copy =gnupg.conf= into your =gnupg= directory.
 #+end_src
 
 * Script
+:PROPERTIES:
+:CUSTOM_ID: Script
+:END:
 Simple script to automate the backing up and restoring process.
 
 #+begin_src sh
@@ -201,6 +220,9 @@ exit
 #+end_src
 
 * Just Backing Up Your Private Keys
+:PROPERTIES:
+:CUSTOM_ID: Just-Backing-Up-Your-Private-Keys
+:END:
 Encrypting
 #+begin_src sh
   gpg --output pubkey.gpg --export SOMEKEYID \
@@ -215,6 +237,9 @@ Decrypting
 #+end_src
 
 * Moving GPG keys privately
+:PROPERTIES:
+:CUSTOM_ID: Moving-GPG-keys-privately
+:END:
 This method allows you to very easily move you key from one computer
 to another. It does require you to have ssh access to that computer.
 
@@ -231,6 +256,9 @@ If you’re on the machine that needs the key:
 #+end_src
 
 * Sources
+:PROPERTIES:
+:CUSTOM_ID: Sources
+:END:
 - https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html
 - https://wiki.archlinux.org/title/GnuPG#Key_maintenance
 - https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/

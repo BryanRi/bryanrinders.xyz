@@ -6,8 +6,13 @@
 #+PROPERTY: header-args:python :session *natas-python-session*
 
 * Fix Microphone On XPS 9700
-{{{date([%Y-%m-%d])}}} I fixed the Issue by switching the rt715 ADC 24
-Mux selector in ~alsamixer~ to DMIC3.
+:PROPERTIES:
+:CUSTOM_ID: Fix-Microphone-On-XPS-9700
+:END:
+{{{date([%Y-%m-%d])}}}
+
+I fixed the Issue by switching the rt715 ADC 24 Mux selector in
+~alsamixer~ to DMIC3.
 
 Save settings with ~sudo alsactl store~. After storing the settings
 you have to restore them on every boot up usinng ~alsactl restore~. To
@@ -21,6 +26,9 @@ command followed by a file path i.e.
 #+end_src
 
 * Noise Cancelation
+:PROPERTIES:
+:CUSTOM_ID: Noise-Cancelation
+:END:
 The commands below will create a new device which you can select with
 for example ~pavucontrol~.
 
@@ -34,5 +42,8 @@ for example ~pavucontrol~.
 #+end_src
 
 * Sources
+:PROPERTIES:
+:CUSTOM_ID: Sources
+:END:
 - [[https://askubuntu.com/a/1362014]]
 - [[https://www.youtube.com/watch?v=lTodCeVAfpI]]

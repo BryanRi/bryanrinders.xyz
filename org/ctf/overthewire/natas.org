@@ -6,17 +6,25 @@
 #+PROPERTY: header-args:python :session *natas-python-session*
 
 * Introduction
-{{{date([%Y-%m-%d])}}} This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war
-game Natas. To start a level visit the URL
-http://natasX.natas.labs.overthewire.org, and login with username:
-=natasX= and the password found in the previous level, where =X= is
-the level number.  All passwords for the next level are also stored in
-/etc/natas_webpass/natasX, where X is the number of the level.
+:PROPERTIES:
+:CUSTOM_ID: Introduction
+:END:
+{{{date([%Y-%m-%d])}}}
+
+This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Natas. To start a
+level visit the URL http://natasX.natas.labs.overthewire.org, and
+login with username: =natasX= and the password found in the previous
+level, where =X= is the level number. All passwords for the next level
+are also stored in /etc/natas_webpass/natasX, where X is the number of
+the level.
 
 In the scripts below =PASS_NATASX= is the password for level =X= as
 found in the previous level.
 
 * Level 0
+:PROPERTIES:
+:CUSTOM_ID: Level-0
+:END:
 View the source page and find the password:
 
 #+NAME: lvl0
@@ -36,6 +44,9 @@ View the source page and find the password:
 : g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
 
 * Level 1
+:PROPERTIES:
+:CUSTOM_ID: Level-1
+:END:
 View the source page by using a short cut key (for me =Ctrl+u=):
 
 #+NAME: lvl1
@@ -55,6 +66,9 @@ View the source page by using a short cut key (for me =Ctrl+u=):
 : h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
 
 * Level 2
+:PROPERTIES:
+:CUSTOM_ID: Level-2
+:END:
 Again view the source page. There is a line with a link to an image
 
 #+BEGIN_SRC
@@ -87,6 +101,9 @@ next level.
 : G6ctbMJ5Nb4cbFwhpMPSvxGHhQ7I6W8Q
 
 * Level 3
+:PROPERTIES:
+:CUSTOM_ID: Level-3
+:END:
 View the source and find the line
 
 #+BEGIN_SRC
@@ -115,6 +132,9 @@ curl -u natas3:"${PASS_NATAS3}" "http://natas3.natas.labs.overthewire.org/s3cr3t
 : tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
 
 * Level 4
+:PROPERTIES:
+:CUSTOM_ID: Level-4
+:END:
 NOTE: from level 4 and onwards the code snippets are written in
 =Python= unless otherwise specified.
 
@@ -187,6 +207,9 @@ Now the code that changes the referer to natas5:
 : Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD
 
 * Level 5
+:PROPERTIES:
+:CUSTOM_ID: Level-5
+:END:
 After logging in the web page shows:
 
 #+BEGIN_SRC
@@ -231,6 +254,9 @@ changed to =loggedin=1= then that should give access to the password.
 : fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR
 
 * Level 6
+:PROPERTIES:
+:CUSTOM_ID: Level-6
+:END:
 After logging in we are prompted to input a secret. The page source
 contains the line:
 
@@ -272,6 +298,9 @@ reveals the secret: =FOEIUWGHFEEUHOFUOIU=
 : jmxSiH3SP6Sonf8dv66ng8v1cIEdjXWr
 
 * Level 7
+:PROPERTIES:
+:CUSTOM_ID: Level-7
+:END:
 The source page says:
 
 #+BEGIN_SRC
@@ -301,6 +330,9 @@ print(r.text.split('\n')[-7])
 : a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
 
 * Level 8
+:PROPERTIES:
+:CUSTOM_ID: Level-8
+:END:
 The source page again has a link to:
 
 #+BEGIN_SRC
@@ -383,6 +415,9 @@ Now we can POST the =DECODED_SECRET:= src_sh[:var s=decoded_secret
 : Sda6t0vkOPkM8YeOZkAGVhFoaplvlJFd
 
 * Level 9
+:PROPERTIES:
+:CUSTOM_ID: Level-9
+:END:
 On the site there is a search box that searches for words. Trying out
 some words in the search box shows that it actual does find all words
 containing the searched string. Inspecting the source reveals this
@@ -416,6 +451,9 @@ for the next level.
 : D44EcsFkLxPIkAAKLosx8z3hxX1Z4MCE
 
 * Level 10
+:PROPERTIES:
+:CUSTOM_ID: Level-10
+:END:
 This level is similar to the previous level but it checks if there are
 "illegal" characters in the input.
 
@@ -447,7 +485,13 @@ print(re.findall('/etc/natas_webpass/natas11:(.*)', r.text)[0])
 : 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
 
 * Level 11
+:PROPERTIES:
+:CUSTOM_ID: Level-11
+:END:
 ** Intro
+:PROPERTIES:
+:CUSTOM_ID: Level-11-Intro
+:END:
 From the source code, these are the most important
 functions/variables:
 
@@ -482,6 +526,9 @@ the xor function) can be rewritten to solve for the key like
 ~plaintext = $defaultdata~ and ~ciphertext = cookie~.
 
 ** Get the cookie (cipher text)
+:PROPERTIES:
+:CUSTOM_ID: Get-the-cookie-(cipher-text)
+:END:
 So lets get a cookie:
 
 #+NAME: lvl11.1
@@ -539,6 +586,9 @@ decode it.
 : 306c3b242439382d383d3f23392a6a766920276e676c2a2b28212423396c726e687e787c7b7e786e36
 
 ** Get the plain text
+:PROPERTIES:
+:CUSTOM_ID: Get-the-plain-text
+:END:
 Now to get the plaintext that is used in the =xor_encrypt()= json
 encode the =defaultdata= first.
 
@@ -554,6 +604,9 @@ echo (json_encode($defaultdata));
 : {"showpassword":"no","bgcolor":"#ffffff"}
 
 ** Find the encryption key
+:PROPERTIES:
+:CUSTOM_ID: Find-the-encryption-key
+:END:
 Now use the plain and cipher text in a slightly rewritten
 =xor_encrypt()= to find the key.
 
@@ -588,6 +641,9 @@ There is a pattern in the key which means that the key that was used
 is the substring =qw8J=.
 
 ** Get the password for natas12
+:PROPERTIES:
+:CUSTOM_ID: Get-the-password-for-natas12
+:END:
 To get the password change the =showpassword= value from the array
 =$defaultdata= to "yes". Then encrypt the array with the key
 =qw8J=. This will result in the value that should be send as the
@@ -639,6 +695,9 @@ with the cookie attached. This will show the password for Natas 12.
 : EDXp0pS26wLKHZy1rDBPUZk0RKfLGIR3
 
 * Level 12
+:PROPERTIES:
+:CUSTOM_ID: Level-12
+:END:
 The webpage asks for .jpg files to be uploaded. After uploading a
 picture a link is given to the location, =upload/<randomstring>.jpg=,
 of the uploaded file. I tried a few path traversal attacks,
@@ -681,6 +740,9 @@ the password for natas13.
 : jmLTY0qiPZBbaKc9341cqPQZBJv7MQbY
 
 * Level 13
+:PROPERTIES:
+:CUSTOM_ID: Level-13
+:END:
 This level is similar to level 12 but it uses =exif_imagetype= to
 check if the file being uploaded is actually an image. It does this by
 checking the *magic number* at the beginning of the file. So if we can
@@ -723,6 +785,9 @@ similar to level 12. The /magic number/ is =\xFF\xD8\xFF\xE0=.
 : Lg96M10TdfaPyVBkJdjymbllQ5L6qdl1
 
 * Level 14
+:PROPERTIES:
+:CUSTOM_ID: Level-14
+:END:
 This level has a login form. The source code reveals the use of very
 simple sql queries, which means we could try some [[https://en.wikipedia.org/wiki/SQL_injection#Incorrectly_constructed_SQL_statements][sql injections]]. The
 very first try immediately worked, supplying ~" or 1=1 --~ for both
@@ -743,6 +808,9 @@ the username and the password.
 : AwWj0w5cvxrZiONgZ9J5stNVkmxdk39J
 
 * COMMENT Level 15
+:PROPERTIES:
+:CUSTOM_ID: Level-15
+:END:
 
 #+BEGIN_SRC python :var PASS_NATAS15=lvl14
   user, url = user_url(15)

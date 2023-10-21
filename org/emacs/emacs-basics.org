@@ -2,14 +2,18 @@
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-01-31 Tue 19:32>
 
-{{{date([%Y-%m-%d])}}} This is a summary of most of the Emacs key
-bindings that can be found in the Emacs tutorial. You can start the
-tutorial inside Emacs with =C-h t=. The tutorial covers the basics of
-movement, editing, window and buffer management and much more. The
-most important key binding to remember is =M-x=; to get access to all
-of Emacs' commands.
+{{{date([%Y-%m-%d])}}}
+
+This is a summary of most of the Emacs key bindings that can be found
+in the Emacs tutorial. You can start the tutorial inside Emacs with
+=C-h t=. The tutorial covers the basics of movement, editing, window
+and buffer management and much more. The most important key binding to
+remember is =M-x=; to get access to all of Emacs' commands.
 
 * Buffer movement
+:PROPERTIES:
+:CUSTOM_ID: Buffer-movement
+:END:
 
 | Key binding | Function            | Notes                                |
 |-------------+---------------------+--------------------------------------|
@@ -19,6 +23,9 @@ of Emacs' commands.
 |             |                     |                                      |
 
 * Cursor movement
+:PROPERTIES:
+:CUSTOM_ID: Cursor-movement
+:END:
 
 | Key binding | Function               | Notes                                        |
 |-------------+------------------------+----------------------------------------------|
@@ -39,6 +46,9 @@ of Emacs' commands.
 |             |                        |                                              |
 
 * Universal argument
+:PROPERTIES:
+:CUSTOM_ID: Universal-argument
+:END:
 To supply an emacs command a numeric argument, the repeat count or
 prefix argument, prefix it with =C-u= and then the digits before you
 type the command. Alternatively hold Meta will typing the digits. For
@@ -49,10 +59,16 @@ The universal argument also work on regular characters, e.g. =C-u 8 *=
 results in =********=.
 
 * Quit
+:PROPERTIES:
+:CUSTOM_ID: Quit
+:END:
 To quit in the middle of typing a key cord use =C-g=. It can also be
 used when Emacs stops responding.
 
 * Windows
+:PROPERTIES:
+:CUSTOM_ID: Windows
+:END:
 | Key binding | Function             | Notes                                         |
 |-------------+----------------------+-----------------------------------------------|
 | C-x 1       | delete-other-windows | delete all windows except the focussed window |
@@ -62,7 +78,13 @@ used when Emacs stops responding.
 | C-M-v       | scroll-other-window  | a negative prefix scrolls the other way C-u - |
 
 * Editing
+:PROPERTIES:
+:CUSTOM_ID: Editing
+:END:
 ** Killing, Deleting and Yanking
+:PROPERTIES:
+:CUSTOM_ID: Killing-Deleting-and-Yanking
+:END:
 | Key binding | Function           | Notes                                             |
 |-------------+--------------------+---------------------------------------------------|
 | <DEL>       | kill-backward-char | <DEL> := backspace                                |
@@ -78,6 +100,9 @@ used when Emacs stops responding.
 | M-y         | yank-pop           | search the kill ring by repeatedly pressing =M-y= |
 
 ** Undo-ing
+:PROPERTIES:
+:CUSTOM_ID: Undo-ing
+:END:
 =C-/=, =C-_= and =C-x u= can be used to undo. In order to redo
 (i.e. undo your undos) you must 'push' your undos to the
 undo-ring. You do this by pressing =C-g= (or any movement such as
@@ -88,6 +113,9 @@ your undos.
 | C-/, C-_, C-x u | undo     | undo any edit |
 
 * Files
+:PROPERTIES:
+:CUSTOM_ID: Files
+:END:
 | Key binding | Function    | Notes                   |
 |-------------+-------------+-------------------------|
 | C-x C-f     | find-file   | open a file for editing |
@@ -98,6 +126,9 @@ C-f= does not need to exist. Once you save the file, =C-x C-s= Emacs
 will create the file and directories if necessary.
 
 * Buffers
+:PROPERTIES:
+:CUSTOM_ID: Buffers
+:END:
 | Key binding | Function          | Notes                             |
 |-------------+-------------------+-----------------------------------|
 | C-x C-b     | list-buffers      | open a buffer listing all buffers |
@@ -105,19 +136,31 @@ will create the file and directories if necessary.
 | C-x s       | save-some-buffers | interactively save open buffers   |
 
 * Searching
+:PROPERTIES:
+:CUSTOM_ID: Searching
+:END:
 | Key binding | Function         | Notes                         |
 |-------------+------------------+-------------------------------|
 | C-s         | isearch-forward  | incrementally search forward  |
 | C-r         | isearch-backward | incrementally search backward |
 
 * Frames
+:PROPERTIES:
+:CUSTOM_ID: Frames
+:END:
 | Key binding | Function           | Notes               |
 |-------------+--------------------+---------------------|
 | C-x 5 2     | make-frame-command | creates a new frame |
 | C-x 5 0     | delete-frame       |                     |
 
 * COMMENT Recursive Editing
+:PROPERTIES:
+:CUSTOM_ID: Recursive-Editing
+:END:
 
 
 * COMMENT continue at line
+:PROPERTIES:
+:CUSTOM_ID: continue-at-line
+:END:
 Tutorial line 1016

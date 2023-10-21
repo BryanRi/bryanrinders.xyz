@@ -4,6 +4,9 @@
 #+OPTIONS: num:nil toc:nil title:nil
 
 * OverTheWire Writeups
+:PROPERTIES:
+:CUSTOM_ID: OverTheWire-Writeups
+:END:
 My write ups for the [[https://overthewire.org/wargames][overthewire.org]] war games. OverTheWire teaches
 basic *nix skill, web security and more.
 
@@ -11,4 +14,3 @@ basic *nix skill, web security and more.
 |-------------|
 | [[./bandit.org][Bandit]]      |
 | [[./natas.org][Natas]]       |
-

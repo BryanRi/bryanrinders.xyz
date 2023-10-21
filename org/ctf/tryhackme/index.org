@@ -4,11 +4,12 @@
 #+OPTIONS: num:nil toc:nil title:nil
 
 * TryHackMe Writeups
+:PROPERTIES:
+:CUSTOM_ID: TryHackMe-Writeups
+:END:
 My write ups for [[https://tryhackme.com][TryHackMe]] rooms and learning paths.
 
 | OverTheWire          |
 |----------------------|
 | [[./advent-of-cyber-2022.org][Advent Of Cyber 2022]] |
 | [[./file-inclusion.org][File Inclusion]]       |
-
-

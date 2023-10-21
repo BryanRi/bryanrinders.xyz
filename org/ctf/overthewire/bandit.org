@@ -5,9 +5,14 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Introduction
-{{{date([%Y-%m-%d])}}} This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war
-game Bandit. The password for each level is stored in a file named
-banditX.txt where X is the level number. Then use
+:PROPERTIES:
+:CUSTOM_ID: Introduction
+:END:
+{{{date([%Y-%m-%d])}}}
+
+This is a writeup for the [[https://overthewire.org/wargames/][overthewire.org]] war game Bandit. The
+password for each level is stored in a file named banditX.txt where X
+is the level number. Then use
 
 #+BEGIN_SRC sh
 
@@ -19,6 +24,9 @@ to connect to the server without having to manually type the password
 for each level.
 
 * COMMENT testing stuff
+:PROPERTIES:
+:CUSTOM_ID: testing-stuff
+:END:
 
 #+BEGIN_SRC sh
 # testing executing commands remotely
@@ -37,7 +45,10 @@ cat test.txt
 | test.txt   |
 
 * Level 0
-The password for this level is given: bandit0. Simply connect to the server with SSH to port 2220. 
+:PROPERTIES:
+:CUSTOM_ID: Level-0
+:END:
+The password for this level is given: bandit0. Simply connect to the server with SSH to port 2220.
 The password for the next level is stored in a file called readme.
 
 #+BEGIN_SRC sh
@@ -50,6 +61,9 @@ boJ9jbbUNNfktd78OOpsqOltutMc3MY1
 #+END_SRC
 
 * Level 1
+:PROPERTIES:
+:CUSTOM_ID: Level-1
+:END:
 The password to the next level is located in a file named '-', to cat out the
 contents of this file use the full path to the file from the home directory.
 
@@ -60,15 +74,18 @@ bandit1@bandit:~$ ls
 bandit1@bandit:~$ cat ~/-
 CV1DtqXWVFXTvM2F0k09SHz0YwRINYA9
 
-#+END_SRC 
+#+END_SRC
 
 * Level 2
-The password is in a file with spaces in the name. To cat out the contents either 
-use backslashes before the spaces or surround the entire file name with single 
+:PROPERTIES:
+:CUSTOM_ID: Level-2
+:END:
+The password is in a file with spaces in the name. To cat out the contents either
+use backslashes before the spaces or surround the entire file name with single
 or double quotes.
 
  #+BEGIN_SRC sh
- 
+
 bandit2@bandit:~$ ls -al
 total 24
 drwxr-xr-x  2 root    root    4096 May  7  2020 .
@@ -81,12 +98,15 @@ bandit2@bandit:~$ cat spaces\ in\ this\ filename
 UmHadQclWmgdLOKQ3YNgjWxGoRMb5luK
 
  #+END_SRC
- 
+
 * Level 3
-The password is in a hidden file inside the directory 'inhere'. To cat out the 
+:PROPERTIES:
+:CUSTOM_ID: Level-3
+:END:
+The password is in a hidden file inside the directory 'inhere'. To cat out the
 contents move into the inhere directory and cat out the file.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit3@bandit:~$ ls -al
 total 24
@@ -108,15 +128,18 @@ pIwrPrtPN36QITSp3EQaw936yaFoFgAB
 #+END_SRC
 
 * Level 4
+:PROPERTIES:
+:CUSTOM_ID: Level-4
+:END:
 The password is the only human readable file inside the directory 'inhere'. When
 listing all the files in the directory notice that the file names start with a
 '-', which means that to use the files as input to a command it requires the full
 path from the home directory to be able to execute the command.
 To find the file that contains human readable content use the command 'file' and
-the regular expression * to execute the command on all files inside the 
+the regular expression * to execute the command on all files inside the
 directory.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit4@bandit:~$ ls -al
 total 24
@@ -157,17 +180,20 @@ koReBOKuIDDepwhWk7jZC0RTdopnAYKh
 #+END_SRC
 
 * Level 5
-The directory 'inhere' contains several directories which contains files. One 
+:PROPERTIES:
+:CUSTOM_ID: Level-5
+:END:
+The directory 'inhere' contains several directories which contains files. One
 of these files contains the password, this file has the following properties:
-size = 1033 bytes, is human-readable and is not executable. 
-The find command can be used to find this file. The size flag can be used to 
-find files of a specific size and the perm flag in conjunction with the \! 
-operator can be used to find files that are not executable. To find the files 
-that contain human readable text the exec flag can be used to execute the file 
-command just like in level 4. Lastly pipe the result of find into grep with the 
+size = 1033 bytes, is human-readable and is not executable.
+The find command can be used to find this file. The size flag can be used to
+find files of a specific size and the perm flag in conjunction with the \!
+operator can be used to find files that are not executable. To find the files
+that contain human readable text the exec flag can be used to execute the file
+command just like in level 4. Lastly pipe the result of find into grep with the
 text ASCII to find all files that satisfy the required conditions.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit5@bandit:~$ ls -Al
 total 16
@@ -205,12 +231,15 @@ DXjZPULLxYr17uwoI01bNLQbtFemEgo7
 #+END_SRC
 
 * Level 6
+:PROPERTIES:
+:CUSTOM_ID: Level-6
+:END:
 The file containing the password is somewhere on the server with the following
 properties: size = 33 bytes, owned by user bandit7 and owned by group bandit6.
 To clean up the 'permission denied' in output from this command redirect the
 stderr to /dev/null with '2> /dev/null'.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit6@bandit:~$ find / -type f -user bandit7 -group bandit6 -size 33c 2> /dev/null
 /var/lib/dpkg/info/bandit7.password
@@ -220,10 +249,13 @@ HKBPTKQnIay4Fw76bEy8PVxKEDQRKTzs
 #+END_SRC
 
 * Level 7
+:PROPERTIES:
+:CUSTOM_ID: Level-7
+:END:
 The password is in the file 'data.txt' next to the word millionth. Grep can be
 used to find the line that contains that word.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit7@bandit:~$ ls -Al
 total 4100
@@ -237,11 +269,14 @@ millionth	cvX2JJa4CFALtqS87jk27qwqGhBM9plV
 #+END_SRC
 
 * Level 8
+:PROPERTIES:
+:CUSTOM_ID: Level-8
+:END:
 The password is in the file 'data.txt' and is the line that only occurs once in
 the file. Uniq -u can filter out all duplicate lines that are adjacent. To find
 the only unique line in the text the input must first be sorted with sort.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit8@bandit:~$ ls -Al
 total 48
@@ -255,12 +290,15 @@ UsvVyFSfZZWbi6wgC7dAFyFuR6jQQUhR
 #+END_SRC
 
 * Level 9
-The password for the next level is stored in the file data.txt in one of the 
+:PROPERTIES:
+:CUSTOM_ID: Level-9
+:END:
+The password for the next level is stored in the file data.txt in one of the
 few human-readable strings, preceded by several ‘=’ characters.
 Strings can be used to print all the human readable characters and grep to
 find all the lines that contain one or more '='.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit9@bandit:~$ ls -Al
 total 32
@@ -284,11 +322,14 @@ S=A.H&^
 #+END_SRC
 
 * Level 10
-The password for the next level is stored in the file data.txt, which contains 
+:PROPERTIES:
+:CUSTOM_ID: Level-10
+:END:
+The password for the next level is stored in the file data.txt, which contains
 base64 encoded data.
 To decode base64 use the command base64 with the flag -d.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit10@bandit:~$ ls -Al
 total 16
@@ -302,12 +343,15 @@ The password is IFukwKGsFW8MOq3IRFqrxE1hxTNEbUPR
 #+END_SRC
 
 * Level 11
-The password for the next level is stored in the file data.txt, where all 
+:PROPERTIES:
+:CUSTOM_ID: Level-11
+:END:
+The password for the next level is stored in the file data.txt, where all
 lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
-Tr can be used to translate a set of characters to another set of characters 
+Tr can be used to translate a set of characters to another set of characters
 and therefore perform a ROT13 algorithm.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit11@bandit:~$ ls -Al
 total 16
@@ -321,14 +365,17 @@ The password is 5Te8Y4drgCRfCx8ugdwuEX8KFC6k2EUu
 #+END_SRC
 
 * Level 12
-The password for the next level is stored in the file data.txt, which is a 
+:PROPERTIES:
+:CUSTOM_ID: Level-12
+:END:
+The password for the next level is stored in the file data.txt, which is a
 hexdump of a file that has been repeatedly compressed.
 To get the password first reverse the hex dump with xxd and then decompress
 the file as many times as necessary with the correct tool. To find out which
 tool to use, use the file command.
 
- #+BEGIN_SRC sh 
- 
+ #+BEGIN_SRC sh
+
 bandit12@bandit:~$ mkdir /tmp/bandit12dir
 bandit12@bandit:~$ cd !$
 cd /tmp/bandit12dir
@@ -396,13 +443,16 @@ The password is 8ZjyCRiBWFYkneahHwxCv3wb2a1ORpYL
  #+END_SRC
 
 * Level 13
-The password for the next level is stored in /etc/bandit_pass/bandit14 and can 
-only be read by user bandit14. For this level, you don’t get the next password, 
+:PROPERTIES:
+:CUSTOM_ID: Level-13
+:END:
+The password for the next level is stored in /etc/bandit_pass/bandit14 and can
+only be read by user bandit14. For this level, you don’t get the next password,
 but you get a private SSH key that can be used to log into the next level.
-To become the bandit14 user use the sshkey.private in the ssh command and 
+To become the bandit14 user use the sshkey.private in the ssh command and
 connect to the localhost as bandit14. Then cat out the password.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit13@bandit:~$ ls
 sshkey.private
@@ -419,12 +469,15 @@ bandit14@bandit:~$ cat /etc/bandit_pass/bandit14
 #+END_SRC
 
 * Level 14
-The password for the next level can be retrieved by submitting the password of 
+:PROPERTIES:
+:CUSTOM_ID: Level-14
+:END:
+The password for the next level can be retrieved by submitting the password of
 the current level to port 30000 on localhost.
-Use netcat or telnet to connect to the localhost on port 30000 and enter the 
+Use netcat or telnet to connect to the localhost on port 30000 and enter the
 password of level 14.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit14@bandit:~$ nc localhost 30000
 4wcYUJFw0k0XLShlDzztnTBHiqxU3b3e
@@ -434,11 +487,14 @@ BfMYroe26WYalil77FoDi9qh59eK5xNr
 #+END_SRC
 
 * Level 15
-The password for the next level can be retrieved by submitting the password of 
+:PROPERTIES:
+:CUSTOM_ID: Level-15
+:END:
+The password for the next level can be retrieved by submitting the password of
 the current level to port 30001 on localhost using SSL encryption.
 Use openssl with s_client to connect to the localhost at port 30001.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit15@bandit:~$ openssl s_client -connect localhost:30001
 CONNECTED(00000003)
@@ -451,19 +507,22 @@ closed
 #+END_SRC
 
 * Level 16
-The credentials for the next level can be retrieved by submitting the password 
-of the current level to a port on localhost in the range 31000 to 32000. First 
-find out which of these ports have a server listening on them. Then find out 
-which of those speak SSL and which don’t. There is only 1 server that will give 
-the next credentials, the others will simply send back to you whatever you send 
+:PROPERTIES:
+:CUSTOM_ID: Level-16
+:END:
+The credentials for the next level can be retrieved by submitting the password
+of the current level to a port on localhost in the range 31000 to 32000. First
+find out which of these ports have a server listening on them. Then find out
+which of those speak SSL and which don’t. There is only 1 server that will give
+the next credentials, the others will simply send back to you whatever you send
 to it.
 Use nmap to scan all the port in the range 31000-32000 and use the flag -sV to
 check if the port uses SSL. The password for the next level is a RSA key. Store
-it in a file with permissions 0400 so it can only be read by the user. And use 
-SSH and the private key to login to the server for the next level just like in 
+it in a file with permissions 0400 so it can only be read by the user. And use
+SSH and the private key to login to the server for the next level just like in
 level 13.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit16@bandit:~$ nmap localhost -p 31000-32000 -sV
 
@@ -515,12 +574,15 @@ closed
 #+END_SRC
 
 * Level 17
-There are 2 files in the homedirectory: passwords.old and passwords.new. The 
-password for the next level is in passwords.new and is the only line that has 
+:PROPERTIES:
+:CUSTOM_ID: Level-17
+:END:
+There are 2 files in the homedirectory: passwords.old and passwords.new. The
+password for the next level is in passwords.new and is the only line that has
 been changed between passwords.old and passwords.new
 Using the diff command without flags will give the changed line.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit17@bandit:~$ ls -Al
 total 28
@@ -541,15 +603,18 @@ bandit17@bandit:~$ diff passwords.new passwords.old
 Meaning kfBf3eYk5BPBRzwjqutbbfE887SVc5Yd is the password for level 18.
 
 * Level 18
-The password for the next level is stored in a file readme in the homedirectory. 
-Unfortunately, someone has modified .bashrc to log you out when you log in with 
+:PROPERTIES:
+:CUSTOM_ID: Level-18
+:END:
+The password for the next level is stored in a file readme in the homedirectory.
+Unfortunately, someone has modified .bashrc to log you out when you log in with
 SSH.
 To execute a command immediately after connecting to the remote server give the
 ssh command the flag -o (stands for option, and allows for adding utility that
-is not covered by the flags, such as executing a command remotely), followed by 
+is not covered by the flags, such as executing a command remotely), followed by
 RemoteCommand="some command" where some commmand is the desired command.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bryan@xps:~/overthewire$ sshpass -p `cat bandit18.txt` ssh bandit18@bandit.labs.overthewire.org -p 2220 -o RemoteCommand="cat readme"
 This is a OverTheWire game server. More information on http://www.overthewire.org/wargames
@@ -559,15 +624,18 @@ IueksS7Ubh8G3DCwVzrTd8rAVOwq3M5x
 #+END_SRC
 
 * Level 19
-To gain access to the next level, you should use the setuid binary in the 
-homedirectory. Execute it without arguments to find out how to use it. The 
-password for this level can be found in the usual place (/etc/bandit_pass), 
+:PROPERTIES:
+:CUSTOM_ID: Level-19
+:END:
+To gain access to the next level, you should use the setuid binary in the
+homedirectory. Execute it without arguments to find out how to use it. The
+password for this level can be found in the usual place (/etc/bandit_pass),
 after you have used the setuid binary.
 The bandit20-do binary the effective user id (euid) to that of bandit20, meaning
-that the command given to bandit20-do will be run as the user bandit20 and 
+that the command given to bandit20-do will be run as the user bandit20 and
 therefore allows for reading the password file of bandit20.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit19@bandit:~$ ls -Al
 total 20
@@ -586,17 +654,20 @@ GbKksEFF4yrVs6il55v6gwY5aVje5f0j
 #+END_SRC
 
 * Level 20
-There is a setuid binary in the homedirectory that does the following: it makes a 
-connection to localhost on the port you specify as a commandline argument. It 
-then reads a line of text from the connection and compares it to the password in 
-the previous level (bandit20). If the password is correct, it will transmit the 
+:PROPERTIES:
+:CUSTOM_ID: Level-20
+:END:
+There is a setuid binary in the homedirectory that does the following: it makes a
+connection to localhost on the port you specify as a commandline argument. It
+then reads a line of text from the connection and compares it to the password in
+the previous level (bandit20). If the password is correct, it will transmit the
 password for the next level (bandit21).
-First it is necessary to create a netcat background process that starts 
-listening on some port. Then use the suconnect binary to connect to that port and 
+First it is necessary to create a netcat background process that starts
+listening on some port. Then use the suconnect binary to connect to that port and
 lastly enter the password of level 20 in the netcat process.
 
- #+BEGIN_SRC sh 
- 
+ #+BEGIN_SRC sh
+
 bandit20@bandit:~$ ls -Al
 total 24
 -rw-r--r-- 1 root     root       220 May 15  2017 .bash_logout
@@ -622,15 +693,18 @@ gE269g2h3mw3pwgrj0Ha9Uoqen1c9DGr
  #+END_SRC
 
 * Level 21
-A program is running automatically at regular intervals from cron, the 
-time-based job scheduler. Look in /etc/cron.d/ for the configuration and see 
+:PROPERTIES:
+:CUSTOM_ID: Level-21
+:END:
+A program is running automatically at regular intervals from cron, the
+time-based job scheduler. Look in /etc/cron.d/ for the configuration and see
 what command is being executed.
 When looking at the contents of /etc/cron.d/ the file that stands out most is
 cronjob_bandit22, which is executing a shell script in /usr/bin/. When trying
 to execute this script it points to some file in /tmp/ and this file contains
 the password for level 22.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit21@bandit:~$ ls -Al /etc/cron.d/
 total 28
@@ -654,17 +728,20 @@ Yk7owGAcWjwMVRwrTesJEwB7WVOiILLI
 #+END_SRC
 
 * Level 22
-A program is running automatically at regular intervals from cron, the 
-time-based job scheduler. Look in /etc/cron.d/ for the configuration and see 
+:PROPERTIES:
+:CUSTOM_ID: Level-22
+:END:
+A program is running automatically at regular intervals from cron, the
+time-based job scheduler. Look in /etc/cron.d/ for the configuration and see
 what command is being executed.
 The same as level 21 the cronjob is executing a script named cronjob_bandit23.
 Analyzing what the script does reveals that is copying the password to a file in
-/tmp/. The name of the file is in the mytarget variable which is part of md5 
+/tmp/. The name of the file is in the mytarget variable which is part of md5
 hash, where the hash contains the user name (which is bandit23). Executing the
 mytarget line of the script in a shell and replacing the $myname with bandit23
 will return the file that contains the password.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit22@bandit:~$ ls -Al /etc/cron.d/
 total 28
@@ -693,16 +770,19 @@ jc1udXuA1tiHqjIsL8yaapX5XIAI6i0n
 #+END_SRC
 
 * Level 23
-A program is running automatically at regular intervals from cron, the 
-time-based job scheduler. Look in /etc/cron.d/ for the configuration and see 
+:PROPERTIES:
+:CUSTOM_ID: Level-23
+:END:
+A program is running automatically at regular intervals from cron, the
+time-based job scheduler. Look in /etc/cron.d/ for the configuration and see
 what command is being executed.
-The cronjob is for this level is executing and remove all shell scripts in 
+The cronjob is for this level is executing and remove all shell scripts in
 /var/spool/bandit24/. To get the password create a script in that directory that
 cat's out the contents of /etc/bandit_pass/bandit24 to a location where it is
 accessable to us now (bandit23). Don't forget to change the permission on the
 shell script and the created directory in /tmp/.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit23@bandit:~$ ls -Al /etc/cron.d/
 total 28
@@ -747,14 +827,17 @@ UoMYTrfrBFHyQXmg6gzctqAwOmw1IohZ
 #+END_SRC
 
 * Level 24
-A daemon is listening on port 30002 and will give you the password for bandit25 
-if given the password for bandit24 and a secret numeric 4-digit pincode. There 
-is no way to retrieve the pincode except by going through all of the 10000 
-combinations, called brute-forcing. 
+:PROPERTIES:
+:CUSTOM_ID: Level-24
+:END:
+A daemon is listening on port 30002 and will give you the password for bandit25
+if given the password for bandit24 and a secret numeric 4-digit pincode. There
+is no way to retrieve the pincode except by going through all of the 10000
+combinations, called brute-forcing.
 To get the password write a script that loops over all 10000 possible pin code
 and give that as input to netcat. The correct pincode is 2588.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 bandit24@bandit:~$ mkdir /tmp/b100
 bandit24@bandit:~$ cd !$
 bandit24@bandit:~$ vim /tmp/b100/bf.sh
@@ -766,7 +849,7 @@ done
 
 bandit24@bandit:~$ chmod +x /tmp/b100/bf.sh
 bandit24@bandit:~$ ./bf.sh | nc localhost 30002
-I am the pincode checker for user bandit25. Please enter the password for user 
+I am the pincode checker for user bandit25. Please enter the password for user
 bandit24 and the secret pincode on a single line, separated by a space.
 ...
 Wrong! Please enter the correct pincode. Try again.
@@ -778,29 +861,32 @@ The password of user bandit25 is uNG9O58gUE7snukf3bvZ0rxhtnjzSGzG
 #+END_SRC
 
 * Level 25-26
-Logging in to bandit26 from bandit25 should be fairly easy… The shell for user 
-bandit26 is not /bin/sh, but something else. Find out what it is, how it 
+:PROPERTIES:
+:CUSTOM_ID: Level-25-26
+:END:
+Logging in to bandit26 from bandit25 should be fairly easy… The shell for user
+bandit26 is not /bin/sh, but something else. Find out what it is, how it
 works and how to break out of it.
-After using ssh with the RSA key for bandit26 the connection is immediately 
+After using ssh with the RSA key for bandit26 the connection is immediately
 closed. Inspecting the /etc/passwd file to find out what shell bandit26 is using
-shows: /usr/bin/showtext, which is executing 'more ~/text.txt'. In the more 
-environment it is possible to execute commands with ':!command', the trick is to 
+shows: /usr/bin/showtext, which is executing 'more ~/text.txt'. In the more
+environment it is possible to execute commands with ':!command', the trick is to
 make the window very small such that the text printed by ~/text.txt does not fit
 entirely in the window (you need to scroll to see it all), this makes the output
-appear in the more environment (you can now increase the size of the window 
-again), then enter 'v' to enter vi mode and then ':e /etc/bandit_pass/bandit26' 
+appear in the more environment (you can now increase the size of the window
+again), then enter 'v' to enter vi mode and then ':e /etc/bandit_pass/bandit26'
 to get the password of this level.
 The password of user bandit26 is 5czgV9L3Xx8JPOyRbXh6lQbmIOWvPT6Z
 
 Currently we do not have permission to read /etc/bandit_pass/bandit27, so first
-let set the shell to /bin/sh so we can execute normal commands (from within 
+let set the shell to /bin/sh so we can execute normal commands (from within
 more): ':set shell=/bin/sh'. In the home folder you can now find a file called
-bandit27-do which behave similar to how bandit20-do works. Finally enter (still 
-from within more) ':!~/bandit27-do cat /etc/bandit_pass/bandit27 to get the 
+bandit27-do which behave similar to how bandit20-do works. Finally enter (still
+from within more) ':!~/bandit27-do cat /etc/bandit_pass/bandit27 to get the
 password.
 Password bandit27: 3ba3118a22e93127a4ed485be72ef5ea
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit25@bandit:~$ ls -Al
 total 24
@@ -835,14 +921,17 @@ exit 0
 #+END_SRC
 
 * Level 27
-There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo. 
+:PROPERTIES:
+:CUSTOM_ID: Level-27
+:END:
+There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo.
 The password for the user bandit27-git is the same as for the user bandit27.
 Clone the repository and find the password for the next level.
 
-Create a new directory in the /tmp directory and clone the specified repository. 
+Create a new directory in the /tmp directory and clone the specified repository.
 The password is in the '/repo/README' file.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit27@bandit:~$ mkdir /tmp/newdir
 bandit27@bandit:~$ cd !$
@@ -874,16 +963,19 @@ The password to the next level is: 0ef186ac70e04ea33b4c1853d2526fa2
 #+END_SRC
 
 * Level 28
+:PROPERTIES:
+:CUSTOM_ID: Level-28
+:END:
 There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
 Clone the repository and find the password for the next level.
 
 First create a new directory in '/tmp', and then clone the given repository. The
-git repo again contains a README but the password is, 'xx...x', hidden. 
-'git show' returns the previous versions of the README file and what was 
-changed in between commits. Analyzing the output gives the password for 
+git repo again contains a README but the password is, 'xx...x', hidden.
+'git show' returns the previous versions of the README file and what was
+changed in between commits. Analyzing the output gives the password for
 bandit29: bbc96594b4e001778eee9975372716b2
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit28@bandit:/tmp/newdir$ mkdir /tmp/newdirr
 bandit28@bandit:/tmp/newdir$ cd !$
@@ -937,16 +1029,19 @@ index 3f7cee8..5c6457b 100644
 #+END_SRC
 
 * Level 29
+:PROPERTIES:
+:CUSTOM_ID: Level-29
+:END:
 There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo. The password for the user bandit29-git is the same as for the user bandit29.
 Clone the repository and find the password for the next level.
 
 Again clone the given repo in a directory in '/tmp/' and 'cat' out the contents
 of the README. The <no password in production!> hints at there being multiple
-branches, to list them all 'git branch -a'. Change to the 'dev' branch with 
+branches, to list them all 'git branch -a'. Change to the 'dev' branch with
 'git checkout dev'. This branch also has a README which contains the password
 for bandit30: 5b90576bedb2cc04c86a9e924ce42faf.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit29@bandit:~$ mkdir /tmp/newdrr
 bandit29@bandit:~$ cd !$
@@ -1001,17 +1096,20 @@ Some notes for bandit30 of bandit.
 #+END_SRC
 
 * Level 30
-There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo. 
+:PROPERTIES:
+:CUSTOM_ID: Level-30
+:END:
+There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo.
 The password for the user bandit30-git is the same as for the user bandit30.
 Clone the repository and find the password for the next level.
 
-Just as the previous exercises clone the repo and 'cat README', which has no 
-useful contents. So lets explorer the '.git' directory  which contains a file 
-named 'packed-refs'. This file contains hashes of tags and heads, most notably 
-in this case a hash of 'refs/tags/secret'. Doing a 'git show' for this has 
+Just as the previous exercises clone the repo and 'cat README', which has no
+useful contents. So lets explorer the '.git' directory  which contains a file
+named 'packed-refs'. This file contains hashes of tags and heads, most notably
+in this case a hash of 'refs/tags/secret'. Doing a 'git show' for this has
 results in the password for bandit31: 47e603bb428404d265f59c42920d81e5.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit30@bandit:~$ mkdir /tmp/newdrr
 bandit30@bandit:~$ cd !$
@@ -1057,18 +1155,21 @@ bandit30@bandit:/tmp/newdrr/repo$ git show f17132340e8ee6c159e0a4a6bc6f80e1da3b1
 #+END_SRC
 
 * Level 31
+:PROPERTIES:
+:CUSTOM_ID: Level-31
+:END:
 There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo. The password for the user bandit31-git is the same as for the user bandit31.
 Clone the repository and find the password for the next level.
 
-After clone the repo and looking at the contents of the 'README' is clear that 
-the file 'key.txt' must be push to the remote repository. So create the 
-'key.txt' file with the contents 'May I come in?'. Then to push it to the 
-remote repo you need three commands: 'git add -f [filename]' (the 'f' flag is 
-necessary because the '.gitignore' is set to ignore all '.txt' files), 
-'git commit -m [message]' and 'git push'. After the push the output will show 
+After clone the repo and looking at the contents of the 'README' is clear that
+the file 'key.txt' must be push to the remote repository. So create the
+'key.txt' file with the contents 'May I come in?'. Then to push it to the
+remote repo you need three commands: 'git add -f [filename]' (the 'f' flag is
+necessary because the '.gitignore' is set to ignore all '.txt' files),
+'git commit -m [message]' and 'git push'. After the push the output will show
 the password for bandit32: 56a9bf19c63d650ce78e6ec0354ee45e
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 bandit31@bandit:~$ mkdir /tmp/newdrr
 bandit31@bandit:~$ cd !$
@@ -1143,13 +1244,16 @@ error: failed to push some refs to 'ssh://bandit31-git@localhost/home/bandit31-g
 #+END_SRC
 
 * Level 32
+:PROPERTIES:
+:CUSTOM_ID: Level-32
+:END:
 After all this git stuff its time for another escape. Good luck!
 
-The trick to escape the uppercase shell is to use the environment variable $0 
-which returns the file name of the command that executed the process in this 
+The trick to escape the uppercase shell is to use the environment variable $0
+which returns the file name of the command that executed the process in this
 case '/bin/sh'. From here simply 'cat' out the password of bandit33.
 
-#+BEGIN_SRC sh 
+#+BEGIN_SRC sh
 
 WELCOME TO THE UPPERCASE SHELL
 >> $0

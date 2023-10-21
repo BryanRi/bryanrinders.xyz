@@ -3,10 +3,15 @@
 #+DATE: <2022-12-15 Thu>
 #+OPTIONS: toc:nil
 
-{{{date([%Y-%m-%d])}}} Follow the instruction below to set up a shared
-directory between a host and a KVM guest virtual machine.
+{{{date([%Y-%m-%d])}}}
+
+Follow the instruction below to set up a shared directory between a
+host and a KVM guest virtual machine.
 
 * KVM: Setup A Shared Direcory Between A Host And Guest
+:PROPERTIES:
+:CUSTOM_ID: KVM-Setup-A-Shared-Direcory-Between-A-Host-And-Guest
+:END:
 Create the directory to be shared on you host machine and set the permissions.
 
 #+begin_src sh
@@ -42,5 +47,8 @@ this to your =/etc/fstab=:
 #+end_src
 
 * Sources
+:PROPERTIES:
+:CUSTOM_ID: Sources
+:END:
 - https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/
 - https://www.linux-kvm.org/page/9p_virtio

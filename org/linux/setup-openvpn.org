@@ -4,7 +4,12 @@
 #+OPTIONS: ^:{} toc:nil num:nil
 
 * Setup OpenVPN With Network Manager
-{{{date([%Y-%m-%d])}}} On arch based distro's.
+:PROPERTIES:
+:CUSTOM_ID: Setup-OpenVPN-With-Network-Manager
+:END:
+{{{date([%Y-%m-%d])}}}
+
+On arch based distro's.
 
 #+begin_src sh
   sudo pacman -S networkmanager \

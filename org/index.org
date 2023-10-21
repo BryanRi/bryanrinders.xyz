@@ -13,33 +13,54 @@ href='https://gitlab.com/users/bryanrinders/groups',
 target='_blank'@@html:>gitlab page</a>@@
 
 * List of most recent posts
+:PROPERTIES:
+:CUSTOM_ID: List-of-most-recent-posts
+:END:
 ** CTF Writeups
+:PROPERTIES:
+:CUSTOM_ID: CTF-Writeups
+:END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./ctf/ctf-sitemap.org :lines 3-13
 #+HTML: </div>
 
 ** Emacs Tutorials
+:PROPERTIES:
+:CUSTOM_ID: Emacs-Tutorials
+:END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./emacs/emacs-sitemap.org :lines 3-13
 #+HTML: </div>
 
 ** Linux Tutorials
+:PROPERTIES:
+:CUSTOM_ID: Linux-Tutorials
+:END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./linux/linux-sitemap.org :lines 3-13
 #+HTML: </div>
 
 ** Other
+:PROPERTIES:
+:CUSTOM_ID: Other
+:END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./other/other-sitemap.org :lines 3-13
 #+HTML: </div>
 
 * COMMENT List of most recent posts
+:PROPERTIES:
+:CUSTOM_ID: List-of-most-recent-posts
+:END:
 | Recent Posts       |       Date |
 |--------------------+------------|
 | [[/org/ctf-writeups/overthewire/natas.org][OverTheWire Natas]]  | 2022-11-13 |
 | [[/org/ctf-writeups/overthewire/bandit.org][OverTheWire Bandit]] | 2022-11-13 |
 
 * COMMENT Support with crypto
+:PROPERTIES:
+:CUSTOM_ID: Support-with-crypto
+:END:
 If you enjoyed any of my content consider supporting me by donating with crypto currencies.
 - Bitcoin: <address>
 - Monero: <address>

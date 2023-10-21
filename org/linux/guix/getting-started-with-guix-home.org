@@ -7,6 +7,9 @@
 #+PROPERTY: header-args:python :session *natas-python-session*
 
 * Introduction
+:PROPERTIES:
+:CUSTOM_ID: Introduction
+:END:
 {{{date([%Y-%m-%d])}}}
 
 [[https://guix.gnu.org/manual/devel/en/html_node/Home-Configuration.html][Guix-home]] is part of the [[https://guix.gnu.org/manual/devel/en/html_node/index.html][guix]] package manager and allows you to
@@ -18,6 +21,9 @@ dotfiles and it works both on the guix system as well as on foreign
 distros.
 
 * Testing
+:PROPERTIES:
+:CUSTOM_ID: Testing
+:END:
 Once you have a config you can test it inside a throw away container
 with:
 
@@ -32,6 +38,9 @@ And to apply it to your actual system run:
 #+end_src
 
 * Shells
+:PROPERTIES:
+:CUSTOM_ID: Shells
+:END:
 If you already use guix as a package manager then letting guix-home
 configure your shell(s) will make your life easier as it automatically
 sets the proper environment variables and sources your guix profiles.
@@ -81,6 +90,9 @@ be written to =~/.bashrc= as
 Configurations for the other shells look very similar.
 
 * Environment Variables
+:PROPERTIES:
+:CUSTOM_ID: Environment-Variables
+:END:
 You can also define you environment variables inside you guix-home
 configuration. They will be system wide variables that are sourced
 from the =~/.profile= file.
@@ -112,6 +124,9 @@ expand to the new guix-home profile directory. That way you will
 always use the latest installed version of fish.
 
 * Channels
+:PROPERTIES:
+:CUSTOM_ID: Channels
+:END:
 If you use channels other than the default ones you can extend the
 ~home-channels-service-type~ like this:
 
@@ -140,6 +155,9 @@ If you use channels other than the default ones you can extend the
 The example adds the [[https://gitlab.com/nonguix/nonguix][nonguix]] channel to the list of channels.
 
 * Other Configuration Files
+:PROPERTIES:
+:CUSTOM_ID: Other-Configuration-Files
+:END:
 To search for guix-home service types you can run
 
 #+begin_src sh
@@ -192,6 +210,9 @@ set to where you dotfiles live or that you dotfiles live in
 directory has a =.config= directory that resembles =XDG_CONFIG_HOME=.
 
 * Combining Everything
+:PROPERTIES:
+:CUSTOM_ID: Combining-Everything
+:END:
 Combining all the above configurations will results in:
 
 #+begin_src scheme
@@ -262,5 +283,8 @@ You should store this configuration in =home-configuration.scm= at the
 root of your dotfile directory.
 
 * Sources
+:PROPERTIES:
+:CUSTOM_ID: Sources
+:END:
 - The guix home manual:
   [[https://guix.gnu.org/manual/en/html_node/Home-Configuration.html]]

@@ -5,17 +5,31 @@
 #+PROPERTY: header-args:sh :eval never-export
 
 * Intro
-{{{date([%Y-%m-%d])}}} This is a write up for the Challenges part of
-the TryHackMe room [[https://tryhackme.com/room/fileinc][File Inclusion]].
+:PROPERTIES:
+:CUSTOM_ID: Intro
+:END:
+{{{date([%Y-%m-%d])}}}
+
+This is a write up for the Challenges part of the TryHackMe room [[https://tryhackme.com/room/fileinc][File
+Inclusion]].
 
 * Challenges
+:PROPERTIES:
+:CUSTOM_ID: Challenges
+:END:
 ** Flag 1
+:PROPERTIES:
+:CUSTOM_ID: Flag-1
+:END:
 On the right hand side of Firefox open the =menu > Web Developer >
 Inspector=. In the html source code find the form tag and change the
 method from =GET= to =POST=. Then on the actual web page fill =/etc/flag1= in
 in the form and press the include button. This should reveal the flag.
 
 ** Flag 2
+:PROPERTIES:
+:CUSTOM_ID: Flag-2
+:END:
 From the hint it is clear that we have to edit the cookie to find the
 flag. To inspect the cookie run:
 
@@ -43,6 +57,9 @@ correct value was found:
 Locate the flag at the end of the file =flag2.txt=.
 
 ** Flag 3
+:PROPERTIES:
+:CUSTOM_ID: Flag-3
+:END:
 The url input is filtered, everything that is not a-z is filtered
 out. To get around this change the method from get to =GET= to =POST=
 and set the data to be posted to =/etc/flag3%00=. The =%00= is
@@ -56,6 +73,9 @@ explained previously in the room.
 Locate the flag at the end of the file =flag3.txt=.
 
 ** Playground
+:PROPERTIES:
+:CUSTOM_ID: Playground
+:END:
 Since this is a RFI exercise we first need to create a =.php= file
 that will execute the command we want, =hostname=.
 
