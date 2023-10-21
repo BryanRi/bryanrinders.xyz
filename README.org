@@ -16,4 +16,4 @@ The source code for [[https://bryanrinders.xyz]]
   dynamically increasing the number of sitemaps, and hence no need to
   add more and more components to the =org-publish-project-alist=.
 - [ ] Add light theme
-- [ ] Make headline anchors deterministic
+- [X] Make headline anchors deterministic
