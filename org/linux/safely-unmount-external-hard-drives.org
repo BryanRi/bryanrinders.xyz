@@ -9,6 +9,8 @@
 :PROPERTIES:
 :CUSTOM_ID: Introduction
 :END:
+{{{date([%Y-%m-%d])}}}
+
 You might have noticed that after
 
 #+begin_src sh
@@ -24,8 +26,6 @@ that can be used for this purpose.
 :PROPERTIES:
 :CUSTOM_ID: Udisks
 :END:
-{{{date([%Y-%m-%d])}}}
-
 To unmount the external harddrive:
 
 #+begin_src sh
