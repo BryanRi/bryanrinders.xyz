@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Fix Dell XPS 9700 microphone</title>
+<title>Safely Remove External Hard Drives From The CLI</title>
 <meta name="generator" content="Org mode" />
 <link rel='stylesheet' href='/css/default.css' />
 <link rel='stylesheet' href='/css/source-code.css' />
@@ -27,72 +27,84 @@
 <br><hr>
 </div>
 <div id="content">
-<h1 class="title">Fix Dell XPS 9700 microphone</h1>
+<h1 class="title">Safely Remove External Hard Drives From The CLI</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></li>
-<li><a href="#Noise-Cancelation">Noise Cancelation</a></li>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Udisks">Udisks</a></li>
 <li><a href="#Sources">Sources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org288b6a0" class="outline-2">
-<h2 id="Fix-Microphone-On-XPS-9700"><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></h2>
-<div class="outline-text-2" id="text-Fix-Microphone-On-XPS-9700">
+<div id="outline-container-org39c038f" class="outline-2">
+<h2 id="Introduction"><a href="#Introduction">Introduction</a></h2>
+<div class="outline-text-2" id="text-Introduction">
 <p>
-<span class="timestamp-wrapper"><span class="timestamp">[2023-09-10 Sun]</span></span>
-</p>
-
-<p>
-I fixed the Issue by switching the rt715 ADC 24 Mux selector in
-<code>alsamixer</code> to DMIC3.
-</p>
-
-<p>
-Save settings with <code>sudo alsactl store</code>. After storing the settings
-you have to restore them on every boot up usinng <code>alsactl restore</code>. To
-safe the settings to a specific file, useful for placing it under
-version control, you can specify the <code>-f</code> flag in both <code>alsactl</code>
-command followed by a file path i.e.
+You might have noticed that after
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">alsactl store -f ~/.config/alsa/asound.state
-alsactl restore -f ~/.config/alsa/asound.state
+<pre class="src src-sh">sudo umount /dev/sdX
 </pre>
 </div>
+
+<p>
+a external hard drive is still making noise and appears to be in use
+by the OS. This is because rotating hard disks require a few extra
+commands before they can be safely unplugged, <a href="https://www.freedesktop.org/wiki/Software/udisks/">udisks</a> is a CLI tool
+that can be used for this purpose.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org9e51a46" class="outline-2">
-<h2 id="Noise-Cancelation"><a href="#Noise-Cancelation">Noise Cancelation</a></h2>
-<div class="outline-text-2" id="text-Noise-Cancelation">
+<div id="outline-container-org4937c2e" class="outline-2">
+<h2 id="Udisks"><a href="#Udisks">Udisks</a></h2>
+<div class="outline-text-2" id="text-Udisks">
 <p>
-The commands below will create a new device which you can select with
-for example <code>pavucontrol</code>.
+<span class="timestamp-wrapper"><span class="timestamp">[2023-10-22 Sun]</span></span>
+</p>
+
+<p>
+To unmount the external harddrive:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">sudo cp /etc/pulse/default.pa /etc/pulse/default.pa.bak
-sudo cat &lt;&lt;EOT &gt;&gt; /etc/pulse/default.pa
-<span class="org-sh-heredoc">     load-module module-echo-cancel source_name=noechosource</span>
-<span class="org-sh-heredoc">     sink name=noechosink</span>
-<span class="org-sh-heredoc">     set-default-source noechosource</span>
-<span class="org-sh-heredoc">     set-default-sink noechosink</span>
+<pre class="src src-sh">udisksctl unmount -b /dev/sdXn
 </pre>
 </div>
+
+<p>
+followed by:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">udisksctl power-off -b /dev/sdX
+</pre>
+</div>
+
+<p>
+The commands result in a graceful power down of the spinning hard
+drive; after which it can be safely unplugged.
+</p>
+
+<p>
+Note that the last command turns off all the power to the specific
+port and if you use a usb hub that might cause other devices connected
+to that hub to lose connection, check the <code>udisksctl</code> man page for
+more information on this.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org2a88d98" class="outline-2">
+<div id="outline-container-org1a0cb03" class="outline-2">
 <h2 id="Sources"><a href="#Sources">Sources</a></h2>
 <div class="outline-text-2" id="text-Sources">
 <ul class="org-ul">
-<li><a href="https://askubuntu.com/a/1362014">https://askubuntu.com/a/1362014</a></li>
-<li><a href="https://www.youtube.com/watch?v=lTodCeVAfpI">https://www.youtube.com/watch?v=lTodCeVAfpI</a></li>
+<li><a href="https://unix.stackexchange.com/questions/354138/safest-way-to-remove-usb-drive-on-linux">https://unix.stackexchange.com/questions/354138/safest-way-to-remove-usb-drive-on-linux</a></li>
+<li><a href="https://stackoverflow.com/questions/13224509/linux-ubuntu-safely-remove-a-usb-flash-disk-via-the-command-line">https://stackoverflow.com/questions/13224509/linux-ubuntu-safely-remove-a-usb-flash-disk-via-the-command-line</a></li>
 </ul>
 </div>
 </div>
