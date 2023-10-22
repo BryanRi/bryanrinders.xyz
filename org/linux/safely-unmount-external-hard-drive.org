@@ -1,0 +1,54 @@
+#+TITLE: Safely Remove External Hard Drives From The CLI
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-10-22 Sun>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+* Introduction
+:PROPERTIES:
+:CUSTOM_ID: Introduction
+:END:
+You might have noticed that after
+
+#+begin_src sh
+  sudo umount /dev/sdX
+#+end_src
+
+a external hard drive is still making noise and appears to be in use
+by the OS. This is because rotating hard disks require a few extra
+commands before they can be safely unplugged, [[https://www.freedesktop.org/wiki/Software/udisks/][udisks]] is a CLI tool
+that can be used for this purpose.
+
+* Udisks
+:PROPERTIES:
+:CUSTOM_ID: Udisks
+:END:
+{{{date([%Y-%m-%d])}}}
+
+To unmount the external harddrive:
+
+#+begin_src sh
+  udisksctl unmount -b /dev/sdXn
+#+end_src
+
+followed by:
+
+#+begin_src sh
+  udisksctl power-off -b /dev/sdX
+#+end_src
+
+The commands result in a graceful power down of the spinning hard
+drive; after which it can be safely unplugged.
+
+Note that the last command turns off all the power to the specific
+port and if you use a usb hub that might cause other devices connected
+to that hub to lose connection, check the ~udisksctl~ man page for
+more information on this.
+
+* Sources
+:PROPERTIES:
+:CUSTOM_ID: Sources
+:END:
+- [[https://unix.stackexchange.com/questions/354138/safest-way-to-remove-usb-drive-on-linux]]
+- [[https://stackoverflow.com/questions/13224509/linux-ubuntu-safely-remove-a-usb-flash-disk-via-the-command-line]]
