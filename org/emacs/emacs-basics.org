@@ -20,7 +20,6 @@ remember is =M-x=; to get access to all of Emacs' commands.
 | C-v         | scroll-up-command   | Scroll the window up a full screen   |
 | M-v         | scroll-down-command | Scroll the window down a full window |
 | C-l         | recenter-top-bottom | Center the buffer around the cursor  |
-|             |                     |                                      |
 
 * Cursor movement
 :PROPERTIES:
@@ -43,7 +42,6 @@ remember is =M-x=; to get access to all of Emacs' commands.
 |-------------+------------------------+----------------------------------------------|
 | M-<         | beginning-of-buffer    | Move to the beginning of the buffer          |
 | M->         | end-of-buffer          | Move to the end of the buffer                |
-|             |                        |                                              |
 
 * Universal argument
 :PROPERTIES:
@@ -110,6 +108,7 @@ undo-ring. You do this by pressing =C-g= (or any movement such as
 your undos.
 
 | Key binding     | Function | Notes         |
+|-----------------+----------+---------------|
 | C-/, C-_, C-x u | undo     | undo any edit |
 
 * Files
