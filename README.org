@@ -23,3 +23,10 @@ The source code for [[https://bryanrinders.xyz]]
   add more and more components to the =org-publish-project-alist=.
 - [ ] Add light theme
 - [X] Make headline anchors deterministic
+
+* Fix List
+:PROPERTIES:
+:CUSTOM_ID: Fix-list
+:END:
+- [ ] TOC headline color
+- [ ] Color of the number of numbered headings (guix home)
