@@ -53,10 +53,6 @@
   <a href='/emacs-index.html'>Emacs</a>
   <a href='/linux-index.html'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
-  <a href='/other-index.html'>Other</a>
-  <span class='right'>
-    <a href='/sitemap.html'>Sitemap</a>
-  </span>
 </div>
 <br><hr>")
 
