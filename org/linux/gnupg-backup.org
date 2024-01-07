@@ -4,7 +4,7 @@
 #+DATE: <2023-08-28 Mon>
 #+OPTIONS: num:nil
 #+PROPERTY: header-args :results output :exports both :eval never-export
-#+PROPERTY; header-args:sh :results output
+#+PROPERTY: header-args:sh :results output
 
 * TODO COMMENT Getting started with gnupg
 :PROPERTIES:
