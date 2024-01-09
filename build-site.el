@@ -200,8 +200,7 @@ specified return an empty string."
         (br/define-website-component "ctf")
         (br/define-website-component "emacs")
         (br/define-website-component "linux")
-        (br/define-website-component "other")
-        (list "website" :components '("css" "ctf" "emacs" "linux" "other" "home"))))
+        (list "website" :components '("css" "ctf" "emacs" "linux" "home"))))
 
 
 ;; Generate the site output
