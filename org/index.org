@@ -40,14 +40,6 @@ target='_blank'@@html:>gitlab page</a>@@
 #+INCLUDE: ./linux/linux-sitemap.org :lines 3-13
 #+HTML: </div>
 
-** Other
-:PROPERTIES:
-:CUSTOM_ID: Other
-:END:
-#+HTML: <div class="recent-posts">
-#+INCLUDE: ./other/other-sitemap.org :lines 3-13
-#+HTML: </div>
-
 * COMMENT List of most recent posts
 :PROPERTIES:
 :CUSTOM_ID: List-of-most-recent-posts
