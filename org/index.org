@@ -1,4 +1,4 @@
-#+TITLE: Welcome !
+#+TITLE: Welcome!
 #+AUTHOR: Bryan Rinders
 #+DATE: <2022-10-17 Mon>
 #+OPTIONS: toc:nil
@@ -10,7 +10,7 @@ or Capture The Flags are a fun way to learn cyber security skills).
 You can find my dotfiles and the source code for this website and many
 other projects on my @@html:<a @@
 href='https://gitlab.com/users/bryanrinders/groups',
-target='_blank'@@html:>gitlab page</a>@@
+target='_blank'@@html:>gitlab page</a>@@.
 
 * List of most recent posts
 :PROPERTIES:
