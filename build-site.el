@@ -61,8 +61,7 @@
            "<br><br>
 <div style='text-align: center;'>
   If something is not working, please create an issue
-  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>
-  .
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>.
 </div>
 <br><hr/>
 <footer>
@@ -80,7 +79,7 @@
   </div>
   <br>
   <div class='generated'>
-    Created with %c on <a href='https://www.gnu.org'>GNU</a>/<a href='https://www.kernel.org/'>Linux</a>
+    Created with %c on <a href='https://www.gnu.org'>GNU</a>+<a href='https://www.kernel.org/'>Linux</a>
   </div>
 </footer>"))
 
