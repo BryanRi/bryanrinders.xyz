@@ -28,5 +28,5 @@ The source code for [[https://bryanrinders.xyz]]
 :PROPERTIES:
 :CUSTOM_ID: Fix-list
 :END:
-- [ ] TOC headline color
+- [X] TOC headline color
 - [ ] Color of the number of numbered headings (guix home)
