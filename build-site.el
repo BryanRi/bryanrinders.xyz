@@ -28,7 +28,7 @@
 (setq org-publish-timestamp-directory
       (let ((my-project-dir (getenv "MY_PROJECTS_DIR")))
         (if my-project-dir
-            (concat my-project-dir "/website/.org-timestamps/")
+            (concat my-project-dir "/bryanrinders.xyz/.org-timestamps/")
           "~/.org-timestamps/")))
 
 
