@@ -38,6 +38,8 @@
 <li><a href="#Buffers">8. Buffers</a></li>
 <li><a href="#Searching">9. Searching</a></li>
 <li><a href="#Frames">10. Frames</a></li>
+<li><a href="#Recursive-Editing">11. Recursive Editing</a></li>
+<li><a href="#Getting-Help-From-Emacs">12. Getting Help From Emacs</a></li>
 </ul>
 </div>
 </div>
@@ -53,7 +55,7 @@ and buffer management and much more. The most important key binding to
 remember is <code>M-x</code>; to get access to all of Emacs' commands.
 </p>
 
-<div id="outline-container-org68c3ba5" class="outline-2">
+<div id="outline-container-org569e55d" class="outline-2">
 <h2 id="Buffer-movement"><span class="section-number-2">1</span> <a href="#Buffer-movement">Buffer movement</a></h2>
 <div class="outline-text-2" id="text-Buffer-movement">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -96,7 +98,7 @@ remember is <code>M-x</code>; to get access to all of Emacs' commands.
 </div>
 </div>
 
-<div id="outline-container-orgfdadc38" class="outline-2">
+<div id="outline-container-orgf4eb27a" class="outline-2">
 <h2 id="Cursor-movement"><span class="section-number-2">2</span> <a href="#Cursor-movement">Cursor movement</a></h2>
 <div class="outline-text-2" id="text-Cursor-movement">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -195,7 +197,7 @@ remember is <code>M-x</code>; to get access to all of Emacs' commands.
 </div>
 </div>
 
-<div id="outline-container-org5db7c1a" class="outline-2">
+<div id="outline-container-org2804025" class="outline-2">
 <h2 id="Universal-argument"><span class="section-number-2">3</span> <a href="#Universal-argument">Universal argument</a></h2>
 <div class="outline-text-2" id="text-Universal-argument">
 <p>
@@ -213,7 +215,7 @@ results in <code>********</code>.
 </div>
 </div>
 
-<div id="outline-container-org3c93ae6" class="outline-2">
+<div id="outline-container-org8029db2" class="outline-2">
 <h2 id="Quit"><span class="section-number-2">4</span> <a href="#Quit">Quit</a></h2>
 <div class="outline-text-2" id="text-Quit">
 <p>
@@ -223,9 +225,15 @@ used when Emacs stops responding.
 </div>
 </div>
 
-<div id="outline-container-org430c0e5" class="outline-2">
+<div id="outline-container-org022df60" class="outline-2">
 <h2 id="Windows"><span class="section-number-2">5</span> <a href="#Windows">Windows</a></h2>
 <div class="outline-text-2" id="text-Windows">
+<p>
+Windows are where <a href="#Buffers">8</a> are shown. You can have multiple windows in
+a single frame (see <a href="#Frames">10</a> for more information) and you can also have
+the same buffer open in multiple windows.
+</p>
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -278,11 +286,11 @@ used when Emacs stops responding.
 </div>
 </div>
 
-<div id="outline-container-org758538a" class="outline-2">
+<div id="outline-container-org60d1ad8" class="outline-2">
 <h2 id="Editing"><span class="section-number-2">6</span> <a href="#Editing">Editing</a></h2>
 <div class="outline-text-2" id="text-Editing">
 </div>
-<div id="outline-container-org0faa65e" class="outline-3">
+<div id="outline-container-org4a5b700" class="outline-3">
 <h3 id="Killing-Deleting-and-Yanking"><span class="section-number-3">6.1</span> <a href="#Killing-Deleting-and-Yanking">Killing, Deleting and Yanking</a></h3>
 <div class="outline-text-3" id="text-Killing-Deleting-and-Yanking">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -373,7 +381,7 @@ used when Emacs stops responding.
 </div>
 </div>
 
-<div id="outline-container-org490f084" class="outline-3">
+<div id="outline-container-org509b033" class="outline-3">
 <h3 id="Undo-ing"><span class="section-number-3">6.2</span> <a href="#Undo-ing">Undo-ing</a></h3>
 <div class="outline-text-3" id="text-Undo-ing">
 <p>
@@ -413,7 +421,7 @@ your undos.
 </div>
 </div>
 
-<div id="outline-container-org6c20744" class="outline-2">
+<div id="outline-container-org71521a0" class="outline-2">
 <h2 id="Files"><span class="section-number-2">7</span> <a href="#Files">Files</a></h2>
 <div class="outline-text-2" id="text-Files">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -456,9 +464,16 @@ will create the file and directories if necessary.
 </div>
 </div>
 
-<div id="outline-container-orge3828a7" class="outline-2">
+<div id="outline-container-orgf8b6554" class="outline-2">
 <h2 id="Buffers"><span class="section-number-2">8</span> <a href="#Buffers">Buffers</a></h2>
 <div class="outline-text-2" id="text-Buffers">
+<p>
+A buffer is where Emacs stores the text contained in a file or the
+messages shown in the minibuffer (called the <code>*Messages*</code>) or any
+other piece of text. A buffer will remain accessible within Emacs
+until you <code>M-x kill-emacs</code> or you <code>M-x kill-buffer</code> the buffer.
+</p>
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -499,7 +514,7 @@ will create the file and directories if necessary.
 </div>
 </div>
 
-<div id="outline-container-org5f91c34" class="outline-2">
+<div id="outline-container-org9f41121" class="outline-2">
 <h2 id="Searching"><span class="section-number-2">9</span> <a href="#Searching">Searching</a></h2>
 <div class="outline-text-2" id="text-Searching">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -536,9 +551,13 @@ will create the file and directories if necessary.
 </div>
 </div>
 
-<div id="outline-container-orgd39561b" class="outline-2">
+<div id="outline-container-org47078ac" class="outline-2">
 <h2 id="Frames"><span class="section-number-2">10</span> <a href="#Frames">Frames</a></h2>
 <div class="outline-text-2" id="text-Frames">
+<p>
+An Emacs frame is what most people would call a window.
+</p>
+
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
@@ -566,6 +585,109 @@ will create the file and directories if necessary.
 <tr>
 <td class="org-left">C-x 5 0</td>
 <td class="org-left">delete-frame</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org814e525" class="outline-2">
+<h2 id="Recursive-Editing"><span class="section-number-2">11</span> <a href="#Recursive-Editing">Recursive Editing</a></h2>
+<div class="outline-text-2" id="text-Recursive-Editing">
+<p>
+Recursive editing is a topic in itself but recursive editing is
+indicated by the <code>[]</code> around the major mode on the mode line e.g.
+[(Fundamental)] instead of (Fundamental).
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Key binding</th>
+<th scope="col" class="org-left">Function</th>
+<th scope="col" class="org-left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">&lt;ESC&gt; &lt;ESC&gt; &lt;ESC&gt;</td>
+<td class="org-left">keyboard-escape-quit</td>
+<td class="org-left">leave recursive editing level</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div id="outline-container-org04ae664" class="outline-2">
+<h2 id="Getting-Help-From-Emacs"><span class="section-number-2">12</span> <a href="#Getting-Help-From-Emacs">Getting Help From Emacs</a></h2>
+<div class="outline-text-2" id="text-Getting-Help-From-Emacs">
+<p>
+The <code>describe-*</code> functions are really useful when you are hacking on
+your emacs.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Key binding</th>
+<th scope="col" class="org-left">Function</th>
+<th scope="col" class="org-left">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">C-h c</td>
+<td class="org-left">describe-key-briefly</td>
+<td class="org-left">Show the function ran by a keybinding in the message buffer</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h k</td>
+<td class="org-left">describe-key</td>
+<td class="org-left">Display more info on a keybinding</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h x</td>
+<td class="org-left">describe-command</td>
+<td class="org-left">Display help buffer for a command</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h a</td>
+<td class="org-left">apropos-command</td>
+<td class="org-left">List all command containing a KEY word</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h v</td>
+<td class="org-left">describe-variable</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-left">C-h f</td>
+<td class="org-left">describe-function</td>
 <td class="org-left">&#xa0;</td>
 </tr>
 </tbody>

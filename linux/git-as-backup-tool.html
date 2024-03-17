@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Git as a Backup Tool</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Git as a Backup Tool</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#Introduction">Introduction</a></li>
+<li><a href="#Setup">Setup</a></li>
+<li><a href="#Limitations">Limitations</a></li>
+<li><a href="#Advantages">Advantages</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3481201" class="outline-2">
+<h2 id="Introduction"><a href="#Introduction">Introduction</a></h2>
+<div class="outline-text-2" id="text-Introduction">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2024-03-17 Sun]</span></span>
+</p>
+
+<p>
+Using Git as a backup strategy works the best for short term backups
+(i.e. backing up files you work with on a daily/weekly basis) and for
+syncing files between multiple computers. It is a simple solution and
+comes with some <a href="#Limitations">limitations</a> (discussed below). For long term backups
+you'll probably want to look into specialized software such as <a href="https://restic.net/">restic</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org30bc8c5" class="outline-2">
+<h2 id="Setup"><a href="#Setup">Setup</a></h2>
+<div class="outline-text-2" id="text-Setup">
+<p>
+The setup discussed here will use a usb drive as the "remote"
+repository, but you could ofcourse also use a server.
+</p>
+
+<ol class="org-ol">
+<li><p>
+Create the repository:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">cd</span> /mnt/backup-repo
+git init --bare --shared=all
+</pre>
+</div></li>
+
+<li><p>
+Clone the repository:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">cd</span> ~/documents
+git clone /mnt/backup-repo
+</pre>
+</div></li>
+
+<li><p>
+Commit changes:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git add -A
+git commit -m <span class="org-string">"2024-03-17"</span>
+</pre>
+</div></li>
+
+<li><p>
+Push changes to USB stick, make sure you always mount the usb to
+the same location or pushing will fail:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">git push origin main
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgbf8713d" class="outline-2">
+<h2 id="Limitations"><a href="#Limitations">Limitations</a></h2>
+<div class="outline-text-2" id="text-Limitations">
+<ul class="org-ul">
+<li>Binary data cannot use most of git's features (e.g. diff's).</li>
+<li>Git does not preserve file system meta data:
+<ul class="org-ul">
+<li>file groups</li>
+<li>file owners</li>
+<li>file permissions, except executable bit</li>
+</ul></li>
+<li>The backup will always increase in size. If you run out of space
+you'll need to delete the repo on the usb and the <code>.git</code> directory
+in the local repo and start form scratch. There are other ways to
+trim the remote repo size but those are out of scope for this
+tutorial.</li>
+<li>Backups are not encrypted.</li>
+</ul>
+
+<p>
+If these are deal breakers for you you might want to look into <a href="https://rsync.samba.org/">rsync</a>
+or <a href="https://syncthing.net/">syncthing</a>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org87a9d2c" class="outline-2">
+<h2 id="Advantages"><a href="#Advantages">Advantages</a></h2>
+<div class="outline-text-2" id="text-Advantages">
+<ul class="org-ul">
+<li>Git is used by practically every software project and therefore very
+reliable.</li>
+<li>Access to all of Git's features, mainly version control.</li>
+<li>If you know Git then you do not need to learn another piece of
+software.</li>
+<li>Fast recovery after you lose your data. Simply clone the repo and
+you are good to go.</li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>.
+</div>
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2024 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>+<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
