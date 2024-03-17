@@ -67,6 +67,10 @@ used when Emacs stops responding.
 :PROPERTIES:
 :CUSTOM_ID: Windows
 :END:
+Windows are where [[Buffers]] are shown. You can have multiple windows in
+a single frame (see [[Frames]] for more information) and you can also have
+the same buffer open in multiple windows.
+
 | Key binding | Function             | Notes                                         |
 |-------------+----------------------+-----------------------------------------------|
 | C-x 1       | delete-other-windows | delete all windows except the focussed window |
@@ -128,6 +132,11 @@ will create the file and directories if necessary.
 :PROPERTIES:
 :CUSTOM_ID: Buffers
 :END:
+A buffer is where Emacs stores the text contained in a file or the
+messages shown in the minibuffer (called the =*Messages*=) or any
+other piece of text. A buffer will remain accessible within Emacs
+until you =M-x kill-emacs= or you =M-x kill-buffer= the buffer.
+
 | Key binding | Function          | Notes                             |
 |-------------+-------------------+-----------------------------------|
 | C-x C-b     | list-buffers      | open a buffer listing all buffers |
@@ -147,19 +156,37 @@ will create the file and directories if necessary.
 :PROPERTIES:
 :CUSTOM_ID: Frames
 :END:
+An Emacs frame is what most people would call a window.
+
 | Key binding | Function           | Notes               |
 |-------------+--------------------+---------------------|
 | C-x 5 2     | make-frame-command | creates a new frame |
 | C-x 5 0     | delete-frame       |                     |
 
-* COMMENT Recursive Editing
+* Recursive Editing
 :PROPERTIES:
 :CUSTOM_ID: Recursive-Editing
 :END:
+Recursive editing is a topic in itself but recursive editing is
+indicated by the =[]= around the major mode on the mode line e.g.
+[(Fundamental)] instead of (Fundamental).
 
+| Key binding       | Function             | Notes                         |
+|-------------------+----------------------+-------------------------------|
+| <ESC> <ESC> <ESC> | keyboard-escape-quit | leave recursive editing level |
 
-* COMMENT continue at line
+* Getting Help From Emacs
 :PROPERTIES:
-:CUSTOM_ID: continue-at-line
+:CUSTOM_ID: Getting-Help-From-Emacs
 :END:
-Tutorial line 1016
+The ~describe-*~ functions are really useful when you are hacking on
+your emacs.
+
+| Key binding | Function             | Notes                                                       |
+|-------------+----------------------+-------------------------------------------------------------|
+| C-h c       | describe-key-briefly | Show the function ran by a keybinding in the message buffer |
+| C-h k       | describe-key         | Display more info on a keybinding                           |
+| C-h x       | describe-command     | Display help buffer for a command                           |
+| C-h a       | apropos-command      | List all command containing a KEY word                      |
+| C-h v       | describe-variable    |                                                             |
+| C-h f       | describe-function    |                                                             |
