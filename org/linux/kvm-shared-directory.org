@@ -35,8 +35,8 @@ Target path: /sharedir
 Now start the VM. To mount the shared directory use:
 
 #+begin_src sh
-  mkdir shared
-  sudo mount -t 9p -o trans=virtio /sharedir shared/
+  sudo mkdir /shared
+  sudo mount -t 9p -o trans=virtio /sharedir /shared
 #+end_src
 
 Or if you want the directory to automatically be mounted on boot add
