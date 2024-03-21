@@ -43,6 +43,7 @@ for example ~pavucontrol~.
        sink name=noechosink
        set-default-source noechosource
        set-default-sink noechosink
+       EOT
 #+end_src
 
 * Sources
