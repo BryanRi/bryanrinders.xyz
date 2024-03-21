@@ -1,0 +1,154 @@
+#+TITLE: Restic Basics
+#+AUTHOR: Bryan Rinders
+#+DATE: <2024-03-19 Tue>
+#+OPTIONS: num:t
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:sh :session *restic-basics-session*
+
+{{{date([%Y-%m-%d])}}}
+
+[[https://restic.net/][Restic]] is an easy to use fast an secure way to create and manage your
+backups. It has support for many different [[https://github.com/restic/restic?tab=readme-ov-file#backends][backends]], including local
+backups.
+
+Below I will describe basic restic usage; how to create and manage
+backups using a local usb/external-drive as a backup repo, as it
+requires no extra setup.
+
+#+begin_src sh :exports none
+  REPO=~/documents/mnt/elements2/.restic
+#+end_src
+
+* Init Repository
+:PROPERTIES:
+:CUSTOM_ID: Init-repository
+:END:
+~Restic~ uses repos to store your backups. The benefit of this is that
+you can have many different backups in the same repo. You can also
+have backups of the same directories from different points in time
+that are stored space efficiently[fn:1] in the same repo. Each backup
+in a repo is referred to as a snapshot. To initialize a restic repo
+run:
+
+#+begin_src sh
+  restic init --repo "${REPO}"
+#+end_src
+
+You'll be prompted for a password because all data in the repo is
+encrypted and can therefore only be accessed if you have the password.
+Note that if you lose the password the data will be irrecoverably
+lost.
+
+* Backup Data
+:PROPERTIES:
+:CUSTOM_ID: Backup-data
+:END:
+To create a backup of =~/documents= run:
+
+#+begin_src sh
+  restic -r "${REPO}" --verbose backup ~/documents
+#+end_src
+
+This will add a snapshot to =${REPO}= with all the contents of
+=~/documents=. Each time you run the backup command ~restic~ will add
+a snapshot to the specified repo.
+
+** Exclude Directories/Files from a Backup
+:PROPERTIES:
+:CUSTOM_ID: Exclude-directoriesfiles
+:END:
+You can be more specific with the files and directories you want in a
+backup by specifying ~--exclude~ or ~--exclude-file~. The latter
+receives a file similar to a =.gitignore= file and contains patterns
+to exclude.
+
+#+begin_src sh
+  restic -r "${REPO}" backup ~/documents --exclude="*.txt"
+#+end_src
+
+This will exclude all the file ending with =.txt= from the backup.
+
+* List Snapshots
+:PROPERTIES:
+:CUSTOM_ID: List-Snapshots
+:END:
+Before you can restore a backup you first must know which one to use.
+You can do this by listing the snapshots.
+
+#+begin_src sh
+  restic -r "${REPO}" snapshots
+#+end_src
+
+If you have many snapshots you can filter the list, see the [[https://restic.readthedocs.io/en/stable/045_working_with_repos.html#working-with-repositories][docs]] for
+info on how to do that.
+
+* Restore Backups
+:PROPERTIES:
+:CUSTOM_ID: Restore-backup
+:END:
+Once you have found the snapshots you want to restore copy its =ID=
+found when [[Listing Snapshots][listing snapshots]] and run:
+
+#+begin_src sh
+  ID="set you snapshot ID here"
+  restic -r "${REPO}" restore "${ID}" --target /tmp/restore-snapshot
+#+end_src
+
+This will restore the snapshot with =${ID}= to the directory
+=/tmp/restore-snapshot=. Instead of using the =${ID}= you can also use
+the =latest= key word to restore the latest snapshot. To do this
+simply replace =${ID}= with =latest= in the above command.
+
+* Remove Snapshots
+:PROPERTIES:
+:CUSTOM_ID: Remove-snapshots
+:END:
+If you want to clean up your repo or if you need to make space, you can
+use the ~forget~ command to remove single snapshots from a repo with
+its =ID=.
+
+#+begin_src sh
+  ID="set you snapshot ID here"
+  restic -r "${REPO}" forget "${ID}" --prune
+#+end_src
+
+This removes the snapshot from the repo and deletes all unreferrenced
+data.
+
+* Password Management
+:PROPERTIES:
+:CUSTOM_ID: Password-Management
+:END:
+You may have noticed that every interaction with the repo required
+entering of the password. This is very annoying and can be resolved
+with the =RESTIC_PASSWORD_COMMAND= environment variable. You could use
+[[https://gnupg.org/][gnupg]] or [[https://www.passwordstore.org/][pass]] to decrypt a file containing the password to the repo.
+For =pass= add to your =.bash_profile= the line:
+
+#+begin_src sh
+  export RESTIC_PASSWORD_COMMAND="pass <restic/repo1>"
+#+end_src
+
+This requires that you have setup ~pass~ which I will probably do a
+tutorial on in the future.
+
+** TODO COMMENT insert link to pass tutorial
+:PROPERTIES:
+:CUSTOM_ID: insert-link-to-pass-tutorial
+:END:
+
+* Sources
+:PROPERTIES:
+:CUSTOM_ID: Sources
+:END:
+- https://restic.readthedocs.io/
+
+* Footnotes
+:PROPERTIES:
+:CUSTOM_ID: Footnotes
+:END:
+
+[fn:1] ~restic~ has a notion of de-duplication, where if a file has
+the same contents as a file already in the repo than ~restic~ will not
+store that file a second time but rather use the data that is already
+in the repo.
