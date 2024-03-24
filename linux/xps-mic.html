@@ -28,9 +28,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></li>
-<li><a href="#Noise-Cancelation">Noise Cancelation</a></li>
-<li><a href="#Sources">Sources</a></li>
+<li><a href="#fix-microphone-on-xps-9700">Fix Microphone On XPS 9700</a></li>
+<li><a href="#noise-cancelation">Noise Cancelation</a></li>
+<li><a href="#sources">Sources</a></li>
 </ul>
 </div>
 </div>
@@ -43,9 +43,9 @@ I had some issues getting my microphone to work on my laptop. Here is
 the fix that worked for me. I put this here so it may help others.
 </p>
 
-<div id="outline-container-org9773f03" class="outline-2">
-<h2 id="Fix-Microphone-On-XPS-9700"><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></h2>
-<div class="outline-text-2" id="text-Fix-Microphone-On-XPS-9700">
+<div id="outline-container-org92e49cb" class="outline-2">
+<h2 id="fix-microphone-on-xps-9700"><a href="#fix-microphone-on-xps-9700">Fix Microphone On XPS 9700</a></h2>
+<div class="outline-text-2" id="text-fix-microphone-on-xps-9700">
 <p>
 I fixed the Issue by switching the rt715 ADC 24 Mux selector in
 <code>alsamixer</code> to DMIC3.
@@ -67,9 +67,9 @@ alsactl restore -f ~/.config/alsa/asound.state
 </div>
 </div>
 
-<div id="outline-container-orgd93fdb2" class="outline-2">
-<h2 id="Noise-Cancelation"><a href="#Noise-Cancelation">Noise Cancelation</a></h2>
-<div class="outline-text-2" id="text-Noise-Cancelation">
+<div id="outline-container-org8448c7d" class="outline-2">
+<h2 id="noise-cancelation"><a href="#noise-cancelation">Noise Cancelation</a></h2>
+<div class="outline-text-2" id="text-noise-cancelation">
 <p>
 The commands below will create a new device which you can select with
 for example <code>pavucontrol</code>.
@@ -88,9 +88,9 @@ sudo cat &lt;&lt;EOT &gt;&gt; /etc/pulse/default.pa
 </div>
 </div>
 
-<div id="outline-container-org43d2348" class="outline-2">
-<h2 id="Sources"><a href="#Sources">Sources</a></h2>
-<div class="outline-text-2" id="text-Sources">
+<div id="outline-container-org1b0c12a" class="outline-2">
+<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div class="outline-text-2" id="text-sources">
 <ul class="org-ul">
 <li><a href="https://askubuntu.com/a/1362014">https://askubuntu.com/a/1362014</a></li>
 <li><a href="https://www.youtube.com/watch?v=lTodCeVAfpI">https://www.youtube.com/watch?v=lTodCeVAfpI</a></li>
