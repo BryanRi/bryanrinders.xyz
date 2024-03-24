@@ -223,7 +223,8 @@ exit
 :PROPERTIES:
 :CUSTOM_ID: Just-Backing-Up-Your-Private-Keys
 :END:
-Encrypting
+Encrypting[fn:1]
+
 #+begin_src sh
   gpg --output pubkey.gpg --export SOMEKEYID \
       && gpg --output - --export-secret-key SOMEKEYID \
@@ -231,7 +232,8 @@ Encrypting
           | gpg --armor --output keys.asc --symmetric --cipher-algo AES256
 #+end_src
 
-Decrypting
+Decrypting[fn:1]
+
 #+begin_src sh
   gpg --output - keys.asc | gpg --import
 #+end_src
@@ -240,7 +242,7 @@ Decrypting
 :PROPERTIES:
 :CUSTOM_ID: Moving-GPG-keys-privately
 :END:
-This method allows you to very easily move you key from one computer
+This method[fn:1] allows you to very easily move you key from one computer
 to another. It does require you to have ssh access to that computer.
 
 If you’re on the machine that already has the key:
@@ -261,4 +263,9 @@ If you’re on the machine that needs the key:
 :END:
 - https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html
 - https://wiki.archlinux.org/title/GnuPG#Key_maintenance
-- https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/
+
+* Footnotes
+:PROPERTIES:
+:CUSTOM_ID: Footnotes
+:END:
+[fn:1] [[https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/]]
