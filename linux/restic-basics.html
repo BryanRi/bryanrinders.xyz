@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Restic Basics</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Restic Basics</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#init-repository">1. Init Repository</a></li>
+<li><a href="#backup-data">2. Backup Data</a></li>
+<li><a href="#list-snapshots">3. List Snapshots</a></li>
+<li><a href="#restore-backups">4. Restore Backups</a></li>
+<li><a href="#remove-snapshots">5. Remove Snapshots</a></li>
+<li><a href="#password-management">6. Password Management</a></li>
+<li><a href="#sources">7. Sources</a></li>
+</ul>
+</div>
+</div>
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2024-03-19 Tue]</span></span>
+</p>
+
+<p>
+<a href="https://restic.net/">Restic</a> is an easy to use fast an secure way to create and manage your
+backups. It has support for many different <a href="https://github.com/restic/restic?tab=readme-ov-file#backends">backends</a>, including local
+backups.
+</p>
+
+<p>
+Below I will describe basic restic usage; how to create and manage
+backups using a local usb/external-drive as a backup repo, as it
+requires no extra setup.
+</p>
+
+<div id="outline-container-org20fb457" class="outline-2">
+<h2 id="init-repository"><span class="section-number-2">1</span> <a href="#init-repository">Init Repository</a></h2>
+<div class="outline-text-2" id="text-init-repository">
+<p>
+<code>Restic</code> uses repos to store your backups. The benefit of this is that
+you can have many different backups in the same repo. You can also
+have backups of the same directories from different points in time
+that are stored space efficiently<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> in the same repo. Each backup
+in a repo is referred to as a snapshot. To initialize a restic repo
+run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">restic init --repo <span class="org-string">"${REPO}"</span>
+</pre>
+</div>
+
+<p>
+You'll be prompted for a password because all data in the repo is
+encrypted and can therefore only be accessed if you have the password.
+Note that if you lose the password the data will be irrecoverably
+lost.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge0274b3" class="outline-2">
+<h2 id="backup-data"><span class="section-number-2">2</span> <a href="#backup-data">Backup Data</a></h2>
+<div class="outline-text-2" id="text-backup-data">
+<p>
+To create a backup of <code>~/documents</code> run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">restic -r <span class="org-string">"${REPO}"</span> --verbose backup ~/documents
+</pre>
+</div>
+
+<p>
+This will add a snapshot to <code>${REPO}</code> with all the contents of
+<code>~/documents</code>. Each time you run the backup command <code>restic</code> will add
+a snapshot to the specified repo.
+</p>
+</div>
+
+<div id="outline-container-orgdc4782a" class="outline-3">
+<h3 id="Exclude-directoriesfiles"><span class="section-number-3">2.1</span> <a href="#Exclude-directoriesfiles">Exclude Directories/Files from a Backup</a></h3>
+<div class="outline-text-3" id="text-Exclude-directoriesfiles">
+<p>
+You can be more specific with the files and directories you want in a
+backup by specifying <code>--exclude</code> or <code>--exclude-file</code>. The latter
+receives a file similar to a <code>.gitignore</code> file and contains patterns
+to exclude.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">restic -r <span class="org-string">"${REPO}"</span> backup ~/documents --exclude=<span class="org-string">"*.txt"</span>
+</pre>
+</div>
+
+<p>
+This will exclude all the file ending with <code>.txt</code> from the backup.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgf23acc2" class="outline-2">
+<h2 id="list-snapshots"><span class="section-number-2">3</span> <a href="#list-snapshots">List Snapshots</a></h2>
+<div class="outline-text-2" id="text-list-snapshots">
+<p>
+Before you can restore a backup you first must know which one to use.
+You can do this by listing the snapshots.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">restic -r <span class="org-string">"${REPO}"</span> snapshots
+</pre>
+</div>
+
+<p>
+If you have many snapshots you can filter the list, see the <a href="https://restic.readthedocs.io/en/stable/045_working_with_repos.html#working-with-repositories">docs</a> for
+info on how to do that.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org5a8112a" class="outline-2">
+<h2 id="restore-backups"><span class="section-number-2">4</span> <a href="#restore-backups">Restore Backups</a></h2>
+<div class="outline-text-2" id="text-restore-backups">
+<p>
+Once you have found the snapshots you want to restore copy its <code>ID</code>
+found when <a href="#list-snapshots">list snapshots</a> and run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-variable-name">ID</span>=<span class="org-string">"set you snapshot ID here"</span>
+restic -r <span class="org-string">"${REPO}"</span> restore <span class="org-string">"${ID}"</span> --target /tmp/restore-snapshot
+</pre>
+</div>
+
+<p>
+This will restore the snapshot with <code>${ID}</code> to the directory
+<code>/tmp/restore-snapshot</code>. Instead of using the <code>${ID}</code> you can also use
+the <code>latest</code> key word to restore the latest snapshot. To do this
+simply replace <code>${ID}</code> with <code>latest</code> in the above command.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org56db53b" class="outline-2">
+<h2 id="remove-snapshots"><span class="section-number-2">5</span> <a href="#remove-snapshots">Remove Snapshots</a></h2>
+<div class="outline-text-2" id="text-remove-snapshots">
+<p>
+If you want to clean up your repo or if you need to make space, you can
+use the <code>forget</code> command to remove single snapshots from a repo with
+its <code>ID</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-variable-name">ID</span>=<span class="org-string">"set you snapshot ID here"</span>
+restic -r <span class="org-string">"${REPO}"</span> forget <span class="org-string">"${ID}"</span> --prune
+</pre>
+</div>
+
+<p>
+This removes the snapshot from the repo and deletes all unreferrenced
+data.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org0464fce" class="outline-2">
+<h2 id="password-management"><span class="section-number-2">6</span> <a href="#password-management">Password Management</a></h2>
+<div class="outline-text-2" id="text-password-management">
+<p>
+You may have noticed that every interaction with the repo required
+entering of the password. This is very annoying and can be resolved
+with the <code>RESTIC_PASSWORD_COMMAND</code> environment variable. You could use
+<a href="https://gnupg.org/">gnupg</a> or <a href="https://www.passwordstore.org/">pass</a> to decrypt a file containing the password to the repo.
+For <code>pass</code> add to your <code>.bash_profile</code> the line:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">RESTIC_PASSWORD_COMMAND</span>=<span class="org-string">"pass &lt;restic/repo1&gt;"</span>
+</pre>
+</div>
+
+<p>
+This requires that you have setup <code>pass</code> which I will probably do a
+tutorial on in the future.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orge9b8b42" class="outline-2">
+<h2 id="sources"><span class="section-number-2">7</span> <a href="#sources">Sources</a></h2>
+<div class="outline-text-2" id="text-sources">
+<ul class="org-ul">
+<li><a href="https://restic.readthedocs.io/">https://restic.readthedocs.io/</a></li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<code>restic</code> has a notion of de-duplication, where if a file has
+the same contents as a file already in the repo than <code>restic</code> will not
+store that file a second time but rather use the data that is already
+in the repo.
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>.
+</div>
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2024 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>+<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
