@@ -21,7 +21,7 @@ requires no extra setup.
 
 * Init Repository
 :PROPERTIES:
-:CUSTOM_ID: Init-repository
+:CUSTOM_ID: init-repository
 :END:
 ~Restic~ uses repos to store your backups. The benefit of this is that
 you can have many different backups in the same repo. You can also
@@ -41,7 +41,7 @@ lost.
 
 * Backup Data
 :PROPERTIES:
-:CUSTOM_ID: Backup-data
+:CUSTOM_ID: backup-data
 :END:
 To create a backup of =~/documents= run:
 
@@ -70,7 +70,7 @@ This will exclude all the file ending with =.txt= from the backup.
 
 * List Snapshots
 :PROPERTIES:
-:CUSTOM_ID: List-Snapshots
+:CUSTOM_ID: list-snapshots
 :END:
 Before you can restore a backup you first must know which one to use.
 You can do this by listing the snapshots.
@@ -84,10 +84,10 @@ info on how to do that.
 
 * Restore Backups
 :PROPERTIES:
-:CUSTOM_ID: Restore-backup
+:CUSTOM_ID: restore-backups
 :END:
 Once you have found the snapshots you want to restore copy its =ID=
-found when [[Listing Snapshots][listing snapshots]] and run:
+found when [[List Snapshots][list snapshots]] and run:
 
 #+begin_src sh
   ID="set you snapshot ID here"
@@ -101,7 +101,7 @@ simply replace =${ID}= with =latest= in the above command.
 
 * Remove Snapshots
 :PROPERTIES:
-:CUSTOM_ID: Remove-snapshots
+:CUSTOM_ID: remove-snapshots
 :END:
 If you want to clean up your repo or if you need to make space, you can
 use the ~forget~ command to remove single snapshots from a repo with
@@ -117,7 +117,7 @@ data.
 
 * Password Management
 :PROPERTIES:
-:CUSTOM_ID: Password-Management
+:CUSTOM_ID: password-management
 :END:
 You may have noticed that every interaction with the repo required
 entering of the password. This is very annoying and can be resolved
@@ -139,13 +139,13 @@ tutorial on in the future.
 
 * Sources
 :PROPERTIES:
-:CUSTOM_ID: Sources
+:CUSTOM_ID: sources
 :END:
 - https://restic.readthedocs.io/
 
 * Footnotes
 :PROPERTIES:
-:CUSTOM_ID: Footnotes
+:CUSTOM_ID: footnotes
 :END:
 
 [fn:1] ~restic~ has a notion of de-duplication, where if a file has
