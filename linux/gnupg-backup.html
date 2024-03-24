@@ -41,7 +41,7 @@
 </div>
 </div>
 
-<div id="outline-container-orgb152598" class="outline-2">
+<div id="outline-container-org7cafdff" class="outline-2">
 <h2 id="Backup"><a href="#Backup">Backup</a></h2>
 <div class="outline-text-2" id="text-Backup">
 <p>
@@ -127,17 +127,13 @@ with your private key, etc:
 <div class="org-src-container">
 <pre class="src src-sh">gpgtar --output gpg-backup.gpg <span class="org-sh-escaped-newline">\</span>
        --symmetric <span class="org-sh-escaped-newline">\</span>
-       --cipher-algo AES256 <span class="org-sh-escaped-newline">\</span>
-       --s2k-digest-algo SHA512 <span class="org-sh-escaped-newline">\</span>
-       --s2k-count 65536 <span class="org-sh-escaped-newline">\</span>
-       --armor <span class="org-sh-escaped-newline">\</span>
        gpg-backup
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgec0129a" class="outline-2">
+<div id="outline-container-org8083eb1" class="outline-2">
 <h2 id="Restore"><a href="#Restore">Restore</a></h2>
 <div class="outline-text-2" id="text-Restore">
 <p>
@@ -145,7 +141,7 @@ Decrypt the tarbal:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh">gpgtar --output gpg-backup --decrypt gpg-backup.tar
+<pre class="src src-sh">gpgtar --decrypt gpg-backup.tar
 </pre>
 </div>
 
@@ -181,7 +177,7 @@ and also copy <code>gnupg.conf</code> into your <code>gnupg</code> directory.
 </p>
 </div>
 
-<div id="outline-container-org9e87f74" class="outline-3">
+<div id="outline-container-orgf04cf3e" class="outline-3">
 <h3 id="Manually-Setting-The-Trust-Of-Your-Key"><a href="#Manually-Setting-The-Trust-Of-Your-Key">Manually Setting The Trust Of Your Key</a></h3>
 <div class="outline-text-3" id="text-Manually-Setting-The-Trust-Of-Your-Key">
 <div class="org-src-container">
@@ -194,7 +190,7 @@ Your decision? 5
 </div>
 </div>
 
-<div id="outline-container-orgc50f9ea" class="outline-2">
+<div id="outline-container-org4436e07" class="outline-2">
 <h2 id="Script"><a href="#Script">Script</a></h2>
 <div class="outline-text-2" id="text-Script">
 <p>
@@ -244,16 +240,16 @@ Simple script to automate the backing up and restoring process.
         gpg --export-ownertrust &gt; otrust.txt
         gpg --output public-keys.asc <span class="org-sh-escaped-newline">\</span>
             --export <span class="org-sh-escaped-newline">\</span>
-            --armor <span class="org-sh-escaped-newline">\</span>
-            --keyring <span class="org-string">"${GNUPGHOME}"</span>/pubring.gpg
-        cp <span class="org-string">"${GNUPGHOME}"</span>/gpg.conf .
+            --armor <span class="org-comment-delimiter">#</span><span class="org-comment">\</span>
+            <span class="org-comment-delimiter"># </span><span class="org-comment">--keyring "$(find "${GNUPGHOME}" -type f -name 'pubring.*[^~]')"</span>
+        [ -f cp <span class="org-string">"${GNUPGHOME}"</span>/gpg.conf ]       &amp;&amp; cp <span class="org-string">"${GNUPGHOME}"</span>/gpg.conf .
+        [ -f cp <span class="org-string">"${GNUPGHOME}"</span>/gpg-agent.conf ] &amp;&amp; cp <span class="org-string">"${GNUPGHOME}"</span>/gpg-agent.conf .
         <span class="org-variable-name">fingerprint</span>=<span class="org-string">"$(gpg  --fingerprint --keyid-format long "${uid}" \</span>
 <span class="org-string">                            | awk -F= '/Key/ { gsub(/[[:blank:]]/, "", $2); print $2 }')"</span>
         <span class="org-comment-delimiter"># </span><span class="org-comment">consider backing up entire openpgp-revocs.d directory</span>
         gpg --gen-revoke --armor --output <span class="org-string">"${fingerprint}.rev"</span> <span class="org-string">"${uid}"</span>
         <span class="org-builtin">cd</span> .. || <span class="org-keyword">exit</span> 3
         gpgtar --output <span class="org-string">"${backup_dir}"</span>.gpg <span class="org-sh-escaped-newline">\</span>
-               --encrypt <span class="org-sh-escaped-newline">\</span>
                --symmetric <span class="org-sh-escaped-newline">\</span>
                --gpg-args <span class="org-string">'--cipher-algo AES256 --s2k-digest-algo SHA512 --s2k-count 65536 --armor'</span> <span class="org-sh-escaped-newline">\</span>
                <span class="org-string">"${backup_dir}"</span>
@@ -271,7 +267,8 @@ Simple script to automate the backing up and restoring process.
         gpg --import-ownertrust &lt; otrust.txt
         mkdir -pv  <span class="org-string">"${GNUPGHOME}"</span>/openpgp-revocs.d <span class="org-sh-escaped-newline">\</span>
               &amp;&amp; cp *.rev <span class="org-string">"${GNUPGHOME}"</span>/openpgp-revocs.d
-        cp gpg.conf <span class="org-string">"${GNUPGHOME}"</span>
+        [ -f gpg.conf ]       &amp;&amp; cp gpg.conf <span class="org-string">"${GNUPGHOME}"</span>
+        [ -f gpg-agent.conf ] &amp;&amp; cp gpg-agent.conf <span class="org-string">"${GNUPGHOME}"</span>
         ;;
     *) usage; <span class="org-keyword">exit</span> 4; ;;
 <span class="org-keyword">esac</span>
@@ -282,12 +279,13 @@ Simple script to automate the backing up and restoring process.
 </div>
 </div>
 
-<div id="outline-container-orgc2d9b27" class="outline-2">
+<div id="outline-container-org8c8a287" class="outline-2">
 <h2 id="Just-Backing-Up-Your-Private-Keys"><a href="#Just-Backing-Up-Your-Private-Keys">Just Backing Up Your Private Keys</a></h2>
 <div class="outline-text-2" id="text-Just-Backing-Up-Your-Private-Keys">
 <p>
-Encrypting
+Encrypting<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
 </p>
+
 <div class="org-src-container">
 <pre class="src src-sh">gpg --output pubkey.gpg --export SOMEKEYID <span class="org-sh-escaped-newline">\</span>
     &amp;&amp; gpg --output - --export-secret-key SOMEKEYID <span class="org-sh-escaped-newline">\</span>
@@ -297,8 +295,9 @@ Encrypting
 </div>
 
 <p>
-Decrypting
+Decrypting<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>
 </p>
+
 <div class="org-src-container">
 <pre class="src src-sh">gpg --output - keys.asc | gpg --import
 </pre>
@@ -306,11 +305,11 @@ Decrypting
 </div>
 </div>
 
-<div id="outline-container-org4550877" class="outline-2">
+<div id="outline-container-org4565008" class="outline-2">
 <h2 id="Moving-GPG-keys-privately"><a href="#Moving-GPG-keys-privately">Moving GPG keys privately</a></h2>
 <div class="outline-text-2" id="text-Moving-GPG-keys-privately">
 <p>
-This method allows you to very easily move you key from one computer
+This method<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> allows you to very easily move you key from one computer
 to another. It does require you to have ssh access to that computer.
 </p>
 
@@ -334,17 +333,26 @@ If you’re on the machine that needs the key:
 </div>
 </div>
 
-<div id="outline-container-org1da05c8" class="outline-2">
+<div id="outline-container-org1f8a59f" class="outline-2">
 <h2 id="Sources"><a href="#Sources">Sources</a></h2>
 <div class="outline-text-2" id="text-Sources">
 <ul class="org-ul">
 <li><a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html">https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html</a></li>
 <li><a href="https://wiki.archlinux.org/title/GnuPG#Key_maintenance">https://wiki.archlinux.org/title/GnuPG#Key_maintenance</a></li>
-<li><a href="https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/">https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/</a></li>
 </ul>
 </div>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/">https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/</a>
+</p></div></div>
+
+
 </div>
+</div></div>
 <div id="postamble" class="status">
 <br><br>
 <div style='text-align: center;'>

@@ -34,14 +34,18 @@
 </ul>
 </div>
 </div>
-
-<div id="outline-container-org778ec66" class="outline-2">
-<h2 id="Fix-Microphone-On-XPS-9700"><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></h2>
-<div class="outline-text-2" id="text-Fix-Microphone-On-XPS-9700">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">[2023-09-10 Sun]</span></span>
 </p>
 
+<p>
+I had some issues getting my microphone to work on my laptop. Here is
+the fix that worked for me. I put this here so it may help others.
+</p>
+
+<div id="outline-container-org0ebd444" class="outline-2">
+<h2 id="Fix-Microphone-On-XPS-9700"><a href="#Fix-Microphone-On-XPS-9700">Fix Microphone On XPS 9700</a></h2>
+<div class="outline-text-2" id="text-Fix-Microphone-On-XPS-9700">
 <p>
 I fixed the Issue by switching the rt715 ADC 24 Mux selector in
 <code>alsamixer</code> to DMIC3.
@@ -63,7 +67,7 @@ alsactl restore -f ~/.config/alsa/asound.state
 </div>
 </div>
 
-<div id="outline-container-org5326c9e" class="outline-2">
+<div id="outline-container-org2532822" class="outline-2">
 <h2 id="Noise-Cancelation"><a href="#Noise-Cancelation">Noise Cancelation</a></h2>
 <div class="outline-text-2" id="text-Noise-Cancelation">
 <p>
@@ -78,12 +82,13 @@ sudo cat &lt;&lt;EOT &gt;&gt; /etc/pulse/default.pa
 <span class="org-sh-heredoc">     sink name=noechosink</span>
 <span class="org-sh-heredoc">     set-default-source noechosource</span>
 <span class="org-sh-heredoc">     set-default-sink noechosink</span>
+<span class="org-sh-heredoc">     EOT</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org8bfddd7" class="outline-2">
+<div id="outline-container-orgf0d5666" class="outline-2">
 <h2 id="Sources"><a href="#Sources">Sources</a></h2>
 <div class="outline-text-2" id="text-Sources">
 <ul class="org-ul">
