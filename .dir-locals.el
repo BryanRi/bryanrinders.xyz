@@ -19,7 +19,8 @@ represents. PREFIX will be prefixed to the CUSTOM_ID."
                                  (replace-regexp-in-string
                                   "\s+" "-" ;"--on io a-"))
                                   (substring-no-properties (org-get-heading t t t t)))))))
-                          (concat (when prefix (concat prefix "-")) id))
+                          (concat (when prefix (concat prefix "-"))
+                                  (downcase id)))
                         ))
 
               (eval . (defun br/org-custom-id-get (&optional pom create prefix)
