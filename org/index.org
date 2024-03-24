@@ -14,11 +14,11 @@ target='_blank'@@html:>gitlab page</a>@@.
 
 * List of most recent posts
 :PROPERTIES:
-:CUSTOM_ID: List-of-most-recent-posts
+:CUSTOM_ID: list-of-most-recent-posts
 :END:
 ** CTF Writeups
 :PROPERTIES:
-:CUSTOM_ID: CTF-Writeups
+:CUSTOM_ID: ctf-writeups
 :END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./ctf/ctf-sitemap.org :lines 3-13
@@ -26,7 +26,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 
 ** Emacs Tutorials
 :PROPERTIES:
-:CUSTOM_ID: Emacs-Tutorials
+:CUSTOM_ID: emacs-tutorials
 :END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./emacs/emacs-sitemap.org :lines 3-13
@@ -34,7 +34,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 
 ** Linux Tutorials
 :PROPERTIES:
-:CUSTOM_ID: Linux-Tutorials
+:CUSTOM_ID: linux-tutorials
 :END:
 #+HTML: <div class="recent-posts">
 #+INCLUDE: ./linux/linux-sitemap.org :lines 3-13
@@ -42,7 +42,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 
 * COMMENT List of most recent posts
 :PROPERTIES:
-:CUSTOM_ID: List-of-most-recent-posts
+:CUSTOM_ID: list-of-most-recent-posts
 :END:
 | Recent Posts       |       Date |
 |--------------------+------------|
@@ -51,7 +51,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 
 * COMMENT Support with crypto
 :PROPERTIES:
-:CUSTOM_ID: Support-with-crypto
+:CUSTOM_ID: support-with-crypto
 :END:
 If you enjoyed any of my content consider supporting me by donating with crypto currencies.
 - Bitcoin: <address>

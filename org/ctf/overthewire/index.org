@@ -5,7 +5,7 @@
 
 * OverTheWire Writeups
 :PROPERTIES:
-:CUSTOM_ID: OverTheWire-Writeups
+:CUSTOM_ID: overthewire-writeups
 :END:
 My write ups for the [[https://overthewire.org/wargames][overthewire.org]] war games. OverTheWire teaches
 basic *nix skill, web security and more.

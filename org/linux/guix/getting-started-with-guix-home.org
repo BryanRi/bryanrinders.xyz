@@ -8,7 +8,7 @@
 
 * Introduction
 :PROPERTIES:
-:CUSTOM_ID: Introduction
+:CUSTOM_ID: introduction
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -22,7 +22,7 @@ distros.
 
 * Testing
 :PROPERTIES:
-:CUSTOM_ID: Testing
+:CUSTOM_ID: testing
 :END:
 Once you have a config you can test it inside a throw away container
 with:
@@ -39,7 +39,7 @@ And to apply it to your actual system run:
 
 * Shells
 :PROPERTIES:
-:CUSTOM_ID: Shells
+:CUSTOM_ID: shells
 :END:
 If you already use guix as a package manager then letting guix-home
 configure your shell(s) will make your life easier as it automatically
@@ -91,7 +91,7 @@ Configurations for the other shells look very similar.
 
 * Environment Variables
 :PROPERTIES:
-:CUSTOM_ID: Environment-Variables
+:CUSTOM_ID: environment-variables
 :END:
 You can also define you environment variables inside you guix-home
 configuration. They will be system wide variables that are sourced
@@ -125,7 +125,7 @@ always use the latest installed version of fish.
 
 * Channels
 :PROPERTIES:
-:CUSTOM_ID: Channels
+:CUSTOM_ID: channels
 :END:
 If you use channels other than the default ones you can extend the
 ~home-channels-service-type~ like this:
@@ -156,7 +156,7 @@ The example adds the [[https://gitlab.com/nonguix/nonguix][nonguix]] channel to 
 
 * Other Configuration Files
 :PROPERTIES:
-:CUSTOM_ID: Other-Configuration-Files
+:CUSTOM_ID: other-configuration-files
 :END:
 To search for guix-home service types you can run
 
@@ -211,7 +211,7 @@ directory has a =.config= directory that resembles =XDG_CONFIG_HOME=.
 
 * Combining Everything
 :PROPERTIES:
-:CUSTOM_ID: Combining-Everything
+:CUSTOM_ID: combining-everything
 :END:
 Combining all the above configurations will results in:
 
@@ -284,7 +284,7 @@ root of your dotfile directory.
 
 * Sources
 :PROPERTIES:
-:CUSTOM_ID: Sources
+:CUSTOM_ID: sources
 :END:
 - The guix home manual:
   [[https://guix.gnu.org/manual/en/html_node/Home-Configuration.html]]

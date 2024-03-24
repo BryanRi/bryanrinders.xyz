@@ -7,7 +7,7 @@
 
 * Introduction
 :PROPERTIES:
-:CUSTOM_ID: Introduction
+:CUSTOM_ID: introduction
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -19,7 +19,7 @@ you'll probably want to look into specialized software such as [[https://restic.
 
 * Setup
 :PROPERTIES:
-:CUSTOM_ID: Setup
+:CUSTOM_ID: setup
 :END:
 The setup discussed here will use a usb drive as the "remote"
 repository, but you could ofcourse also use a server.
@@ -54,7 +54,7 @@ repository, but you could ofcourse also use a server.
 
 * Limitations
 :PROPERTIES:
-:CUSTOM_ID: Limitations
+:CUSTOM_ID: limitations
 :END:
 - Binary data cannot use most of git's features (e.g. diff's).
 - Git does not preserve file system meta data:
@@ -73,7 +73,7 @@ or [[https://syncthing.net/][syncthing]].
 
 * Advantages
 :PROPERTIES:
-:CUSTOM_ID: Advantages
+:CUSTOM_ID: advantages
 :END:
 - Git is used by practically every software project and therefore very
   reliable.

@@ -5,7 +5,7 @@
 
 * TryHackMe Writeups
 :PROPERTIES:
-:CUSTOM_ID: TryHackMe-Writeups
+:CUSTOM_ID: tryhackme-writeups
 :END:
 My write ups for [[https://tryhackme.com][TryHackMe]] rooms and learning paths.
 

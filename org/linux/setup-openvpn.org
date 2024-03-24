@@ -5,7 +5,7 @@
 
 * Setup OpenVPN With Network Manager
 :PROPERTIES:
-:CUSTOM_ID: Setup-OpenVPN-With-Network-Manager
+:CUSTOM_ID: setup-openvpn-with-network-manager
 :END:
 {{{date([%Y-%m-%d])}}}
 

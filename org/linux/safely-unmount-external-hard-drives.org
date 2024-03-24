@@ -7,7 +7,7 @@
 
 * Introduction
 :PROPERTIES:
-:CUSTOM_ID: Introduction
+:CUSTOM_ID: introduction
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -24,7 +24,7 @@ that can be used for this purpose.
 
 * Udisks
 :PROPERTIES:
-:CUSTOM_ID: Udisks
+:CUSTOM_ID: udisks
 :END:
 To unmount the external harddrive:
 
@@ -48,7 +48,7 @@ more information on this.
 
 * Sources
 :PROPERTIES:
-:CUSTOM_ID: Sources
+:CUSTOM_ID: sources
 :END:
 - [[https://unix.stackexchange.com/questions/354138/safest-way-to-remove-usb-drive-on-linux]]
 - [[https://stackoverflow.com/questions/13224509/linux-ubuntu-safely-remove-a-usb-flash-disk-via-the-command-line]]

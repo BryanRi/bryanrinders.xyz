@@ -11,7 +11,7 @@ Write up for the challenges in the tryhackme room [[https://tryhackme.com/room/o
 
 * Task 11 Insecure design
 :PROPERTIES:
-:CUSTOM_ID: Task-11-Insecure-design
+:CUSTOM_ID: task-11-insecure-design
 :END:
 Visit the page =ht​tp://MACHINE_IP:PORT= and click on the 'I forgot my
 password' link and enter the username =joseph=. You will be brought to
@@ -41,7 +41,7 @@ THM{Not_3ven_c4tz_c0uld_sav3_U!}
 
 * Task 12 Security Misconfiguration
 :PROPERTIES:
-:CUSTOM_ID: Task-12-Security-Misconfiguration
+:CUSTOM_ID: task-12-security-misconfiguration
 :END:
 Go to =h​ttp://MACHINE_IP:PORT/console= and enter in the console
 
@@ -65,7 +65,7 @@ THM{Just_a_tiny_misconfiguration}
 
 * Task 15 Vulnerable And Outdated Components
 :PROPERTIES:
-:CUSTOM_ID: Task-15-Vulnerable-And-Outdated-Components
+:CUSTOM_ID: task-15-vulnerable-and-outdated-components
 :END:
 Go to the page =h​ttp://MACHINE_IP:PORT=. After look around the website
 for a bit the most interesting page in the admin login page. Trying
@@ -93,7 +93,7 @@ THM{But_1ts_n0t_my_f4ult!}
 
 * Task 20 Data Integrity Failures
 :PROPERTIES:
-:CUSTOM_ID: Task-20-Data-Integrity-Failures
+:CUSTOM_ID: task-20-data-integrity-failures
 :END:
 The password for the =guest= account is =guest=.
 
@@ -145,7 +145,7 @@ THM{Dont_take_cookies_from_strangers}
 
 * Task 21 Security Logging And Monitoring Failures
 :PROPERTIES:
-:CUSTOM_ID: Task-21-Security-Logging-And-Monitoring-Failures
+:CUSTOM_ID: task-21-security-logging-and-monitoring-failures
 :END:
 When you open the supplied file it is obvious the IP of the attacker
 is:
@@ -162,7 +162,7 @@ brute force
 
 * Task 22 Server Side Request Forgery
 :PROPERTIES:
-:CUSTOM_ID: Task-22-Server-Side-Request-Forgery
+:CUSTOM_ID: task-22-server-side-request-forgery
 :END:
 Go to the admin area, it will tell you only =localhost= can login as
 admin.
@@ -190,7 +190,7 @@ THM{Hello_Im_just_an_API_key}
 
 ** Extra Mile
 :PROPERTIES:
-:CUSTOM_ID: Extra-Mile
+:CUSTOM_ID: extra-mile
 :END:
 Because the admin page is only accessible from =localhost= we can do
 the same trick as before but instead of using ~netcat~ you use

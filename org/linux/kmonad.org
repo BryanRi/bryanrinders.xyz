@@ -6,7 +6,7 @@
 
 * Intro
 :PROPERTIES:
-:CUSTOM_ID: Intro
+:CUSTOM_ID: intro
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -16,7 +16,7 @@ you to remap keys, create layers, compose keys and more.
 
 * Post installation
 :PROPERTIES:
-:CUSTOM_ID: Post-installation
+:CUSTOM_ID: post-installation
 :END:
 After you have installed =kmonad=, to prevent having to run =kmonad=
 with root priviledges run the following commands and then reboot your
@@ -45,7 +45,7 @@ for more info.
 
 * Configuring
 :PROPERTIES:
-:CUSTOM_ID: Configuring
+:CUSTOM_ID: configuring
 :END:
 
 #+begin_src emacs-lisp
@@ -193,6 +193,6 @@ for more info.
 
 * COMMENT Other Sources
 :PROPERTIES:
-:CUSTOM_ID: Other-Sources
+:CUSTOM_ID: other-sources
 :END:
 [[https://www.reddit.com/r/emacs/comments/oyzfz9/kmonad_and_the_power_of_infinite_leader_keys/][kmonad reddit]]

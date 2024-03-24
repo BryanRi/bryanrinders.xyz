@@ -6,7 +6,7 @@
 
 * My Website
 :PROPERTIES:
-:CUSTOM_ID: My-Website
+:CUSTOM_ID: my-website
 :END:
 The source code for [[https://bryanrinders.xyz]]
 
@@ -16,7 +16,7 @@ The source code for [[https://bryanrinders.xyz]]
 
 * TODO Wishlist [1/4]
 :PROPERTIES:
-:CUSTOM_ID: Wishlist-14
+:CUSTOM_ID: wishlist-14
 :END:
 - [ ] Use CATEGORY to automatically make sub-sitemaps. This allows for
   dynamically increasing the number of sitemaps, and hence no need to
@@ -26,7 +26,7 @@ The source code for [[https://bryanrinders.xyz]]
 
 * Fix List
 :PROPERTIES:
-:CUSTOM_ID: Fix-list
+:CUSTOM_ID: fix-list
 :END:
 - [X] TOC headline color
 - [ ] Color of the number of numbered headings (guix home)

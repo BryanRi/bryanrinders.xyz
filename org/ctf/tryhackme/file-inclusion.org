@@ -6,7 +6,7 @@
 
 * Intro
 :PROPERTIES:
-:CUSTOM_ID: Intro
+:CUSTOM_ID: intro
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -15,11 +15,11 @@ Inclusion]].
 
 * Challenges
 :PROPERTIES:
-:CUSTOM_ID: Challenges
+:CUSTOM_ID: challenges
 :END:
 ** Flag 1
 :PROPERTIES:
-:CUSTOM_ID: Flag-1
+:CUSTOM_ID: flag-1
 :END:
 On the right hand side of Firefox open the =menu > Web Developer >
 Inspector=. In the html source code find the form tag and change the
@@ -28,7 +28,7 @@ in the form and press the include button. This should reveal the flag.
 
 ** Flag 2
 :PROPERTIES:
-:CUSTOM_ID: Flag-2
+:CUSTOM_ID: flag-2
 :END:
 From the hint it is clear that we have to edit the cookie to find the
 flag. To inspect the cookie run:
@@ -58,7 +58,7 @@ Locate the flag at the end of the file =flag2.txt=.
 
 ** Flag 3
 :PROPERTIES:
-:CUSTOM_ID: Flag-3
+:CUSTOM_ID: flag-3
 :END:
 The url input is filtered, everything that is not a-z is filtered
 out. To get around this change the method from get to =GET= to =POST=
@@ -74,7 +74,7 @@ Locate the flag at the end of the file =flag3.txt=.
 
 ** Playground
 :PROPERTIES:
-:CUSTOM_ID: Playground
+:CUSTOM_ID: playground
 :END:
 Since this is a RFI exercise we first need to create a =.php= file
 that will execute the command we want, =hostname=.

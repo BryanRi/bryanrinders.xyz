@@ -8,17 +8,17 @@
 
 * TODO COMMENT Getting started with gnupg
 :PROPERTIES:
-:CUSTOM_ID: Getting-started-with-gnupg
+:CUSTOM_ID: getting-started-with-gnupg
 :END:
 
 * TODO COMMENT How to handle subkeys
 :PROPERTIES:
-:CUSTOM_ID: How-to-handle-subkeys
+:CUSTOM_ID: how-to-handle-subkeys
 :END:
 
 * Backup
 :PROPERTIES:
-:CUSTOM_ID: Backup
+:CUSTOM_ID: backup
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -90,7 +90,7 @@ with your private key, etc:
 
 * Restore
 :PROPERTIES:
-:CUSTOM_ID: Restore
+:CUSTOM_ID: restore
 :END:
 Decrypt the tarbal:
 
@@ -120,7 +120,7 @@ and also copy =gnupg.conf= into your =gnupg= directory.
 
 ** Manually Setting The Trust Of Your Key
 :PROPERTIES:
-:CUSTOM_ID: Manually-Setting-The-Trust-Of-Your-Key
+:CUSTOM_ID: manually-setting-the-trust-of-your-key
 :END:
 
 #+begin_src sh
@@ -131,7 +131,7 @@ and also copy =gnupg.conf= into your =gnupg= directory.
 
 * Script
 :PROPERTIES:
-:CUSTOM_ID: Script
+:CUSTOM_ID: script
 :END:
 Simple script to automate the backing up and restoring process.
 
@@ -216,7 +216,7 @@ Simple script to automate the backing up and restoring process.
 
 * Just Backing Up Your Private Keys
 :PROPERTIES:
-:CUSTOM_ID: Just-Backing-Up-Your-Private-Keys
+:CUSTOM_ID: just-backing-up-your-private-keys
 :END:
 Encrypting[fn:1]
 
@@ -235,7 +235,7 @@ Decrypting[fn:1]
 
 * Moving GPG keys privately
 :PROPERTIES:
-:CUSTOM_ID: Moving-GPG-keys-privately
+:CUSTOM_ID: moving-gpg-keys-privately
 :END:
 This method[fn:1] allows you to very easily move you key from one computer
 to another. It does require you to have ssh access to that computer.
@@ -254,13 +254,13 @@ If you’re on the machine that needs the key:
 
 * Sources
 :PROPERTIES:
-:CUSTOM_ID: Sources
+:CUSTOM_ID: sources
 :END:
 - https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html
 - https://wiki.archlinux.org/title/GnuPG#Key_maintenance
 
 * Footnotes
 :PROPERTIES:
-:CUSTOM_ID: Footnotes
+:CUSTOM_ID: footnotes
 :END:
 [fn:1] [[https://web.archive.org/web/20210803213236/https://habd.as/post/moving-gpg-keys-privately/]]

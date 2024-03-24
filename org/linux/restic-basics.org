@@ -55,7 +55,7 @@ a snapshot to the specified repo.
 
 ** Exclude Directories/Files from a Backup
 :PROPERTIES:
-:CUSTOM_ID: Exclude-directoriesfiles
+:CUSTOM_ID: exclude-directoriesfiles
 :END:
 You can be more specific with the files and directories you want in a
 backup by specifying ~--exclude~ or ~--exclude-file~. The latter

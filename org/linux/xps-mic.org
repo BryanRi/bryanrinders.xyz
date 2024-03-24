@@ -12,7 +12,7 @@ the fix that worked for me. I put this here so it may help others.
 
 * Fix Microphone On XPS 9700
 :PROPERTIES:
-:CUSTOM_ID: Fix-Microphone-On-XPS-9700
+:CUSTOM_ID: fix-microphone-on-xps-9700
 :END:
 
 I fixed the Issue by switching the rt715 ADC 24 Mux selector in
@@ -31,7 +31,7 @@ command followed by a file path i.e.
 
 * Noise Cancelation
 :PROPERTIES:
-:CUSTOM_ID: Noise-Cancelation
+:CUSTOM_ID: noise-cancelation
 :END:
 The commands below will create a new device which you can select with
 for example ~pavucontrol~.
@@ -48,7 +48,7 @@ for example ~pavucontrol~.
 
 * Sources
 :PROPERTIES:
-:CUSTOM_ID: Sources
+:CUSTOM_ID: sources
 :END:
 - [[https://askubuntu.com/a/1362014]]
 - [[https://www.youtube.com/watch?v=lTodCeVAfpI]]

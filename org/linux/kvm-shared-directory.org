@@ -10,7 +10,7 @@ host and a KVM guest virtual machine.
 
 * KVM: Setup A Shared Direcory Between A Host And Guest
 :PROPERTIES:
-:CUSTOM_ID: KVM-Setup-A-Shared-Direcory-Between-A-Host-And-Guest
+:CUSTOM_ID: kvm-setup-a-shared-direcory-between-a-host-and-guest
 :END:
 Create the directory to be shared on you host machine and set the permissions.
 
@@ -48,7 +48,7 @@ this to your =/etc/fstab=:
 
 * Sources
 :PROPERTIES:
-:CUSTOM_ID: Sources
+:CUSTOM_ID: sources
 :END:
 - https://ostechnix.com/setup-a-shared-folder-between-kvm-host-and-guest/
 - https://www.linux-kvm.org/page/9p_virtio

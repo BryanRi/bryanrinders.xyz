@@ -6,7 +6,7 @@
 
 * Introduction
 :PROPERTIES:
-:CUSTOM_ID: Introduction
+:CUSTOM_ID: introduction
 :END:
 {{{date([%Y-%m-%d])}}}
 
@@ -15,11 +15,11 @@ Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
 
 * Day 1 Frameworks
 :PROPERTIES:
-:CUSTOM_ID: Day-1-Frameworks
+:CUSTOM_ID: day-1-frameworks
 :END:
 ** Puzzle 1
 :PROPERTIES:
-:CUSTOM_ID: Day-1-Puzzle-1
+:CUSTOM_ID: day-1-puzzle-1
 :END:
 1. Reconnaissance
 2. Weaponization
@@ -32,7 +32,7 @@ Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
 
 ** Puzzle 2
 :PROPERTIES:
-:CUSTOM_ID: Day-1-Puzzle-2
+:CUSTOM_ID: day-1-puzzle-2
 :END:
 1. Pivoting
 2. Discovery
@@ -43,7 +43,7 @@ Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
 
 ** Puzzle 3
 :PROPERTIES:
-:CUSTOM_ID: Day-1-Puzzle-3
+:CUSTOM_ID: day-1-puzzle-3
 :END:
 1. Access
 2. Collection
@@ -53,7 +53,7 @@ Cyber. Join the room [[https://tryhackme.com/room/adventofcyber4][here]].
 
 ** Answers
 :PROPERTIES:
-:CUSTOM_ID: Day-1-Answers
+:CUSTOM_ID: day-1-answers
 :END:
 Who is the adversary that attacked Santa's network this year?
 
@@ -69,7 +69,7 @@ THM{IT'S A Y3T1 CHR1$TMA$}
 
 * Day 2 Log Analysis
 :PROPERTIES:
-:CUSTOM_ID: Day-2-Log-Analysis
+:CUSTOM_ID: day-2-log-analysis
 :END:
 Use the ls command to list the files present in the current directory. How many log files are present?
 
@@ -131,7 +131,7 @@ Look through the log files for the flag. The format of the flag is: THM{}
 
 * Day 3 OSINT
 :PROPERTIES:
-:CUSTOM_ID: Day-3-OSINT
+:CUSTOM_ID: day-3-osint
 :END:
 What is the name of the Registrar for the domain santagift.shop?
 
@@ -198,11 +198,11 @@ s@nta2022
 
 * Day 4 Scanning
 :PROPERTIES:
-:CUSTOM_ID: Day-4-Scanning
+:CUSTOM_ID: day-4-scanning
 :END:
 * Day 5 Brute Forcing
 :PROPERTIES:
-:CUSTOM_ID: Day-5-Brute-Forcing
+:CUSTOM_ID: day-5-brute-forcing
 :END:
 Use Hydra to find the VNC password of the target with IP address
 *MACHINE_IP*. What is the password?
@@ -229,7 +229,7 @@ THM{I_SEE_YOUR_SCREEN}
 
 * Day 6 Email Analysis
 :PROPERTIES:
-:CUSTOM_ID: Day-6-Email-Analysis
+:CUSTOM_ID: day-6-email-analysis
 :END:
 1. What is the email address of the sender?
 
@@ -310,7 +310,7 @@ macro_hunter
 
 * Day 7 Cyberchef
 :PROPERTIES:
-:CUSTOM_ID: Day-7-Cyberchef
+:CUSTOM_ID: day-7-cyberchef
 :END:
 Before answering any of the questions, open firefox and click the
 bookmark of cyberchef. Then go through all the 11 steps as explained
@@ -350,5 +350,5 @@ THM_MYSTERY_FLAG
 
 * Day 8 Smart Contracts
 :PROPERTIES:
-:CUSTOM_ID: Day-8-Smart-Contracts
+:CUSTOM_ID: day-8-smart-contracts
 :END:

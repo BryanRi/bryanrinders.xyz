@@ -12,7 +12,7 @@ remember is =M-x=; to get access to all of Emacs' commands.
 
 * Buffer movement
 :PROPERTIES:
-:CUSTOM_ID: Buffer-movement
+:CUSTOM_ID: buffer-movement
 :END:
 
 | Key binding | Function            | Notes                                |
@@ -23,7 +23,7 @@ remember is =M-x=; to get access to all of Emacs' commands.
 
 * Cursor movement
 :PROPERTIES:
-:CUSTOM_ID: Cursor-movement
+:CUSTOM_ID: cursor-movement
 :END:
 
 | Key binding | Function               | Notes                                        |
@@ -45,7 +45,7 @@ remember is =M-x=; to get access to all of Emacs' commands.
 
 * Universal argument
 :PROPERTIES:
-:CUSTOM_ID: Universal-argument
+:CUSTOM_ID: universal-argument
 :END:
 To supply an emacs command a numeric argument, the repeat count or
 prefix argument, prefix it with =C-u= and then the digits before you
@@ -58,14 +58,14 @@ results in =********=.
 
 * Quit
 :PROPERTIES:
-:CUSTOM_ID: Quit
+:CUSTOM_ID: quit
 :END:
 To quit in the middle of typing a key cord use =C-g=. It can also be
 used when Emacs stops responding.
 
 * Windows
 :PROPERTIES:
-:CUSTOM_ID: Windows
+:CUSTOM_ID: windows
 :END:
 Windows are where [[Buffers]] are shown. You can have multiple windows in
 a single frame (see [[Frames]] for more information) and you can also have
@@ -81,11 +81,11 @@ the same buffer open in multiple windows.
 
 * Editing
 :PROPERTIES:
-:CUSTOM_ID: Editing
+:CUSTOM_ID: editing
 :END:
 ** Killing, Deleting and Yanking
 :PROPERTIES:
-:CUSTOM_ID: Killing-Deleting-and-Yanking
+:CUSTOM_ID: killing-deleting-and-yanking
 :END:
 | Key binding | Function           | Notes                                             |
 |-------------+--------------------+---------------------------------------------------|
@@ -103,7 +103,7 @@ the same buffer open in multiple windows.
 
 ** Undo-ing
 :PROPERTIES:
-:CUSTOM_ID: Undo-ing
+:CUSTOM_ID: undo-ing
 :END:
 =C-/=, =C-_= and =C-x u= can be used to undo. In order to redo
 (i.e. undo your undos) you must 'push' your undos to the
@@ -117,7 +117,7 @@ your undos.
 
 * Files
 :PROPERTIES:
-:CUSTOM_ID: Files
+:CUSTOM_ID: files
 :END:
 | Key binding | Function    | Notes                   |
 |-------------+-------------+-------------------------|
@@ -130,7 +130,7 @@ will create the file and directories if necessary.
 
 * Buffers
 :PROPERTIES:
-:CUSTOM_ID: Buffers
+:CUSTOM_ID: buffers
 :END:
 A buffer is where Emacs stores the text contained in a file or the
 messages shown in the minibuffer (called the =*Messages*=) or any
@@ -145,7 +145,7 @@ until you =M-x kill-emacs= or you =M-x kill-buffer= the buffer.
 
 * Searching
 :PROPERTIES:
-:CUSTOM_ID: Searching
+:CUSTOM_ID: searching
 :END:
 | Key binding | Function         | Notes                         |
 |-------------+------------------+-------------------------------|
@@ -154,7 +154,7 @@ until you =M-x kill-emacs= or you =M-x kill-buffer= the buffer.
 
 * Frames
 :PROPERTIES:
-:CUSTOM_ID: Frames
+:CUSTOM_ID: frames
 :END:
 An Emacs frame is what most people would call a window.
 
@@ -165,7 +165,7 @@ An Emacs frame is what most people would call a window.
 
 * Recursive Editing
 :PROPERTIES:
-:CUSTOM_ID: Recursive-Editing
+:CUSTOM_ID: recursive-editing
 :END:
 Recursive editing is a topic in itself but recursive editing is
 indicated by the =[]= around the major mode on the mode line e.g.
@@ -177,7 +177,7 @@ indicated by the =[]= around the major mode on the mode line e.g.
 
 * Getting Help From Emacs
 :PROPERTIES:
-:CUSTOM_ID: Getting-Help-From-Emacs
+:CUSTOM_ID: getting-help-from-emacs
 :END:
 The ~describe-*~ functions are really useful when you are hacking on
 your emacs.
