@@ -8,13 +8,37 @@
 :PROPERTIES:
 :CUSTOM_ID: my-website
 :END:
-The source code for [[https://bryanrinders.xyz]]
+The source code for [[https://bryanrinders.xyz]], generated using
+[[https://www.gnu.org/software/emacs/manual/html_mono/org.html#Publishing][org-publish]].
 
 - Git repo Gitlab: [[https://gitlab.com/bryanrinders/bryanrinders.xyz]]
-  + Mirrors:
-    - Github: [[https://github.com/BryanRi/bryanrinders.xyz]]
 
-* TODO Wishlist [1/4]
+  Mirrors:
+  - Github: [[https://github.com/BryanRi/bryanrinders.xyz]]
+
+* Build
+:PROPERTIES:
+:CUSTOM_ID: build
+:END:
+To generate the website, html pages, css, etc use the ~build.sh~
+script. It accepts three arguments:
+
+- d :: starts a new emacs server using the =build-site-debug.el= as
+  =init.el=, this will make sure you actual =init.el= does not
+  unknowingly mess with the websites configuration.
+  =build-site-debug.el= is a very bare bones config using only builtin
+  features.
+- a :: regenerate the entire website. It can happen that files have
+  not changed but do need to be regenerated, in which case using =a=
+  will force emacs to regenerate them.
+- <no-argument> :: only generate those files that are new or that have
+  changed since the last build.
+
+If you use the emacs package [[https://docs.projectile.mx/projectile/index.html][projectile]] than you can generate the
+website with =M-x projectile-compile-project=, which calls =build.sh=.
+With the prefix argument you can also pass the script arguments.
+
+* TODO Wishlist [2/4]
 :PROPERTIES:
 :CUSTOM_ID: wishlist-14
 :END:
@@ -23,9 +47,9 @@ The source code for [[https://bryanrinders.xyz]]
   add more and more components to the =org-publish-project-alist=.
 - [ ] Add light theme
 - [X] Make headline anchors deterministic
-- [ ] Add usage section to the readme for ~build.sh~
+- [X] Add usage section to the readme for ~build.sh~
 
-* Fix List
+* TODO Fix List
 :PROPERTIES:
 :CUSTOM_ID: fix-list
 :END:
