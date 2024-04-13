@@ -167,7 +167,7 @@ thead th {
 }
 
 tbody tr:nth-of-type(even) {
-    background-color: var(--bg1);
+    background-color: var(--bg0);
 }
 
 tbody tr:last-of-type {
