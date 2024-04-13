@@ -1,0 +1,67 @@
+#+TITLE: Nix CLI Basics
+#+AUTHOR: Bryan Rinders
+#+DATE: <2024-04-13 Sat>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+Just a list of basic commands with descriptions for the ~nix~ package
+manager using imperative operations.
+
+* Basic Nix Command For Package Management
+:PROPERTIES:
+:CUSTOM_ID: basic-nix-command-for-package-management
+:END:
+{{{date([%Y-%m-%d])}}}
+
+** Package Managment
+:PROPERTIES:
+:CUSTOM_ID: package-managment
+:END:
+Search for packages is best done throught the web interface
+[[https://search.nixos.org/packages]]. The cli for searching is very slow.
+
+| Description                   | Command                  |
+|-------------------------------+--------------------------|
+| Searching for packages (slow) | nix-env -qaP packagename |
+| Installing a package          | nix-env -iA packagename  |
+| List installed packages       | nix-env -q               |
+| Uninstall packages            | nix-env -e packagename   |
+| Upgrade packages              | nix-env -u               |
+|-------------------------------+--------------------------|
+
+** Channels
+:PROPERTIES:
+:CUSTOM_ID: channels
+:END:
+Channels are where nix package definitions, etc are defined.
+
+| Description              | Command                                                         |
+|--------------------------+-----------------------------------------------------------------|
+| Listing current channels | nix-channel --list                                              |
+| Adding a primary channel | nix-channel --add https://nixos.org/channels/channel-name nixos |
+| Adding other channels    | nix-channel --add https://some.channel/url my-alias             |
+| Remove a channel         | nix-channel --remove channel-alias                              |
+| Updating a channel       | nix-channel --update channel-alias                              |
+| Updating all channels    | nix-channel --update                                            |
+|--------------------------+-----------------------------------------------------------------|
+
+** Garbage Collection
+:PROPERTIES:
+:CUSTOM_ID: garbage-collection
+:END:
+Uninstalling nix packages does not remove them from your system, to do
+that you need the nix garbage collector.
+
+| Description                            | Command                |
+|----------------------------------------+------------------------|
+| Delete everything not currently in use | nix-collect-garbage -d |
+|----------------------------------------+------------------------|
+
+* Sources
+:PROPERTIES:
+:CUSTOM_ID: sources
+:END:
+- [[https://nixos.org/manual/nix/stable/command-ref/nix-env]]
+- [[https://nixos.org/manual/nix/stable/command-ref/nix-channel]]
+- [[https://nixos.org/manual/nix/stable/command-ref/nix-collect-garbage]]
