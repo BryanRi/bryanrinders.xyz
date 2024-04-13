@@ -1,4 +1,9 @@
-((org-mode . ((eval . (defun br/org-custom-id-get-create (&optional force)
+;;; Directory Local Variables            -*- no-byte-compile: t -*-
+;;; For more information see (info "(emacs) Directory Variables")
+
+((nil . ((eval . (setq projectile-project-compilation-cmd
+					   (file-name-concat (projectile-project-root) "build.sh ")))))
+ (org-mode . ((eval . (defun br/org-custom-id-get-create (&optional force)
                         "Create an ID for the current entry and return it.
 If the entry already has an ID, just return it.
 With optional argument FORCE, force the creation of a new ID."
