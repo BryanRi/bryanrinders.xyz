@@ -129,6 +129,7 @@ h6 {
 
 code {
     padding: 0px 3px;
+    color: var(--orange);
 }
 
 pre, code {
@@ -167,7 +168,7 @@ thead th {
 }
 
 tbody tr:nth-of-type(even) {
-    background-color: var(--bg1);
+    background-color: var(--bg0);
 }
 
 tbody tr:last-of-type {
