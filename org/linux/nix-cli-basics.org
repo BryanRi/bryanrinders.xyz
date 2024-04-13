@@ -5,14 +5,14 @@
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 
-Just a list of basic commands with descriptions for the ~nix~ package
-manager using imperative operations.
-
 * Basic Nix Command For Package Management
 :PROPERTIES:
 :CUSTOM_ID: basic-nix-command-for-package-management
 :END:
 {{{date([%Y-%m-%d])}}}
+
+Just a list of basic commands with descriptions for the ~nix~ package
+manager using imperative operations.
 
 ** Package Managment
 :PROPERTIES:
