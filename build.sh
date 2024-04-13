@@ -24,6 +24,9 @@ fork_emacs() {
     return
 }
 
+vc_root="$(git rev-parse --show-toplevel)"
+cd "${vc_root}" || exit 1
+
 case "$1" in
     d|dbg) fork_emacs ;;
     a|all) build_website "all" ;;
