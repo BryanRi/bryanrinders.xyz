@@ -2,7 +2,7 @@
 #+SUBTITLE: README
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-09-30>
-#+OPTIONS: ^:{} toc:nil num:nil
+#+OPTIONS: ^:{} toc:nil num:nil todo:t
 
 * My Website
 :PROPERTIES:
@@ -23,6 +23,7 @@ The source code for [[https://bryanrinders.xyz]]
   add more and more components to the =org-publish-project-alist=.
 - [ ] Add light theme
 - [X] Make headline anchors deterministic
+- [ ] Add usage section to the readme for ~build.sh~
 
 * Fix List
 :PROPERTIES:
