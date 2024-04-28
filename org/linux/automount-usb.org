@@ -1,0 +1,117 @@
+#+TITLE: Automount USB
+#+AUTHOR: Bryan Rinders
+#+DATE: <2024-04-28 Sun>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+* Mounting USB Devices With Fstab
+:PROPERTIES:
+:CUSTOM_ID: mounting-usb-devices-with-fstab
+:END:
+{{{date([%Y-%m-%d])}}}
+
+While fstab will not completely automate the mounting process it
+simplifies it by only requiring specifying the device and all option
+will be taken from the =/etc/fstab= file.
+
+* Fstab Format
+:PROPERTIES:
+:CUSTOM_ID: fstab-format
+:END:
+The =/etc/fstab= is formatted in the following way:
+
+#+begin_src conf-unix
+# <file system> <mount point> <type> <options> <dump>  <pass>
+#+end_src
+
+Read on to find out how to configure each part.
+
+* File System and Type
+:PROPERTIES:
+:CUSTOM_ID: file-system-and-type
+:END:
+Use ~blkid~ to find the UUID or LABEL and TYPE of a mountable device
+
+#+begin_src sh
+  sudo blkid
+#+end_src
+
+If you do not know which output belongs to the usb you want to add to
+the fstab file then remove the usb again run ~sudo blkid~ again and
+see which line disappeared, this will be you usb. Now read of the UUID
+or LABEL and the TYPE.
+
+Other ways to find the TYPE are ~df -T~, if the usb has been mounted,
+or ~lsblk -f~.
+
+* Mount Point
+:PROPERTIES:
+:CUSTOM_ID: mount-point
+:END:
+This is the place where you wish to mount the usb, it can be anywhere
+but =/mnt/<some-directory>= is often used.
+
+* Options
+:PROPERTIES:
+:CUSTOM_ID: options
+:END:
+Multiple options can be seperated with a =,=, comma, no spaces. More
+options can be found in the man pages of ~fstab~ and ~mount~.
+
+- =ro= or =rw=: read only or read and write permissions for files on
+  the device. One of the two *must* be in the options list.
+- =relatime=: avoiding a lot of unnecessary writes.
+- =exec=: allow executables on the device.
+- =nofail=: fail gracefully if the device is not connected on boot.
+- =user=: device is mountable with ~mount~ by a normal user, no ~sudo~ required.
+- =uid=<uid>=: all files and directories are owned by the user with uid =<uid>=.
+
+You can be more specific with file permission with the options
+=fmask=<fmask>=, the mask for files, and =dmask=<dmask>=, the mask for
+directories. I won't go into detail how these work but go values could be:
+
+- =fmask=113=: read write permission for owner and group, and read
+  permission for others.
+- =dmask=002=: read, write, execute permission for owner and group and
+  read, executed permission for others.
+
+* Dump
+:PROPERTIES:
+:CUSTOM_ID: dump
+:END:
+Determines which filesystems need to be dumped. Defaults to zero
+(don’t dump) if not present. For usb's zero is fine.
+
+* Pass
+:PROPERTIES:
+:CUSTOM_ID: pass
+:END:
+Pass determines the order in which filesystem checks are done at boot
+time. It can have three values, if it is not specified it defaults
+to =0=.
+
+- =0=: do not check the filesystem
+- =1=: for root filesystem only
+- =2=: for other filesystems
+
+* Fstab
+:PROPERTIES:
+:CUSTOM_ID: fstab
+:END:
+Usb entries in =/etc/fstab= could look like:
+
+#+begin_src conf-unix
+  # <file system>     <mount point>   <type>   <options>                               <dump>  <pass>
+  UUID=79b0f26c-2d0d  /mnt/usb1        ext4    rw,relatime,exec,nofail,user,uid=1000   0       2
+  LABEL=MY_LABEL      /mnt/usb2        ext4    rw,relatime,exec,nofail,user,uid=1000   0       2
+#+end_src
+
+* Sources
+:PROPERTIES:
+:CUSTOM_ID: sources
+:END:
+- [[https://thequantitative.medium.com/auto-mount-drives-in-linux-by-configuring-etc-fstab-931b0df4a50a]]
+- [[https://www.man7.org/linux/man-pages/man8/mount.8.html#FILESYSTEM-INDEPENDENT_MOUNT_OPTIONS]]
+- ~man mount~
+- ~man fstab~
