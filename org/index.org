@@ -21,7 +21,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 :CUSTOM_ID: ctf-writeups
 :END:
 #+HTML: <div class="recent-posts">
-#+INCLUDE: ./ctf/ctf-sitemap.org :lines 3-13
+#+INCLUDE: ./ctf/ctf-sitemap.org :lines "3-13"
 #+HTML: </div>
 
 ** Emacs Tutorials
@@ -29,7 +29,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 :CUSTOM_ID: emacs-tutorials
 :END:
 #+HTML: <div class="recent-posts">
-#+INCLUDE: ./emacs/emacs-sitemap.org :lines 3-13
+#+INCLUDE: ./emacs/emacs-sitemap.org :lines "3-13"
 #+HTML: </div>
 
 ** Linux Tutorials
@@ -37,7 +37,7 @@ target='_blank'@@html:>gitlab page</a>@@.
 :CUSTOM_ID: linux-tutorials
 :END:
 #+HTML: <div class="recent-posts">
-#+INCLUDE: ./linux/linux-sitemap.org :lines 3-13
+#+INCLUDE: ./linux/linux-sitemap.org :lines "3-13"
 #+HTML: </div>
 
 * COMMENT List of most recent posts
