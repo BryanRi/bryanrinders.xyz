@@ -26,8 +26,11 @@
 ;; move the timestamps directory when running this script on my
 ;; personal machine
 (setq org-publish-timestamp-directory
-      (file-name-concat (or (vc-root-dir) "~")
-                        ".org-timestamps/"))
+      (let ((my-project-dir (getenv "MY_PROJECTS_DIR")))
+        (if my-project-dir
+            (concat my-project-dir "/bryanrinders.xyz/.org-timestamps/")
+          "~/.org-timestamps/")))
+
 
 ;; load some programming languages for syntax highlighting
 (org-babel-do-load-languages
