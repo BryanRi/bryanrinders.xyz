@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Automount USB</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+<h1 id='site-name'>Bryan Rinders</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf-index.html'>CTF WriteUps</a>
+  <a href='/emacs-index.html'>Emacs</a>
+  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Automount USB</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#mounting-usb-devices-with-fstab">Mounting USB Devices With Fstab</a></li>
+<li><a href="#fstab-format">Fstab Format</a></li>
+<li><a href="#file-system-and-type">File System and Type</a></li>
+<li><a href="#mount-point">Mount Point</a></li>
+<li><a href="#options">Options</a></li>
+<li><a href="#dump">Dump</a></li>
+<li><a href="#pass">Pass</a></li>
+<li><a href="#fstab">Fstab</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org0a63753" class="outline-2">
+<h2 id="mounting-usb-devices-with-fstab"><a href="#mounting-usb-devices-with-fstab">Mounting USB Devices With Fstab</a></h2>
+<div class="outline-text-2" id="text-mounting-usb-devices-with-fstab">
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2024-04-28 Sun]</span></span>
+</p>
+
+<p>
+While fstab will not completely automate the mounting process it
+simplifies it by only requiring specifying the device and all option
+will be taken from the <code>/etc/fstab</code> file.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgf9691b1" class="outline-2">
+<h2 id="fstab-format"><a href="#fstab-format">Fstab Format</a></h2>
+<div class="outline-text-2" id="text-fstab-format">
+<p>
+The <code>/etc/fstab</code> is formatted in the following way:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf-unix"><span class="org-comment-delimiter"># </span><span class="org-comment">&lt;file system&gt; &lt;mount point&gt; &lt;type&gt; &lt;options&gt; &lt;dump&gt;  &lt;pass&gt;</span>
+</pre>
+</div>
+
+<p>
+Read on to find out how to configure each part.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgecc4ba5" class="outline-2">
+<h2 id="file-system-and-type"><a href="#file-system-and-type">File System and Type</a></h2>
+<div class="outline-text-2" id="text-file-system-and-type">
+<p>
+Use <code>blkid</code> to find the UUID or LABEL and TYPE of a mountable device
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sudo blkid
+</pre>
+</div>
+
+<p>
+If you do not know which output belongs to the usb you want to add to
+the fstab file then remove the usb again run <code>sudo blkid</code> again and
+see which line disappeared, this will be you usb. Now read of the UUID
+or LABEL and the TYPE.
+</p>
+
+<p>
+Other ways to find the TYPE are <code>df -T</code>, if the usb has been mounted,
+or <code>lsblk -f</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org72ea057" class="outline-2">
+<h2 id="mount-point"><a href="#mount-point">Mount Point</a></h2>
+<div class="outline-text-2" id="text-mount-point">
+<p>
+This is the place where you wish to mount the usb, it can be anywhere
+but <code>/mnt/&lt;some-directory&gt;</code> is often used.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgd42d2e8" class="outline-2">
+<h2 id="options"><a href="#options">Options</a></h2>
+<div class="outline-text-2" id="text-options">
+<p>
+Multiple options can be seperated with a <code>,</code>, comma, no spaces. More
+options can be found in the man pages of <code>fstab</code> and <code>mount</code>.
+</p>
+
+<ul class="org-ul">
+<li><code>ro</code> or <code>rw</code>: read only or read and write permissions for files on
+the device. One of the two <b>must</b> be in the options list.</li>
+<li><code>relatime</code>: avoiding a lot of unnecessary writes.</li>
+<li><code>exec</code>: allow executables on the device.</li>
+<li><code>nofail</code>: fail gracefully if the device is not connected on boot.</li>
+<li><code>user</code>: device is mountable with <code>mount</code> by a normal user, no <code>sudo</code> required.</li>
+<li><code>uid=&lt;uid&gt;</code>: all files and directories are owned by the user with uid <code>&lt;uid&gt;</code>.</li>
+</ul>
+
+<p>
+You can be more specific with file permission with the options
+<code>fmask=&lt;fmask&gt;</code>, the mask for files, and <code>dmask=&lt;dmask&gt;</code>, the mask for
+directories. I won't go into detail how these work but go values could be:
+</p>
+
+<ul class="org-ul">
+<li><code>fmask=113</code>: read write permission for owner and group, and read
+permission for others.</li>
+<li><code>dmask=002</code>: read, write, execute permission for owner and group and
+read, executed permission for others.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2dc09a0" class="outline-2">
+<h2 id="dump"><a href="#dump">Dump</a></h2>
+<div class="outline-text-2" id="text-dump">
+<p>
+Determines which filesystems need to be dumped. Defaults to zero
+(don’t dump) if not present. For usb's zero is fine.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org220e458" class="outline-2">
+<h2 id="pass"><a href="#pass">Pass</a></h2>
+<div class="outline-text-2" id="text-pass">
+<p>
+Pass determines the order in which filesystem checks are done at boot
+time. It can have three values, if it is not specified it defaults
+to <code>0</code>.
+</p>
+
+<ul class="org-ul">
+<li><code>0</code>: do not check the filesystem</li>
+<li><code>1</code>: for root filesystem only</li>
+<li><code>2</code>: for other filesystems</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2769c71" class="outline-2">
+<h2 id="fstab"><a href="#fstab">Fstab</a></h2>
+<div class="outline-text-2" id="text-fstab">
+<p>
+Usb entries in <code>/etc/fstab</code> could look like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf-unix"><span class="org-comment-delimiter"># </span><span class="org-comment">&lt;file system&gt;     &lt;mount point&gt;   &lt;type&gt;   &lt;options&gt;                               &lt;dump&gt;  &lt;pass&gt;</span>
+<span class="org-variable-name">UUID</span>=79b0f26c-2d0d  /mnt/usb1        ext4    rw,relatime,exec,nofail,user,uid=1000   0       2
+<span class="org-variable-name">LABEL</span>=MY_LABEL      /mnt/usb2        ext4    rw,relatime,exec,nofail,user,uid=1000   0       2
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc16002b" class="outline-2">
+<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div class="outline-text-2" id="text-sources">
+<ul class="org-ul">
+<li><a href="https://thequantitative.medium.com/auto-mount-drives-in-linux-by-configuring-etc-fstab-931b0df4a50a">https://thequantitative.medium.com/auto-mount-drives-in-linux-by-configuring-etc-fstab-931b0df4a50a</a></li>
+<li><a href="https://www.man7.org/linux/man-pages/man8/mount.8.html#FILESYSTEM-INDEPENDENT_MOUNT_OPTIONS">https://www.man7.org/linux/man-pages/man8/mount.8.html#FILESYSTEM-INDEPENDENT_MOUNT_OPTIONS</a></li>
+<li><code>man mount</code></li>
+<li><code>man fstab</code></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>.
+</div>
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2024 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>+<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
