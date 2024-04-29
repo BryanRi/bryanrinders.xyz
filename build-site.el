@@ -49,9 +49,9 @@
   "<h1 id='site-name'>Bryan Rinders</h1>
 <div id='menu'>
   <a href='/'>Home</a>
-  <a href='/ctf-index.html'>CTF WriteUps</a>
-  <a href='/emacs-index.html'>Emacs</a>
-  <a href='/linux-index.html'>Linux Tutorials</a>
+  <a href='/ctf/index.html'>CTF WriteUps</a>
+  <a href='/emacs/index.html'>Emacs</a>
+  <a href='/linux/index.html'>Linux Tutorials</a>
   <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
 </div>
 <br><hr>")
@@ -103,11 +103,11 @@
   (let ((filename (org-publish-find-title entry project)))
     (if (= (length filename) 0)
         (format "*%s*" entry)
-      (format "{{{timestamp(%s)}}} [[./%s/%s][%s]]"
+      (format "{{{timestamp(%s)}}} [[./%s][%s]]"
       ;(format "{{{timestamp(%s)}}} [[./%s][%s]]"
               (format-time-string "[%Y-%m-%d]"
                                   (org-publish-find-date entry project))
-              (car project)
+              ;; (car project)
               entry
               filename))))
 
@@ -149,7 +149,7 @@ specified return an empty string."
  org-src-fontify-natively            t
  )
 
-(defun br/define-website-component(id)
+(defun br/define-website-component(id &optional sitemap-title)
   "Create a list of all the settings for the website component ID."
   (list id
         :recursive             t
@@ -158,8 +158,9 @@ specified return an empty string."
         :publishing-function   'org-html-publish-to-html
         :publishing-directory  (concat "./html/" id)
         :auto-sitemap          t
-        :sitemap-filename      (concat id "-sitemap.org")
-        :sitemap-title         ""
+        :sitemap-filename      "index.org"
+        :sitemap-title         (or sitemap-title
+                                   (concat (capitalize id) " Tutorials"))
         :sitemap-style         'list
         :sitemap-sort-folders  'ignore
         :sitemap-sort-files    'anti-chronologically
@@ -196,7 +197,7 @@ specified return an empty string."
               :html-preamble        nav-bar
               :html-postamble       footer
               :time-stamp-file      nil)        ;; Don't include time stamp in file
-        (br/define-website-component "ctf")
+        (br/define-website-component "ctf" "CTF Write-ups")
         (br/define-website-component "emacs")
         (br/define-website-component "linux")
         (list "website" :components '("css" "ctf" "emacs" "linux" "home"))))

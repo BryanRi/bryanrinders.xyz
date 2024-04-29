@@ -1,7 +1,0 @@
-#+TITLE: Linux Tutorials
-#+AUTHOR: Bryan Rinders
-#+DATE: <2022-10-17 Mon>
-
-* An Exhaustive List Of My Linux Tutorials.
-
-#+INCLUDE: linux/linux-sitemap.org :lines 3-

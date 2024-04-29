@@ -1,7 +1,0 @@
-#+TITLE: Emacs Tutorials
-#+AUTHOR: Bryan Rinders
-#+DATE: <2022-10-17 Mon>
-
-* An Exhaustive List Of My Emacs Tutorials
-
-#+INCLUDE: emacs/emacs-sitemap.org :lines 3-

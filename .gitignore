@@ -1,6 +1,8 @@
-html/
-website/
-passwords/
-org/*/*sitemap.org
+.org-timestamps/
 .packages
-/.org-timestamps/
+html/
+org/ctf/index.org
+org/emacs/index.org
+org/linux/index.org
+passwords/
+website/
