@@ -1,0 +1,65 @@
+#+TITLE: Guix Errors
+#+AUTHOR: Bryan Rinders
+#+DATE: <2023-11-28 Tue>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *guix-errors-python-session*
+
+{{{date([%Y-%m-%d])}}}
+
+This is a list problems/errors I encounters when trying Gnu Guix for
+the first time, some with solutions. Perhaps this is helpful to
+someone.
+
+* [X] River
+:PROPERTIES:
+:CUSTOM_ID: x-river
+:END:
+- Problem :: ~riverctl list-inputs~ produces an error..
+- Solution :: install =libinput=.
+
+* [ ] Audio Does Not Work
+:PROPERTIES:
+:CUSTOM_ID: audio
+:END:
+=sof-firmware= (from non-guix) does not fix it. No solution found yet.
+
+* [X] Installing Nerd Fonts
+:PROPERTIES:
+:CUSTOM_ID: x-installing-nerd-fonts
+:END:
+- Manually install:
+  1. download zip from website
+  2. unzip in =~/.local/share/fonts/ttf/mononoki-nerd-font=
+  3. update cache with ~fc-cache~.
+
+- Using guix:
+
+  Or check out [[https://gitlab.com/bryanrinders/channel-b][channel-b]] my personal guix channel for the Nerd Font
+  packages.
+
+* [X] Installing the Nix Package Manager
+:PROPERTIES:
+:CUSTOM_ID: x-installing-the-nix-package-manager
+:END:
+1. add ~nix-service-type~ to the guix system configuration.
+2. add a channel to nix: ~nix-channel --add <channel-url>~.
+3. update the nix channels, ~nix-channel --update~. It might be
+   necessary to restart the nix daemon,
+   ~sudo herd restart nix-daemon~.
+
+   Note: Restarting the daemon is necessary after every boot (for me),
+   not sure why.
+4. install packages with nix.
+
+* [X] TTY login with X display server
+:PROPERTIES:
+:CUSTOM_ID: x-tty-login-with-x-display-server
+:END:
+1. add the ~xorg-server-service-type~ to the system configuration.
+2. copy =.xinitrc= to =~/.config/sx/sxrc= and make the file
+   executable.
+3. add ~sx~ to the list of packages
+4. use ~sx~, instead of ~startx~, to start the X display server.
+
+For more detailed instructions go [[https://mail.gnu.org/archive/html/help-guix/2021-08/msg00089.html][here]].
