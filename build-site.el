@@ -104,10 +104,8 @@
     (if (= (length filename) 0)
         (format "*%s*" entry)
       (format "{{{timestamp(%s)}}} [[./%s][%s]]"
-      ;(format "{{{timestamp(%s)}}} [[./%s][%s]]"
               (format-time-string "[%Y-%m-%d]"
                                   (org-publish-find-date entry project))
-              ;; (car project)
               entry
               filename))))
 
