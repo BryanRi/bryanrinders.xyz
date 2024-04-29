@@ -1,0 +1,87 @@
+#+TITLE: SSH into Libvirt VM
+#+AUTHOR: Bryan Rinders
+#+DATE: <2024-03-18 Mon>
+#+OPTIONS: num:nil
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+* TODO COMMENT
+:PROPERTIES:
+:CUSTOM_ID: comment
+:END:
+- [ ] edit copied text
+- [ ] test if it works
+
+* Intro
+:PROPERTIES:
+:CUSTOM_ID: intro
+:END:
+{{{date([%Y-%m-%d])}}}
+
+Instuctions for setting up a libvirt VM with =user-mode= networking
+for SSH access from the (local) host.
+
+Just to have this documented somewhere on the net:
+
+I managed to do this some two years later by manually adding the
+relevant QEMU arguments to the KVM XML file (which holds the config
+for all the fancy virtualisation foo behind the scenes).
+
+Here are the steps I performed to grant port forwarding to a user
+network; in my case, forwarding the host's port 22222 to the guest's
+port 22:
+
+My emulated machine will be called ubuntu18.04 here.
+
+1. Open xml config for editing via virsh
+   #+begin_src sh
+     virsh -c qemu:///session edit ubuntu18.04
+   #+end_src
+
+2. Find and remove the configuration for the "user"-type interface
+   which may look somehow like this:
+
+   #+BEGIN_EXAMPLE
+   <interface type='user'>
+     <mac address='52:54:00:52:35:ff'/>
+     <model type='rtl8139'/>
+     <address type='pci' domain='0x0000' bus='0x00' slot='0x03' function='0x0'/>
+   </interface>
+   #+END_EXAMPLE
+
+3. Add the QEMU namespace to the (root) domain tag:
+
+   #+BEGIN_EXAMPLE
+   <domain type='kvm' xmlns:qemu='http://libvirt.org/schemas/domain/qemu/1.0'>
+   #+END_EXAMPLE
+
+4. Manually add the now missing interface configuration as QEMU
+   arguments somewhere inside the domain tag (e.g., as last child of
+   <domain>):
+
+   #+BEGIN_EXAMPLE
+   <qemu:commandline>
+     <qemu:arg value='-netdev'/>
+     <qemu:arg value='user,id=mynet.0,net=10.0.10.0/24,hostfwd=tcp::22222-:22'/>
+     <qemu:arg value='-device'/>
+     <qemu:arg value='rtl8139,netdev=mynet.0'/>
+   </qemu:commandline>
+   #+END_EXAMPLE
+
+5. Save the config and fire up/reboot the VM.
+
+6. ssh away:
+
+   #+begin_src sh
+     ssh myusername@localhost -p 22222
+   #+end_src
+
+* Sources
+:PROPERTIES:
+:CUSTOM_ID: source
+:END:
+- [[https://unix.stackexchange.com/questions/350339/how-to-port-forward-ssh-in-virt-manager]]
+
+Other (useful) links:
+- [[https://blog.programster.org/kvm-missing-default-network]]
+- [[https://askubuntu.com/questions/576437/virsh-ssh-into-a-guest-vm]]
