@@ -1,7 +1,7 @@
 #+TITLE: Advent Of Cyber 2022 (TryHackMe)
 #+AUTHOR: Bryan Rinders
 #+DATE: <2022-12-07 Wed>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args:sh :eval never-export
 
 * Introduction

@@ -1,7 +1,7 @@
 #+TITLE: Fix Dell XPS 9700 microphone
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-09-10 Sun>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 

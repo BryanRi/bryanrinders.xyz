@@ -1,7 +1,7 @@
 #+TITLE: Safely Remove External Hard Drives From The CLI
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-10-22 Sun>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 

@@ -1,7 +1,7 @@
 #+TITLE: Automount USB
 #+AUTHOR: Bryan Rinders
 #+DATE: <2024-04-28 Sun>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 

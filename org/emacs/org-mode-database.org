@@ -1,7 +1,7 @@
 #+TITLE: Org Mode Database
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-09-28 Thu>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+FILETAGS: :emacs:org-mode:database:
 
 * Create A Basic database With Org-mode

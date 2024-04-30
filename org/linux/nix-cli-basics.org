@@ -1,7 +1,7 @@
 #+TITLE: Nix CLI Basics
 #+AUTHOR: Bryan Rinders
 #+DATE: <2024-04-13 Sat>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 

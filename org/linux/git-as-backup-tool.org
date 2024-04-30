@@ -1,7 +1,7 @@
 #+TITLE: Git as a Backup Tool
 #+AUTHOR: Bryan Rinders
 #+DATE: <2024-03-17 Sun>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *natas-python-session*
 

@@ -1,7 +1,7 @@
 #+TITLE: Kmonad: Super Charge Your Keyboard
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-03-02 Thu>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :exports code :eval never-export
 
 * Intro

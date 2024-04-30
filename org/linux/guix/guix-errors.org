@@ -1,7 +1,7 @@
 #+TITLE: Guix Errors
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-11-28 Tue>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:python :session *guix-errors-python-session*
 

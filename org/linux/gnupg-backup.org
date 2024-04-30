@@ -2,7 +2,7 @@
 #+SUBTITLE: Backup Your GPG Private Keys And Settings
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-08-28 Mon>
-#+OPTIONS: num:nil
+#+OPTIONS:
 #+PROPERTY: header-args :results output :exports both :eval never-export
 #+PROPERTY: header-args:sh :results output
 

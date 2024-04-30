@@ -1,7 +1,7 @@
 #+TITLE: Setup Openvpn
 #+AUTHOR: Bryan Rinders
 #+DATE: <2023-10-03 Tue>
-#+OPTIONS: ^:{} toc:nil num:nil
+#+OPTIONS: ^:{} toc:nil
 
 * Setup OpenVPN With Network Manager
 :PROPERTIES:
