@@ -40,7 +40,7 @@ If you use the emacs package [[https://docs.projectile.mx/projectile/index.html]
 website with =M-x projectile-compile-project=, which calls =build.sh=.
 With the prefix argument you can also pass the script arguments.
 
-* TODO Wishlist [2/4]
+* TODO Wishlist [2/5]
 :PROPERTIES:
 :CUSTOM_ID: wishlist-14
 :END:
@@ -48,6 +48,7 @@ With the prefix argument you can also pass the script arguments.
   dynamically increasing the number of sitemaps, and hence no need to
   add more and more components to the =org-publish-project-alist=.
 - [ ] Add light theme
+- [ ] Add RSS
 - [X] Make headline anchors deterministic
 - [X] Add usage section to the readme for ~build.sh~
 
