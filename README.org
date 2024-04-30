@@ -9,12 +9,12 @@
 :CUSTOM_ID: my-website
 :END:
 The source code for [[https://bryanrinders.xyz]], generated using
-[[https://www.gnu.org/software/emacs/manual/html_mono/org.html#Publishing][org-publish]].
+[[https://www.gnu.org/software/emacs/manual/html_mono/org.html#Publishing][org-publish]] and hosted using github-pages.
 
-- Git repo Gitlab: [[https://gitlab.com/bryanrinders/bryanrinders.xyz]]
+Git repo: [[https://gitlab.com/bryanrinders/bryanrinders.xyz]]
 
-  Mirrors:
-  - Github: [[https://github.com/BryanRi/bryanrinders.xyz]]
+Mirrors:
+- Github: [[https://github.com/BryanRi/bryanrinders.xyz]]
 
 * Build
 :PROPERTIES:
@@ -56,4 +56,4 @@ With the prefix argument you can also pass the script arguments.
 :CUSTOM_ID: fix-list
 :END:
 - [X] TOC headline color
-- [ ] Color of the number of numbered headings (guix home)
+- [X] Color of the number of numbered headings (guix home)
