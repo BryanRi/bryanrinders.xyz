@@ -20,19 +20,21 @@ The source code for [[https://bryanrinders.xyz]], generated using
 :PROPERTIES:
 :CUSTOM_ID: build
 :END:
-To generate the website, html pages, css, etc use the ~build.sh~
-script. It accepts three arguments:
+To generate the website, html pages, css, etc use ~build.sh [OPTION]~.
+If =OPTION= is not specified then generate only those files that are
+new or that have changed since the last build.
 
-- d :: starts a new emacs server using the =build-site-debug.el= as
-  =init.el=, this will make sure you actual =init.el= does not
-  unknowingly mess with the websites configuration.
+=OPTION= can be:
+
+- d, debug :: starts a new emacs server using the
+  =build-site-debug.el= as =init.el=, this will make sure you actual
+  =init.el= does not unknowingly mess with the websites configuration.
   =build-site-debug.el= is a very bare bones config using only builtin
   features.
-- a :: regenerate the entire website. It can happen that files have
-  not changed but do need to be regenerated, in which case using =a=
-  will force emacs to regenerate them.
-- <no-argument> :: only generate those files that are new or that have
-  changed since the last build.
+- a, all :: regenerate the entire website. This is useful for example
+  when you modify the =nav-bar= in =build-site.el=. So non of the org
+  files have changed and therefore running ~./build.sh~ will not
+  update any of the html files. You will need to run ~./build.sh all~.
 
 If you use the emacs package [[https://docs.projectile.mx/projectile/index.html][projectile]] than you can generate the
 website with =M-x projectile-compile-project=, which calls =build.sh=.
