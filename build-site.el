@@ -46,7 +46,14 @@
 <link rel='stylesheet' href='/css/source-code.css' />")
 
 (defvar nav-bar
-  "<h1 id='site-name'>Bryan Rinders</h1>
+  "
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
 <div id='menu'>
   <a href='/'>Home</a>
   <a href='/ctf/index.html'>CTF WriteUps</a>
