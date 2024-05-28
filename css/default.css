@@ -59,7 +59,7 @@ table {
 #site-name {
     margin: 0;
     padding: 0;
-	color: var(--dblue);
+	color: var(--fg0);
 }
 
 .title {

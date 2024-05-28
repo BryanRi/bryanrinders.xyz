@@ -12,7 +12,14 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<h1 id='site-name'>Bryan Rinders</h1>
+
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
 <div id='menu'>
   <a href='/'>Home</a>
   <a href='/ctf/index.html'>CTF WriteUps</a>
@@ -28,12 +35,12 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#task-11-insecure-design">Task 11 Insecure design</a></li>
-<li><a href="#task-12-security-misconfiguration">Task 12 Security Misconfiguration</a></li>
-<li><a href="#task-15-vulnerable-and-outdated-components">Task 15 Vulnerable And Outdated Components</a></li>
-<li><a href="#task-20-data-integrity-failures">Task 20 Data Integrity Failures</a></li>
-<li><a href="#task-21-security-logging-and-monitoring-failures">Task 21 Security Logging And Monitoring Failures</a></li>
-<li><a href="#task-22-server-side-request-forgery">Task 22 Server Side Request Forgery</a></li>
+<li><a href="#task-11-insecure-design">1. Task 11 Insecure design</a></li>
+<li><a href="#task-12-security-misconfiguration">2. Task 12 Security Misconfiguration</a></li>
+<li><a href="#task-15-vulnerable-and-outdated-components">3. Task 15 Vulnerable And Outdated Components</a></li>
+<li><a href="#task-20-data-integrity-failures">4. Task 20 Data Integrity Failures</a></li>
+<li><a href="#task-21-security-logging-and-monitoring-failures">5. Task 21 Security Logging And Monitoring Failures</a></li>
+<li><a href="#task-22-server-side-request-forgery">6. Task 22 Server Side Request Forgery</a></li>
 </ul>
 </div>
 </div>
@@ -45,8 +52,8 @@
 Write up for the challenges in the tryhackme room <a href="https://tryhackme.com/room/owasptop102021">OWASP Top 10 2021</a>.
 </p>
 
-<div id="outline-container-org37d75a4" class="outline-2">
-<h2 id="task-11-insecure-design"><a href="#task-11-insecure-design">Task 11 Insecure design</a></h2>
+<div id="outline-container-org96a6df9" class="outline-2">
+<h2 id="task-11-insecure-design"><span class="section-number-2">1</span> <a href="#task-11-insecure-design">Task 11 Insecure design</a></h2>
 <div class="outline-text-2" id="text-task-11-insecure-design">
 <p>
 Visit the page <code>ht​tp://MACHINE_IP:PORT</code> and click on the 'I forgot my
@@ -94,8 +101,8 @@ THM{Not_3ven_c4tz_c0uld_sav3_U!}
 </div>
 </div>
 
-<div id="outline-container-org523aa2a" class="outline-2">
-<h2 id="task-12-security-misconfiguration"><a href="#task-12-security-misconfiguration">Task 12 Security Misconfiguration</a></h2>
+<div id="outline-container-orgd83eb53" class="outline-2">
+<h2 id="task-12-security-misconfiguration"><span class="section-number-2">2</span> <a href="#task-12-security-misconfiguration">Task 12 Security Misconfiguration</a></h2>
 <div class="outline-text-2" id="text-task-12-security-misconfiguration">
 <p>
 Go to <code>h​ttp://MACHINE_IP:PORT/console</code> and enter in the console
@@ -129,8 +136,8 @@ THM{Just_a_tiny_misconfiguration}
 </div>
 </div>
 
-<div id="outline-container-org635f51f" class="outline-2">
-<h2 id="task-15-vulnerable-and-outdated-components"><a href="#task-15-vulnerable-and-outdated-components">Task 15 Vulnerable And Outdated Components</a></h2>
+<div id="outline-container-orgc9c6d8f" class="outline-2">
+<h2 id="task-15-vulnerable-and-outdated-components"><span class="section-number-2">3</span> <a href="#task-15-vulnerable-and-outdated-components">Task 15 Vulnerable And Outdated Components</a></h2>
 <div class="outline-text-2" id="text-task-15-vulnerable-and-outdated-components">
 <p>
 Go to the page <code>h​ttp://MACHINE_IP:PORT</code>. After look around the website
@@ -166,8 +173,8 @@ THM{But_1ts_n0t_my_f4ult!}
 </div>
 </div>
 
-<div id="outline-container-org3cc69f0" class="outline-2">
-<h2 id="task-20-data-integrity-failures"><a href="#task-20-data-integrity-failures">Task 20 Data Integrity Failures</a></h2>
+<div id="outline-container-org1c92222" class="outline-2">
+<h2 id="task-20-data-integrity-failures"><span class="section-number-2">4</span> <a href="#task-20-data-integrity-failures">Task 20 Data Integrity Failures</a></h2>
 <div class="outline-text-2" id="text-task-20-data-integrity-failures">
 <p>
 The password for the <code>guest</code> account is <code>guest</code>.
@@ -237,8 +244,8 @@ THM{Dont_take_cookies_from_strangers}
 </div>
 </div>
 
-<div id="outline-container-orga98973c" class="outline-2">
-<h2 id="task-21-security-logging-and-monitoring-failures"><a href="#task-21-security-logging-and-monitoring-failures">Task 21 Security Logging And Monitoring Failures</a></h2>
+<div id="outline-container-org526d945" class="outline-2">
+<h2 id="task-21-security-logging-and-monitoring-failures"><span class="section-number-2">5</span> <a href="#task-21-security-logging-and-monitoring-failures">Task 21 Security Logging And Monitoring Failures</a></h2>
 <div class="outline-text-2" id="text-task-21-security-logging-and-monitoring-failures">
 <p>
 When you open the supplied file it is obvious the IP of the attacker
@@ -259,8 +266,8 @@ brute force
 </div>
 </div>
 
-<div id="outline-container-org7c0d688" class="outline-2">
-<h2 id="task-22-server-side-request-forgery"><a href="#task-22-server-side-request-forgery">Task 22 Server Side Request Forgery</a></h2>
+<div id="outline-container-org1d78e94" class="outline-2">
+<h2 id="task-22-server-side-request-forgery"><span class="section-number-2">6</span> <a href="#task-22-server-side-request-forgery">Task 22 Server Side Request Forgery</a></h2>
 <div class="outline-text-2" id="text-task-22-server-side-request-forgery">
 <p>
 Go to the admin area, it will tell you only <code>localhost</code> can login as
@@ -296,8 +303,8 @@ THM{Hello_Im_just_an_API_key}
 </pre>
 </div>
 
-<div id="outline-container-org35a0746" class="outline-3">
-<h3 id="extra-mile"><a href="#extra-mile">Extra Mile</a></h3>
+<div id="outline-container-org167c8ac" class="outline-3">
+<h3 id="extra-mile"><span class="section-number-3">6.1</span> <a href="#extra-mile">Extra Mile</a></h3>
 <div class="outline-text-3" id="text-extra-mile">
 <p>
 Because the admin page is only accessible from <code>localhost</code> we can do

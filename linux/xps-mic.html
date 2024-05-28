@@ -12,7 +12,14 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<h1 id='site-name'>Bryan Rinders</h1>
+
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
 <div id='menu'>
   <a href='/'>Home</a>
   <a href='/ctf/index.html'>CTF WriteUps</a>
@@ -28,9 +35,9 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#fix-microphone-on-xps-9700">Fix Microphone On XPS 9700</a></li>
-<li><a href="#noise-cancelation">Noise Cancelation</a></li>
-<li><a href="#sources">Sources</a></li>
+<li><a href="#fix-microphone-on-xps-9700">1. Fix Microphone On XPS 9700</a></li>
+<li><a href="#noise-cancelation">2. Noise Cancelation</a></li>
+<li><a href="#sources">3. Sources</a></li>
 </ul>
 </div>
 </div>
@@ -43,8 +50,8 @@ I had some issues getting my microphone to work on my laptop. Here is
 the fix that worked for me. I put this here so it may help others.
 </p>
 
-<div id="outline-container-orged6b94e" class="outline-2">
-<h2 id="fix-microphone-on-xps-9700"><a href="#fix-microphone-on-xps-9700">Fix Microphone On XPS 9700</a></h2>
+<div id="outline-container-orga2bf8aa" class="outline-2">
+<h2 id="fix-microphone-on-xps-9700"><span class="section-number-2">1</span> <a href="#fix-microphone-on-xps-9700">Fix Microphone On XPS 9700</a></h2>
 <div class="outline-text-2" id="text-fix-microphone-on-xps-9700">
 <p>
 I fixed the Issue by switching the rt715 ADC 24 Mux selector in
@@ -67,8 +74,8 @@ alsactl restore -f ~/.config/alsa/asound.state
 </div>
 </div>
 
-<div id="outline-container-orgf041412" class="outline-2">
-<h2 id="noise-cancelation"><a href="#noise-cancelation">Noise Cancelation</a></h2>
+<div id="outline-container-orgb2a4d09" class="outline-2">
+<h2 id="noise-cancelation"><span class="section-number-2">2</span> <a href="#noise-cancelation">Noise Cancelation</a></h2>
 <div class="outline-text-2" id="text-noise-cancelation">
 <p>
 The commands below will create a new device which you can select with
@@ -88,8 +95,8 @@ sudo cat &lt;&lt;EOT &gt;&gt; /etc/pulse/default.pa
 </div>
 </div>
 
-<div id="outline-container-org4af7ad9" class="outline-2">
-<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div id="outline-container-org37fd0a3" class="outline-2">
+<h2 id="sources"><span class="section-number-2">3</span> <a href="#sources">Sources</a></h2>
 <div class="outline-text-2" id="text-sources">
 <ul class="org-ul">
 <li><a href="https://askubuntu.com/a/1362014">https://askubuntu.com/a/1362014</a></li>

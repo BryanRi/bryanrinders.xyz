@@ -12,7 +12,14 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<h1 id='site-name'>Bryan Rinders</h1>
+
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
 <div id='menu'>
   <a href='/'>Home</a>
   <a href='/ctf/index.html'>CTF WriteUps</a>
@@ -31,18 +38,18 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#backup">Backup</a></li>
-<li><a href="#restore">Restore</a></li>
-<li><a href="#script">Script</a></li>
-<li><a href="#just-backing-up-your-private-keys">Just Backing Up Your Private Keys</a></li>
-<li><a href="#moving-gpg-keys-privately">Moving GPG keys privately</a></li>
-<li><a href="#sources">Sources</a></li>
+<li><a href="#backup">1. Backup</a></li>
+<li><a href="#restore">2. Restore</a></li>
+<li><a href="#script">3. Script</a></li>
+<li><a href="#just-backing-up-your-private-keys">4. Just Backing Up Your Private Keys</a></li>
+<li><a href="#moving-gpg-keys-privately">5. Moving GPG keys privately</a></li>
+<li><a href="#sources">6. Sources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org64bb33e" class="outline-2">
-<h2 id="backup"><a href="#backup">Backup</a></h2>
+<div id="outline-container-orged1b888" class="outline-2">
+<h2 id="backup"><span class="section-number-2">1</span> <a href="#backup">Backup</a></h2>
 <div class="outline-text-2" id="text-backup">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">[2023-08-28 Mon]</span></span>
@@ -133,8 +140,8 @@ with your private key, etc:
 </div>
 </div>
 
-<div id="outline-container-org2af4ccf" class="outline-2">
-<h2 id="restore"><a href="#restore">Restore</a></h2>
+<div id="outline-container-orgdb22551" class="outline-2">
+<h2 id="restore"><span class="section-number-2">2</span> <a href="#restore">Restore</a></h2>
 <div class="outline-text-2" id="text-restore">
 <p>
 Decrypt the tarbal:
@@ -177,8 +184,8 @@ and also copy <code>gnupg.conf</code> into your <code>gnupg</code> directory.
 </p>
 </div>
 
-<div id="outline-container-orgaae36c5" class="outline-3">
-<h3 id="manually-setting-the-trust-of-your-key"><a href="#manually-setting-the-trust-of-your-key">Manually Setting The Trust Of Your Key</a></h3>
+<div id="outline-container-org5c592e3" class="outline-3">
+<h3 id="manually-setting-the-trust-of-your-key"><span class="section-number-3">2.1</span> <a href="#manually-setting-the-trust-of-your-key">Manually Setting The Trust Of Your Key</a></h3>
 <div class="outline-text-3" id="text-manually-setting-the-trust-of-your-key">
 <div class="org-src-container">
 <pre class="src src-sh">gpg --edit-key your@id.here
@@ -190,8 +197,8 @@ Your decision? 5
 </div>
 </div>
 
-<div id="outline-container-org74f7123" class="outline-2">
-<h2 id="script"><a href="#script">Script</a></h2>
+<div id="outline-container-org9410721" class="outline-2">
+<h2 id="script"><span class="section-number-2">3</span> <a href="#script">Script</a></h2>
 <div class="outline-text-2" id="text-script">
 <p>
 Simple script to automate the backing up and restoring process.
@@ -279,8 +286,8 @@ Simple script to automate the backing up and restoring process.
 </div>
 </div>
 
-<div id="outline-container-orgd130c59" class="outline-2">
-<h2 id="just-backing-up-your-private-keys"><a href="#just-backing-up-your-private-keys">Just Backing Up Your Private Keys</a></h2>
+<div id="outline-container-org6d2f1b8" class="outline-2">
+<h2 id="just-backing-up-your-private-keys"><span class="section-number-2">4</span> <a href="#just-backing-up-your-private-keys">Just Backing Up Your Private Keys</a></h2>
 <div class="outline-text-2" id="text-just-backing-up-your-private-keys">
 <p>
 Encrypting<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>
@@ -305,8 +312,8 @@ Decrypting<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup>
 </div>
 </div>
 
-<div id="outline-container-orgcb28c8b" class="outline-2">
-<h2 id="moving-gpg-keys-privately"><a href="#moving-gpg-keys-privately">Moving GPG keys privately</a></h2>
+<div id="outline-container-org257ee28" class="outline-2">
+<h2 id="moving-gpg-keys-privately"><span class="section-number-2">5</span> <a href="#moving-gpg-keys-privately">Moving GPG keys privately</a></h2>
 <div class="outline-text-2" id="text-moving-gpg-keys-privately">
 <p>
 This method<sup><a id="fnr.1.100" class="footref" href="#fn.1">1</a></sup> allows you to very easily move you key from one computer
@@ -333,8 +340,8 @@ If you’re on the machine that needs the key:
 </div>
 </div>
 
-<div id="outline-container-org3deb0a5" class="outline-2">
-<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div id="outline-container-orgab44efc" class="outline-2">
+<h2 id="sources"><span class="section-number-2">6</span> <a href="#sources">Sources</a></h2>
 <div class="outline-text-2" id="text-sources">
 <ul class="org-ul">
 <li><a href="https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html">https://www.gnupg.org/documentation/manuals/gnupg/GPG-Configuration.html</a></li>

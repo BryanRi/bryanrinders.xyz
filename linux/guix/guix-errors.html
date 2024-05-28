@@ -12,7 +12,14 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<h1 id='site-name'>Bryan Rinders</h1>
+
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
 <div id='menu'>
   <a href='/'>Home</a>
   <a href='/ctf/index.html'>CTF WriteUps</a>
@@ -28,11 +35,11 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#x-river">[X] River</a></li>
-<li><a href="#audio">[ ] Audio Does Not Work</a></li>
-<li><a href="#x-installing-nerd-fonts">[X] Installing Nerd Fonts</a></li>
-<li><a href="#x-installing-the-nix-package-manager">[X] Installing the Nix Package Manager</a></li>
-<li><a href="#x-tty-login-with-x-display-server">[X] TTY login with X display server</a></li>
+<li><a href="#x-river">1. [X] River</a></li>
+<li><a href="#audio">2. [ ] Audio Does Not Work</a></li>
+<li><a href="#x-installing-nerd-fonts">3. [X] Installing Nerd Fonts</a></li>
+<li><a href="#x-installing-the-nix-package-manager">4. [X] Installing the Nix Package Manager</a></li>
+<li><a href="#x-tty-login-with-x-display-server">5. [X] TTY login with X display server</a></li>
 </ul>
 </div>
 </div>
@@ -46,8 +53,8 @@ the first time, some with solutions. Perhaps this is helpful to
 someone.
 </p>
 
-<div id="outline-container-orge1d67d8" class="outline-2">
-<h2 id="x-river"><a href="#x-river">[X] River</a></h2>
+<div id="outline-container-org9acfcba" class="outline-2">
+<h2 id="x-river"><span class="section-number-2">1</span> <a href="#x-river">[X] River</a></h2>
 <div class="outline-text-2" id="text-x-river">
 <dl class="org-dl">
 <dt>Problem</dt><dd><code>riverctl list-inputs</code> produces an error..</dd>
@@ -56,8 +63,8 @@ someone.
 </div>
 </div>
 
-<div id="outline-container-org49e0d97" class="outline-2">
-<h2 id="audio"><a href="#audio">[ ] Audio Does Not Work</a></h2>
+<div id="outline-container-orgc91044f" class="outline-2">
+<h2 id="audio"><span class="section-number-2">2</span> <a href="#audio">[ ] Audio Does Not Work</a></h2>
 <div class="outline-text-2" id="text-audio">
 <p>
 <code>sof-firmware</code> (from non-guix) does not fix it. No solution found yet.
@@ -65,8 +72,8 @@ someone.
 </div>
 </div>
 
-<div id="outline-container-org0ff0186" class="outline-2">
-<h2 id="x-installing-nerd-fonts"><a href="#x-installing-nerd-fonts">[X] Installing Nerd Fonts</a></h2>
+<div id="outline-container-org8285269" class="outline-2">
+<h2 id="x-installing-nerd-fonts"><span class="section-number-2">3</span> <a href="#x-installing-nerd-fonts">[X] Installing Nerd Fonts</a></h2>
 <div class="outline-text-2" id="text-x-installing-nerd-fonts">
 <ul class="org-ul">
 <li>Manually install:
@@ -88,8 +95,8 @@ packages.
 </div>
 </div>
 
-<div id="outline-container-orga46a9fa" class="outline-2">
-<h2 id="x-installing-the-nix-package-manager"><a href="#x-installing-the-nix-package-manager">[X] Installing the Nix Package Manager</a></h2>
+<div id="outline-container-org1c1cbb9" class="outline-2">
+<h2 id="x-installing-the-nix-package-manager"><span class="section-number-2">4</span> <a href="#x-installing-the-nix-package-manager">[X] Installing the Nix Package Manager</a></h2>
 <div class="outline-text-2" id="text-x-installing-the-nix-package-manager">
 <ol class="org-ol">
 <li>add <code>nix-service-type</code> to the guix system configuration.</li>
@@ -109,8 +116,8 @@ not sure why.
 </div>
 </div>
 
-<div id="outline-container-org3091a7e" class="outline-2">
-<h2 id="x-tty-login-with-x-display-server"><a href="#x-tty-login-with-x-display-server">[X] TTY login with X display server</a></h2>
+<div id="outline-container-orgb522a62" class="outline-2">
+<h2 id="x-tty-login-with-x-display-server"><span class="section-number-2">5</span> <a href="#x-tty-login-with-x-display-server">[X] TTY login with X display server</a></h2>
 <div class="outline-text-2" id="text-x-tty-login-with-x-display-server">
 <ol class="org-ol">
 <li>add the <code>xorg-server-service-type</code> to the system configuration.</li>

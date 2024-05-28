@@ -12,7 +12,14 @@
 </head>
 <body>
 <div id="preamble" class="status">
-<h1 id='site-name'>Bryan Rinders</h1>
+
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
 <div id='menu'>
   <a href='/'>Home</a>
   <a href='/ctf/index.html'>CTF WriteUps</a>
@@ -28,21 +35,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#mounting-usb-devices-with-fstab">Mounting USB Devices With Fstab</a></li>
-<li><a href="#fstab-format">Fstab Format</a></li>
-<li><a href="#file-system-and-type">File System and Type</a></li>
-<li><a href="#mount-point">Mount Point</a></li>
-<li><a href="#options">Options</a></li>
-<li><a href="#dump">Dump</a></li>
-<li><a href="#pass">Pass</a></li>
-<li><a href="#fstab">Fstab</a></li>
-<li><a href="#sources">Sources</a></li>
+<li><a href="#mounting-usb-devices-with-fstab">1. Mounting USB Devices With Fstab</a></li>
+<li><a href="#fstab-format">2. Fstab Format</a></li>
+<li><a href="#file-system-and-type">3. File System and Type</a></li>
+<li><a href="#mount-point">4. Mount Point</a></li>
+<li><a href="#options">5. Options</a></li>
+<li><a href="#dump">6. Dump</a></li>
+<li><a href="#pass">7. Pass</a></li>
+<li><a href="#fstab">8. Fstab</a></li>
+<li><a href="#sources">9. Sources</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org67ad497" class="outline-2">
-<h2 id="mounting-usb-devices-with-fstab"><a href="#mounting-usb-devices-with-fstab">Mounting USB Devices With Fstab</a></h2>
+<div id="outline-container-org2c91fd2" class="outline-2">
+<h2 id="mounting-usb-devices-with-fstab"><span class="section-number-2">1</span> <a href="#mounting-usb-devices-with-fstab">Mounting USB Devices With Fstab</a></h2>
 <div class="outline-text-2" id="text-mounting-usb-devices-with-fstab">
 <p>
 <span class="timestamp-wrapper"><span class="timestamp">[2024-04-28 Sun]</span></span>
@@ -56,8 +63,8 @@ will be taken from the <code>/etc/fstab</code> file.
 </div>
 </div>
 
-<div id="outline-container-orgfed5bd0" class="outline-2">
-<h2 id="fstab-format"><a href="#fstab-format">Fstab Format</a></h2>
+<div id="outline-container-orgfc63bba" class="outline-2">
+<h2 id="fstab-format"><span class="section-number-2">2</span> <a href="#fstab-format">Fstab Format</a></h2>
 <div class="outline-text-2" id="text-fstab-format">
 <p>
 The <code>/etc/fstab</code> is formatted in the following way:
@@ -74,8 +81,8 @@ Read on to find out how to configure each part.
 </div>
 </div>
 
-<div id="outline-container-org6c41b73" class="outline-2">
-<h2 id="file-system-and-type"><a href="#file-system-and-type">File System and Type</a></h2>
+<div id="outline-container-org2dbb7f9" class="outline-2">
+<h2 id="file-system-and-type"><span class="section-number-2">3</span> <a href="#file-system-and-type">File System and Type</a></h2>
 <div class="outline-text-2" id="text-file-system-and-type">
 <p>
 Use <code>blkid</code> to find the UUID or LABEL and TYPE of a mountable device
@@ -100,8 +107,8 @@ or <code>lsblk -f</code>.
 </div>
 </div>
 
-<div id="outline-container-orgd2afac2" class="outline-2">
-<h2 id="mount-point"><a href="#mount-point">Mount Point</a></h2>
+<div id="outline-container-org2e7324b" class="outline-2">
+<h2 id="mount-point"><span class="section-number-2">4</span> <a href="#mount-point">Mount Point</a></h2>
 <div class="outline-text-2" id="text-mount-point">
 <p>
 This is the place where you wish to mount the usb, it can be anywhere
@@ -110,8 +117,8 @@ but <code>/mnt/&lt;some-directory&gt;</code> is often used.
 </div>
 </div>
 
-<div id="outline-container-org3503db0" class="outline-2">
-<h2 id="options"><a href="#options">Options</a></h2>
+<div id="outline-container-org3617e4c" class="outline-2">
+<h2 id="options"><span class="section-number-2">5</span> <a href="#options">Options</a></h2>
 <div class="outline-text-2" id="text-options">
 <p>
 Multiple options can be seperated with a <code>,</code>, comma, no spaces. More
@@ -143,8 +150,8 @@ read, executed permission for others.</li>
 </div>
 </div>
 
-<div id="outline-container-org93bf1fc" class="outline-2">
-<h2 id="dump"><a href="#dump">Dump</a></h2>
+<div id="outline-container-org3b6f9a4" class="outline-2">
+<h2 id="dump"><span class="section-number-2">6</span> <a href="#dump">Dump</a></h2>
 <div class="outline-text-2" id="text-dump">
 <p>
 Determines which filesystems need to be dumped. Defaults to zero
@@ -153,8 +160,8 @@ Determines which filesystems need to be dumped. Defaults to zero
 </div>
 </div>
 
-<div id="outline-container-org2773eb8" class="outline-2">
-<h2 id="pass"><a href="#pass">Pass</a></h2>
+<div id="outline-container-org4485349" class="outline-2">
+<h2 id="pass"><span class="section-number-2">7</span> <a href="#pass">Pass</a></h2>
 <div class="outline-text-2" id="text-pass">
 <p>
 Pass determines the order in which filesystem checks are done at boot
@@ -170,8 +177,8 @@ to <code>0</code>.
 </div>
 </div>
 
-<div id="outline-container-org9b811c2" class="outline-2">
-<h2 id="fstab"><a href="#fstab">Fstab</a></h2>
+<div id="outline-container-orge370fca" class="outline-2">
+<h2 id="fstab"><span class="section-number-2">8</span> <a href="#fstab">Fstab</a></h2>
 <div class="outline-text-2" id="text-fstab">
 <p>
 Usb entries in <code>/etc/fstab</code> could look like:
@@ -186,8 +193,8 @@ Usb entries in <code>/etc/fstab</code> could look like:
 </div>
 </div>
 
-<div id="outline-container-orgb0546f0" class="outline-2">
-<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div id="outline-container-org598505a" class="outline-2">
+<h2 id="sources"><span class="section-number-2">9</span> <a href="#sources">Sources</a></h2>
 <div class="outline-text-2" id="text-sources">
 <ul class="org-ul">
 <li><a href="https://thequantitative.medium.com/auto-mount-drives-in-linux-by-configuring-etc-fstab-931b0df4a50a">https://thequantitative.medium.com/auto-mount-drives-in-linux-by-configuring-etc-fstab-931b0df4a50a</a></li>
