@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'org/**'
+      - '.github/workflows/**'
+      - 'build-site.el'
 
 jobs:
   publish:
