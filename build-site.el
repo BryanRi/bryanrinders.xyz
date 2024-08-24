@@ -182,6 +182,12 @@ specified return an empty string."
 ;; Define the publishing project
 (setq org-publish-project-alist
       (list
+        (list "files"
+              :base-directory       "./org/files"
+              :base-extension       'any
+              :recursive            nil
+              :publishing-directory "./html"
+              :publishing-function  'org-publish-attachment)
         (list "css"
               :base-directory       "./org/css"
               :base-extension       "css"
@@ -205,7 +211,7 @@ specified return an empty string."
         (br/define-website-component "ctf" "CTF Write-ups")
         (br/define-website-component "emacs")
         (br/define-website-component "linux")
-        (list "website" :components '("css" "ctf" "emacs" "linux" "home"))))
+        (list "website" :components '("files" "css" "ctf" "emacs" "linux" "home"))))
 
 
 ;; Generate the site output
