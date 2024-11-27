@@ -1,0 +1,21 @@
+ARG PROJ_DIR=/opt/bryanrinders.xyz
+
+FROM alpine:3.20.3 as build
+
+RUN apk update \
+    && apk add --no-cache emacs-nox
+
+RUN mkdir -p "${PROJ_DIR}"/org
+
+WORKDIR "${PROJ_DIR}"
+
+COPY build.sh build-site.el "${PROJ_DIR}"/
+COPY org "${PROJ_DIR}"/org
+
+RUN ./build.sh all
+
+
+FROM nginx:1.27.2-alpine
+
+COPY nginx/bryanrinders.xyz.conf /etc/nginx/conf.d/
+COPY --from=build "${PROJ_DIR}"/html /var/www/bryanrinders.xyz

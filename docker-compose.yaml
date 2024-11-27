@@ -1,0 +1,27 @@
+# Usage: SITE_URL=<your-domain> FS_PORT=<port-number> docker-compose up ...
+#
+# e.g. SITE_URL=filesender.example.com FS_PORT=443 docker-compose up ...
+#
+# Both arguments are optional; if you change the port number from the
+# default 8443 you must also change the SITE_URL to reflect that
+# change.
+
+services:
+  bryanrinders.xyz:
+    build:
+      context: .
+      dockerfile: ./docker/Dockerfile.bryanrinders.xyz
+    volumes:
+      - ./.packages:/opt/bryanrinders.xyz/.packages
+      - ./html:/opt/bryanrinders.xyz/html # how to mount this as RO on deploy image
+      # - ./letsencrypt/certs:/etc/letsencrypt
+      # - ./letsencrypt/data:/var/www/bryanrinders.xyz/letsencrypt
+    ports:
+      - ${HTTP_PORT:-8080}:80
+      - ${HTTPS_PORT:-8443}:443
+  # certbot:
+  #   image: certbot/certbot
+  #   volumes:
+  #     - ./letsencrypt/certs:/etc/letsencrypt
+  #     - ./letsencrypt/data:/data/letsencrypt
+  #     command: certonly --webroot --webroot-path=/data/letsencrypt -d "${DOMAIN}" --email "${EMAIL}" --agree-tos
