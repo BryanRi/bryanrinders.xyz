@@ -5,7 +5,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Gnupg For SSH</title>
+<title>Replace SSH with GnuPG</title>
 <meta name="generator" content="Org mode" />
 <link rel='stylesheet' href='/css/default.css' />
 <link rel='stylesheet' href='/css/source-code.css' />
@@ -30,7 +30,7 @@
 <br><hr>
 </div>
 <div id="content">
-<h1 class="title">Gnupg For SSH</h1>
+<h1 class="title">Replace SSH with GnuPG</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
@@ -63,7 +63,7 @@ is inside gpg.</li>
 tutorial&#x2014;to a smartcard (not described here).</li>
 </ul>
 
-<div id="outline-container-org83ed780" class="outline-2">
+<div id="outline-container-orge61e319" class="outline-2">
 <h2 id="gpg-as-a-ssh-agent"><a href="#gpg-as-a-ssh-agent">GPG as a ssh-agent</a></h2>
 <div class="outline-text-2" id="text-gpg-as-a-ssh-agent">
 <p>
@@ -89,7 +89,7 @@ It may or may not be necessary to enable ssh support in your
 </div>
 </div>
 
-<div id="outline-container-org947b2ab" class="outline-2">
+<div id="outline-container-org98d28e8" class="outline-2">
 <h2 id="import-existing-ssh-keys"><a href="#import-existing-ssh-keys"><span class="todo TODO">TODO</span> Import Existing SSH Keys</a></h2>
 <div class="outline-text-2" id="text-import-existing-ssh-keys">
 <p>
@@ -101,7 +101,7 @@ key you have.
 </div>
 </div>
 
-<div id="outline-container-org3aa1f44" class="outline-2">
+<div id="outline-container-orgc13bb2e" class="outline-2">
 <h2 id="create-ssh-keys-with-gpg"><a href="#create-ssh-keys-with-gpg">Create SSH Keys with GPG</a></h2>
 <div class="outline-text-2" id="text-create-ssh-keys-with-gpg">
 <p>
@@ -143,7 +143,7 @@ considered secure for the foreseeable future.</li>
 </div>
 </div>
 
-<div id="outline-container-orgd54062d" class="outline-2">
+<div id="outline-container-org0fc304c" class="outline-2">
 <h2 id="export-gpg-authentication-keys-as-ssh-public-keys"><a href="#export-gpg-authentication-keys-as-ssh-public-keys">Export GPG Authentication Keys as SSH Public Keys</a></h2>
 <div class="outline-text-2" id="text-export-gpg-authentication-keys-as-ssh-public-keys">
 <p>
@@ -175,7 +175,7 @@ gpg -K --with-keygrip
 </div>
 </div>
 
-<div id="outline-container-org599094c" class="outline-3">
+<div id="outline-container-orgc490a05" class="outline-3">
 <h3 id="script"><a href="#script">Script</a></h3>
 <div class="outline-text-3" id="text-script">
 <p>
@@ -235,11 +235,11 @@ mkdir -p ~/.ssh
 </div>
 </div>
 
-<div id="outline-container-orgbdafd60" class="outline-2">
+<div id="outline-container-orgfaf2aac" class="outline-2">
 <h2 id="setup-ssh_config-and-git-config-for-multiple-ssh-keys"><a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">Setup ssh_config and git-config for Multiple SSH Keys</a></h2>
 <div class="outline-text-2" id="text-setup-ssh_config-and-git-config-for-multiple-ssh-keys">
 </div>
-<div id="outline-container-org9a46217" class="outline-3">
+<div id="outline-container-org4fcf2e1" class="outline-3">
 <h3 id="simple-configuration"><a href="#simple-configuration">Simple Configuration</a></h3>
 <div class="outline-text-3" id="text-simple-configuration">
 <p>
@@ -266,7 +266,7 @@ gitlab.com and <code>github.pub</code> when the host is github.com.
 </div>
 </div>
 
-<div id="outline-container-org48b4123" class="outline-3">
+<div id="outline-container-org48d6b60" class="outline-3">
 <h3 id="multiple-github-accounts"><a href="#multiple-github-accounts">Multiple Github Accounts</a></h3>
 <div class="outline-text-3" id="text-multiple-github-accounts">
 <p>
@@ -294,7 +294,7 @@ the correct ssh command and other options if required.
 </div>
 </div>
 
-<div id="outline-container-org7203b09" class="outline-4">
+<div id="outline-container-orgceb70da" class="outline-4">
 <h4 id="setup-ssh-config"><a href="#setup-ssh-config">Setup ssh_config</a></h4>
 <div class="outline-text-4" id="text-setup-ssh-config">
 <p>
@@ -328,7 +328,7 @@ the <code>~/.config/git/config</code>.
 </div>
 </div>
 
-<div id="outline-container-org9e2f6c5" class="outline-4">
+<div id="outline-container-org0909574" class="outline-4">
 <h4 id="setup-git-config-for-multiple-accounts"><a href="#setup-git-config-for-multiple-accounts">Setup git-config</a></h4>
 <div class="outline-text-4" id="text-setup-git-config-for-multiple-accounts">
 <p>
@@ -414,7 +414,7 @@ correct ssh key. This only have when inside
 </div>
 </div>
 
-<div id="outline-container-org19c24cc" class="outline-2">
+<div id="outline-container-org6eb6434" class="outline-2">
 <h2 id="add-ssh-and-gpg-keys-to-githublab"><a href="#add-ssh-and-gpg-keys-to-githublab">Add SSH and GPG Keys to Github/lab</a></h2>
 <div class="outline-text-2" id="text-add-ssh-and-gpg-keys-to-githublab">
 <p>
@@ -424,7 +424,7 @@ docs or search the answer on duckduckgo.
 </div>
 </div>
 
-<div id="outline-container-org20b2c16" class="outline-2">
+<div id="outline-container-org223192f" class="outline-2">
 <h2 id="errors"><a href="#errors">Errors</a></h2>
 <div class="outline-text-2" id="text-errors">
 <p>
@@ -444,7 +444,7 @@ This will ensure that the gpg-agent is started for ssh support.
 </div>
 </div>
 
-<div id="outline-container-orgc0a69ea" class="outline-2">
+<div id="outline-container-org2555e82" class="outline-2">
 <h2 id="sources"><a href="#sources">Sources</a></h2>
 <div class="outline-text-2" id="text-sources">
 <ul class="org-ul">
