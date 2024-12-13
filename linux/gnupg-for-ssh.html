@@ -1,0 +1,506 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Gnupg For SSH</title>
+<meta name="generator" content="Org mode" />
+<link rel='stylesheet' href='/css/default.css' />
+<link rel='stylesheet' href='/css/source-code.css' />
+</head>
+<body>
+<div id="preamble" class="status">
+
+<h1 id='site-name'>
+  <tt>
+    <span class='org-br-prompt'>(</span><span class='org-keyword'>setq</span>
+    <span class='org-variable-name'>plaintext</span>
+    'everywhere<span class='org-br-prompt'>)</span>
+  </tt>
+</h1>
+<div id='menu'>
+  <a href='/'>Home</a>
+  <a href='/ctf/index.html'>CTF WriteUps</a>
+  <a href='/emacs/index.html'>Emacs</a>
+  <a href='/linux/index.html'>Linux Tutorials</a>
+  <a href='https://gitlab.com/bryos/dotfiles' target='_blank'>Dotfiles</a>
+</div>
+<br><hr>
+</div>
+<div id="content">
+<h1 class="title">Gnupg For SSH</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#gpg-as-a-ssh-agent">GPG as a ssh-agent</a></li>
+<li><a href="#import-existing-ssh-keys"><span class="todo TODO">TODO</span> Import Existing SSH Keys</a></li>
+<li><a href="#create-ssh-keys-with-gpg">Create SSH Keys with GPG</a></li>
+<li><a href="#export-gpg-authentication-keys-as-ssh-public-keys">Export GPG Authentication Keys as SSH Public Keys</a></li>
+<li><a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">Setup ssh_config and git-config for Multiple SSH Keys</a></li>
+<li><a href="#add-ssh-and-gpg-keys-to-githublab">Add SSH and GPG Keys to Github/lab</a></li>
+<li><a href="#errors">Errors</a></li>
+<li><a href="#sources">Sources</a></li>
+</ul>
+</div>
+</div>
+<p>
+<span class="timestamp-wrapper"><span class="timestamp">[2024-12-13 Fri]</span></span>
+</p>
+
+<p>
+Below describes the process of using the gpg-agent as a drop-in
+replacement for the ssh-agent. It also has steps for importing your
+existing ssh keys into gpg. Reason for wanting to do this are:
+</p>
+
+<ul class="org-ul">
+<li>Reduced key maitainance. You no longer have any ssh keys, everything
+is inside gpg.</li>
+<li>Add the "ssh keys"&#x2014;they will be gpg authentication keys after this
+tutorial&#x2014;to a smartcard (not described here).</li>
+</ul>
+
+<div id="outline-container-org83ed780" class="outline-2">
+<h2 id="gpg-as-a-ssh-agent"><a href="#gpg-as-a-ssh-agent">GPG as a ssh-agent</a></h2>
+<div class="outline-text-2" id="text-gpg-as-a-ssh-agent">
+<p>
+To make gpg act as a ssh-agent add these lines to your <code>~/.bashrc</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">export</span> <span class="org-variable-name">GPG_TTY</span>=$(tty)
+<span class="org-builtin">unset</span> SSH_AGENT_PID
+[ <span class="org-string">"${gnupg_SSH_AUTH_SOCK_by:-0}"</span> -ne $<span class="org-variable-name">$</span> ] <span class="org-sh-escaped-newline">\</span>
+    &amp;&amp; <span class="org-builtin">export</span> <span class="org-variable-name">SSH_AUTH_SOCK</span>=<span class="org-string">"$(gpgconf --list-dirs agent-ssh-socket)"</span>
+</pre>
+</div>
+
+<p>
+It may or may not be necessary to enable ssh support in your
+<code>~/.gnupg/gpg-agent.conf</code>:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">echo</span> <span class="org-string">'enable-ssh-support'</span> &gt;&gt; ~/.gnupg/gpg-agent.conf
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org947b2ab" class="outline-2">
+<h2 id="import-existing-ssh-keys"><a href="#import-existing-ssh-keys"><span class="todo TODO">TODO</span> Import Existing SSH Keys</a></h2>
+<div class="outline-text-2" id="text-import-existing-ssh-keys">
+<p>
+If you already have SSH keys you can import them into GnuPG. Perhaps I
+will make some blog post about this in the future. For now you can
+follow these guides <sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup> and <sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>, depending on the type of SSH
+key you have.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org3aa1f44" class="outline-2">
+<h2 id="create-ssh-keys-with-gpg"><a href="#create-ssh-keys-with-gpg">Create SSH Keys with GPG</a></h2>
+<div class="outline-text-2" id="text-create-ssh-keys-with-gpg">
+<p>
+The easiest way to start using GPG as a replacement for SSH is to
+create new SSH keys. We will do this by adding an authentication
+subkey to an already existing GPG key. If you don't already have a GPG
+key, create one with:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --full-gen-key
+</pre>
+</div>
+
+<p>
+and follow the instructions. If you need help with generating a key
+pair read<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.
+</p>
+
+<ol class="org-ol">
+<li><p>
+To create an authentication subkey:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg --expert --edit-key &lt;your-id&gt;
+</pre>
+</div></li>
+
+<li>Enter <code>addkey</code>.</li>
+<li>Choose <code>RSA (set your own capabilities)</code> (maybe 8).</li>
+<li>The allowed actions of the subkey should be <code>authenticate</code> and
+nothing else.</li>
+<li>The size of the key should be at least 2048, for the key to be
+considered secure for the foreseeable future.</li>
+<li>Choose an expiration date you like.</li>
+<li>Enter <code>quit</code>.</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-orgd54062d" class="outline-2">
+<h2 id="export-gpg-authentication-keys-as-ssh-public-keys"><a href="#export-gpg-authentication-keys-as-ssh-public-keys">Export GPG Authentication Keys as SSH Public Keys</a></h2>
+<div class="outline-text-2" id="text-export-gpg-authentication-keys-as-ssh-public-keys">
+<p>
+For every authentication key you want to use for ssh you need to add
+their public key to <code>~/.ssh</code> so you can reference them in
+<code>~/.ssh/config</code>. You also need to add the gpg subkey fingerprints to
+<code>~/.gnupg/sshcontrol</code> so the gpg-agent knows which keys can be used
+for ssh.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-comment-delimiter"># </span><span class="org-comment">Ensure the directory exists</span>
+mkdir ~/.ssh
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Select the fingerprint of a authentication subkey</span>
+gpg -K --with-subkey-fingerprint
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Note the ! after the fingerprint</span>
+<span class="org-comment-delimiter"># </span><span class="org-comment">Note this will overwrite ~/.ssh/&lt;public-key&gt; if it exists</span>
+gpg --output ~/.ssh/&lt;public-key&gt; --export-ssh-key &lt;fingerprint&gt;!
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Modify permission on the public key file to 600</span>
+chmod 0600 ~/.ssh/&lt;public-key&gt;
+
+<span class="org-comment-delimiter"># </span><span class="org-comment">Add keygrips of auth subkeys to ~/.gnupg/sshcontrol</span>
+gpg -K --with-keygrip
+<span class="org-builtin">echo</span> &lt;key-grip&gt; &gt;&gt; ~/.gnupg/sshcontrol
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org599094c" class="outline-3">
+<h3 id="script"><a href="#script">Script</a></h3>
+<div class="outline-text-3" id="text-script">
+<p>
+If you are too lazy to enter all the above commands into the terminal
+then you can this script.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh"><span class="org-builtin">set</span> -e
+
+<span class="org-function-name">confirm_info</span> () {
+    gpg -K --with-subkey-fingerprint --with-keygrip <span class="org-string">"${uid}"</span>
+    cat &lt;&lt; EOF
+<span class="org-sh-heredoc">   Fingerprint:      ${fingerprint}</span>
+<span class="org-sh-heredoc">   Keygrip:          ${keygrip}</span>
+<span class="org-sh-heredoc">   Public key file:  ${file_pk}</span>
+<span class="org-sh-heredoc">Is this correct (y/N):</span>
+<span class="org-sh-heredoc">EOF</span>
+    <span class="org-builtin">read</span> -r confirm
+    [ <span class="org-string">"${confirm}"</span> = y ] &amp;&amp; <span class="org-keyword">return</span> 0
+    <span class="org-keyword">return</span> 1
+}
+
+mkdir -p ~/.ssh
+<span class="org-keyword">while</span> true; <span class="org-keyword">do</span>
+    gpg -K
+    cat &lt;&lt; EOF
+<span class="org-sh-heredoc">Which uid to export as SSH key, this will also be used as the filename</span>
+<span class="org-sh-heredoc">of the public key in ~/.ssh (or "q" to finish): '</span>
+<span class="org-sh-heredoc">EOF</span>
+    <span class="org-builtin">read</span> -r uid
+    [ <span class="org-string">"${uid}"</span> = q ] &amp;&amp; <span class="org-keyword">break</span>
+    <span class="org-variable-name">file_pk</span>=<span class="org-string">"${HOME}/.ssh/${uid}"</span>.pub
+
+    gpg -K --with-subkey-fingerprint <span class="org-string">"${uid}"</span>
+    <span class="org-builtin">echo</span> <span class="org-string">'What is the fingerprint of the authentication *subkey* to export as SSH key: '</span>
+    <span class="org-builtin">read</span> -r fingerprint
+    <span class="org-variable-name">keygrip</span>=<span class="org-string">"$(gpg -K --with-subkey-fingerprint --with-keygrip "${uid}" | awk "/${fingerprint}/ {getline; print \$3}")"</span>
+    <span class="org-keyword">if</span> [ <span class="org-string">"${#keygrip}"</span> -ne 40 ]; <span class="org-keyword">then</span> <span class="org-comment-delimiter"># </span><span class="org-comment">keygrips are always 40 characters long</span>
+        gpg -K --with-subkey-fingerprint --with-keygrip <span class="org-string">"${uid}"</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"Could not automatically find the keygrip of subkey with ${fingerprint}, please enter it manually: "</span>
+        <span class="org-builtin">read</span> -r keygrip
+    <span class="org-keyword">fi</span>
+    <span class="org-keyword">if</span> [ -f <span class="org-string">"${file_pk}"</span> ]; <span class="org-keyword">then</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"File ${file_pk} already exists."</span>
+    <span class="org-keyword">else</span>
+        confirm_info || <span class="org-keyword">continue</span>
+        gpg --output <span class="org-string">"${file_pk}"</span> --export-ssh-key <span class="org-string">"${fingerprint}"</span>!
+        chmod 0600 <span class="org-string">"${file_pk}"</span>
+        <span class="org-builtin">echo</span> <span class="org-string">"${keygrip}"</span> 0 &gt;&gt; <span class="org-string">"${GNUPGHOME:-~/.gnupg}"</span>/sshcontrol
+    <span class="org-keyword">fi</span>
+<span class="org-keyword">done</span>
+<span class="org-keyword">exit</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgbdafd60" class="outline-2">
+<h2 id="setup-ssh_config-and-git-config-for-multiple-ssh-keys"><a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">Setup ssh_config and git-config for Multiple SSH Keys</a></h2>
+<div class="outline-text-2" id="text-setup-ssh_config-and-git-config-for-multiple-ssh-keys">
+</div>
+<div id="outline-container-org9a46217" class="outline-3">
+<h3 id="simple-configuration"><a href="#simple-configuration">Simple Configuration</a></h3>
+<div class="outline-text-3" id="text-simple-configuration">
+<p>
+Now you can use the public keys you just created in your
+<code>~/.ssh/config</code> to let ssh know when to use which key. A simple
+configuration could look like:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-conf-unix">Host gitlab.com
+  IdentityFile ~/.ssh/gitlab.pub
+  PreferredAuthentications publickey
+
+Host github.com
+  IdentityFile ~/.ssh/github.pub
+  PreferredAuthentications publickey
+</pre>
+</div>
+
+<p>
+This will make <code>ssh</code> use the <code>gitlab.pub</code> key when the host is
+gitlab.com and <code>github.pub</code> when the host is github.com.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org48b4123" class="outline-3">
+<h3 id="multiple-github-accounts"><a href="#multiple-github-accounts">Multiple Github Accounts</a></h3>
+<div class="outline-text-3" id="text-multiple-github-accounts">
+<p>
+When you have multiple account at the same host and you can use the
+same key e.g. github.com then the above configuration will not work.
+You will need to modify your <code>~/.config/git/config</code> and
+<code>~/.ssh/config</code> to make this setup work. It also requires a specific
+directory structure.
+</p>
+
+<p>
+This directory structure is necessary so git can be configured to use
+the correct ssh command and other options if required.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-text">projects-directory
+&#9500;&#9472;&#9472; github-account-1
+&#9474;   &#9500;&#9472;&#9472; project-1
+&#9474;   &#9500;&#9472;&#9472; project-2
+&#9500;&#9472;&#9472; github-account-2
+&#9474;   &#9500;&#9472;&#9472; project-3
+&#9474;   &#9500;&#9472;&#9472; project-4
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7203b09" class="outline-4">
+<h4 id="setup-ssh-config"><a href="#setup-ssh-config">Setup ssh_config</a></h4>
+<div class="outline-text-4" id="text-setup-ssh-config">
+<p>
+<code>~/.ssh/config</code>
+#+begin_src conf-unix -n
+</p>
+
+<p>
+Host github.com-account1
+  User git
+  HostName github.com
+  IdentityFile ~/.ssh/github1.pub
+  PreferredAuthentications publickey
+</p>
+
+<p>
+Host github.com-account2
+  User git
+  HostName github.com
+  IdentityFile ~/.ssh/github2.pub
+  PreferredAuthentications publickey
+#+end_src unix
+</p>
+
+<p>
+For the second account, the <code>github.com-account2</code> is just an alias and
+the <code>User</code> and <code>HostName</code> are what ssh actually uses as user and host
+i.e. <code>ssh User@HostName</code>. We can now take advantage of this alias in
+the <code>~/.config/git/config</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org9e2f6c5" class="outline-4">
+<h4 id="setup-git-config-for-multiple-accounts"><a href="#setup-git-config-for-multiple-accounts">Setup git-config</a></h4>
+<div class="outline-text-4" id="text-setup-git-config-for-multiple-accounts">
+<p>
+<code>~/.config/git/config</code>
+#+begin_src conf-unix -n
+[user]
+  name = Your Name
+</p>
+
+<p>
+  useConfigOnly = true
+[init]
+  defaultBranch = main
+</p>
+
+<p>
+[includeIf "gitdir:~/projects-directory/github1/"]
+  path = ~/.config/git/config.github1
+[includeIf "gitdir:~/projects-directory/github2/"]
+  path = ~/.config/git/config.github2
+#+end_src unix
+</p>
+
+<p>
+The <code>includeIf</code> allows git to load settings based on the location of
+the project. So earch github account will get its own git config file
+with the location specified in the <code>path</code>.
+</p>
+
+<p>
+<code>github1</code> is the default account so it is basically the same as in the
+simple configuration except here commit signing is turned on, since
+you have a gpg key you might as well sign your commits. The gpg email
+can be found with <code>gpg -K</code>.
+</p>
+
+<p>
+Note: to sign git commits and have them verified by github your gpg
+public key must added to your github account and the gpg email must be
+the same as the email used in github. You can use the no-reply email
+if you want to keep your email private.
+</p>
+
+<p>
+<code>~/.config/git/config.github1</code>
+#+begin_src conf-unix -n
+[user]
+  email = github1@gmail.com
+  signingKey = &lt;gpg-key-id&gt;
+[url "git@github.com-account1"]
+  insteadOf = git@github.com
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
+#+end_src unix
+</p>
+
+<p>
+<code>~/.config/git/config.github2</code>
+#+begin_src conf-unix -n
+[user]
+  email = github2@gmail.com
+  signingKey = &lt;gpg-key-id&gt;
+[url "git@github.com-account2"]
+  insteadOf = git@github.com
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
+#+end_src unix
+</p>
+
+<p>
+<b>Note</b> that the <code>github.com-account1</code> and <code>github.com-account2</code> part
+of the urls are the same as the host aliases defined in
+<code>~/.ssh/config</code> earlier. This will make sure that ssh will use the
+correct ssh key. This only have when inside
+<code>~/projects-directory/github1</code> or <code>~/projects-directory/github2</code>.
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org19c24cc" class="outline-2">
+<h2 id="add-ssh-and-gpg-keys-to-githublab"><a href="#add-ssh-and-gpg-keys-to-githublab">Add SSH and GPG Keys to Github/lab</a></h2>
+<div class="outline-text-2" id="text-add-ssh-and-gpg-keys-to-githublab">
+<p>
+This step depends on which platform you use, so read the respective
+docs or search the answer on duckduckgo.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org20b2c16" class="outline-2">
+<h2 id="errors"><a href="#errors">Errors</a></h2>
+<div class="outline-text-2" id="text-errors">
+<p>
+If you get an error like <code>agent refused operation</code> either try changing
+pinentry progams in <code>~/.gnupg/gpg-agent.conf</code> or add this to your
+shell config file, e.g. <code>~/.bashrc</code>:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">gpg-connect-agent UPDATESTARTUPTTY /bye
+</pre>
+</div>
+
+<p>
+This will ensure that the gpg-agent is started for ssh support.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgc0a69ea" class="outline-2">
+<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div class="outline-text-2" id="text-sources">
+<ul class="org-ul">
+<li><a href="https://opensource.com/article/19/4/gpg-subkeys-ssh">How to enable SSH access using a GPG key for authentication</a></li>
+<li><a href="https://opensource.com/article/19/4/gpg-subkeys-ssh-multiples">How to import your existing SSH keys into your GPG key</a></li>
+<li><a href="https://superuser.com/questions/1414381/how-to-import-an-ssh-ed25519-key-to-gpg">Import ed25519 ssh keys into GPG</a></li>
+<li><a href="https://dev.to/chakrit/multiple-identity-gitconfig-with-gpg-signing-8c0">Multiple Identity Git Config</a></li>
+<li><a href="https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/">Multiple Github Accounts SSH/GPG setup</a></li>
+<li><a href="https://serverfault.com/questions/906871/force-the-use-of-a-gpg-key-as-an-ssh-key-for-a-given-server">Force the use of a gpg-key as an ssh-key for a given server</a></li>
+<li><a href="https://wiki.archlinux.org/title/GnuPG#SSH_agent">Arch Wiki: SSH agent</a></li>
+<li><a href="https://wiki.archlinux.org/title/GnuPG#Usage">Arch wiki: GnuPG usage</a></li>
+</ul>
+</div>
+</div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://superuser.com/questions/1414381/how-to-import-an-ssh-ed25519-key-to-gpg">Import ed25519 ssh keys into GPG</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://opensource.com/article/19/4/gpg-subkeys-ssh-multiples">How to import your existing SSH keys into your GPG key</a>
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
+<a href="https://wiki.archlinux.org/title/GnuPG#Usage">Arch wiki: GnuPG usage</a>
+</p></div></div>
+
+
+</div>
+</div></div>
+<div id="postamble" class="status">
+<br><br>
+<div style='text-align: center;'>
+  If something is not working, please create an issue
+  <a href='https://gitlab.com/bryanrinders/bryanrinders.xyz/-/issues'>here</a>.
+</div>
+<br><hr/>
+<footer>
+  <div class='copyright-container'>
+    <div class='copyright'>
+      Copyright &copy; 2022-2024 Bryan Rinders some rights reserved
+      <br><br>
+      This page is available under a
+      <a rel='license' href='http://creativecommons.org/licenses/by/4.0/'>
+        CC-BY 4.0
+      </a> licence.
+    </div>
+  </div>
+  <br>
+  <div class='generated'>
+    Created with <a href="https://www.gnu.org/software/emacs/">Emacs</a> 27.1 (<a href="https://orgmode.org">Org</a> mode 9.3) on <a href='https://www.gnu.org'>GNU</a>+<a href='https://www.kernel.org/'>Linux</a>
+  </div>
+</footer>
+</div>
+</body>
+</html>
