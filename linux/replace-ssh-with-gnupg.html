@@ -35,14 +35,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#gpg-as-a-ssh-agent">GPG as a ssh-agent</a></li>
-<li><a href="#import-existing-ssh-keys"><span class="todo TODO">TODO</span> Import Existing SSH Keys</a></li>
-<li><a href="#create-ssh-keys-with-gpg">Create SSH Keys with GPG</a></li>
-<li><a href="#export-gpg-authentication-keys-as-ssh-public-keys">Export GPG Authentication Keys as SSH Public Keys</a></li>
-<li><a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">Setup ssh_config and git-config for Multiple SSH Keys</a></li>
-<li><a href="#add-ssh-and-gpg-keys-to-githublab">Add SSH and GPG Keys to Github/lab</a></li>
-<li><a href="#errors">Errors</a></li>
-<li><a href="#sources">Sources</a></li>
+<li><a href="#gpg-as-a-ssh-agent">1. GPG as a ssh-agent</a></li>
+<li><a href="#import-existing-ssh-keys">2. <span class="todo TODO">TODO</span> Import Existing SSH Keys</a></li>
+<li><a href="#create-ssh-keys-with-gpg">3. Create SSH Keys with GPG</a></li>
+<li><a href="#export-gpg-authentication-keys-as-ssh-public-keys">4. Export GPG Authentication Keys as SSH Public Keys</a></li>
+<li><a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">5. Setup ssh_config and git-config for Multiple SSH Keys</a></li>
+<li><a href="#add-ssh-and-gpg-keys-to-githublab">6. Add SSH and GPG Keys to Github/lab</a></li>
+<li><a href="#errors">7. Errors</a></li>
+<li><a href="#sources">8. Sources</a></li>
 </ul>
 </div>
 </div>
@@ -63,8 +63,8 @@ is inside gpg.</li>
 tutorial&#x2014;to a smartcard (not described here).</li>
 </ul>
 
-<div id="outline-container-orge61e319" class="outline-2">
-<h2 id="gpg-as-a-ssh-agent"><a href="#gpg-as-a-ssh-agent">GPG as a ssh-agent</a></h2>
+<div id="outline-container-org1a0f2b2" class="outline-2">
+<h2 id="gpg-as-a-ssh-agent"><span class="section-number-2">1</span> <a href="#gpg-as-a-ssh-agent">GPG as a ssh-agent</a></h2>
 <div class="outline-text-2" id="text-gpg-as-a-ssh-agent">
 <p>
 To make gpg act as a ssh-agent add these lines to your <code>~/.bashrc</code>:
@@ -89,8 +89,8 @@ It may or may not be necessary to enable ssh support in your
 </div>
 </div>
 
-<div id="outline-container-org98d28e8" class="outline-2">
-<h2 id="import-existing-ssh-keys"><a href="#import-existing-ssh-keys"><span class="todo TODO">TODO</span> Import Existing SSH Keys</a></h2>
+<div id="outline-container-orga9a7dec" class="outline-2">
+<h2 id="import-existing-ssh-keys"><span class="section-number-2">2</span> <a href="#import-existing-ssh-keys"><span class="todo TODO">TODO</span> Import Existing SSH Keys</a></h2>
 <div class="outline-text-2" id="text-import-existing-ssh-keys">
 <p>
 If you already have SSH keys you can import them into GnuPG. Perhaps I
@@ -101,8 +101,8 @@ key you have.
 </div>
 </div>
 
-<div id="outline-container-orgc13bb2e" class="outline-2">
-<h2 id="create-ssh-keys-with-gpg"><a href="#create-ssh-keys-with-gpg">Create SSH Keys with GPG</a></h2>
+<div id="outline-container-org40706a3" class="outline-2">
+<h2 id="create-ssh-keys-with-gpg"><span class="section-number-2">3</span> <a href="#create-ssh-keys-with-gpg">Create SSH Keys with GPG</a></h2>
 <div class="outline-text-2" id="text-create-ssh-keys-with-gpg">
 <p>
 The easiest way to start using GPG as a replacement for SSH is to
@@ -143,8 +143,8 @@ considered secure for the foreseeable future.</li>
 </div>
 </div>
 
-<div id="outline-container-org0fc304c" class="outline-2">
-<h2 id="export-gpg-authentication-keys-as-ssh-public-keys"><a href="#export-gpg-authentication-keys-as-ssh-public-keys">Export GPG Authentication Keys as SSH Public Keys</a></h2>
+<div id="outline-container-orged1c1d2" class="outline-2">
+<h2 id="export-gpg-authentication-keys-as-ssh-public-keys"><span class="section-number-2">4</span> <a href="#export-gpg-authentication-keys-as-ssh-public-keys">Export GPG Authentication Keys as SSH Public Keys</a></h2>
 <div class="outline-text-2" id="text-export-gpg-authentication-keys-as-ssh-public-keys">
 <p>
 For every authentication key you want to use for ssh you need to add
@@ -175,8 +175,8 @@ gpg -K --with-keygrip
 </div>
 </div>
 
-<div id="outline-container-orgc490a05" class="outline-3">
-<h3 id="script"><a href="#script">Script</a></h3>
+<div id="outline-container-orgf2172e8" class="outline-3">
+<h3 id="script"><span class="section-number-3">4.1</span> <a href="#script">Script</a></h3>
 <div class="outline-text-3" id="text-script">
 <p>
 If you are too lazy to enter all the above commands into the terminal
@@ -235,12 +235,12 @@ mkdir -p ~/.ssh
 </div>
 </div>
 
-<div id="outline-container-orgfaf2aac" class="outline-2">
-<h2 id="setup-ssh_config-and-git-config-for-multiple-ssh-keys"><a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">Setup ssh_config and git-config for Multiple SSH Keys</a></h2>
+<div id="outline-container-org3d2f68f" class="outline-2">
+<h2 id="setup-ssh_config-and-git-config-for-multiple-ssh-keys"><span class="section-number-2">5</span> <a href="#setup-ssh_config-and-git-config-for-multiple-ssh-keys">Setup ssh_config and git-config for Multiple SSH Keys</a></h2>
 <div class="outline-text-2" id="text-setup-ssh_config-and-git-config-for-multiple-ssh-keys">
 </div>
-<div id="outline-container-org4fcf2e1" class="outline-3">
-<h3 id="simple-configuration"><a href="#simple-configuration">Simple Configuration</a></h3>
+<div id="outline-container-org318a251" class="outline-3">
+<h3 id="simple-configuration"><span class="section-number-3">5.1</span> <a href="#simple-configuration">Simple Configuration</a></h3>
 <div class="outline-text-3" id="text-simple-configuration">
 <p>
 Now you can use the public keys you just created in your
@@ -266,8 +266,8 @@ gitlab.com and <code>github.pub</code> when the host is github.com.
 </div>
 </div>
 
-<div id="outline-container-org48d6b60" class="outline-3">
-<h3 id="multiple-github-accounts"><a href="#multiple-github-accounts">Multiple Github Accounts</a></h3>
+<div id="outline-container-org5f020a8" class="outline-3">
+<h3 id="multiple-github-accounts"><span class="section-number-3">5.2</span> <a href="#multiple-github-accounts">Multiple Github Accounts</a></h3>
 <div class="outline-text-3" id="text-multiple-github-accounts">
 <p>
 When you have multiple account at the same host and you can use the
@@ -294,8 +294,8 @@ the correct ssh command and other options if required.
 </div>
 </div>
 
-<div id="outline-container-orgceb70da" class="outline-4">
-<h4 id="setup-ssh-config"><a href="#setup-ssh-config">Setup ssh_config</a></h4>
+<div id="outline-container-org82ad822" class="outline-4">
+<h4 id="setup-ssh-config"><span class="section-number-4">5.2.1</span> <a href="#setup-ssh-config">Setup ssh_config</a></h4>
 <div class="outline-text-4" id="text-setup-ssh-config">
 <p>
 <code>~/.ssh/config</code>
@@ -328,8 +328,8 @@ the <code>~/.config/git/config</code>.
 </div>
 </div>
 
-<div id="outline-container-org0909574" class="outline-4">
-<h4 id="setup-git-config-for-multiple-accounts"><a href="#setup-git-config-for-multiple-accounts">Setup git-config</a></h4>
+<div id="outline-container-org7f94058" class="outline-4">
+<h4 id="setup-git-config-for-multiple-accounts"><span class="section-number-4">5.2.2</span> <a href="#setup-git-config-for-multiple-accounts">Setup git-config</a></h4>
 <div class="outline-text-4" id="text-setup-git-config-for-multiple-accounts">
 <p>
 <code>~/.config/git/config</code>
@@ -414,8 +414,8 @@ correct ssh key. This only have when inside
 </div>
 </div>
 
-<div id="outline-container-org6eb6434" class="outline-2">
-<h2 id="add-ssh-and-gpg-keys-to-githublab"><a href="#add-ssh-and-gpg-keys-to-githublab">Add SSH and GPG Keys to Github/lab</a></h2>
+<div id="outline-container-orgd065e17" class="outline-2">
+<h2 id="add-ssh-and-gpg-keys-to-githublab"><span class="section-number-2">6</span> <a href="#add-ssh-and-gpg-keys-to-githublab">Add SSH and GPG Keys to Github/lab</a></h2>
 <div class="outline-text-2" id="text-add-ssh-and-gpg-keys-to-githublab">
 <p>
 This step depends on which platform you use, so read the respective
@@ -424,8 +424,8 @@ docs or search the answer on duckduckgo.
 </div>
 </div>
 
-<div id="outline-container-org223192f" class="outline-2">
-<h2 id="errors"><a href="#errors">Errors</a></h2>
+<div id="outline-container-org3ba39a1" class="outline-2">
+<h2 id="errors"><span class="section-number-2">7</span> <a href="#errors">Errors</a></h2>
 <div class="outline-text-2" id="text-errors">
 <p>
 If you get an error like <code>agent refused operation</code> either try changing
@@ -444,8 +444,8 @@ This will ensure that the gpg-agent is started for ssh support.
 </div>
 </div>
 
-<div id="outline-container-org2555e82" class="outline-2">
-<h2 id="sources"><a href="#sources">Sources</a></h2>
+<div id="outline-container-orgbed4db1" class="outline-2">
+<h2 id="sources"><span class="section-number-2">8</span> <a href="#sources">Sources</a></h2>
 <div class="outline-text-2" id="text-sources">
 <ul class="org-ul">
 <li><a href="https://opensource.com/article/19/4/gpg-subkeys-ssh">How to enable SSH access using a GPG key for authentication</a></li>
