@@ -1,0 +1,426 @@
+#+TITLE: Replace SSH with GnuPG
+#+AUTHOR: Bryan Rinders
+#+DATE: [2024-12-13 Fri]
+#+OPTIONS: num:t todo:t
+#+PROPERTY: header-args :results output :exports both :eval never-export
+#+PROPERTY: header-args:python :session *natas-python-session*
+
+{{{date([%Y-%m-%d])}}}
+
+Below describes the process of using the gpg-agent as a drop-in
+replacement for the ssh-agent. It also has steps for importing your
+existing ssh keys into gpg. Reason for wanting to do this are:
+
+- Reduced key maitainance. You no longer have any ssh keys, everything
+  is inside gpg.
+- Add the "ssh keys"---they will be gpg authentication keys after this
+  tutorial---to a smartcard (not described here).
+
+* GPG as a ssh-agent
+:PROPERTIES:
+:CUSTOM_ID: gpg-as-a-ssh-agent
+:END:
+To make gpg act as a ssh-agent add these lines to your =~/.bashrc=:
+
+#+begin_src sh
+  export GPG_TTY=$(tty)
+  unset SSH_AGENT_PID
+  [ "${gnupg_SSH_AUTH_SOCK_by:-0}" -ne $$ ] \
+      && export SSH_AUTH_SOCK="$(gpgconf --list-dirs agent-ssh-socket)"
+#+end_src
+
+It may or may not be necessary to enable ssh support in your
+=~/.gnupg/gpg-agent.conf=:
+#+begin_src sh
+  echo 'enable-ssh-support' >> ~/.gnupg/gpg-agent.conf
+#+end_src
+
+* TODO Import Existing SSH Keys
+:PROPERTIES:
+:CUSTOM_ID: import-existing-ssh-keys
+:END:
+# If you already have SSH keys you can import them into GnuPG (described
+# in this section) or you can create GPG keys from which you can
+# generate SSH keys (described in [[*Create SSH Keys with GPG]]). The steps
+# for importing an existing SSH key into GPG depends on the type of ssh
+# key. Below are instructions for importing ED25519 and RSA ssh keys
+# into gpg.
+
+If you already have SSH keys you can import them into GnuPG. Perhaps I
+will make some blog post about this in the future. For now you can
+follow these guides [fn:1] and [fn:2], depending on the type of SSH
+key you have.
+
+** TODO COMMENT ED25519
+:PROPERTIES:
+:CUSTOM_ID: ed25519
+:END:
+# TODO: how do you add the ssh key as a standalone key and not a
+# subkey?
+
+In this section we will add the SSH key to an already existing GPG key
+as an authentication subkey[fn:1].
+
+#+begin_src sh
+  ssh-add <private-key-file>
+#+end_src
+
+Identify the keygrip of the private key just added with ~ssh-add~.
+#+begin_src sh
+  gpg -K --with-keygrip
+  ls -l "$(gpgconf --list-dirs homedir)"/private-keys-v1.d
+#+end_src
+
+The latter command should have a keygrip that is not in the former.
+*or just use the timestamps of the latter command*.
+
+Now add the new key as a subkey to an already existing GPG key.
+1. ~gpg --expert --edit-key <existing-gpg-id>~, this will open a
+   command prompt.
+2. Enter ~addkey~.
+3. Select "Existing Key" (Maybe "13").
+4. Enter the keygrip identified earlier.
+5. Set the capabilities to "Authenticate".
+6. Answer the questions appropriately.
+7. Exit the gpg command prompt with ~save~.
+
+** TODO COMMENT RSA
+:PROPERTIES:
+:CUSTOM_ID: rsa
+:END:
+# follow [[https://opensource.com/article/19/4/gpg-subkeys-ssh-multiples]]
+
+Importing an RSA SSH key is a bit more involved than importing an
+ed25519 key[fn:2].
+
+First there are two styles of RSA SSH keys, the new that begins with
+*-----BEGIN OPENSSH PRIVATE KEY----*​, and the old that begins with
+*-----BEGIN RSA PRIVATE KEY-----*. If you have the new style RSA key
+you'll first need to convert it to the PEM-encoded format.
+
+1. To change the an SSH key to use the PEM encoding:
+   #+begin_src sh
+     ssh-keygen -p -m PEM -f <private-key-file>
+   #+end_src
+
+2. Backup your existing GPG key(s):
+   #+begin_src sh
+     $ gpg --output private-key.asc --armor --export-secret-keys <key-id>
+   #+end_src
+
+3. In a new keyring, import your existing GPG key.
+
+   #+begin_src sh
+     mkdir temp_gpg
+     chmod go-rwx temp_gpg/
+     gpg --homedir temp_gpg --import my_gpg_key.asc
+
+     # Optionally, verify the import
+     gpg -K --homedir temp_gpg/
+   #+end_src
+
+* Create SSH Keys with GPG
+:PROPERTIES:
+:CUSTOM_ID: create-ssh-keys-with-gpg
+:END:
+The easiest way to start using GPG as a replacement for SSH is to
+create new SSH keys. We will do this by adding an authentication
+subkey to an already existing GPG key. If you don't already have a GPG
+key, create one with:
+
+#+begin_src sh
+  gpg --full-gen-key
+#+end_src
+
+and follow the instructions. If you need help with generating a key
+pair read[fn:3].
+
+1. To create an authentication subkey:
+
+   #+begin_src sh
+     gpg --expert --edit-key <your-id>
+   #+end_src
+
+2. Enter =addkey=.
+3. Choose =RSA (set your own capabilities)= (maybe 8).
+4. The allowed actions of the subkey should be =authenticate= and
+   nothing else.
+5. The size of the key should be at least 2048, for the key to be
+   considered secure for the foreseeable future.
+6. Choose an expiration date you like.
+7. Enter =quit=.
+
+* Export GPG Authentication Keys as SSH Public Keys
+:PROPERTIES:
+:CUSTOM_ID: export-gpg-authentication-keys-as-ssh-public-keys
+:END:
+For every authentication key you want to use for ssh you need to add
+their public key to =~/.ssh= so you can reference them in
+=~/.ssh/config=. You also need to add the gpg subkey fingerprints to
+=~/.gnupg/sshcontrol= so the gpg-agent knows which keys can be used
+for ssh.
+
+# FIXME: sshcontrol file is deprecated. It seems that the new way is
+# to add the 'use-for-ssh' key attribute must be used in the future.
+# See the gpg-agent man-page. And try `gpg-connect-agent 'help
+# KEYATTR' /bye`
+
+#+begin_src sh
+  # Ensure the directory exists
+  mkdir ~/.ssh
+
+  # Select the fingerprint of a authentication subkey
+  gpg -K --with-subkey-fingerprint
+
+  # Note the ! after the fingerprint
+  # Note this will overwrite ~/.ssh/<public-key> if it exists
+  gpg --output ~/.ssh/<public-key> --export-ssh-key <fingerprint>!
+
+  # Modify permission on the public key file to 600
+  chmod 0600 ~/.ssh/<public-key>
+
+  # Add keygrips of auth subkeys to ~/.gnupg/sshcontrol
+  gpg -K --with-keygrip
+  echo <key-grip> >> ~/.gnupg/sshcontrol
+#+end_src
+
+** Script
+:PROPERTIES:
+:CUSTOM_ID: script
+:END:
+If you are too lazy to enter all the above commands into the terminal
+then you can this script.
+
+#+begin_src sh
+  set -e
+
+  confirm_info () {
+      gpg -K --with-subkey-fingerprint --with-keygrip "${uid}"
+      cat << EOF
+     Fingerprint:      ${fingerprint}
+     Keygrip:          ${keygrip}
+     Public key file:  ${file_pk}
+  Is this correct (y/N):
+  EOF
+      read -r confirm
+      [ "${confirm}" = y ] && return 0
+      return 1
+  }
+
+  mkdir -p ~/.ssh
+  while true; do
+      gpg -K
+      cat << EOF
+  Which uid to export as SSH key, this will also be used as the filename
+  of the public key in ~/.ssh (or "q" to finish): '
+  EOF
+      read -r uid
+      [ "${uid}" = q ] && break
+      file_pk="${HOME}/.ssh/${uid}".pub
+
+      gpg -K --with-subkey-fingerprint "${uid}"
+      echo 'What is the fingerprint of the authentication *subkey* to export as SSH key: '
+      read -r fingerprint
+      keygrip="$(gpg -K --with-subkey-fingerprint --with-keygrip "${uid}" | awk "/${fingerprint}/ {getline; print \$3}")"
+      if [ "${#keygrip}" -ne 40 ]; then # keygrips are always 40 characters long
+          gpg -K --with-subkey-fingerprint --with-keygrip "${uid}"
+          echo "Could not automatically find the keygrip of subkey with ${fingerprint}, please enter it manually: "
+          read -r keygrip
+      fi
+      if [ -f "${file_pk}" ]; then
+          echo "File ${file_pk} already exists."
+      else
+          confirm_info || continue
+          gpg --output "${file_pk}" --export-ssh-key "${fingerprint}"!
+          chmod 0600 "${file_pk}"
+          echo "${keygrip}" 0 >> "${GNUPGHOME:-~/.gnupg}"/sshcontrol
+      fi
+  done
+  exit
+#+end_src
+
+* Setup ssh_config and git-config for Multiple SSH Keys
+:PROPERTIES:
+:CUSTOM_ID: setup-ssh_config-and-git-config-for-multiple-ssh-keys
+:END:
+** Simple Configuration
+:PROPERTIES:
+:CUSTOM_ID: simple-configuration
+:END:
+Now you can use the public keys you just created in your
+=~/.ssh/config= to let ssh know when to use which key. A simple
+configuration could look like:
+
+#+begin_src conf-unix
+Host gitlab.com
+  IdentityFile ~/.ssh/gitlab.pub
+  PreferredAuthentications publickey
+
+Host github.com
+  IdentityFile ~/.ssh/github.pub
+  PreferredAuthentications publickey
+#+end_src
+
+This will make ~ssh~ use the =gitlab.pub= key when the host is
+gitlab.com and =github.pub= when the host is github.com.
+
+** Multiple Github Accounts
+:PROPERTIES:
+:CUSTOM_ID: multiple-github-accounts
+:END:
+When you have multiple account at the same host and you can use the
+same key e.g. github.com then the above configuration will not work.
+You will need to modify your =~/.config/git/config= and
+=~/.ssh/config= to make this setup work. It also requires a specific
+directory structure.
+
+This directory structure is necessary so git can be configured to use
+the correct ssh command and other options if required.
+
+#+begin_src text
+projects-directory
+├── github-account-1
+│   ├── project-1
+│   ├── project-2
+├── github-account-2
+│   ├── project-3
+│   ├── project-4
+#+end_src
+
+*** Setup ssh_config
+:PROPERTIES:
+:CUSTOM_ID: setup-ssh-config
+:END:
+=~/.ssh/config=
+#+begin_src conf-unix -n
+# Github account 1
+Host github.com-account1
+  User git
+  HostName github.com
+  IdentityFile ~/.ssh/github1.pub
+  PreferredAuthentications publickey
+
+# Github account 2
+Host github.com-account2
+  User git
+  HostName github.com
+  IdentityFile ~/.ssh/github2.pub
+  PreferredAuthentications publickey
+#+end_src unix
+
+For the second account, the =github.com-account2= is just an alias and
+the =User= and =HostName= are what ssh actually uses as user and host
+i.e. ~ssh User@HostName~. We can now take advantage of this alias in
+the =~/.config/git/config=.
+
+*** Setup git-config
+:PROPERTIES:
+:CUSTOM_ID: setup-git-config-for-multiple-accounts
+:END:
+
+=~/.config/git/config=
+#+begin_src conf-unix -n
+[user]
+  name = Your Name
+  # define email in specific configs and set `useConfigOnly = true` to
+  # signal errors in the specific git configs
+  useConfigOnly = true
+[init]
+  defaultBranch = main
+# NOTE: in includeIf the slash at the end is important
+[includeIf "gitdir:~/projects-directory/github1/"]
+  path = ~/.config/git/config.github1
+[includeIf "gitdir:~/projects-directory/github2/"]
+  path = ~/.config/git/config.github2
+#+end_src unix
+
+The =includeIf= allows git to load settings based on the location of
+the project. So earch github account will get its own git config file
+with the location specified in the =path=.
+
+=github1= is the default account so it is basically the same as in the
+simple configuration except here commit signing is turned on, since
+you have a gpg key you might as well sign your commits. The gpg email
+can be found with ~gpg -K~.
+
+Note: to sign git commits and have them verified by github your gpg
+public key must added to your github account and the gpg email must be
+the same as the email used in github. You can use the no-reply email
+if you want to keep your email private.
+
+=~/.config/git/config.github1=
+#+begin_src conf-unix -n
+[user]
+  email = github1@gmail.com
+  signingKey = <gpg-key-id>
+[url "git@github.com-account1"]
+  insteadOf = git@github.com
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
+#+end_src unix
+
+=~/.config/git/config.github2=
+#+begin_src conf-unix -n
+[user]
+  email = github2@gmail.com
+  signingKey = <gpg-key-id>
+[url "git@github.com-account2"]
+  insteadOf = git@github.com
+[commit]
+  gpgsign = true
+[tag]
+  gpgsign = true
+#+end_src unix
+
+*Note* that the =github.com-account1= and =github.com-account2= part
+of the urls are the same as the host aliases defined in
+=~/.ssh/config= earlier. This will make sure that ssh will use the
+correct ssh key. This only have when inside
+=~/projects-directory/github1= or =~/projects-directory/github2=.
+
+* Add SSH and GPG Keys to Github/lab
+:PROPERTIES:
+:CUSTOM_ID: add-ssh-and-gpg-keys-to-githublab
+:END:
+This step depends on which platform you use, so read the respective
+docs or search the answer on duckduckgo.
+
+* Errors
+:PROPERTIES:
+:CUSTOM_ID: errors
+:END:
+If you get an error like =agent refused operation= either try changing
+pinentry progams in =~/.gnupg/gpg-agent.conf= or add this to your
+shell config file, e.g. =~/.bashrc=:
+
+#+begin_src sh
+  gpg-connect-agent UPDATESTARTUPTTY /bye
+#+end_src
+
+This will ensure that the gpg-agent is started for ssh support.
+
+* Sources
+:PROPERTIES:
+:CUSTOM_ID: sources
+:END:
+- [[https://opensource.com/article/19/4/gpg-subkeys-ssh][How to enable SSH access using a GPG key for authentication]]
+- [[https://opensource.com/article/19/4/gpg-subkeys-ssh-multiples][How to import your existing SSH keys into your GPG key]]
+- [[https://superuser.com/questions/1414381/how-to-import-an-ssh-ed25519-key-to-gpg][Import ed25519 ssh keys into GPG]]
+- [[https://dev.to/chakrit/multiple-identity-gitconfig-with-gpg-signing-8c0][Multiple Identity Git Config]]
+- [[https://markentier.tech/posts/2021/02/github-with-multiple-profiles-gpg-ssh-keys/][Multiple Github Accounts SSH/GPG setup]]
+- [[https://serverfault.com/questions/906871/force-the-use-of-a-gpg-key-as-an-ssh-key-for-a-given-server][Force the use of a gpg-key as an ssh-key for a given server]]
+- [[https://wiki.archlinux.org/title/GnuPG#SSH_agent][Arch Wiki: SSH agent]]
+- [[https://wiki.archlinux.org/title/GnuPG#Usage][Arch wiki: GnuPG usage]]
+
+* Footnotes
+:PROPERTIES:
+:CUSTOM_ID: footnotes
+:END:
+
+[fn:1] [[https://superuser.com/questions/1414381/how-to-import-an-ssh-ed25519-key-to-gpg][Import ed25519 ssh keys into GPG]]
+
+[fn:2] [[https://opensource.com/article/19/4/gpg-subkeys-ssh-multiples][How to import your existing SSH keys into your GPG key]]
+
+[fn:3] [[https://wiki.archlinux.org/title/GnuPG#Usage][Arch wiki: GnuPG usage]]
